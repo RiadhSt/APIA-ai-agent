@@ -29,12 +29,12 @@ export default {
 
       const pdfUrls = [
         `${botUrl}/reports/APIA_QA.pdf`,
-        `${botUrl}/guide_de_l_investisseur-etranger.pdf`,
-        `${botUrl}/Guide_Global.pdf`, 
-        `${botUrl}/guide_societes_communautaires.pdf`,
-        `${botUrl}/RAPPORT_2025_PUBLIQUE.pdf`,
-        `${botUrl}/Rapport_Comite_Inv.pdf`,
-        `${botUrl}/Site_web.pdf`
+        `${botUrl}/reports/guide_de_l_investisseur-etranger.pdf`,
+        `${botUrl}/reports/Guide_Global.pdf`, 
+        `${botUrl}/reports/guide_societes_communautaires.pdf`,
+        `${botUrl}/reports/RAPPORT_2025_PUBLIQUE.pdf`,
+        `${botUrl}/reports/Rapport_Comite_Inv.pdf`,
+        `${botUrl}/reports/Site_web.pdf`
       ];
 
       const attachedFiles = pdfUrls.map(url => ({
