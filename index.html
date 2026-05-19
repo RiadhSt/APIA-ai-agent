@@ -155,7 +155,7 @@
         </button>
     </div>
 
-    <script>
+<script>
         const WORKER_URL = "https://apia1ai.apia.workers.dev/";
         let chatHistory = [];
 
@@ -183,36 +183,15 @@
                     throw new Error(errorData.error || "تعذر على الـ Worker معالجة طلبك حالياً.");
                 }
 
-                assistantBubble.innerHTML = ""; 
-                
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-                let buffer = "";
-                let fullAnswer = "";
+                // استقبال الإجابة النظيفة الكاملة مباشرة دفعة واحدة
+                const data = await response.json();
+                const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                while (true) {
-                    const { value, done } = await reader.read();
-                    if (done) break;
-                    
-                    buffer += decoder.decode(value, { stream: true });
-                    const lines = buffer.split("\n");
-                    buffer = lines.pop(); 
+                // عرض الإجابة وتنسيقها
+                assistantBubble.innerHTML = formatMarkdown(fullAnswer);
+                document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
 
-                    for (const line of lines) {
-                        if (line.startsWith("data: ")) {
-                            try {
-                                const parsed = JSON.parse(line.substring(6));
-                                if (parsed.candidates && parsed.candidates[0].content.parts[0].text) {
-                                    const chunkText = parsed.candidates[0].content.parts[0].text;
-                                    fullAnswer += chunkText;
-                                    assistantBubble.innerHTML = formatMarkdown(fullAnswer);
-                                    document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
-                                }
-                            } catch (e) { }
-                        }
-                    }
-                }
-
+                // تحديث الذاكرة للمحادثة المستمرة
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "assistant", parts: [{ text: fullAnswer }] });
 
@@ -234,7 +213,7 @@
         }
 
         function formatMarkdown(text) {
-            // تحسين معالجة الأسطر والخط العريض ليدعم الماركدوان القياسي لجوميناي
+            // معالجة الخط العريض، الجداول، والأسطر البرمجية القياسية القادمة من Gemini
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
