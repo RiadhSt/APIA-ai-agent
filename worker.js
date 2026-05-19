@@ -1,6 +1,5 @@
 export default {
   async fetch(request, env) {
-    // تفعيل الـ CORS لتسمح لموقعك بالاتصال بالـ Worker دون قيود أمنية
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -17,11 +16,12 @@ export default {
 
     try {
       const { message, history } = await request.json();
-      const apiKey = env.GEMINI_API_KEY; // يتم جلب مفتاح الأمان من إعدادات Cloudflare
+      const apiKey = env.GEMINI_API_KEY;
 
-      // ==========================================
-      // 1. ضع روابط ملفات وتقارير وكالة APIA هنا بدقة
-      // ==========================================
+      if (!apiKey) {
+        throw new Error("مفتاح الـ API Key مفقود في إعدادات Cloudflare Variables!");
+      }
+
       const pdfUrls = [
         "https://apia-smartagri.pages.dev/reports/APIA_QA.pdf",
         "https://apia-smartagri.pages.dev/guide_de_l_investisseur-etranger.pdf",
@@ -32,18 +32,16 @@ export default {
         "https://apia-smartagri.pages.dev/Site_web.pdf",  
       ];
 
-      // تحويل الروابط إلى الهيكل البرمجي الذي يطلبه نموذج Gemini 2.5 Flash لقراءتها
+      // التصحيح البرمجي الصارم لهيكلية الملفات عن بعد لقراءتها بسلاسة
       const attachedFiles = pdfUrls.map(url => ({
-        fileData: {
-          fileUri: url,
-          mimeType: "application/pdf"
+        inlineData: {
+          mimeType: "application/pdf",
+          data: url // تمرير الرابط المباشر كـ Source
         }
       }));
 
-      // 2. توجيهات النظام الصارمة (System Instructions) للحفاظ على المحتوى والأرقام
       const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء عدم تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
 
-      // دمج الملفات مع الرسالة الحالية للمستخدم
       const currentContent = {
         role: "user",
         parts: [
@@ -52,11 +50,9 @@ export default {
         ]
       };
 
-      // دمج سجل المحادثة بالكامل (History) لضمان استمرار سياق الحوار
       const contents = [...history, currentContent];
       const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${apiKey}`;
 
-      // 3. الاتصال بـ Gemini بنظام البث (Streaming) لسرعة استجابة فائقة
       const response = await fetch(geminiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,6 +61,11 @@ export default {
           systemInstruction: { parts: [{ text: systemInstruction }] }
         })
       });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`خطأ من خادم جوميناي: ${errText}`);
+      }
 
       return new Response(response.body, {
         headers: {
