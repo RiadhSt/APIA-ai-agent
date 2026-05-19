@@ -1,7 +1,7 @@
 export default {
   async fetch(request, env) {
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "*", // يسمح للموقع الرئيسي بالاتصال به
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     };
@@ -19,19 +19,25 @@ export default {
       const apiKey = env.GEMINI_API_KEY;
 
       if (!apiKey) {
-        throw new Error("مفتاح الـ API Key مفقود في إعدادات Cloudflare Variables!");
+        throw new Error("مفتاح الـ API Key مفقود في المتغيرات!");
       }
+
+      // =========================================================
+      // ضع هنا رابط البوت الفعلي من الخطوة 1 (وليس الموقع الرئيسي)
+      // =========================================================
 
       const pdfUrls = [
         "https://apia-smartagri.pages.dev/reports/APIA_QA.pdf",
-        "https://apia-smartagri.pages.dev/guide_de_l_investisseur-etranger.pdf",
-        "https://apia-smartagri.pages.dev/Guide_Global.pdf", 
-        "https://apia-smartagri.pages.dev/guide_societes_communautaires.pdf",
-        "https://apia-smartagri.pages.dev/RAPPORT_2025_PUBLIQUE.pdf",
-        "https://apia-smartagri.pages.dev/Rapport_Comite_Inv.pdf",
-        "https://apia-smartagri.pages.dev/Site_web.pdf",  
+        "https://apia-smartagri.pages.dev/reports/guide_de_l_investisseur-etranger.pdf",
+        "https://apia-smartagri.pages.dev/reports/Guide_Global.pdf", 
+        "https://apia-smartagri.pages.dev/reports/guide_societes_communautaires.pdf",
+        "https://apia-smartagri.pages.dev/reports/RAPPORT_2025_PUBLIQUE.pdf",
+        "https://apia-smartagri.pages.dev/reports/Rapport_Comite_Inv.pdf",
+        "https://apia-smartagri.pages.dev/reports/Site_web.pdf",  
       ];
 
+
+      
       // التصحيح البرمجي الصارم لهيكلية الملفات عن بعد لقراءتها بسلاسة
       const attachedFiles = pdfUrls.map(url => ({
         inlineData: {
