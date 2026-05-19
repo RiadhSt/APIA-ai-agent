@@ -19,33 +19,31 @@ export default {
       const apiKey = env.GEMINI_API_KEY;
 
       if (!apiKey) {
-        throw new Error("مفتاح الـ GEMINI_API_KEY مفقود في إعدادات Cloudflare!");
+        throw new Error("مفتاح الـ GEMINI_API_KEY مفقود في إعدادات كلوفلير!");
       }
 
-      // رابط مستودع البوت الفعلي والمباشر الخاص بك
-      const botUrl = "https://apia1ai.apia.workers.dev"; 
-
-      // التركيز على الملفات الحيوية لضمان عدم تجاوز الذاكرة والـ Quota
-      const targetFiles = [
-        `${botUrl}/reports/APIA_QA.pdf`,
-        `${botUrl}/reports/guide_de_l_investisseur-etranger.pdf`,
-        `${botUrl}/reports/Guide_Global.pdf`, 
-        `${botUrl}/reports/guide_societes_communautaires.pdf`,
-        `${botUrl}/reports/RAPPORT_2025_PUBLIQUE.pdf`,
-        `${botUrl}/reports/Rapport_Comite_Inv.pdf`,
-        `${botUrl}/reports/Site_web.pdf`
+      // أسماء الملفات كما هي موجودة في مستودع GitHub الخاص بالبوت
+      const filePaths = [
+        "reports/APIA_QA.pdf",
+        "reports/guide_de_l_investisseur-etranger.pdf",
+        "reports/Guide_Global.pdf", 
+        "reports/guide_societes_communautaires.pdf",
+        "reports/RAPPORT_2025_PUBLIQUE.pdf",
+        "reports/Rapport_Comite_Inv.pdf",
+        "reports/Site_web.pdf"
       ];
 
       const attachedFilesParts = [];
 
-      // تحويل الملفات برمجياً إلى Base64 لتخطي حظر السيرفرات والأمان
-      for (const url of targetFiles) {
+      // قراءة الملفات مباشرة من الأصول الثابتة للمشروع (Assets)
+      for (const path of filePaths) {
         try {
-          const fileResponse = await fetch(url);
-          if (fileResponse.ok) {
-            const arrayBuffer = await fileResponse.arrayBuffer();
+          // جلب الملف محلياً من البيئة المشتركة لـ Cloudflare Pages
+          const fileObject = await env.ASSETS.get(path);
+          if (fileObject) {
+            const arrayBuffer = await fileObject.arrayBuffer();
             
-            // تحويل آمن ومتوافق مع خوادم كلوفلير للـ ArrayBuffer إلى Base64
+            // تحويل الملف البرمجي الثنائي إلى صيغة Base64 ليفهمها جوميناي
             const bytes = new Uint8Array(arrayBuffer);
             let binary = "";
             for (let i = 0; i < bytes.byteLength; i++) {
@@ -61,11 +59,11 @@ export default {
             });
           }
         } catch (e) {
-          // تجاوز أي ملف يفشل في التحميل لضمان عدم توقف البوت
+          // تجاوز أي ملف يحدث فيه خلل في القراءة لضمان استقرار البوت
         }
       }
 
-      const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. الالتزام الصارم بعدم تبسيط المحتوى أو تغيير أي أرقام.";
+      const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. الالتزام الصارم بعدم تبسيط المحتوى أو تغيير أي أرقام أو فقرات.";
 
       const currentContent = {
         role: "user",
@@ -89,7 +87,7 @@ export default {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`رفض الـ API الخاص بجوجل الطلب: ${errorText}`);
+        throw new Error(`رفض خادم جوميناي الطلب: ${errorText}`);
       }
 
       return new Response(response.body, {
