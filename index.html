@@ -135,9 +135,8 @@
         <br><br>
         <strong class="highlight-yellow">تنبيه:</strong>
         <ul style="list-style-type: disc;">
-            <li>ككل تطبيق مرتكز على الذكاء الاصطناعي، يمكن أن يحدث بعض الالتباس. عند الحاجة يمكنكم التواصل مع المشرف <a href="mailto:kouki.riadh@apia.com.tn" style="color:#d4b661; text-decoration:none; font-weight:bold;">kouki.riadh@apia.com.tn</a></li>
-            <li>يرجى عدم إدخال أي معطيات شخصية داخل المحادثة (الاسم، الهاتف، البريد الإلكتروني، رقم بطاقة التعريف الوطنية، …).</li>
-            <li>لا يتم تسجيل أو تخزين أو استعمال محتوى المحادثة لتدريب نماذج الذكاء الاصطناعي.</li>
+            <li>عند الحاجة يمكنكم التواصل مع المشرف <a href="mailto:kouki.riadh@apia.com.tn" style="color:#d4b661; text-decoration:none; font-weight:bold;">kouki.riadh@apia.com.tn</a></li>
+            <li>يرجى عدم إدخال أي معطيات شخصية داخل المحادثة.</li>
             <li>لا يتم اعتماد محتوى هذه المحادثة كقرار إداري أو التزام رسمي للوكالة.</li>
         </ul>
         <br>
@@ -155,8 +154,9 @@
         </button>
     </div>
 
-<script>
-        const WORKER_URL = "https://apia1ai.apia.workers.dev";
+    <script>
+        // الربط المحلي الذكي دون الحاجة لروابط خارجية تسبب مشاكل CORS
+        const WORKER_URL = "/api/chat";
         let chatHistory = [];
 
         async function sendMessage() {
@@ -180,18 +180,16 @@
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.error || "تعذر على الـ Worker معالجة طلبك حالياً.");
+                    throw new Error(errorData.error || "تعذر على خادم الوكالة معالجة طلبك حالياً.");
                 }
 
-                // استقبال الإجابة النظيفة الكاملة مباشرة دفعة واحدة
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                // عرض الإجابة وتنسيقها
                 assistantBubble.innerHTML = formatMarkdown(fullAnswer);
                 document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
 
-                // تحديث الذاكرة للمحادثة المستمرة
+                // حفظ مسار الحوار للمحافظة على سياق النقاش
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "assistant", parts: [{ text: fullAnswer }] });
 
@@ -213,7 +211,6 @@
         }
 
         function formatMarkdown(text) {
-            // معالجة الخط العريض، الجداول، والأسطر البرمجية القياسية القادمة من Gemini
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
