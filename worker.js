@@ -1,6 +1,5 @@
 export default {
   async fetch(request, env) {
-    // تفعيل الـ CORS لتسمح لموقعك المستضاف على Cloudflare Pages بالاتصال بالـ Worker دون قيود
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -17,24 +16,27 @@ export default {
 
     try {
       const { message, history } = await request.json();
-      const apiKey = env.GEMINI_API_KEY; // يتم ضبطه بأمان في إعدادات Cloudflare
+      const apiKey = env.GEMINI_API_KEY;
 
-      // 1. جلب قائمة كافة ملفات الـ PDF الضخمة المرفوعة مسبقاً على حسابك تلقائياً دون تذكر الـ IDs
-      const filesResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/files?key=${apiKey}`, {
-        method: "GET"
-      });
-      const filesData = await filesResponse.json();
-      
-      // استخراج معرّفات الملفات لتمريرها مع السياق
-      let attachedFiles = [];
-      if (filesData.files && filesData.files.length > 0) {
-        attachedFiles = filesData.files.map(f => ({ fileUri: f.uri }));
-      }
+      // 1. ضع هنا معرّفات الـ File IDs الخاصة بتقارير وكالة APIA التي قمت برفعها
+      // يمكنك وضع معرف واحد أو أكثر داخل هذه المصفوفة
+      const fileIds = [
+        "files/ضع_هنا_معرف_الملف_الأول", 
+        "files/ضع_هنا_معرف_الملف_الثاني"
+      ];
 
-      // 2. بناء هيكل طلب المحادثة لـ Gemini 2.5 Flash
-      const systemInstruction = "أنت خبير وكالة النهوض بالاستثمارات الفلاحية. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
-      
-      // تجهيز الرسالة الحالية ودمج الملفات المرفقة معها تلقائياً إن وجدت
+      // تحويل الـ IDs إلى الصيغة التي يفهمها جوميناي
+      const attachedFiles = fileIds.map(id => ({
+        fileData: {
+          fileUri: `https://generativelanguage.googleapis.com/v1beta/${id}`,
+          mimeType: "application/pdf"
+        }
+      }));
+
+      // 2. بناء التوجيهات الصارمة للخبير
+      const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء عدم تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
+
+      // دمج الملفات مع السؤال الحالي للمستخدم
       const currentContent = {
         role: "user",
         parts: [
@@ -43,12 +45,9 @@ export default {
         ]
       };
 
-      // دمج سجل المحادثة الحالي (History) لضمان استمرار السياق
       const contents = [...history, currentContent];
-
-      // 3. الاتصال بـ Gemini بنظام البث (Streaming) لسرعة استجابة فائقة
       const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${apiKey}`;
-      
+
       const response = await fetch(geminiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,7 +57,6 @@ export default {
         })
       });
 
-      // تحويل استجابة جوميناي إلى Stream متدفق مباشرة إلى واجهة المستخدم
       return new Response(response.body, {
         headers: {
           ...corsHeaders,
