@@ -1,5 +1,6 @@
 export default {
   async fetch(request, env) {
+    // تفعيل الـ CORS لتسمح لموقعك بالاتصال بالـ Worker دون قيود أمنية
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -16,27 +17,29 @@ export default {
 
     try {
       const { message, history } = await request.json();
-      const apiKey = env.GEMINI_API_KEY;
+      const apiKey = env.GEMINI_API_KEY; // يتم جلب مفتاح الأمان من إعدادات Cloudflare
 
-      // 1. ضع هنا معرّفات الـ File IDs الخاصة بتقارير وكالة APIA التي قمت برفعها
-      // يمكنك وضع معرف واحد أو أكثر داخل هذه المصفوفة
-      const fileIds = [
-        "files/ضع_هنا_معرف_الملف_الأول", 
-        "files/ضع_هنا_معرف_الملف_الثاني"
+      // ==========================================
+      // 1. ضع روابط ملفات وتقارير وكالة APIA هنا بدقة
+      // ==========================================
+      const pdfUrls = [
+        "https://your-project.pages.dev/reports/Guide%20Global.pdf",
+        "https://your-project.pages.dev/reports/APIA_QA.pdf",
+        "https://your-project.pages.dev/reports/RAPPORT_2025_PUBLIQUE.pdf"
       ];
 
-      // تحويل الـ IDs إلى الصيغة التي يفهمها جوميناي
-      const attachedFiles = fileIds.map(id => ({
+      // تحويل الروابط إلى الهيكل البرمجي الذي يطلبه نموذج Gemini 2.5 Flash لقراءتها
+      const attachedFiles = pdfUrls.map(url => ({
         fileData: {
-          fileUri: `https://generativelanguage.googleapis.com/v1beta/${id}`,
+          fileUri: url,
           mimeType: "application/pdf"
         }
       }));
 
-      // 2. بناء التوجيهات الصارمة للخبير
+      // 2. توجيهات النظام الصارمة (System Instructions) للحفاظ على المحتوى والأرقام
       const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء عدم تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
 
-      // دمج الملفات مع السؤال الحالي للمستخدم
+      // دمج الملفات مع الرسالة الحالية للمستخدم
       const currentContent = {
         role: "user",
         parts: [
@@ -45,9 +48,11 @@ export default {
         ]
       };
 
+      // دمج سجل المحادثة بالكامل (History) لضمان استمرار سياق الحوار
       const contents = [...history, currentContent];
       const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${apiKey}`;
 
+      // 3. الاتصال بـ Gemini بنظام البث (Streaming) لسرعة استجابة فائقة
       const response = await fetch(geminiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
