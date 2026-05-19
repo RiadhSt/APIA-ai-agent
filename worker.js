@@ -25,28 +25,26 @@ export default {
       // =========================================================
       // ضع هنا رابط البوت الفعلي من الخطوة 1 (وليس الموقع الرئيسي)
       // =========================================================
+      const botUrl = "https://apia1ai.apia.workers.dev/"; 
 
       const pdfUrls = [
-        "https://apia-smartagri.pages.dev/reports/APIA_QA.pdf",
-        "https://apia-smartagri.pages.dev/reports/guide_de_l_investisseur-etranger.pdf",
-        "https://apia-smartagri.pages.dev/reports/Guide_Global.pdf", 
-        "https://apia-smartagri.pages.dev/reports/guide_societes_communautaires.pdf",
-        "https://apia-smartagri.pages.dev/reports/RAPPORT_2025_PUBLIQUE.pdf",
-        "https://apia-smartagri.pages.dev/reports/Rapport_Comite_Inv.pdf",
-        "https://apia-smartagri.pages.dev/reports/Site_web.pdf",  
+        `${botUrl}/reports/APIA_QA.pdf`,
+        `${botUrl}/guide_de_l_investisseur-etranger.pdf`,
+        `${botUrl}/Guide_Global.pdf`, 
+        `${botUrl}/guide_societes_communautaires.pdf`,
+        `${botUrl}/RAPPORT_2025_PUBLIQUE.pdf`,
+        `${botUrl}/Rapport_Comite_Inv.pdf`,
+        `${botUrl}/Site_web.pdf`
       ];
 
-
-      
-      // التصحيح البرمجي الصارم لهيكلية الملفات عن بعد لقراءتها بسلاسة
       const attachedFiles = pdfUrls.map(url => ({
         inlineData: {
           mimeType: "application/pdf",
-          data: url // تمرير الرابط المباشر كـ Source
+          data: url
         }
       }));
 
-      const systemInstruction = "أنت خبير وكالة APIA. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء عدم تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
+      const systemInstruction = "أنت خبير وكالة النهوض بالاستثمارات الفلاحية التونسية. أجب بدقة من الملفات المرفقة واستخدم الجداول للأرقام. رجاء عدم تبسيط المحتوى ولا اختصار الفقرات الالتزام الصارم بعدم تغيير أي حرف أو رقم.";
 
       const currentContent = {
         role: "user",
