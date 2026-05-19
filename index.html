@@ -166,71 +166,59 @@
         const WORKER_URL = "https://apia1ai.apia.workers.dev/";
         let chatHistory = [];
 
-        async function sendMessage() {
-            const inputEl = document.getElementById("userInput");
-            const query = inputEl.value.trim();
-            if (!query) return;
+// استبدل دالة sendMessage القديمة في ملف index.html بهذا التحديث المستقر:
+async function sendMessage() {
+    const inputEl = document.getElementById("userInput");
+    const query = inputEl.value.trim();
+    if (!query) return;
 
-            // إخفاء النص الترحيبي عند بدء النقاش الفعلي لتوفير المساحة بصرياً
-            document.getElementById("welcome").style.display = "none";
+    // إخفاء الواجهة الترحيبية عند بدء النقاش
+    document.getElementById("welcome").style.display = "none";
+    inputEl.value = "";
+    appendMessage("user", query);
 
-            inputEl.value = "";
-            appendMessage("user", query);
+    // إعداد فقاعة الرد وتنبيه المستخدم ببدء معالجة وثائق الوكالة بمئات الصفحات
+    const assistantMessageId = appendMessage("assistant", "جاري قراءة تقارير APIA والتحضير...");
+    const assistantBubble = document.getElementById(assistantMessageId);
 
-            // إعداد فقاعة الرد الفارغة لاستقبال البث المتدفق
-            const assistantMessageId = appendMessage("assistant", "جاري التحضير...");
-            const assistantBubble = document.getElementById(assistantMessageId);
+    try {
+        const response = await fetch(WORKER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: query, history: chatHistory })
+        });
 
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message: query, history: chatHistory })
-                });
+        if (!response.ok) throw new Error("تعذر على الـ Worker معالجة المستندات حالياً.");
 
-                if (!response.ok) throw new Error("تعذر الاتصال بالخادم الخلفي.");
+        assistantBubble.innerHTML = ""; // تفريغ نص التحضير البدئي
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullAnswer = "";
 
-                assistantBubble.innerHTML = ""; // تفريغ نص التحضير
-                
-                // معالجة تدفق النص (Streaming) بدون توقف أو تقطيع
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-                let buffer = "";
-                let fullAnswer = "";
-
-                while (true) {
-                    const { value, done } = await reader.read();
-                    if (done) break;
-                    
-                    buffer += decoder.decode(value, { stream: true });
-                    // جوميناي يرسل البيانات بصيغة SSE (Server-Sent Events)
-                    const lines = buffer.split("\n");
-                    buffer = lines.pop(); 
-
-                    for (const line of lines) {
-                        if (line.startsWith("data: ")) {
-                            try {
-                                const parsed = JSON.parse(line.substring(6));
-                                if (parsed.candidates && parsed.candidates[0].content.parts[0].text) {
-                                    const chunkText = parsed.candidates[0].content.parts[0].text;
-                                    fullAnswer += chunkText;
-                                    // عرض النص وتجهيز الجداول آلياً إذا تم تضمينها
-                                    assistantBubble.innerHTML = formatMarkdown(fullAnswer);
-                                    document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
-                                }
-                            } catch (e) { /* تخطي السطور غير المكتملة في التدفق البصري */ }
-                        }
-                    }
-                }
-
-                // حفظ الجلسة في الذاكرة المستمرة للمتابعة
-                chatHistory.push({ role: "user", parts: [{ text: query }] });
-                chatHistory.push({ role: "assistant", parts: [{ text: fullAnswer }] });
-
-            } catch (error) {
-                assistantBubble.innerHTML = "عذراً، حدث خطأ أثناء معالجة طلبك الفني: " + error.message;
-            }
+        // قراءة البث المتدفق (Stream) كلمة بكلمة وحرف بحرف
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            
+            const textChunk = decoder.decode(value, { stream: true });
+            fullAnswer += textChunk;
+            
+            // عرض النص المحدث وتنسيقه آلياً مع دعم الجداول والأرقام الصارمة
+            assistantBubble.innerHTML = formatMarkdown(fullAnswer);
+            
+            // تحريك التمرير لأسفل الشاشة لمواكبة النص تلقائياً وحل مشكلة المقاييس
+            document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
         }
+
+        // حفظ هذه الجولة في سجل الذاكرة المستمرة للبوت
+        chatHistory.push({ role: "user", parts: [{ text: query }] });
+        chatHistory.push({ role: "assistant", parts: [{ text: fullAnswer }] });
+
+    } catch (error) {
+        assistantBubble.innerHTML = "حدث خطأ أثناء الاتصال بالخبير: " + error.message;
+    }
+}
 
         function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
