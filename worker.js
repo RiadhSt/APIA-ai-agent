@@ -23,9 +23,13 @@ export default {
       // 1. ضع روابط ملفات وتقارير وكالة APIA هنا بدقة
       // ==========================================
       const pdfUrls = [
-        "https://your-project.pages.dev/reports/Guide%20Global.pdf",
-        "https://your-project.pages.dev/reports/APIA_QA.pdf",
-        "https://your-project.pages.dev/reports/RAPPORT_2025_PUBLIQUE.pdf"
+        "https://apia-smartagri.pages.dev/reports/APIA_QA.pdf",
+        "https://apia-smartagri.pages.dev/guide_de_l_investisseur-etranger.pdf",
+        "https://apia-smartagri.pages.dev/Guide_Global.pdf", 
+        "https://apia-smartagri.pages.dev/guide_societes_communautaires.pdf",
+        "https://apia-smartagri.pages.dev/RAPPORT_2025_PUBLIQUE.pdf",
+        "https://apia-smartagri.pages.dev/Rapport_Comite_Inv.pdf",
+        "https://apia-smartagri.pages.dev/Site_web.pdf",  
       ];
 
       // تحويل الروابط إلى الهيكل البرمجي الذي يطلبه نموذج Gemini 2.5 Flash لقراءتها
