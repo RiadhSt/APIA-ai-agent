@@ -153,7 +153,8 @@
         </button>
     </div>
 
-    <script>
+
+<script>
         // الربط المحلي الذكي دون الحاجة لروابط خارجية تسبب مشاكل CORS
         const WORKER_URL = "/api/chat";
         let chatHistory = [];
@@ -185,10 +186,10 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                assistantBubble.innerHTML = formatMarkdown(fullAnswer);
-                document.getElementById("chatContainer").scrollTop = document.getElementById("chatContainer").scrollHeight;
+                // 🌟 استدعاء تأثير الزحف والكتابة التلقائية بدلاً من العرض الدفعي الفوري
+                typeWriterEffect(assistantBubble, fullAnswer, 25);
 
-                // حفظ مسار الحوار للمحافظة على سياق النقاش
+                // حفظ مسار الحوار للمحافظة على سياق النقاش بالدور المتوافق مع جوجل (model)
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
@@ -209,6 +210,31 @@
             return msgId;
         }
 
+        // دالة تحاكي تدفق الكلام كلمة بكلمة لقتل وقت الانتظار وتنسيق الـ Markdown
+        function typeWriterEffect(element, text, speed = 25) {
+            let words = text.split(" ");
+            let i = 0;
+            element.innerHTML = ""; // تصفير فقاعة الانتظار لبدء الكتابة
+
+            function type() {
+                if (i < words.length) {
+                    // تجميع الكلمات الحالية وتطبيق تنسيق الماركداون والأسطر عليها حياً
+                    let currentText = words.slice(0, i + 1).join(" ");
+                    element.innerHTML = formatMarkdown(currentText);
+                    i++;
+                    
+                    // النزول التلقائي للمستعرض مع تدفق النص لأسفل
+                    const container = document.getElementById("chatContainer");
+                    if (container) {
+                        container.scrollTop = container.scrollHeight;
+                    }
+                    
+                    setTimeout(type, speed); // التحكم في سرعة خروج الكلمات (بالملي ثانية)
+                }
+            }
+            type();
+        }
+
         function formatMarkdown(text) {
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -223,5 +249,7 @@
             }
         });
     </script>
+
+    
 </body>
 </html>
