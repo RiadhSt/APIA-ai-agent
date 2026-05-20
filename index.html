@@ -161,13 +161,11 @@
 
     <script>
         const WORKER_URL = "/api/chat";
-        let chatHistory = [];
+        // 🌟 مصفوفة التاريخ المهيكلة تماماً مثل بايثون
+        let chatHistory = []; 
 
-        // ضبط إعدادات مكتبة التنسيق لتدعم كسر الأسطر تلقائياً والجداول
-        marked.setOptions({
-            breaks: true,
-            gfm: true
-        });
+        // إعدادات رندرة الجداول والنصوص
+        marked.setOptions({ breaks: true, gfm: true });
 
         async function sendMessage() {
             const inputEl = document.getElementById("userInput");
@@ -177,13 +175,13 @@
             document.getElementById("welcome").style.display = "none";
             inputEl.value = "";
             
-            // 1. إرسال سؤال المستخدم
+            // 1. عرض سؤال المستخدم في فقاعة مستقلة
             appendMessage("user", query);
 
-            // 2. إنشاء فقاعة البوت الفريدة للانتظار
+            // 2. إنشاء فقاعة البوت الفريدة للانتظار وحفظ الـ ID الخاص بها
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
-            const assistantBubble = document.getElementById(assistantMessageId);
-
+            
+            // تشغيل نقاط التحميل المتحركة داخل هذه الفقاعة حصرياً
             let loadingDots = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
@@ -197,9 +195,11 @@
             }, 500);
 
             try {
+                // 3. إرسال الطلب إلى Cloudflare Worker مع التاريخ الكامل والنظيف
                 const response = await fetch(WORKER_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
+                    // نرسل السؤال الحالي ومعه تاريخ المحادثة المرتب
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
 
@@ -215,17 +215,18 @@
 
                 const freshAssistantBubble = document.getElementById(assistantMessageId);
                 if (freshAssistantBubble) {
-                    // 🌟 تصفير النص وتشغيل دالة الزحف المعتمدة على المكتبة الاحترافية الجديدة
+                    // تصفير نص الانتظار ورسم الجداول والنصوص حياً وبأناقة
                     typeWriterEffect(freshAssistantBubble, fullAnswer);
                 }
 
-                // 3. إدارة التاريخ بشكل معزول تماماً لمنع التداخل في الأسئلة القادمة
+                // 4. 🌟 استنساخ منطق بايثون: تحديث ذاكرة التاريخ بالهيكل القياسي لـ Gemini
+                // هذا الترتيب الصارم يمنع الموديل من الخلط أو الهذيان عند طول المحادثة
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
-                // تدوير التاريخ الذكي للحفاظ على التركيز وسرعة الاستجابة
-                if (chatHistory.length > 4) {
-                    chatHistory = chatHistory.slice(-4);
+                // حصر الذاكرة في آخر 3 حوارات (6 عناصر) للحفاظ على التركيز العالي وسرعة الاستجابة
+                if (chatHistory.length > 6) {
+                    chatHistory = chatHistory.slice(-6);
                 }
 
             } catch (error) {
@@ -239,12 +240,12 @@
 
         function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
+            // توليد ID فريد معقد لكل فقاعة لمنع أي تداخل برمي بين الإجابات
             const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
             
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${role}`;
             msgDiv.id = msgId;
-            // إذا كان المستخدم نضع النص مباشرة، وإذا كان البوت نتركه ليتم صياغته عبر الزحف والمكتبة
             msgDiv.innerHTML = role === "user" ? formatMarkdown(text) : text;
             
             container.appendChild(msgDiv);
@@ -252,17 +253,17 @@
             return msgId;
         }
 
-        // دالة الزحف الذكية المدمجة مع المكتبة الاحترافية لرسم الجداول حياً بدون تقطيع
+        // دالة الزحف الذكية المتوافقة مع مكتبة marked لرسم الجداول بدون تقطيع
         function typeWriterEffect(element, text) {
             element.innerHTML = ""; 
             let words = text.split(" ");
             let i = 0;
-            const speed = 20;
+            const speed = 15; // سرعة مناسبة ومريحة للعين
 
             function type() {
                 if (i < words.length) {
                     let currentText = words.slice(0, i + 1).join(" ");
-                    // 🌟 استخدام مكتبة marked العالمية لطباعة نصوص وجداول فائقة الدقة والجمال
+                    // تحويل الماركداون المباشر قادم من جوميناي إلى جداول HTML فاخرة
                     element.innerHTML = marked.parse(currentText);
                     i++;
                     
@@ -275,7 +276,6 @@
             type();
         }
 
-        // دالة احتياطية مبسطة للرسائل السريعة لضمان عدم توقف الكود
         function formatMarkdown(text) {
             if (!text) return "";
             return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
