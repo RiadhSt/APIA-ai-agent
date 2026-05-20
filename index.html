@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APIA Expert</title>
-<style>
+    <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: transparent;
@@ -55,6 +55,7 @@
             font-size: 15px;
             line-height: 1.5;
             word-wrap: break-word;
+            box-sizing: border-box;
         }
 
         .message.user {
@@ -154,8 +155,7 @@
         </button>
     </div>
 
-
-<script>
+    <script>
         const WORKER_URL = "/api/chat";
         let chatHistory = [];
 
@@ -168,18 +168,19 @@
             inputEl.value = "";
             appendMessage("user", query);
 
-            // 1. إنشاء فقاعة الانتظار للبوت
+            // 1. إنشاء فقاعة الانتظار الفريدة للبوت وحفظ الـ ID الخاص بها بدقة
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
-            const assistantBubble = document.getElementById(assistantMessageId);
-
-            // 🌟 ميزة ذكية: إضافة نقاط متحركة حية تشغل عين القارئ فوراً أثناء الانتظار
+            
+            // إضافة نقاط الحركة الحية داخل العنصر المستهدف فقط
             let loadingDots = setInterval(() => {
-                if (assistantBubble.innerText.endsWith("...")) {
-                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
-                } else if (assistantBubble.innerText.endsWith(" .")) {
-                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
+                const bubble = document.getElementById(assistantMessageId);
+                if (!bubble) return;
+                if (bubble.innerText.endsWith("...")) {
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
+                } else if (bubble.innerText.endsWith(" .")) {
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
                 } else {
-                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
                 }
             }, 500);
 
@@ -190,7 +191,7 @@
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
 
-                // إيقاف حركة نقاط الانتظار بمجرد وصول الرد
+                // 🌟 حل المشكلة الحاسم: إيقاف المؤقت فوراً قبل بدء عملية الزحف لضمان عدم حدوث تداخل!
                 clearInterval(loadingDots);
 
                 if (!response.ok) {
@@ -201,22 +202,28 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                // 🌟 تشغيل تأثير الزحف السلس كلمة بكلمة
-                typeWriterEffect(assistantBubble, fullAnswer);
+                const assistantBubble = document.getElementById(assistantMessageId);
+                if (assistantBubble) {
+                    // تشغيل تأثير الزحف الحقيقي المستقر
+                    typeWriterEffect(assistantBubble, fullAnswer);
+                }
 
-                // حفظ مسار الحوار للمحافظة على سياق النقاش بالدور المتوافق مع جوجل (model)
+                // حفظ مسار الحوار بهوية متوافقة مع شروط سيرفرات جوجل الجديدة لمنع تشتت الموديل
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
             } catch (error) {
                 clearInterval(loadingDots);
-                assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
+                const assistantBubble = document.getElementById(assistantMessageId);
+                if (assistantBubble) {
+                    assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
+                }
             }
         }
 
         function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
-            const msgId = "msg-" + Date.now();
+            const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${role}`;
             msgDiv.id = msgId;
@@ -226,12 +233,12 @@
             return msgId;
         }
 
-        // دالة الزحف والتدفق كلمة بكلمة لتعطي شعوراً بالسرعة والراحة الفورية
+        // دالة الزحف الحية المستقرة والمحمية من التداخل اللغوي والهيكلي
         function typeWriterEffect(element, text) {
             element.innerHTML = ""; 
             let words = text.split(" ");
             let i = 0;
-            const speed = 40; // سرعة تدفق الكلمات بالملي ثانية
+            const speed = 30; // سرعة تدفق الكلمات بالملي ثانية لشغل المستخدم وتغطية وقت الانتظار
 
             function type() {
                 if (i < words.length) {
@@ -262,6 +269,5 @@
             }
         });
     </script>
-    
 </body>
 </html>
