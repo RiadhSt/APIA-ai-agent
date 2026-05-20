@@ -167,9 +167,20 @@
             inputEl.value = "";
             appendMessage("user", query);
 
-            // إنشاء فقاعة الانتظار للبوت وحفظ معرفها
+            // 1. إنشاء فقاعة الانتظار للبوت
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
             const assistantBubble = document.getElementById(assistantMessageId);
+
+            // 🌟 ميزة ذكية: إضافة نقاط متحركة حية تشغل عين القارئ فوراً أثناء الانتظار
+            let loadingDots = setInterval(() => {
+                if (assistantBubble.innerText.endsWith("...")) {
+                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
+                } else if (assistantBubble.innerText.endsWith(" .")) {
+                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
+                } else {
+                    assistantBubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
+                }
+            }, 500);
 
             try {
                 const response = await fetch(WORKER_URL, {
@@ -177,6 +188,9 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
+
+                // إيقاف حركة نقاط الانتظار بمجرد وصول الرد
+                clearInterval(loadingDots);
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
@@ -186,15 +200,16 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                // تشغيل تأثير الزحف الحقيقي على الفقاعة
-                typeWriter(assistantBubble, fullAnswer);
+                // 🌟 تشغيل تأثير الزحف السلس كلمة بكلمة
+                typeWriterEffect(assistantBubble, fullAnswer);
 
-                // حفظ التاريخ بالتوافق مع سيرفرات جوجل
+                // حفظ مسار الحوار للمحافظة على سياق النقاش بالدور المتوافق مع جوجل (model)
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
             } catch (error) {
-                assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ: " + error.message + "</span>";
+                clearInterval(loadingDots);
+                assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
             }
         }
 
@@ -210,26 +225,26 @@
             return msgId;
         }
 
-        // دالة الزحف الحية المبسطة والفعالة جداً لمنع أي تعارض
-        function typeWriter(element, text) {
-            element.innerHTML = ""; // تصفير نص الجاري التحضير...
+        // دالة الزحف والتدفق كلمة بكلمة لتعطي شعوراً بالسرعة والراحة الفورية
+        function typeWriterEffect(element, text) {
+            element.innerHTML = ""; 
+            let words = text.split(" ");
             let i = 0;
-            const speed = 15; // السرعة بالملي ثانية لظهور الأحرف
+            const speed = 40; // سرعة تدفق الكلمات بالملي ثانية
 
-            function typing() {
-                if (i < text.length) {
-                    // القراءة الحية مع دعم الفراغات والأسطر الجديدة حياً
-                    let rawHtml = text.substring(0, i + 1);
-                    element.innerHTML = formatMarkdown(rawHtml);
+            function type() {
+                if (i < words.length) {
+                    let currentText = words.slice(0, i + 1).join(" ");
+                    element.innerHTML = formatMarkdown(currentText);
                     i++;
                     
                     const container = document.getElementById("chatContainer");
                     if (container) container.scrollTop = container.scrollHeight;
                     
-                    setTimeout(typing, speed);
+                    setTimeout(type, speed);
                 }
             }
-            typing();
+            type();
         }
 
         function formatMarkdown(text) {
