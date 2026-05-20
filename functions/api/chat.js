@@ -17,7 +17,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 1. أسماء ملفات الأدلة والتقارير المرفوعة في مجلد reports على GitHub
+    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
     const fileNames = [
       "APIA_QA.pdf",
       "guide_de_l_investisseur-etranger.pdf",
@@ -28,25 +28,46 @@ export async function onRequestPost(context) {
       "Site_web.pdf"
     ];
 
-    const attachedFilesParts = [];
     const baseUrl = new URL(request.url).origin;
 
-    // 2. بدلاً من تحميل الملفات وتحويلها، سنقوم بتوجيه Gemini لقراءة روابطها مباشرة لتوفير الوقت والذاكرة
-    for (const fileName of fileNames) {
-      const fileUrl = `${baseUrl}/reports/${fileName}`;
-      attachedFilesParts.push({
-        text: `المصدر المرجعي المتاح للقراءة الحية: [${fileName}] رابط الملف للتحليل: ${fileUrl}\n`
-      });
-    }
+    // 2. جلب الملفات بشكل متوازٍ وسريع جداً (Parallel Fetching) لتفادي البطء التراكمي
+    const fetchPromises = fileNames.map(async (fileName) => {
+      try {
+        const fileUrl = `${baseUrl}/reports/${fileName}`;
+        const fileResponse = await fetch(fileUrl);
+        if (fileResponse.ok) {
+          const arrayBuffer = await fileResponse.arrayBuffer();
+          const bytes = new Uint8Array(arrayBuffer);
+          let binary = "";
+          // معالجة سريعة لتحويل البايتات إلى Base64
+          for (let i = 0; i < bytes.byteLength; i += 8000) {
+            const chunk = bytes.subarray(i, i + 8000);
+            binary += String.fromCharCode.apply(null, chunk);
+          }
+          return {
+            inlineData: {
+              mimeType: "application/pdf",
+              data: btoa(binary)
+            }
+          };
+        }
+      } catch (e) {
+        return null;
+      }
+      return null;
+    });
 
-    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على ملفات المراجع المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أي أرقام أو نسب مئوية.";
+    // انتظار انتهاء جلب جميع الملفات معاً في نفس الوقت لتوفير الثواني
+    const resolvedFiles = await Promise.all(fetchPromises);
+    const attachedFilesParts = resolvedFiles.filter(file => file !== null);
+
+    const systemInstruction = "أنت خبير وكالة APIA المعتمد التابعة لوزارة الفلاحة التونسية. أجب بدقة وعمق اعتماداً حصرياً على ملفات المراجع المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أو اختصار أي أرقام، نسب مئوية، أو إجراءات قانونية واردة في المستندات.";
     
-    // دمج الإشارات المرجعية الحية للملفات مع سؤال المستخدم
     const currentContent = { 
       role: "user", 
       parts: [
         ...attachedFilesParts,
-        { text: `سؤال المستخدم الحالي: ${message}` }
+        { text: message }
       ] 
     };
 
@@ -72,16 +93,13 @@ export async function onRequestPost(context) {
 
         const data = await response.json();
 
-        // إعادة المحاولة عند الضغط العالي (429 أو 503)
         if (!response.ok && (response.status === 429 || response.status === 503)) {
           lastError = data.error?.message || "الخادم مشغول حالياً";
-          
           if (attempt < MAX_RETRIES) {
             const delay = Math.pow(2, attempt + 1) * 1000;
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
           }
-          
           return new Response(JSON.stringify({ 
             error: "النموذج يواجه طلباً مرتفعاً حالياً. يرجى إعادة المحاولة بعد بضع ثوان." 
           }), {
