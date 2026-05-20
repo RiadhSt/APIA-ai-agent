@@ -60,19 +60,25 @@ export async function onRequestPost(context) {
     const attachedFilesParts = resolvedFiles.filter(file => file !== null);
 
     // =========================================================================
-    // التوجيهات الجديدة الصارمة: لغة مطابقة، اختصار شديد، منع ذكر المصادر
+    // التوجيهات المرنة والمحكمة: جداول مشروطة، التزام لغوي مطلق، واختصار
     // =========================================================================
-const systemInstruction = `
+    const systemInstruction = `
 You are the AI Digital Assistant for APIA Tunisia. Analyze the attached PDFs and answer according to these STRICT operational rules:
 
 1. ABSOLUTE LANGUAGE MATCH: Detect the language of the user's prompt (English, French, Arabic, or Tunisian Dialect) and reply ALWAYS in the EXACT SAME LANGUAGE. Never mix or switch languages, even if the source documents are in Arabic.
 2. MAXIMUM BREVITY: Be extremely concise, short, and direct. Remove all introductory phrases or fillers. Deliver the information directly without losing any technical accuracy, numbers, or legal ratios.
-3. NO SOURCE MENTION: Do NOT mention, cite, or reference any of the file names, document titles, or sources (e.g., do NOT say "according to the PDF"). Deliver the information directly as your own authoritative answer.
+3. NO SOURCE MENTION: Do NOT mention, cite, or reference any of the file names, document titles, or sources. Deliver the information directly as your own authoritative answer.
 4. CONDITIONAL TABLES: Use Markdown tables ONLY when presenting multiple percentages, grants, or complex financial comparisons that naturally require structured data. For simple or direct answers, use concise bullet points or short text instead of forcing a table.
 5. MISSING DATA: If information is totally absent from the sources, reply exactly with: 
 "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (Translate this specific phrase to the user's language if they ask in English or French).
 `;
     
+    // تنظيف التاريخ وتحويل أي دور 'assistant' إلى 'model' لتجنب رفض جوجل الصارم
+    const safeHistory = (history || []).map(turn => ({
+      role: turn.role === "assistant" ? "model" : turn.role,
+      parts: turn.parts
+    }));
+
     const currentContent = { 
       role: "user", 
       parts: [
@@ -81,8 +87,7 @@ You are the AI Digital Assistant for APIA Tunisia. Analyze the attached PDFs and
       ] 
     };
 
-    const trimmedHistory = history ? history.slice(-2) : [];
-    const contents = [...trimmedHistory, currentContent];
+    const contents = [...safeHistory.slice(-2), currentContent];
     
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
