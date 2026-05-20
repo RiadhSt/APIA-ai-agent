@@ -17,7 +17,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
+    // 1. أسماء ملفات الأدلة والتقارير المرفوعة في مجلد reports على GitHub
     const fileNames = [
       "APIA_QA.pdf",
       "guide_de_l_investisseur-etranger.pdf",
@@ -31,41 +31,22 @@ export async function onRequestPost(context) {
     const attachedFilesParts = [];
     const baseUrl = new URL(request.url).origin;
 
-    // 2. جلب الملفات حياً من المستودع وتحويلها إلى حزم ليفهمها السيرفر
+    // 2. بدلاً من تحميل الملفات وتحويلها، سنقوم بتوجيه Gemini لقراءة روابطها مباشرة لتوفير الوقت والذاكرة
     for (const fileName of fileNames) {
-      try {
-        const fileUrl = `${baseUrl}/reports/${fileName}`;
-        const fileResponse = await fetch(fileUrl);
-        
-        if (fileResponse.ok) {
-          const arrayBuffer = await fileResponse.arrayBuffer();
-          const bytes = new Uint8Array(arrayBuffer);
-          let binary = "";
-          for (let i = 0; i < bytes.byteLength; i++) {
-            binary += String.fromCharCode(bytes[i]);
-          }
-          const base64Data = btoa(binary);
-
-          attachedFilesParts.push({
-            inlineData: {
-              mimeType: "application/pdf",
-              data: base64Data
-            }
-          });
-        }
-      } catch (e) {
-        // إذا فشل جلب ملف نتابع البقية لضمان استقرار البوت
-      }
+      const fileUrl = `${baseUrl}/reports/${fileName}`;
+      attachedFilesParts.push({
+        text: `المصدر المرجعي المتاح للقراءة الحية: [${fileName}] رابط الملف للتحليل: ${fileUrl}\n`
+      });
     }
 
-    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على الملفات المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أي أرقام أو نسب مئوية.";
+    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على ملفات المراجع المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أي أرقام أو نسب مئوية.";
     
-    // دمج محتوى ملفات الـ PDF الحية مع سؤال المستخدم
+    // دمج الإشارات المرجعية الحية للملفات مع سؤال المستخدم
     const currentContent = { 
       role: "user", 
       parts: [
         ...attachedFilesParts,
-        { text: message }
+        { text: `سؤال المستخدم الحالي: ${message}` }
       ] 
     };
 
@@ -74,7 +55,7 @@ export async function onRequestPost(context) {
     
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // ===== منطق إعادة المحاولة الذكي من إقتراح نموذج كلوفلير (Retry with Exponential Backoff) =====
+    // ===== منطق إعادة المحاولة الذكي (Retry with Exponential Backoff) =====
     const MAX_RETRIES = 3;
     let lastError = null;
 
@@ -91,12 +72,11 @@ export async function onRequestPost(context) {
 
         const data = await response.json();
 
-        // إذا كان الخطأ بسبب الطلب المرتفع (429 أو 503)، أعد المحاولة تلقائياً بانتظار تصاعدي
+        // إعادة المحاولة عند الضغط العالي (429 أو 503)
         if (!response.ok && (response.status === 429 || response.status === 503)) {
           lastError = data.error?.message || "الخادم مشغول حالياً";
           
           if (attempt < MAX_RETRIES) {
-            // انتظار تضاعفي: 2ث -> 4ث -> 8ث
             const delay = Math.pow(2, attempt + 1) * 1000;
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
@@ -110,7 +90,6 @@ export async function onRequestPost(context) {
           });
         }
 
-        // أي خطأ آخر (خارج نطاق الـ Rate Limit)
         if (!response.ok) {
           return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
             status: response.status,
@@ -118,7 +97,6 @@ export async function onRequestPost(context) {
           });
         }
 
-        // نجاح العملية - استخراج وإرسال الرد
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "لم أتمكن من صياغة إجابة.";
         return new Response(JSON.stringify({ reply: botReply }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" }
