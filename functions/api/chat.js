@@ -30,7 +30,7 @@ export async function onRequestPost(context) {
 
     const baseUrl = new URL(request.url).origin;
 
-    // 2. جلب الملفات بشكل متوازٍ وسريع جداً (Parallel Fetching) لتفادي البطء التراكمي
+    // 2. جلب الملفات بشكل متوازٍ وسريع جداً (Parallel Fetching)
     const fetchPromises = fileNames.map(async (fileName) => {
       try {
         const fileUrl = `${baseUrl}/reports/${fileName}`;
@@ -39,7 +39,6 @@ export async function onRequestPost(context) {
           const arrayBuffer = await fileResponse.arrayBuffer();
           const bytes = new Uint8Array(arrayBuffer);
           let binary = "";
-          // معالجة سريعة لتحويل البايتات إلى Base64
           for (let i = 0; i < bytes.byteLength; i += 8000) {
             const chunk = bytes.subarray(i, i + 8000);
             binary += String.fromCharCode.apply(null, chunk);
@@ -57,11 +56,31 @@ export async function onRequestPost(context) {
       return null;
     });
 
-    // انتظار انتهاء جلب جميع الملفات معاً في نفس الوقت لتوفير الثواني
     const resolvedFiles = await Promise.all(fetchPromises);
     const attachedFilesParts = resolvedFiles.filter(file => file !== null);
 
-    const systemInstruction = "أنت خبير وكالة APIA المعتمد التابعة لوزارة الفلاحة التونسية. أجب بدقة وعمق اعتماداً حصرياً على ملفات المراجع المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أو اختصار أي أرقام، نسب مئوية، أو إجراءات قانونية واردة في المستندات.";
+    // =========================================================================
+    // ترجمة وحقن تعليماتك الصارمة والهيكلية المحدثة لـ Gemini
+    // =========================================================================
+    const systemInstruction = `
+You are the "Smart Digital Assistant for the Agricultural Investment Promotion Agency (APIA)" in Tunisia. Your mission is to provide accurate guide for investors in agriculture, fisheries, aquaculture, and related services.
+
+[KNOWLEDGE SOURCE - STRICT HIERARCHY]
+1. HIGHEST PRIORITY: The attached PDF documents are your primary, absolute legal reference.
+2. GUIDED SEARCH: If information is missing from the PDFs, rely strictly on official data from the domains (apia.com.tn) and (agriculture.tn).
+3. STRICT WARNING: Never invent information or provide non-existent numbers. If the data is absent from both sources, you MUST reply exactly with this default phrase:
+"عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn"
+
+[TONE, LANGUAGE & FORMATTING]
+1. LANGUAGE MATCHING & TUNISIAN DIALECT: Always reply in the exact language used by the user (Arabic, French, or English). CRITICAL: If the user asks in the Tunisian Dialect (اللهجة العامية التونسية), you must respond in the Tunisian Dialect as well, while remaining professional, encouraging, and clear.
+2. STRUCTURE: When explaining grant types, incentives, or benefits, you MUST use professional Markdown Tables (Columns: نوع المنحة، النسبة، السقف، الشروط) to facilitate comparison.
+3. LEGAL DETAILS: When referencing any legal text or article from the Tunisian Investment Law, mention it clearly and precisely.
+
+[TUNISIAN INVESTMENT RULES]
+- Differentiate accurately between investment categories (الصنف أ، الصنف ب).
+- Respect regional development zones (مناطق التنمية الجهوية) and their specific incentives.
+- Clearly explain value-added grants (modern technologies, water conservation, eco-friendly projects).
+`;
     
     const currentContent = { 
       role: "user", 
