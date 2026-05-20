@@ -155,7 +155,7 @@
         </button>
     </div>
 
-    <script>
+<script>
         const WORKER_URL = "/api/chat";
         let chatHistory = [];
 
@@ -166,32 +166,36 @@
 
             document.getElementById("welcome").style.display = "none";
             inputEl.value = "";
+            
+            // 1. إظهار رسالة المستخدم في فقاعة مستقلة
             appendMessage("user", query);
 
-            // 1. إنشاء فقاعة الانتظار الفريدة للبوت وحفظ الـ ID الخاص بها بدقة
-            const assistantMessageId = appendMessage("assistant", "جاري تحضير الإجابة...");
-            
-            // إضافة نقاط الحركة الحية داخل العنصر المستهدف فقط
+            // 2. إنشاء فقاعة الانتظار الفريدة للبوت وحفظ معرفها (ID)
+            const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
+            const assistantBubble = document.getElementById(assistantMessageId);
+
+            // تشغيل نقاط التحميل المتحركة حياً داخل هذه الفقاعة المحددة فقط
             let loadingDots = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
                 if (bubble.innerText.endsWith("...")) {
-                    bubble.innerText = "جاري تحضير الإجابة.";
-                } else if (bubble.innerText.endsWith("..")) {
-                    bubble.innerText = "جاري تحضير الإجابة..";
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
+                } else if (bubble.innerText.endsWith(" .")) {
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
                 } else {
-                    bubble.innerText = "جاري تحضير الإجابة...";
+                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
                 }
             }, 500);
 
             try {
+                // إرسال السؤال الحالي مع نسخة نظيفة من التاريخ السابق
                 const response = await fetch(WORKER_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
 
-                // 🌟 حل المشكلة الحاسم: إيقاف المؤقت فوراً قبل بدء عملية الزحف لضمان عدم حدوث تداخل!
+                // 🌟 حاسم: إيقاف مؤقت نقاط التحميل فوراً قبل لمس محتوى الفقاعة
                 clearInterval(loadingDots);
 
                 if (!response.ok) {
@@ -202,43 +206,52 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                const assistantBubble = document.getElementById(assistantMessageId);
-                if (assistantBubble) {
-                    // تشغيل تأثير الزحف الحقيقي المستقر
-                    typeWriterEffect(assistantBubble, fullAnswer);
+                // 🌟 حاسم: التأكد من جلب الفقاعة الصحيحة وتصفيرها تماماً قبل بدء الزحف لمنع التكرار
+                const freshAssistantBubble = document.getElementById(assistantMessageId);
+                if (freshAssistantBubble) {
+                    // تشغيل تأثير الزحف المستقر كلمة بكلمة على الإجابة الجديدة فقط
+                    typeWriterEffect(freshAssistantBubble, fullAnswer);
                 }
 
-                // حفظ مسار الحوار بهوية متوافقة مع شروط سيرفرات جوجل الجديدة لمنع تشتت الموديل
+                // 3. تحديث مصفوفة التاريخ بالهيكل القياسي لـ Gemini (user -> model)
+                // نستخدم التحديث المتتالي النظيف لضمان عدم تداخل النصوص في الطلب القادم
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
+                // الحفاظ على سياق خفيف عبر تدوير آخر حوارين فقط في الذاكرة لتفادي البطء والتشتت
+                if (chatHistory.length > 4) {
+                    chatHistory = chatHistory.slice(-4);
+                }
+
             } catch (error) {
                 clearInterval(loadingDots);
-                const assistantBubble = document.getElementById(assistantMessageId);
-                if (assistantBubble) {
-                    assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
+                const freshAssistantBubble = document.getElementById(assistantMessageId);
+                if (freshAssistantBubble) {
+                    freshAssistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
                 }
             }
         }
 
         function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
+            // توليد معرف فريد كلياً لكل فقاعة (باستخدام الوقت + رقم عشوائي) لمنع أي تداخل برمي
             const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+            
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${role}`;
             msgDiv.id = msgId;
-            msgDiv.innerHTML = text;
+            msgDiv.innerHTML = text; // نضع النص الخام أولاً (وفي حالة البوت يتم تحديثه عبر الزحف)
+            
             container.appendChild(msgDiv);
             container.scrollTop = container.scrollHeight;
             return msgId;
         }
 
-        // دالة الزحف الحية المستقرة والمحمية من التداخل اللغوي والهيكلي
         function typeWriterEffect(element, text) {
-            element.innerHTML = ""; 
+            element.innerHTML = ""; // تصفير كامل ونص جاري التحضير...
             let words = text.split(" ");
             let i = 0;
-            const speed = 30; // سرعة تدفق الكلمات بالملي ثانية لشغل المستخدم وتغطية وقت الانتظار
+            const speed = 30; // سرعة ظهور الكلمات بالملي ثانية
 
             function type() {
                 if (i < words.length) {
@@ -256,6 +269,7 @@
         }
 
         function formatMarkdown(text) {
+            if (!text) return "";
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
