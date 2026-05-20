@@ -39,12 +39,14 @@
             margin: 10px 0 0 0;
         }
 
-        /* عدّل حاوية الدردشة لتأخذ امتداد الشاشة الكامل بأناقة */
-.chat-container {
-    width: 95% !important;
-    max-width: 1400px !important; /* يمنحها امتداداً عريضاً ومريحاً على الشاشات الكبيرة */
-    margin: 0 auto !important;     /* يتوسط الشاشة تماماً بدلاً من الانحياز لليسار */
-}
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
         .message {
             max-width: 85%;
