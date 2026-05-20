@@ -17,41 +17,64 @@ export async function onRequestPost(context) {
       });
     }
 
-    // =========================================================================
-    // حقن قاعدة المعطيات القانونية والمالية التفصيلية لوكالة APIA مباشرة لحماية الذاكرة
-    // =========================================================================
-    const systemInstruction = `
-أنت الخبير الافتراضي الذكي المعتمد لـ "وكالة النهوض بالاستثمارات الفلاحية" (APIA). مهمتك تقديم إجابات دقيقة وصارمة للغاية بناءً على الضوابط الرسمية التالية:
+    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
+    const fileNames = [
+      "APIA_QA.pdf",
+      "guide_de_l_investisseur-etranger.pdf",
+      "Guide_Global.pdf",
+      "guide_societes_communautaires.pdf",
+      "RAPPORT_2025_PUBLIQUE.pdf",
+      "Rapport_Comite_Inv.pdf",
+      "Site_web.pdf"
+    ];
 
-1. الامتيازات المالية والمنح (قانون الاستثمار التونسي):
-- منحة التنمية الجهوية: تمنح للمشاريع في مناطق التنمية الجهوية: المجموعة الأولى بنسبة 15% بحد أقصى 1.5 مليون دينار، والمجموعة الثانية بنسبة 30% بحد أقصى 3 ملايين دينار.
-- منحة التنمية المستدامة: بنسبة 50% بحد أقصى 0.3 مليون دينار لمشاريع معالجة التلوث، الاقتصاد في مياه الري، والفلاحة البيولوجية (تصل إلى 60% وبحد أقصى 0.5 مليون دينار للشركات الأهلية).
-- التحكم في التكنولوجيا الحديثة وتحسين الإنتاجية: منحة بنسبة 50% بحد أقصى 0.5 مليون دينار لتطوير الآليات والإنتاج.
-- دعم الشركات الأهلية: منحة تأطير وتسيير شهرياً بحد أقصى 800 دينار لمدة أقصاها 12 شهراً خلال السنوات الثلاث الأولى من النشاط.
-- تشغيل حاملي الشهادات العليا: تتكفل الدولة بنسبة المساهمة في الضمان الاجتماعي، أو 50% من الأجور بحد أقصى 250 ديناراً شهرياً لمدة من سنة إلى 3 سنوات (تصل لـ 10 سنوات حسب النشاط والمنطقة).
-- سلف الدراسات والمرافقة: بحد أقصى 20 ألف دينار للتأطير وشهادات المطابقة وتطوير منتجات جديدة للأصناف (أ، ب، ج).
+    const attachedFilesParts = [];
+    const baseUrl = new URL(request.url).origin;
 
-2. القروض الفلاحية العقارية:
-- الغرض: تمويل اقتناء الأراضي الفلاحية لإقامة مشاريع استثمارية منتجة ومجدية اقتصادياً.
-- الشروط المالية: السقف الأقصى لتمويل القرض العقاري الفلاحي هو 250 ألف دينار (بشرط أن يكون الحد الأدنى لاقتناء الأرض من الأصول 125 ألف دينار).
-- مدة السداد والإمهال: يسدد على مدى فترة تصل إلى 25 سنة، مع فترة إمهال تصل إلى 7 سنوات كاملة، بنسبة فائدة تفاضلية منخفضة تبلغ 3%.
-- الفئة المستهدفة: الفلاحون، الباعثون الشبان، وحاملو الشهادات العليا في الفلاحة والصيد البحري.
+    // 2. جلب الملفات حياً من المستودع وتحويلها إلى حزم ليفهمها السيرفر
+    for (const fileName of fileNames) {
+      try {
+        const fileUrl = `${baseUrl}/reports/${fileName}`;
+        const fileResponse = await fetch(fileUrl);
+        
+        if (fileResponse.ok) {
+          const arrayBuffer = await fileResponse.arrayBuffer();
+          const bytes = new Uint8Array(arrayBuffer);
+          let binary = "";
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          const base64Data = btoa(binary);
 
-3. القواعد العامة الصارمة في صياغة الإجابات:
-- استخدم الجداول المنظمة بشكل احترافي عند عرض الأرقام، النسب المئوية، والمبالغ المالية (بالدينار التونسي).
-- الالتزام الصارم بعدم تبسيط المحتوى الفني، ولا تقم باختصار الفقرات أو دمج الإجراءات القانونية. حافظ على النص الهيكلي كما هو بدون تغيير أي حرف أو رقم.
-- إذا كان السؤال خارج نطاق المعطيات أعلاه أو يتطلب تفاصيل تشغيلية عينية، وجّه المستخدم بلطف للاتصال بالبريد الرسمي للمرافقة الشخصية: kouki.riadh@apia.com.tn
-`;
+          attachedFilesParts.push({
+            inlineData: {
+              mimeType: "application/pdf",
+              data: base64Data
+            }
+          });
+        }
+      } catch (e) {
+        // إذا فشل جلب ملف نتابع البقية لضمان استقرار البوت
+      }
+    }
 
-    const currentContent = { role: "user", parts: [{ text: message }] };
+    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على الملفات المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أي أرقام أو نسب مئوية.";
     
-    // الاحتفاظ بآخر حوارين فقط لحماية حجم الـ Payload من التضخم المفرط في المتصفح
+    // دمج محتوى ملفات الـ PDF الحية مع سؤال المستخدم
+    const currentContent = { 
+      role: "user", 
+      parts: [
+        ...attachedFilesParts,
+        { text: message }
+      ] 
+    };
+
     const trimmedHistory = history ? history.slice(-2) : [];
     const contents = [...trimmedHistory, currentContent];
     
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // ===== منطق إعادة المحاولة الذكي (Retry with Exponential Backoff) =====
+    // ===== منطق إعادة المحاولة الذكي من إقتراح نموذج كلوفلير (Retry with Exponential Backoff) =====
     const MAX_RETRIES = 3;
     let lastError = null;
 
@@ -68,34 +91,34 @@ export async function onRequestPost(context) {
 
         const data = await response.json();
 
-        // في حالة وجود ضغط أو خادم مشغول (429 أو 503)، نطبق منطق الانتظار التضاعفي
+        // إذا كان الخطأ بسبب الطلب المرتفع (429 أو 503)، أعد المحاولة تلقائياً بانتظار تصاعدي
         if (!response.ok && (response.status === 429 || response.status === 503)) {
           lastError = data.error?.message || "الخادم مشغول حالياً";
           
           if (attempt < MAX_RETRIES) {
-            // انتظار تصاعدي: 2 ثانية ← 4 ثوانٍ ← 8 ثوانٍ
+            // انتظار تضاعفي: 2ث -> 4ث -> 8ث
             const delay = Math.pow(2, attempt + 1) * 1000;
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
           }
           
           return new Response(JSON.stringify({ 
-            error: "النموذج يواجه ضغطاً مرتفعاً جداً حالياً، يرجى المحاولة مرة أخرى بعد ثوانٍ قليلة." 
+            error: "النموذج يواجه طلباً مرتفعاً حالياً. يرجى إعادة المحاولة بعد بضع ثوان." 
           }), {
             status: response.status,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
 
-        // أي خطأ آخر خارج نطاق الضغط العالي
+        // أي خطأ آخر (خارج نطاق الـ Rate Limit)
         if (!response.ok) {
-          return new Response(JSON.stringify({ error: data.error?.message || "خطأ داخلي من سيرفر جوجل" }), {
+          return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
             status: response.status,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
 
-        // نجاح العملية وإرسال الرد
+        // نجاح العملية - استخراج وإرسال الرد
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "لم أتمكن من صياغة إجابة.";
         return new Response(JSON.stringify({ reply: botReply }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -112,7 +135,7 @@ export async function onRequestPost(context) {
     }
 
     return new Response(JSON.stringify({ 
-      error: "تعذر معالجة الطلب بعد عدة محاولات بسبب جدار الحماية أو شبكة الاتصال." 
+      error: "تعذر الاتصال بالخادم بعد عدة محاولات. يرجى المحاولة لاحقاً." 
     }), {
       status: 503,
       headers: { ...corsHeaders, "Content-Type": "application/json" }
