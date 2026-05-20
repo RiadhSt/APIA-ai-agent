@@ -191,7 +191,7 @@
 
                 // حفظ مسار الحوار للمحافظة على سياق النقاش
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
-                chatHistory.push({ role: "assistant", parts: [{ text: fullAnswer }] });
+                chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
             } catch (error) {
                 assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
