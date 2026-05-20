@@ -155,7 +155,6 @@
 
 
 <script>
-        // الربط المحلي الذكي دون الحاجة لروابط خارجية تسبب مشاكل CORS
         const WORKER_URL = "/api/chat";
         let chatHistory = [];
 
@@ -168,6 +167,7 @@
             inputEl.value = "";
             appendMessage("user", query);
 
+            // إنشاء فقاعة الانتظار للبوت وحفظ معرفها
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
             const assistantBubble = document.getElementById(assistantMessageId);
 
@@ -186,15 +186,15 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                // 🌟 استدعاء تأثير الزحف والكتابة التلقائية بدلاً من العرض الدفعي الفوري
-                typeWriterEffect(assistantBubble, fullAnswer, 25);
+                // تشغيل تأثير الزحف الحقيقي على الفقاعة
+                typeWriter(assistantBubble, fullAnswer);
 
-                // حفظ مسار الحوار للمحافظة على سياق النقاش بالدور المتوافق مع جوجل (model)
+                // حفظ التاريخ بالتوافق مع سيرفرات جوجل
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
             } catch (error) {
-                assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
+                assistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ: " + error.message + "</span>";
             }
         }
 
@@ -210,29 +210,26 @@
             return msgId;
         }
 
-        // دالة تحاكي تدفق الكلام كلمة بكلمة لقتل وقت الانتظار وتنسيق الـ Markdown
-        function typeWriterEffect(element, text, speed = 25) {
-            let words = text.split(" ");
+        // دالة الزحف الحية المبسطة والفعالة جداً لمنع أي تعارض
+        function typeWriter(element, text) {
+            element.innerHTML = ""; // تصفير نص الجاري التحضير...
             let i = 0;
-            element.innerHTML = ""; // تصفير فقاعة الانتظار لبدء الكتابة
+            const speed = 15; // السرعة بالملي ثانية لظهور الأحرف
 
-            function type() {
-                if (i < words.length) {
-                    // تجميع الكلمات الحالية وتطبيق تنسيق الماركداون والأسطر عليها حياً
-                    let currentText = words.slice(0, i + 1).join(" ");
-                    element.innerHTML = formatMarkdown(currentText);
+            function typing() {
+                if (i < text.length) {
+                    // القراءة الحية مع دعم الفراغات والأسطر الجديدة حياً
+                    let rawHtml = text.substring(0, i + 1);
+                    element.innerHTML = formatMarkdown(rawHtml);
                     i++;
                     
-                    // النزول التلقائي للمستعرض مع تدفق النص لأسفل
                     const container = document.getElementById("chatContainer");
-                    if (container) {
-                        container.scrollTop = container.scrollHeight;
-                    }
+                    if (container) container.scrollTop = container.scrollHeight;
                     
-                    setTimeout(type, speed); // التحكم في سرعة خروج الكلمات (بالملي ثانية)
+                    setTimeout(typing, speed);
                 }
             }
-            type();
+            typing();
         }
 
         function formatMarkdown(text) {
@@ -249,7 +246,6 @@
             }
         });
     </script>
-
     
 </body>
 </html>
