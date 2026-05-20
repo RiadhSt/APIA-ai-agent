@@ -169,18 +169,18 @@
             appendMessage("user", query);
 
             // 1. إنشاء فقاعة الانتظار الفريدة للبوت وحفظ الـ ID الخاص بها بدقة
-            const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
+            const assistantMessageId = appendMessage("assistant", "جاري تحضير الإجابة...");
             
             // إضافة نقاط الحركة الحية داخل العنصر المستهدف فقط
             let loadingDots = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
                 if (bubble.innerText.endsWith("...")) {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
+                    bubble.innerText = "جاري تحضير الإجابة.";
                 } else if (bubble.innerText.endsWith(" .")) {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
+                    bubble.innerText = "جاري تحضير الإجابة..";
                 } else {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
+                    bubble.innerText = "جاري تحضير الإجابة...";
                 }
             }, 500);
 
