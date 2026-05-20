@@ -17,7 +17,6 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
     const fileNames = [
       "APIA_QA.pdf",
       "guide_de_l_investisseur-etranger.pdf",
@@ -28,10 +27,10 @@ export async function onRequestPost(context) {
       "Site_web.pdf"
     ];
 
+    const attachedFilesParts = [];
     const baseUrl = new URL(request.url).origin;
 
-    // 2. جلب وتحويل جميع الملفات بالتوازي دفعة واحدة (Parallel Fetching) لضمان السرعة
-    const fetchPromises = fileNames.map(async (fileName) => {
+    for (const fileName of fileNames) {
       try {
         const fileUrl = `${baseUrl}/reports/${fileName}`;
         const fileResponse = await fetch(fileUrl);
@@ -40,40 +39,25 @@ export async function onRequestPost(context) {
           const arrayBuffer = await fileResponse.arrayBuffer();
           const bytes = new Uint8Array(arrayBuffer);
           let binary = "";
-          for (let i = 0; i < bytes.byteLength; i += 8000) {
-            const chunk = bytes.subarray(i, i + 8000);
-            binary += String.fromCharCode.apply(null, chunk);
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
           }
           const base64Data = btoa(binary);
 
-          return {
+          attachedFilesParts.push({
             inlineData: {
               mimeType: "application/pdf",
               data: base64Data
             }
-          };
+          });
         }
-      } catch (e) {
-        return null;
-      }
-      return null;
-    });
+      } catch (e) {}
+    }
 
-    const resolvedFiles = await Promise.all(fetchPromises);
-    const attachedFilesParts = resolvedFiles.filter(file => file !== null);
-
-    // 3. تعليمات لغوية وتنظيمية خارقة الصرامة بالإنجليزي لمنع العناد اللغوي للموديل
-    const systemInstruction = `
-You are the official AI expert for the Agricultural Investment Promotion Agency (APIA) in Tunisia. Answer accurately and comprehensively, strictly based on the attached files, with no summarization or omission of technical data and legal ratios.
-
-CRITICAL OPERATIONAL RULES:
-1. STRICT LANGUAGE MATCHING: You MUST detect the language of the user's prompt (French, English, Arabic, or Tunisian Dialect) and reply EXCLUSIVELY in that SAME LANGUAGE. If the user asks in French, translate the Arabic source data instantly and answer in fluent, professional French. Never answer in Arabic if the question is in French or English.
-2. NO SOURCE CITATION: Do NOT mention any file names, document titles, or phrases like "according to the attached PDF". Deliver the information directly as your own authoritative answer.
-3. CONDITIONAL TABLES: Use Markdown tables ONLY when displaying or comparing multiple numbers, percentages, financial grants, or loans. For general or conceptual explanations, use natural fluid text or bullet points instead of forcing a table.
-4. MISSING DATA: If the required details are completely absent from the documents, reply exactly with: "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (You must translate this exact phrase into French or English if the user's query is in French or English).
-`;
+    // تعليمات واضحة، باللغة العربية، دون تعقيد لمنع خلط اللغات والبطء
+    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على الملفات المرفقة. أجب دائماً بنفس لغة السؤال (إذا سألك بالفرنسية أجب بالفرنسية، وإذا سألك بالعربية أجب بالعربية). لا تذكر أسماء الملفات أو المصادر في إجابتك نهائياً. استخدم الجداول فقط عند وجود أرقام ونسب مئوية ومقارنات مالية تستدعي ذلك.";
     
-    // 4. تطهير الحوار لضمان عدم تعارض الـ Roles
+    // تنظيف التاريخ لتفادي خطأ Role assistant
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: turn.parts
@@ -90,7 +74,6 @@ CRITICAL OPERATIONAL RULES:
     const contents = [...safeHistory.slice(-2), currentContent];
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // ===== منطق إعادة المحاولة الذكي عند الضغط العالي =====
     const MAX_RETRIES = 3;
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       try {
@@ -111,14 +94,10 @@ CRITICAL OPERATIONAL RULES:
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
           }
-          return new Response(JSON.stringify({ error: "النموذج يواجه ضغطاً حالياً. أعد المحاولة بعد ثوانٍ." }), {
-            status: response.status,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-          });
         }
 
         if (!response.ok) {
-          return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
+          return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر" }), {
             status: response.status,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
@@ -138,7 +117,7 @@ CRITICAL OPERATIONAL RULES:
       }
     }
 
-    return new Response(JSON.stringify({ error: "تعذر الاتصال بالخادم. يرجى المحاولة لاحقاً." }), {
+    return new Response(JSON.stringify({ error: "تعذر الاتصال بالخادم." }), {
       status: 503,
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
@@ -149,14 +128,4 @@ CRITICAL OPERATIONAL RULES:
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
   }
-}
-
-export async function onRequestOptions() {
-  return new Response(null, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    }
-  });
 }
