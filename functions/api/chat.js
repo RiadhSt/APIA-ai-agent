@@ -30,7 +30,7 @@ export async function onRequestPost(context) {
 
     const baseUrl = new URL(request.url).origin;
 
-    // 2. تحسين السرعة: جلب وتحويل جميع الملفات بالتوازي دفعة واحدة (Parallel Fetching)
+    // 2. جلب وتحويل جميع الملفات بالتوازي دفعة واحدة (Parallel Fetching) لضمان السرعة
     const fetchPromises = fileNames.map(async (fileName) => {
       try {
         const fileUrl = `${baseUrl}/reports/${fileName}`;
@@ -40,7 +40,6 @@ export async function onRequestPost(context) {
           const arrayBuffer = await fileResponse.arrayBuffer();
           const bytes = new Uint8Array(arrayBuffer);
           let binary = "";
-          // معالجة سريعة وبأحجام كتل مناسبة للذاكرة
           for (let i = 0; i < bytes.byteLength; i += 8000) {
             const chunk = bytes.subarray(i, i + 8000);
             binary += String.fromCharCode.apply(null, chunk);
@@ -63,24 +62,23 @@ export async function onRequestPost(context) {
     const resolvedFiles = await Promise.all(fetchPromises);
     const attachedFilesParts = resolvedFiles.filter(file => file !== null);
 
-    // 3. صياغة التوجيهات الهيكلية بالإنجليزية لضمان التطبيق الصارم للغة والمصادر والتنسيق
+    // 3. تعليمات لغوية وتنظيمية خارقة الصرامة بالإنجليزي لمنع العناد اللغوي للموديل
     const systemInstruction = `
 You are the official AI expert for the Agricultural Investment Promotion Agency (APIA) in Tunisia. Answer accurately and comprehensively, strictly based on the attached files, with no summarization or omission of technical data and legal ratios.
 
-STRICT OPERATIONAL RULES:
-1. LANGUAGE MATCHING: Detect the language of the prompt (Arabic, French, English, or Tunisian Dialect) and ALWAYS reply in the EXACT SAME LANGUAGE. Never cross or mix languages.
-2. NO SOURCE CITATION: Do NOT mention any file names, document titles, or phrases like "according to the attached PDF" or "as mentioned in the source". Answer directly as an absolute expert.
-3. CONDITIONAL TABLES: Use Markdown tables ONLY when displaying or comparing multiple numbers, percentages, financial grants, or loans. For general, non-numerical, or conceptual explanations, use natural fluid text or bullet points instead of forcing a table.
-4. MISSING DATA: If the required details are completely absent from the documents, reply exactly with: "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (Translate this phrase if the user's prompt is in French or English).
+CRITICAL OPERATIONAL RULES:
+1. STRICT LANGUAGE MATCHING: You MUST detect the language of the user's prompt (French, English, Arabic, or Tunisian Dialect) and reply EXCLUSIVELY in that SAME LANGUAGE. If the user asks in French, translate the Arabic source data instantly and answer in fluent, professional French. Never answer in Arabic if the question is in French or English.
+2. NO SOURCE CITATION: Do NOT mention any file names, document titles, or phrases like "according to the attached PDF". Deliver the information directly as your own authoritative answer.
+3. CONDITIONAL TABLES: Use Markdown tables ONLY when displaying or comparing multiple numbers, percentages, financial grants, or loans. For general or conceptual explanations, use natural fluid text or bullet points instead of forcing a table.
+4. MISSING DATA: If the required details are completely absent from the documents, reply exactly with: "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (You must translate this exact phrase into French or English if the user's query is in French or English).
 `;
     
-    // 4. تصحيح الـ Roles وتطهير الحوار لضمان عدم تعارض سيرفرات جوجل مع المتصفح
+    // 4. تطهير الحوار لضمان عدم تعارض الـ Roles
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: turn.parts
     }));
 
-    // دمج محتوى ملفات الـ PDF الحية مع سؤال المستخدم الحالي
     const currentContent = { 
       role: "user", 
       parts: [
@@ -89,15 +87,11 @@ STRICT OPERATIONAL RULES:
       ] 
     };
 
-    // الاحتفاظ بآخر حوارين لحماية حجم البيانات المرسلة وسرعة الاستجابة
     const contents = [...safeHistory.slice(-2), currentContent];
-    
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // ===== منطق إعادة المحاولة الذكي من إقتراح نموذج كلوفلير (Retry with Exponential Backoff) =====
+    // ===== منطق إعادة المحاولة الذكي عند الضغط العالي =====
     const MAX_RETRIES = 3;
-    let lastError = null;
-
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       try {
         const response = await fetch(geminiUrl, {
@@ -111,26 +105,18 @@ STRICT OPERATIONAL RULES:
 
         const data = await response.json();
 
-        // إذا كان الخطأ بسبب الطلب المرتفع (429 أو 503)، أعد المحاولة تلقائياً بانتظار تصاعدي
         if (!response.ok && (response.status === 429 || response.status === 503)) {
-          lastError = data.error?.message || "الخادم مشغول حالياً";
-          
           if (attempt < MAX_RETRIES) {
-            // انتظار تضاعفي: 2ث -> 4ث -> 8ث
             const delay = Math.pow(2, attempt + 1) * 1000;
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
           }
-          
-          return new Response(JSON.stringify({ 
-            error: "النموذج يواجه طلباً مرتفعاً حالياً. يرجى إعادة المحاولة بعد بضع ثوان." 
-          }), {
+          return new Response(JSON.stringify({ error: "النموذج يواجه ضغطاً حالياً. أعد المحاولة بعد ثوانٍ." }), {
             status: response.status,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
 
-        // أي خطأ آخر (خارج نطاق الـ Rate Limit)
         if (!response.ok) {
           return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
             status: response.status,
@@ -138,14 +124,12 @@ STRICT OPERATIONAL RULES:
           });
         }
 
-        // نجاح العملية - استخراج وإرسال الرد
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "لم أتمكن من صياغة إجابة.";
         return new Response(JSON.stringify({ reply: botReply }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" }
         });
 
       } catch (fetchError) {
-        lastError = fetchError;
         if (attempt < MAX_RETRIES) {
           const delay = Math.pow(2, attempt + 1) * 1000;
           await new Promise(resolve => setTimeout(resolve, delay));
@@ -154,9 +138,7 @@ STRICT OPERATIONAL RULES:
       }
     }
 
-    return new Response(JSON.stringify({ 
-      error: "تعذر الاتصال بالخادم بعد عدة محاولات. يرجى المحاولة لاحقاً." 
-    }), {
+    return new Response(JSON.stringify({ error: "تعذر الاتصال بالخادم. يرجى المحاولة لاحقاً." }), {
       status: 503,
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
