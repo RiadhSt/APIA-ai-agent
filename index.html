@@ -157,9 +157,17 @@
         </button>
     </div>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
         const WORKER_URL = "/api/chat";
         let chatHistory = [];
+
+        // ضبط إعدادات مكتبة التنسيق لتدعم كسر الأسطر تلقائياً والجداول
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
 
         async function sendMessage() {
             const inputEl = document.getElementById("userInput");
@@ -169,14 +177,13 @@
             document.getElementById("welcome").style.display = "none";
             inputEl.value = "";
             
-            // 1. إظهار رسالة المستخدم في فقاعة مستقلة
+            // 1. إرسال سؤال المستخدم
             appendMessage("user", query);
 
-            // 2. إنشاء فقاعة الانتظار الفريدة للبوت وحفظ معرفها (ID)
+            // 2. إنشاء فقاعة البوت الفريدة للانتظار
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
             const assistantBubble = document.getElementById(assistantMessageId);
 
-            // تشغيل نقاط التحميل المتحركة حياً داخل هذه الفقاعة المحددة فقط
             let loadingDots = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
@@ -190,14 +197,12 @@
             }, 500);
 
             try {
-                // إرسال السؤال الحالي مع نسخة نظيفة من التاريخ السابق
                 const response = await fetch(WORKER_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
 
-                // 🌟 حاسم: إيقاف مؤقت نقاط التحميل فوراً قبل لمس محتوى الفقاعة
                 clearInterval(loadingDots);
 
                 if (!response.ok) {
@@ -208,19 +213,17 @@
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
 
-                // 🌟 حاسم: التأكد من جلب الفقاعة الصحيحة وتصفيرها تماماً قبل بدء الزحف لمنع التكرار
                 const freshAssistantBubble = document.getElementById(assistantMessageId);
                 if (freshAssistantBubble) {
-                    // تشغيل تأثير الزحف المستقر كلمة بكلمة على الإجابة الجديدة فقط
+                    // 🌟 تصفير النص وتشغيل دالة الزحف المعتمدة على المكتبة الاحترافية الجديدة
                     typeWriterEffect(freshAssistantBubble, fullAnswer);
                 }
 
-                // 3. تحديث مصفوفة التاريخ بالهيكل القياسي لـ Gemini (user -> model)
-                // نستخدم التحديث المتتالي النظيف لضمان عدم تداخل النصوص في الطلب القادم
+                // 3. إدارة التاريخ بشكل معزول تماماً لمنع التداخل في الأسئلة القادمة
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
-                // الحفاظ على سياق خفيف عبر تدوير آخر حوارين فقط في الذاكرة لتفادي البطء والتشتت
+                // تدوير التاريخ الذكي للحفاظ على التركيز وسرعة الاستجابة
                 if (chatHistory.length > 4) {
                     chatHistory = chatHistory.slice(-4);
                 }
@@ -236,29 +239,31 @@
 
         function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
-            // توليد معرف فريد كلياً لكل فقاعة (باستخدام الوقت + رقم عشوائي) لمنع أي تداخل برمي
             const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
             
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${role}`;
             msgDiv.id = msgId;
-            msgDiv.innerHTML = text; // نضع النص الخام أولاً (وفي حالة البوت يتم تحديثه عبر الزحف)
+            // إذا كان المستخدم نضع النص مباشرة، وإذا كان البوت نتركه ليتم صياغته عبر الزحف والمكتبة
+            msgDiv.innerHTML = role === "user" ? formatMarkdown(text) : text;
             
             container.appendChild(msgDiv);
             container.scrollTop = container.scrollHeight;
             return msgId;
         }
 
+        // دالة الزحف الذكية المدمجة مع المكتبة الاحترافية لرسم الجداول حياً بدون تقطيع
         function typeWriterEffect(element, text) {
-            element.innerHTML = ""; // تصفير كامل ونص جاري التحضير...
+            element.innerHTML = ""; 
             let words = text.split(" ");
             let i = 0;
-            const speed = 30; // سرعة ظهور الكلمات بالملي ثانية
+            const speed = 20;
 
             function type() {
                 if (i < words.length) {
                     let currentText = words.slice(0, i + 1).join(" ");
-                    element.innerHTML = formatMarkdown(currentText);
+                    // 🌟 استخدام مكتبة marked العالمية لطباعة نصوص وجداول فائقة الدقة والجمال
+                    element.innerHTML = marked.parse(currentText);
                     i++;
                     
                     const container = document.getElementById("chatContainer");
@@ -270,12 +275,10 @@
             type();
         }
 
+        // دالة احتياطية مبسطة للرسائل السريعة لضمان عدم توقف الكود
         function formatMarkdown(text) {
             if (!text) return "";
-            let html = text
-                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                .replace(/\n/g, "<br>");
-            return html;
+            return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
         }
 
         document.getElementById("userInput").addEventListener("keydown", function(e) {
