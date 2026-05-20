@@ -17,6 +17,7 @@ export async function onRequestPost(context) {
       });
     }
 
+    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
     const fileNames = [
       "APIA_QA.pdf",
       "guide_de_l_investisseur-etranger.pdf",
@@ -30,6 +31,7 @@ export async function onRequestPost(context) {
     const attachedFilesParts = [];
     const baseUrl = new URL(request.url).origin;
 
+    // 2. جلب الملفات حياً من المستودع وتحويلها إلى حزم ليفهمها السيرفر
     for (const fileName of fileNames) {
       try {
         const fileUrl = `${baseUrl}/reports/${fileName}`;
@@ -51,18 +53,14 @@ export async function onRequestPost(context) {
             }
           });
         }
-      } catch (e) {}
+      } catch (e) {
+        // إذا فشل جلب ملف نتابع البقية لضمان استقرار البوت
+      }
     }
 
-    // تعليمات واضحة، باللغة العربية، دون تعقيد لمنع خلط اللغات والبطء
-    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على الملفات المرفقة. أجب دائماً بنفس لغة السؤال (إذا سألك بالفرنسية أجب بالفرنسية، وإذا سألك بالعربية أجب بالعربية). لا تذكر أسماء الملفات أو المصادر في إجابتك نهائياً. استخدم الجداول فقط عند وجود أرقام ونسب مئوية ومقارنات مالية تستدعي ذلك.";
+    const systemInstruction = "أنت خبير وكالة APIA المعتمد. أجب بدقة وعمق اعتماداً حصرياً على الملفات المرفقة واستخدم الجداول للأرقام والمنح والقروض. الالتزام الصارم بعدم تبسيط المحتوى الفني أو القانوني، ولا تقم بتغيير أو حذف أي أرقام أو نسب مئوية.";
     
-    // تنظيف التاريخ لتفادي خطأ Role assistant
-    const safeHistory = (history || []).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: turn.parts
-    }));
-
+    // دمج محتوى ملفات الـ PDF الحية مع سؤال المستخدم
     const currentContent = { 
       role: "user", 
       parts: [
@@ -71,10 +69,15 @@ export async function onRequestPost(context) {
       ] 
     };
 
-    const contents = [...safeHistory.slice(-2), currentContent];
+    const trimmedHistory = history ? history.slice(-2) : [];
+    const contents = [...trimmedHistory, currentContent];
+    
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
+    // ===== منطق إعادة المحاولة الذكي من إقتراح نموذج كلوفلير (Retry with Exponential Backoff) =====
     const MAX_RETRIES = 3;
+    let lastError = null;
+
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       try {
         const response = await fetch(geminiUrl, {
@@ -88,27 +91,41 @@ export async function onRequestPost(context) {
 
         const data = await response.json();
 
+        // إذا كان الخطأ بسبب الطلب المرتفع (429 أو 503)، أعد المحاولة تلقائياً بانتظار تصاعدي
         if (!response.ok && (response.status === 429 || response.status === 503)) {
+          lastError = data.error?.message || "الخادم مشغول حالياً";
+          
           if (attempt < MAX_RETRIES) {
+            // انتظار تضاعفي: 2ث -> 4ث -> 8ث
             const delay = Math.pow(2, attempt + 1) * 1000;
             await new Promise(resolve => setTimeout(resolve, delay));
             continue; 
           }
-        }
-
-        if (!response.ok) {
-          return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر" }), {
+          
+          return new Response(JSON.stringify({ 
+            error: "النموذج يواجه طلباً مرتفعاً حالياً. يرجى إعادة المحاولة بعد بضع ثوان." 
+          }), {
             status: response.status,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
 
+        // أي خطأ آخر (خارج نطاق الـ Rate Limit)
+        if (!response.ok) {
+          return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
+            status: response.status,
+            headers: { ...corsHeaders, "Content-Type": "application/json" }
+          });
+        }
+
+        // نجاح العملية - استخراج وإرسال الرد
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "لم أتمكن من صياغة إجابة.";
         return new Response(JSON.stringify({ reply: botReply }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" }
         });
 
       } catch (fetchError) {
+        lastError = fetchError;
         if (attempt < MAX_RETRIES) {
           const delay = Math.pow(2, attempt + 1) * 1000;
           await new Promise(resolve => setTimeout(resolve, delay));
@@ -117,7 +134,9 @@ export async function onRequestPost(context) {
       }
     }
 
-    return new Response(JSON.stringify({ error: "تعذر الاتصال بالخادم." }), {
+    return new Response(JSON.stringify({ 
+      error: "تعذر الاتصال بالخادم بعد عدة محاولات. يرجى المحاولة لاحقاً." 
+    }), {
       status: 503,
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
@@ -128,4 +147,14 @@ export async function onRequestPost(context) {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
   }
+}
+
+export async function onRequestOptions() {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    }
+  });
 }
