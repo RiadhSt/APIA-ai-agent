@@ -17,7 +17,6 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 1. مصفوفة بأسماء الملفات المرفوعة في مجلد reports على GitHub
     const fileNames = [
       "APIA_QA.pdf",
       "guide_de_l_investisseur-etranger.pdf",
@@ -28,66 +27,70 @@ export async function onRequestPost(context) {
       "Site_web.pdf"
     ];
 
-    const attachedFilesParts = [];
-    const baseUrl = new URL(request.url).origin;
-
-    // جلب وتحويل الملفات بالتوازي لتسريع وقت الاستجابة الأولي
-    const fetchPromises = fileNames.map(async (fileName) => {
-      try {
-        const fileUrl = `${baseUrl}/reports/${fileName}`;
-        const fileResponse = await fetch(fileUrl);
-        if (fileResponse.ok) {
-          const arrayBuffer = await fileResponse.arrayBuffer();
-          const bytes = new Uint8Array(arrayBuffer);
-          let binary = "";
-          for (let i = 0; i < bytes.byteLength; i += 8000) {
-            const chunk = bytes.subarray(i, i + 8000);
-            binary += String.fromCharCode.apply(null, chunk);
-          }
-          const base64Data = btoa(binary);
-          return {
-            inlineData: {
-              mimeType: "application/pdf",
-              data: base64Data
-            }
-          };
-        }
-      } catch (e) {}
-      return null;
-    });
-
-    const resolvedFiles = await Promise.all(fetchPromises);
-    for (const file of resolvedFiles) {
-      if (file) attachedFilesParts.push(file);
-    }
-
-    const systemInstruction = `
-You are the official AI expert for the Agricultural Investment Promotion Agency (APIA) in Tunisia. Answer accurately and comprehensively, strictly based on the attached files. You can summarize text but no omission of technical data and legal ratios.
-
-CRITICAL OPERATIONAL RULES:
-1. STRICT LANGUAGE MATCHING: You MUST detect the language of the user's prompt (French, English, Arabic, or Tunisian Dialect) and reply EXCLUSIVELY in that SAME LANGUAGE. Never answer in Arabic if the question is in French or English.
-2. NO SOURCE CITATION: Do NOT mention any file names, document titles, or phrases like "according to the attached PDF". Deliver the information directly as your own authoritative answer.
-3. CONDITIONAL TABLES: Use Markdown tables ONLY when displaying or comparing multiple numbers, percentages, financial grants, or loans. For general or conceptual explanations, use natural fluid text or bullet points instead of forcing a table.
-4. MISSING DATA: If the required details are completely absent from the documents, reply exactly with: "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (You must translate this exact phrase into French or English if the user's query is in French or English).
-`;    
-
-    // تنظيف وتجهيز الـ History مع تحويل الأدوار لضمان عدم تشتت المحرك
+    // تنظيف وتجهيز الـ History مع تحويل الأدوار لضمان الثبات
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: turn.parts
     }));
 
-    // دمج محتوى ملفات الـ PDF الحية مع سؤال المستخدم الحالي دائماً في الواجهة
+    const attachedFilesParts = [];
+    const baseUrl = new URL(request.url).origin;
+
+    // 🌟 استنساخ منطق بايثون: نقوم بجلب وتحميل الملفات فقط في السؤال الأول لتقليل حجم السياق ومنع التشتت
+    if (safeHistory.length === 0) {
+      const fetchPromises = fileNames.map(async (fileName) => {
+        try {
+          const fileUrl = `${baseUrl}/reports/${fileName}`;
+          const fileResponse = await fetch(fileUrl);
+          if (fileResponse.ok) {
+            const arrayBuffer = await fileResponse.arrayBuffer();
+            const bytes = new Uint8Array(arrayBuffer);
+            let binary = "";
+            for (let i = 0; i < bytes.byteLength; i += 8000) {
+              const chunk = bytes.subarray(i, i + 8000);
+              binary += String.fromCharCode.apply(null, chunk);
+            }
+            const base64Data = btoa(binary);
+            return {
+              inlineData: {
+                mimeType: "application/pdf",
+                data: base64Data
+              }
+            };
+          }
+        } catch (e) {}
+        return null;
+      });
+
+      const resolvedFiles = await Promise.all(fetchPromises);
+      for (const file of resolvedFiles) {
+        if (file) attachedFilesParts.push(file);
+      }
+    }
+
+    // صياغة الـ systemInstruction المحدث بلغة عربية حازمة لضمان فرضه كلياً على الذاكرة
+    const systemInstruction = `
+أنت الخبير والمنسق الرسمي لوكالة النهوض بالاستثمارات الفلاحية (APIA) في تونس. 
+أجب بدقة وموثوقية عالية بالاستناد حصرياً إلى الملفات المرفقة.
+
+قواعد تشغيلية حاسمة لا تنازل عنها:
+1. الالتزام المطلق بلغة السؤال: يجب كشف لغة سؤال المستخدم فوراً (سواء كانت عربية، فرنسية، أو إنجليزية) والإجابة حصرياً وبشكل كامل بنفس اللغة. إذا كان السؤال بالعربية، يمنع منعاً باتاً صياغة الإجابة أو الجداول أو العناوين باللغة الإنجليزية.
+2. منع ذكر المصادر: لا تذكر أسماء ملفات الـ PDF أو العناوين مثل "وفقاً للملف المرفق"، قدم المعلومة مباشرة كخبير واثق ومسؤول.
+3. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض المقارنات والأرقام والنسب المئوية والمنح المالية صلب الإجابة لتظهر بشكل تنفيذي فاخر.
+4. غياب المعلومة: إذا كانت تفاصيل السؤال غير موجودة بالملفات، أجب بدقة بهذه الجملة دون زيادة: "عذراً، هذه المعلومة غير متوفرة حالياً في مصادري الرسمية، يرجى التواصل مباشرة مع مصالح الوكالة أو التواصل مع المشرف: kouki.riadh@apia.com.tn" (وتقوم بترجمتها للفرنسية أو الإنجليزية إن كان السؤال بتلك اللغات).
+`;    
+
+    // بناء سياق السؤال الحالي بشكل نظيف وخالٍ من الملفات المكررة في حال استمرار الحوار
     const currentContent = { 
       role: "user", 
       parts: [
-        ...attachedFilesParts,
+        ...attachedFilesParts, // ستكون مصفوفة فارغة تلقائياً إذا كنا في السؤال الثاني أو الثالث
         { text: message }
       ] 
     };
 
-    // الاحتفاظ بآخر حوارين فقط لتقليل البطء والضغط على الذاكرة دون نسيان السياق
-    const contents = [...safeHistory.slice(-2), currentContent];
+    // الاحتفاظ بآخر حوارين مع السؤال الحالي النظيف لمنع الهذيان والخلط
+    const contents = [...safeHistory.slice(-4), currentContent];
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const MAX_RETRIES = 3;
@@ -98,7 +101,11 @@ CRITICAL OPERATIONAL RULES:
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             contents: contents,
-            systemInstruction: { parts: [{ text: systemInstruction }] }
+            systemInstruction: { parts: [{ text: systemInstruction }] },
+            generationConfig: {
+              temperature: 0.15, // خفض درجة الابتكار إلى الحد الأدنى لفرض القواعد واللغة بصرامة
+              topP: 0.95
+            }
           })
         });
 
