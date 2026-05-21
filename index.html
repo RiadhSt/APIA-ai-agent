@@ -222,28 +222,19 @@
         document.body.appendChild(toastContainer);
 
         // دالة مبتكرة لصناعة الإشعار العائم وإخفائه تلقائياً بعد 10 ثوانٍ
-        // دالة مبتكرة لصناعة الإشعار العائم الفاخر وإخفائه تلقائياً بعد 10 ثوانٍ
         function showFloatingToast(text) {
             const container = document.getElementById("toast-container");
             if (!container) return;
 
             const toast = document.createElement("div");
             toast.className = "floating-toast";
-            
-            // حقن ترويسة رسمية جذابة تبرز طبيعة المعلومة الخاطفة
-            toast.innerHTML = `
-                <div class="toast-header">
-                    <span>💡 إضاءة استثمارية من مرجع الوكالة</span>
-                </div>
-                <div>${text}</div>
-            `;
-            
+            toast.innerText = text;
             container.appendChild(toast);
 
-            // تفعيل أنيميشن الظهور المرن
+            // أنيميشن الظهور
             setTimeout(() => toast.classList.add("show"), 100);
 
-            // تدمير الإشعار تلقائياً بعد 10 ثوانٍ بكفاءة
+            // إخفاء وتدمير الإشعار تلقائياً بعد 10 ثوانٍ كاملة
             setTimeout(() => {
                 toast.classList.remove("show");
                 toast.addEventListener("transitionend", () => toast.remove());
