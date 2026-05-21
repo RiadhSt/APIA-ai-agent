@@ -209,24 +209,23 @@
         document.body.appendChild(toastContainer);
 
         // دالة مبتكرة لصناعة الإشعار العائم وإخفائه تلقائياً بعد 10 ثوانٍ
-        function showFloatingToast(text) {
-            const container = document.getElementById("toast-container");
-            if (!container) return;
+function showFloatingToast(text) {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
 
-            const toast = document.createElement("div");
-            toast.className = "floating-toast";
-            toast.innerText = text;
-            container.appendChild(toast);
+    const toast = document.createElement("div");
+    toast.className = "floating-toast";
+    toast.innerText = text; // حقن النص الصافي مباشرة وبأناقة
+    
+    container.appendChild(toast);
 
-            // أنيميشن الظهور
-            setTimeout(() => toast.classList.add("show"), 100);
+    setTimeout(() => toast.classList.add("show"), 100);
 
-            // إخفاء وتدمير الإشعار تلقائياً بعد 10 ثوانٍ كاملة
-            setTimeout(() => {
-                toast.classList.remove("show");
-                toast.addEventListener("transitionend", () => toast.remove());
-            }, 10000); 
-        }
+    setTimeout(() => {
+        toast.classList.remove("show");
+        toast.addEventListener("transitionend", () => toast.remove());
+    }, 10000); 
+}
 
         async function sendMessage() {
             const inputEl = document.getElementById("userInput");
