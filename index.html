@@ -126,6 +126,42 @@
         .input-area button:hover svg {
             transform: scale(1.1);
         }
+        /* حاوية الإشعارات العائمة في زاوية الشاشة */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* تظهر من اليسار لعدم حجب جهة الكتابة العربية */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+}
+
+/* تصميم الإشعار الفردي */
+.floating-toast {
+    background: rgba(10, 26, 18, 0.85) !important; /* أخضر APIA داكن شفاف */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #d4b661; /* إطار ذهبي */
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    direction: rtl;
+    text-align: right;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* تأثير الظهور */
+.floating-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
     </style>
 </head>
 <body>
@@ -167,7 +203,32 @@
         // إعدادات رندرة الجداول والنصوص
         marked.setOptions({ breaks: true, gfm: true });
 
-async function sendMessage() {
+// تفعيل حاوية الإشعارات في الصفحة فور تحميلها
+        const toastContainer = document.createElement("div");
+        toastContainer.id = "toast-container";
+        document.body.appendChild(toastContainer);
+
+        // دالة مبتكرة لصناعة الإشعار العائم وإخفائه تلقائياً بعد 10 ثوانٍ
+        function showFloatingToast(text) {
+            const container = document.getElementById("toast-container");
+            if (!container) return;
+
+            const toast = document.createElement("div");
+            toast.className = "floating-toast";
+            toast.innerText = text;
+            container.appendChild(toast);
+
+            // أنيميشن الظهور
+            setTimeout(() => toast.classList.add("show"), 100);
+
+            // إخفاء وتدمير الإشعار تلقائياً بعد 10 ثوانٍ كاملة
+            setTimeout(() => {
+                toast.classList.remove("show");
+                toast.addEventListener("transitionend", () => toast.remove());
+            }, 10000); 
+        }
+
+        async function sendMessage() {
             const inputEl = document.getElementById("userInput");
             const query = inputEl.value.trim();
             if (!query) return;
@@ -177,72 +238,81 @@ async function sendMessage() {
             
             appendMessage("user", query);
 
-            // 1. إنشاء فقاعة الانتظار مع رسالة ترحيبية أولية
-            const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
+            // 1. فقاعة انتظار كلاسيكية ونظيفة داخل الشات
+            const assistantMessageId = appendMessage("assistant", "جاري فحص وتدقيق التقارير والمخططات الرسمية لـ APIA...");
             
-            // 🌟 2. باقة المعلومات الخاطفة والنصائح الذكية الخاصة بالوكالة (APIA)
+            // باقة الومضات التوعوية للمستثمر
             const apiaHints = [
                 "💡 هل تعلم؟ تمنح APIA امتيازات خاصة للمشاريع التي يبعثها الشباب والنساء بقطاع الفلاحة والصيد البحري.",
                 "🌱 نصيحة خبير: الشركات الأهلية المحلية تحظى بدعم قوي لتنمية المناطق الجهوية صلب المخططات الجديدة.",
                 "📊 معلومة: يمكنك دائماً متابعة روزنامة ومواعيد المناظرات الوطنية للمنتجات المحلية عبر منصات الوكالة.",
                 "🚜 هل تعلم؟ الاستثمارات من الصنف 'أ' صلب مجلة الاستثمار تتمتع بإجراءات مبسطة وإعفاءات هامة.",
                 "🐟 معلومات قطاعية: الاستثمار في الصيد البحري وتربية الأحياء المائية يحظى بمنح تشجيعية وتسهيلات كبرى.",
-                "📜 تذكير: احرص دائماً على إعداد مخطط الأعمال (Business Plan) بدقة قبل تقديم مقرر إسناد الامتيازات.",
-                "🔍 جاري الآن التدقيق صلب دليل المستثمر الأجنبي ودليل الشركات الأهلية لتقديم أدق إجابة..."
+                "📜 تذكير: احرص دائماً على إعداد مخطط الأعمال (Business Plan) بدقة قبل تقديم مقرر إسناد الامتيازات."
             ];
 
-            let hintIndex = 0;
-            // تدوير المعلومات الخاطفة كل 3.5 ثوانٍ لينشغل بها المستخدم تماماً
-            let loadingInterval = setInterval(() => {
+            // 🌟 2. إطلاق أول إشعار عائم فوراً عند إرسال السؤال
+            showFloatingToast(apiaHints[Math.floor(Math.random() * apiaHints.length)]);
+
+            // تدوير وإطلاق إشعار عائم جديد كل 4 ثوانٍ لينشغل المستخدم بقراءتها في الزاوية
+            let hintIndex = 1;
+            let toastInterval = setInterval(() => {
+                showFloatingToast(apiaHints[hintIndex]);
+                hintIndex = (hintIndex + 1) % apiaHints.length;
+            }, 4000);
+
+            // تشغيل نقاط التحميل التقليدية داخل فقاعة الشات الأساسية
+            let dotsCount = 0;
+            let chatLoadingInterval = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
-                
-                // تحديث النص داخل الفقاعة بشكل سلس
-                bubble.innerText = apiaHints[hintIndex];
-                hintIndex = (hintIndex + 1) % apiaHints.length;
-            }, 3500);
+                dotsCount = (dotsCount + 1) % 4;
+                bubble.innerText = "جاري فحص وتدقيق التقارير والمخططات الرسمية لـ APIA" + ".".repeat(dotsCount);
+            }, 500);
 
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message: query, history: chatHistory })
-                });
+            // 3. بدء عملية الـ Fetch في الخلفية بمهلة مريحة للمتصفح
+            setTimeout(async () => {
+                try {
+                    const response = await fetch(WORKER_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: query, history: chatHistory })
+                    });
 
-                // 🌟 3. إيقاف تدوير المعلومات فوراً بمجرد وصول الرد
-                clearInterval(loadingInterval);
+                    // إيقاف عدادات الانتظار فور وصول الرد
+                    clearInterval(toastInterval);
+                    clearInterval(chatLoadingInterval);
 
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.error || "تعذر على خادم الوكالة معالجة طلبك حالياً.");
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.error || "تعذر على خادم الوكالة معالجة طلبك حالياً.");
+                    }
+
+                    const data = await response.json();
+                    const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
+
+                    const freshAssistantBubble = document.getElementById(assistantMessageId);
+                    if (freshAssistantBubble) {
+                        typeWriterEffect(freshAssistantBubble, fullAnswer);
+                    }
+
+                    chatHistory.push({ role: "user", parts: [{ text: query }] });
+                    chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
+
+                    if (chatHistory.length > 6) {
+                        chatHistory = chatHistory.slice(-6);
+                    }
+
+                } catch (error) {
+                    clearInterval(toastInterval);
+                    clearInterval(chatLoadingInterval);
+                    const freshAssistantBubble = document.getElementById(assistantMessageId);
+                    if (freshAssistantBubble) {
+                        freshAssistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
+                    }
                 }
-
-                const data = await response.json();
-                const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
-
-                const freshAssistantBubble = document.getElementById(assistantMessageId);
-                if (freshAssistantBubble) {
-                    // مسح المعلومة الخاطفة ورسم الجدول الفاخر والإجابة حياً
-                    typeWriterEffect(freshAssistantBubble, fullAnswer);
-                }
-
-                chatHistory.push({ role: "user", parts: [{ text: query }] });
-                chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
-
-                if (chatHistory.length > 6) {
-                    chatHistory = chatHistory.slice(-6);
-                }
-
-            } catch (error) {
-                // إيقاف التدوير في حالة حدوث خطأ شبكة
-                clearInterval(loadingInterval);
-                const freshAssistantBubble = document.getElementById(assistantMessageId);
-                if (freshAssistantBubble) {
-                    freshAssistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
-                }
-            }
+            }, 50);
         }
-
 function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
             const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
