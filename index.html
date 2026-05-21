@@ -129,51 +129,38 @@
 /* حاوية الإشعارات العائمة في زاوية الشاشة */
 #toast-container {
     position: fixed;
-    top: 30px;
-    left: 30px; /* تظهر من اليسار لعدم حجب حقل المحادثة */
+    top: 20px;
+    left: 20px; /* تظهر من اليسار لعدم حجب جهة الكتابة العربية */
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 380px; /* زيادة العرض الإجمالي للبطاقة */
+    gap: 10px;
+    max-width: 320px;
 }
 
-/* التصميم الفاخر الجديد للبطاقة العائمة */
+/* تصميم الإشعار الفردي */
 .floating-toast {
-    background: rgba(10, 26, 18, 0.93) !important; /* لون أخضر APIA أعمق وأكثر ثباتاً */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 2px solid #d4b661; /* زيادة سمك الإطار الذهبي لإبرازه */
+    background: rgba(10, 26, 18, 0.85) !important; /* أخضر APIA داكن شفاف */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #d4b661; /* إطار ذهبي */
     color: #ffffff;
-    padding: 16px 20px; /* تكبير المساحة الداخلية */
-    border-radius: 16px; /* زوايا أكثر انسيابية */
-    font-size: 15px; /* تكبير حجم الخط لقراءة مريحة جداً */
-    line-height: 1.6;
-    box-shadow: 0 10px 30px rgba(212, 182, 97, 0.15), 0 5px 15px rgba(0, 0, 0, 0.5); /* تأثير توهج ذهبي خفيف */
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     direction: rtl;
     text-align: right;
     opacity: 0;
-    transform: translateY(-20px) scale(0.9); /* حركة دخول أنيق من الأعلى مع تكبير تدريجي */
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* أنيميشن مرن احترافي */
+    transform: translateX(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* تأثير العنوان الفرعي الذهبي صلب البطاقة */
-.toast-header {
-    color: #d4b661;
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 6px;
-    border-bottom: 1px solid rgba(212, 182, 97, 0.3);
-    padding-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-/* تأثير الظهور الكامل */
+/* تأثير الظهور */
 .floating-toast.show {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
 }
     </style>
 </head>
