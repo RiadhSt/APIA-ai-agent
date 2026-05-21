@@ -167,7 +167,7 @@
         // إعدادات رندرة الجداول والنصوص
         marked.setOptions({ breaks: true, gfm: true });
 
-        async function sendMessage() {
+async function sendMessage() {
             const inputEl = document.getElementById("userInput");
             const query = inputEl.value.trim();
             if (!query) return;
@@ -175,35 +175,42 @@
             document.getElementById("welcome").style.display = "none";
             inputEl.value = "";
             
-            // 1. عرض سؤال المستخدم في فقاعة مستقلة
             appendMessage("user", query);
 
-            // 2. إنشاء فقاعة البوت الفريدة للانتظار وحفظ الـ ID الخاص بها
+            // 1. إنشاء فقاعة الانتظار مع رسالة ترحيبية أولية
             const assistantMessageId = appendMessage("assistant", "جاري قراءة وثائق ومخططات APIA والتحضير...");
             
-            // تشغيل نقاط التحميل المتحركة داخل هذه الفقاعة حصرياً
-            let loadingDots = setInterval(() => {
+            // 🌟 2. باقة المعلومات الخاطفة والنصائح الذكية الخاصة بالوكالة (APIA)
+            const apiaHints = [
+                "💡 هل تعلم؟ تمنح APIA امتيازات خاصة للمشاريع التي يبعثها الشباب والنساء بقطاع الفلاحة والصيد البحري.",
+                "🌱 نصيحة خبير: الشركات الأهلية المحلية تحظى بدعم قوي لتنمية المناطق الجهوية صلب المخططات الجديدة.",
+                "📊 معلومة: يمكنك دائماً متابعة روزنامة ومواعيد المناظرات الوطنية للمنتجات المحلية عبر منصات الوكالة.",
+                "🚜 هل تعلم؟ الاستثمارات من الصنف 'أ' صلب مجلة الاستثمار تتمتع بإجراءات مبسطة وإعفاءات هامة.",
+                "🐟 معلومات قطاعية: الاستثمار في الصيد البحري وتربية الأحياء المائية يحظى بمنح تشجيعية وتسهيلات كبرى.",
+                "📜 تذكير: احرص دائماً على إعداد مخطط الأعمال (Business Plan) بدقة قبل تقديم مقرر إسناد الامتيازات.",
+                "🔍 جاري الآن التدقيق صلب دليل المستثمر الأجنبي ودليل الشركات الأهلية لتقديم أدق إجابة..."
+            ];
+
+            let hintIndex = 0;
+            // تدوير المعلومات الخاطفة كل 3.5 ثوانٍ لينشغل بها المستخدم تماماً
+            let loadingInterval = setInterval(() => {
                 const bubble = document.getElementById(assistantMessageId);
                 if (!bubble) return;
-                if (bubble.innerText.endsWith("...")) {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير .";
-                } else if (bubble.innerText.endsWith(" .")) {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ..";
-                } else {
-                    bubble.innerText = "جاري قراءة وثائق ومخططات APIA والتحضير ...";
-                }
-            }, 500);
+                
+                // تحديث النص داخل الفقاعة بشكل سلس
+                bubble.innerText = apiaHints[hintIndex];
+                hintIndex = (hintIndex + 1) % apiaHints.length;
+            }, 3500);
 
             try {
-                // 3. إرسال الطلب إلى Cloudflare Worker مع التاريخ الكامل والنظيف
                 const response = await fetch(WORKER_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    // نرسل السؤال الحالي ومعه تاريخ المحادثة المرتب
                     body: JSON.stringify({ message: query, history: chatHistory })
                 });
 
-                clearInterval(loadingDots);
+                // 🌟 3. إيقاف تدوير المعلومات فوراً بمجرد وصول الرد
+                clearInterval(loadingInterval);
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
@@ -215,22 +222,20 @@
 
                 const freshAssistantBubble = document.getElementById(assistantMessageId);
                 if (freshAssistantBubble) {
-                    // تصفير نص الانتظار ورسم الجداول والنصوص حياً وبأناقة
+                    // مسح المعلومة الخاطفة ورسم الجدول الفاخر والإجابة حياً
                     typeWriterEffect(freshAssistantBubble, fullAnswer);
                 }
 
-                // 4. 🌟 استنساخ منطق بايثون: تحديث ذاكرة التاريخ بالهيكل القياسي لـ Gemini
-                // هذا الترتيب الصارم يمنع الموديل من الخلط أو الهذيان عند طول المحادثة
                 chatHistory.push({ role: "user", parts: [{ text: query }] });
                 chatHistory.push({ role: "model", parts: [{ text: fullAnswer }] });
 
-                // حصر الذاكرة في آخر 3 حوارات (6 عناصر) للحفاظ على التركيز العالي وسرعة الاستجابة
                 if (chatHistory.length > 6) {
                     chatHistory = chatHistory.slice(-6);
                 }
 
             } catch (error) {
-                clearInterval(loadingDots);
+                // إيقاف التدوير في حالة حدوث خطأ شبكة
+                clearInterval(loadingInterval);
                 const freshAssistantBubble = document.getElementById(assistantMessageId);
                 if (freshAssistantBubble) {
                     freshAssistantBubble.innerHTML = "<span style='color: #ff4d4d;'>حدث خطأ أثناء الاتصال بالخبير: " + error.message + "</span>";
