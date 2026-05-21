@@ -238,9 +238,8 @@
             }
         }
 
-        function appendMessage(role, text) {
+function appendMessage(role, text) {
             const container = document.getElementById("chatContainer");
-            // توليد ID فريد معقد لكل فقاعة لمنع أي تداخل برمي بين الإجابات
             const msgId = "msg-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
             
             const msgDiv = document.createElement("div");
@@ -249,26 +248,34 @@
             msgDiv.innerHTML = role === "user" ? formatMarkdown(text) : text;
             
             container.appendChild(msgDiv);
+            
+            // التمرير التلقائي لأسفل فقط عند إضافة سؤال جديد من المستخدم
             container.scrollTop = container.scrollHeight;
             return msgId;
         }
 
-        // دالة الزحف الذكية المتوافقة مع مكتبة marked لرسم الجداول بدون تقطيع
+        // دالة الرندرة المطورة والذكية التي لا تمنعك من الصعود لقراءة الحوارات السابقة
         function typeWriterEffect(element, text) {
             element.innerHTML = ""; 
             let words = text.split(" ");
             let i = 0;
-            const speed = 15; // سرعة مناسبة ومريحة للعين
+            const speed = 15;
 
             function type() {
                 if (i < words.length) {
                     let currentText = words.slice(0, i + 1).join(" ");
-                    // تحويل الماركداون المباشر قادم من جوميناي إلى جداول HTML فاخرة
                     element.innerHTML = marked.parse(currentText);
                     i++;
                     
                     const container = document.getElementById("chatContainer");
-                    if (container) container.scrollTop = container.scrollHeight;
+                    if (container) {
+                        // 🌟 السر هنا: نتحقق إذا كان المستخدم قريباً من القاع (بمسافة 150 بكسل) نقوم بالنزول معه تلقائياً
+                        // أما إذا قام بالصعود للأعلى يدوياً لقراءة نص قديم، يتركه الكود بحرية كاملة ولا يسحبه لأسفل
+                        const isAtBottom = (container.scrollHeight - container.scrollTop - container.clientHeight) < 150;
+                        if (isAtBottom) {
+                            container.scrollTop = container.scrollHeight;
+                        }
+                    }
                     
                     setTimeout(type, speed);
                 }
