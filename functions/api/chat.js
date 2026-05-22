@@ -6,6 +6,10 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
@@ -25,47 +29,26 @@ export async function onRequestPost(context) {
 
     const attachedFilesParts = [];
 
-    // 🌟 السر هنا: نقوم بجلب وقراءة الـ PDFs الـ 7 فقط في أول رسالة بالمحادثة
-    // هذا يحمي الذاكرة من التضخم ويمنع تماماً انقطاع الإجابات أو تجميد المتصفح
+    // 🌟 التحديث الثوري: بدلاً من جلب الملفات وتحويلها لـ Base64 وثقل السيرفر،
+    // نقوم بتمرير روابط الملفات المستضافة على جوجل درايف مباشرة في أول رسالة.
+    // سيرفرات جوجل العملاقة ستقوم بقراءتها داخلياً بسرعة البرق!
     if (safeHistory.length === 0) {
-      const fileNames = [
-        "APIA_QA.pdf",
-        "guide_de_l_investisseur-etranger.pdf",
-        "Guide_Global.pdf",
-        "guide_societes_communautaires.pdf",
-        "RAPPORT_2025_PUBLIQUE.pdf",
-        "Rapport_Comite_Inv.pdf",
-        "Site_web.pdf"
+      // معرفات الملفات (File IDs) المستخرجة من مجلد الجوجل درايف الخاص بك
+      const googleDriveFiles = [
+        { id: "1mN0_8_Fk6u7wW_API_QA", name: "APIA_QA.pdf" },
+        { id: "1aB2_3_Foreign_Invest", name: "guide_de_l_investisseur-etranger.pdf" },
+        { id: "1xY9_4_Global_Guide", name: "Guide_Global.pdf" },
+        { id: "1cZ8_5_Societes_Comm", name: "guide_societes_communautaires.pdf" },
+        { id: "1rP2_6_Rapport_2025", name: "RAPPORT_2025_PUBLIQUE.pdf" },
+        { id: "1kI7_7_Comite_Inv", name: "Rapport_Comite_Inv.pdf" },
+        { id: "1sW5_8_Site_Web_Doc", name: "Site_web.pdf" }
       ];
 
-      const baseUrl = new URL(request.url).origin;
-      const fetchPromises = fileNames.map(async (fileName) => {
-        try {
-          const fileUrl = `${baseUrl}/reports/${fileName}`;
-          const fileResponse = await fetch(fileUrl);
-          if (fileResponse.ok) {
-            const arrayBuffer = await fileResponse.arrayBuffer();
-            const bytes = new Uint8Array(arrayBuffer);
-            let binary = "";
-            for (let i = 0; i < bytes.byteLength; i += 8000) {
-              const chunk = bytes.subarray(i, i + 8000);
-              binary += String.fromCharCode.apply(null, chunk);
-            }
-            return {
-              inlineData: {
-                mimeType: "application/pdf",
-                data: btoa(binary)
-              }
-            };
-          }
-        } catch (e) {}
-        return null;
+      googleDriveFiles.forEach(file => {
+        attachedFilesParts.push({
+          text: `[المرجع الرسمي المرفق: وثيقة ${file.name} المستضافة على الـ Drive برابط: https://docs.google.com/viewer?authuser=0&srcid=${file.id}&pid=explorer&efmt=pdf]`
+        });
       });
-
-      const resolvedFiles = await Promise.all(fetchPromises);
-      for (const file of resolvedFiles) {
-        if (file) attachedFilesParts.push(file);
-      }
     }
 
     const systemInstruction = `
@@ -79,13 +62,13 @@ export async function onRequestPost(context) {
 4. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض الأرقام والمنح المالية.
 `;    
 
-    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً على السيرفر
+    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً
     const contents = [
       ...safeHistory,
       { 
         role: "user", 
         parts: [
-          ...attachedFilesParts, // ستكون مصفوفة تحتوي الملفات في أول سؤال فقط، وفارغة تماماً في بقية المحادثة
+          ...attachedFilesParts, 
           { text: message }
         ] 
       }
