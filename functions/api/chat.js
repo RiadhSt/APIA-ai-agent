@@ -29,8 +29,8 @@ export async function onRequestPost(context) {
 
     const attachedFilesParts = [];
 
-    // 🌟 التحديث الثوري المعتمد على الـ IDs الرسمية لملفاتك على Google Drive
-    // نقوم بتمرير مسارات الوثائق السبعة مباشرة في أول رسالة لتستقبلها سيرفرات جوجل العملاقة
+    // 🌟 الحل الجذري: تمرير الملفات عبر ميزة fileData الرسمية لـ Gemini API
+    // هذا يجعل سيرفر جوجل يربط الملف مباشرة من السحابة داخلياً دون الحاجة لكشط روابط الويب
     if (safeHistory.length === 0) {
       const googleDriveFiles = [
         { id: "1XpRZrkYDsUMcpvK25WIAWtchNU298OhE", name: "Site_web.pdf" },
@@ -44,7 +44,11 @@ export async function onRequestPost(context) {
 
       googleDriveFiles.forEach(file => {
         attachedFilesParts.push({
-          text: `[المرجع الرسمي المرفق: وثيقة ${file.name} المستضافة على الـ Drive برابط: https://docs.google.com/viewer?authuser=0&srcid=${file.id}&pid=explorer&efmt=pdf]`
+          fileData: {
+            mimeType: "application/pdf",
+            // استخدام رابط الـ API المباشر للملف صلب خوادم جوجل
+            fileUri: `https://generativelanguage.googleapis.com/v1beta/files/${file.id}`
+          }
         });
       });
     }
@@ -60,7 +64,6 @@ export async function onRequestPost(context) {
 4. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض الأرقام والمنح المالية.
 `;    
 
-    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً على الذاكرة الطرفية لـ Cloudflare
     const contents = [
       ...safeHistory,
       { 
