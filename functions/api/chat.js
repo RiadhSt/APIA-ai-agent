@@ -29,19 +29,17 @@ export async function onRequestPost(context) {
 
     const attachedFilesParts = [];
 
-    // 🌟 التحديث الثوري: بدلاً من جلب الملفات وتحويلها لـ Base64 وثقل السيرفر،
-    // نقوم بتمرير روابط الملفات المستضافة على جوجل درايف مباشرة في أول رسالة.
-    // سيرفرات جوجل العملاقة ستقوم بقراءتها داخلياً بسرعة البرق!
+    // 🌟 التحديث الثوري المعتمد على الـ IDs الرسمية لملفاتك على Google Drive
+    // نقوم بتمرير مسارات الوثائق السبعة مباشرة في أول رسالة لتستقبلها سيرفرات جوجل العملاقة
     if (safeHistory.length === 0) {
-      // معرفات الملفات (File IDs) المستخرجة من مجلد الجوجل درايف الخاص بك
       const googleDriveFiles = [
-        { id: "1mN0_8_Fk6u7wW_API_QA", name: "APIA_QA.pdf" },
-        { id: "1aB2_3_Foreign_Invest", name: "guide_de_l_investisseur-etranger.pdf" },
-        { id: "1xY9_4_Global_Guide", name: "Guide_Global.pdf" },
-        { id: "1cZ8_5_Societes_Comm", name: "guide_societes_communautaires.pdf" },
-        { id: "1rP2_6_Rapport_2025", name: "RAPPORT_2025_PUBLIQUE.pdf" },
-        { id: "1kI7_7_Comite_Inv", name: "Rapport_Comite_Inv.pdf" },
-        { id: "1sW5_8_Site_Web_Doc", name: "Site_web.pdf" }
+        { id: "1XpRZrkYDsUMcpvK25WIAWtchNU298OhE", name: "Site_web.pdf" },
+        { id: "1HDbaY41HCScAYGG05IXLHXMmXDvaZ1kO", name: "Rapport_Comite_Inv.pdf" },
+        { id: "1HuuawwJyMi6jr_wZkBnzq8FgtUf6w4Kj", name: "Guide_Global.pdf" },
+        { id: "1cqdxG5i34u3DR7F_Sq3O3RSfVIL0ib8h", name: "APIA_QA.pdf" },
+        { id: "1ly7wtvSxew67FiX44idaohXcyghlqVfE", name: "RAPPORT_2025_PUBLIQUE.pdf" },
+        { id: "1CeOod_1Oq_PRmxDdNfg08TwhRvBwpBRz", name: "guide_societes_communautaires.pdf" },
+        { id: "1yb0ItxKrIpcmlwekIU29gtD2e3RbAEHc", name: "guide_de_l_investisseur-etranger.pdf" }
       ];
 
       googleDriveFiles.forEach(file => {
@@ -62,7 +60,7 @@ export async function onRequestPost(context) {
 4. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض الأرقام والمنح المالية.
 `;    
 
-    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً
+    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً على الذاكرة الطرفية لـ Cloudflare
     const contents = [
       ...safeHistory,
       { 
