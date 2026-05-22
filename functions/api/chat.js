@@ -25,8 +25,6 @@ export async function onRequestPost(context) {
 
     const attachedFilesParts = [];
 
-    // 🌟 السر هنا: نقوم بجلب وقراءة الـ PDFs الـ 7 فقط في أول رسالة بالمحادثة
-    // هذا يحمي الذاكرة من التضخم ويمنع تماماً انقطاع الإجابات أو تجميد المتصفح
     if (safeHistory.length === 0) {
       const fileNames = [
         "APIA_QA.pdf",
@@ -64,22 +62,47 @@ export async function onRequestPost(context) {
         try {
           const fileUrl = `${baseUrl}/reports/${fileName}`;
           const fileResponse = await fetch(fileUrl);
+          
           if (fileResponse.ok) {
-            const arrayBuffer = await fileResponse.arrayBuffer();
-            const bytes = new Uint8Array(arrayBuffer);
-            let binary = "";
-            for (let i = 0; i < bytes.byteLength; i += 8000) {
-              const chunk = bytes.subarray(i, i + 8000);
-              binary += String.fromCharCode.apply(null, chunk);
+            // 1. تحديد نوع الـ MimeType ديناميكياً بناءً على الامتداد
+            let mimeType = "application/pdf";
+            const ext = fileName.split('.').pop().toLowerCase();
+            
+            if (ext === "txt") {
+              mimeType = "text/plain";
+            } else if (ext === "csv") {
+              mimeType = "text/csv";
             }
-            return {
-              inlineData: {
-                mimeType: "application/pdf",
-                data: btoa(binary)
+
+            // 2. قراءة الملفات النصية مباشرة دون الحاجة لترميز الـ Base64 المعقد الخاص بالملفات الثنائية
+            if (ext === "txt" || ext === "csv") {
+              const textData = await fileResponse.text();
+              return {
+                inlineData: {
+                  mimeType: mimeType,
+                  data: btoa(unescape(encodeURIComponent(textData))) // ترميز النصوص البرمجية بشكل آمن يدعم العربية
+                }
+              };
+            } else {
+              // 3. قراءة ملفات الـ PDF الثنائية وترميزها بالشكل المعتاد
+              const arrayBuffer = await fileResponse.arrayBuffer();
+              const bytes = new Uint8Array(arrayBuffer);
+              let binary = "";
+              for (let i = 0; i < bytes.byteLength; i += 8000) {
+                const chunk = bytes.subarray(i, i + 8000);
+                binary += String.fromCharCode.apply(null, chunk);
               }
-            };
+              return {
+                inlineData: {
+                  mimeType: mimeType,
+                  data: btoa(binary)
+                }
+              };
+            }
           }
-        } catch (e) {}
+        } catch (e) {
+          console.error(`خطأ أثناء قراءة الملف ${fileName}:`, e);
+        }
         return null;
       });
 
@@ -100,13 +123,12 @@ export async function onRequestPost(context) {
 4. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض الأرقام والمنح المالية.
 `;    
 
-    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً على السيرفر
     const contents = [
       ...safeHistory,
       { 
         role: "user", 
         parts: [
-          ...attachedFilesParts, // ستكون مصفوفة تحتوي الملفات في أول سؤال فقط، وفارغة تماماً في بقية المحادثة
+          ...attachedFilesParts,
           { text: message }
         ] 
       }
