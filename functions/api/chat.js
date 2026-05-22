@@ -6,10 +6,6 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
@@ -29,28 +25,68 @@ export async function onRequestPost(context) {
 
     const attachedFilesParts = [];
 
-    // 🌟 الحل الجذري: تمرير الملفات عبر ميزة fileData الرسمية لـ Gemini API
-    // هذا يجعل سيرفر جوجل يربط الملف مباشرة من السحابة داخلياً دون الحاجة لكشط روابط الويب
+    // 🌟 السر هنا: نقوم بجلب وقراءة الـ PDFs الـ 7 فقط في أول رسالة بالمحادثة
+    // هذا يحمي الذاكرة من التضخم ويمنع تماماً انقطاع الإجابات أو تجميد المتصفح
     if (safeHistory.length === 0) {
-      const googleDriveFiles = [
-        { id: "1XpRZrkYDsUMcpvK25WIAWtchNU298OhE", name: "Site_web.pdf" },
-        { id: "1HDbaY41HCScAYGG05IXLHXMmXDvaZ1kO", name: "Rapport_Comite_Inv.pdf" },
-        { id: "1HuuawwJyMi6jr_wZkBnzq8FgtUf6w4Kj", name: "Guide_Global.pdf" },
-        { id: "1cqdxG5i34u3DR7F_Sq3O3RSfVIL0ib8h", name: "APIA_QA.pdf" },
-        { id: "1ly7wtvSxew67FiX44idaohXcyghlqVfE", name: "RAPPORT_2025_PUBLIQUE.pdf" },
-        { id: "1CeOod_1Oq_PRmxDdNfg08TwhRvBwpBRz", name: "guide_societes_communautaires.pdf" },
-        { id: "1yb0ItxKrIpcmlwekIU29gtD2e3RbAEHc", name: "guide_de_l_investisseur-etranger.pdf" }
+      const fileNames = [
+        "APIA_QA.pdf",
+        "guide_de_l_investisseur-etranger.pdf",
+        "guide_societes_communautaires.pdf",
+        "RAPPORT_2025_PUBLIQUE.pdf",
+        "Rapport_Comite_Inv.pdf",
+        "Site_web.pdf",
+        "Inciat_Budg.csv",       
+        "Incit_Finac.pdf",
+        "Composantes.csv",
+        "Declarations.txt",
+        "Procedure_Declaration.txt",
+        "Foncier.txt",
+        "Foncier 2.csv",
+        "DOA.txt",
+        "DOA_Delais.txt",
+        "Calcul_Prime.txt",
+        "Deb_Prime.txt",
+        "Liste_Inv.txt",
+        "Comite_Octroi.txt",
+        "Actualisation_ADI_DOA.txt",
+        "Categorie.txt",
+        "Definitions.txt",
+        "Loi_Inv.txt",
+        "Deb_Prime_2.txt",
+        "Normes.pdf",
+        "Cartes_Services.pdf",
+        "Opportunites.txt",
+        "Etude.pdf"
       ];
 
-      googleDriveFiles.forEach(file => {
-        attachedFilesParts.push({
-          fileData: {
-            mimeType: "application/pdf",
-            // استخدام رابط الـ API المباشر للملف صلب خوادم جوجل
-            fileUri: `https://generativelanguage.googleapis.com/v1beta/files/${file.id}`
+      const baseUrl = new URL(request.url).origin;
+      const fetchPromises = fileNames.map(async (fileName) => {
+        try {
+          const fileUrl = `${baseUrl}/reports/${fileName}`;
+          const fileResponse = await fetch(fileUrl);
+          if (fileResponse.ok) {
+            const arrayBuffer = await fileResponse.arrayBuffer();
+            const bytes = new Uint8Array(arrayBuffer);
+            let binary = "";
+            for (let i = 0; i < bytes.byteLength; i += 8000) {
+              const chunk = bytes.subarray(i, i + 8000);
+              binary += String.fromCharCode.apply(null, chunk);
+            }
+            return {
+              inlineData: {
+                mimeType: "application/pdf",
+                data: btoa(binary)
+              }
+            };
           }
-        });
+        } catch (e) {}
+        return null;
       });
+
+      const resolvedFiles = await Promise.all(fetchPromises);
+      for (const file of resolvedFiles) {
+        if (file) attachedFilesParts.push(file);
+      }
     }
 
     const systemInstruction = `
@@ -64,12 +100,13 @@ export async function onRequestPost(context) {
 4. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً عند عرض الأرقام والمنح المالية.
 `;    
 
+    // بناء مصفوفة المحتويات بشكل نظيف وخفيف جداً على السيرفر
     const contents = [
       ...safeHistory,
       { 
         role: "user", 
         parts: [
-          ...attachedFilesParts, 
+          ...attachedFilesParts, // ستكون مصفوفة تحتوي الملفات في أول سؤال فقط، وفارغة تماماً في بقية المحادثة
           { text: message }
         ] 
       }
