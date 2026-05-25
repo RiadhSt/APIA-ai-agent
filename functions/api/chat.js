@@ -31,7 +31,6 @@ export async function onRequestPost(context) {
         "guide_de_l_investisseur-etranger.pdf",
         "guide_societes_communautaires.pdf",
         "RAPPORT_2025_PUBLIQUE.pdf",
-        "Rapport_Comite_Inv.pdf",
         "Inciat_Budg.csv",       
         "Incit_Finac.pdf",
         "Composantes.csv",
