@@ -52,7 +52,12 @@ export async function onRequestPost(context) {
         "Deb_Prime_2.txt",
         "Normes.pdf",
         "Cartes_Services.pdf",
-        "APIA_Knowledge_Base.txt",
+        "Cadre_Tunisie.txt",
+        "Opportunites.txt",
+        "pepenieres.txt",
+        "Presentation_APIA.txt",
+        "Promotion.txt",
+        "SIAT.txt",
         "Etude.pdf"
       ];
 
