@@ -32,7 +32,6 @@ export async function onRequestPost(context) {
         "guide_societes_communautaires.pdf",
         "RAPPORT_2025_PUBLIQUE.pdf",
         "Rapport_Comite_Inv.pdf",
-        "Site_web.pdf",
         "Inciat_Budg.csv",       
         "Incit_Finac.pdf",
         "Composantes.csv",
@@ -54,6 +53,12 @@ export async function onRequestPost(context) {
         "Normes.pdf",
         "Cartes_Services.pdf",
         "Opportunites.txt",
+        "Cadre_Tunisie.txt",
+        "Opportunites.txt",
+        "pepenieres.txt",
+        "Presentation_APIA.txt",
+        "Promotion.txt",
+        "SIAT.txt",
         "Etude.pdf"
       ];
 
