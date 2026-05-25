@@ -83,7 +83,32 @@ ${myKnowledgeBase}
     }
 
     const data = await response.json();
-    const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "لم أتمكن من صياغة إجابة.";
+    // استخراج الجزء النصي الفعلي الموجه للمستخدم فقط واستبعاد أجزاء التفكير (Thought/Reasoning)
+const candidate = data.candidates?.[0];
+let botReply = "";
+
+if (candidate && candidate.content && candidate.content.parts) {
+  // فحص الأجزاء وتجنب أي جزء يحتوي على التفكير الداخلي أو أوسمة التحليل
+  const textParts = candidate.content.parts
+    .filter(part => !part.thought && part.text) // تصفية الأجزاء النصية الموجهة للمستخدم فقط
+    .map(part => part.text);
+    
+  botReply = textParts.join("\n");
+}
+
+// تنظيف إضافي في حال تم دمج كلمة THOUGHT داخل النص كـ String
+if (botReply.includes("THOUGHT:")) {
+  // اقتطاع النص الإنجليزي المتسرب والاحتفاظ بالإجابة النهائية فقط
+  const parts = botReply.split(/[\u0600-\u06FF]/); // تحديد بداية النص العربي
+  const firstArabicCharIndex = botReply.search(/[\u0600-\u06FF]/);
+  if (firstArabicCharIndex !== -1) {
+    botReply = botReply.substring(firstArabicCharIndex);
+  }
+}
+
+if (!botReply) {
+  botReply = "لم أتمكن من صياغة إجابة.";
+}
     
     return new Response(JSON.stringify({ reply: botReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
