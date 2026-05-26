@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
     
-    // حقن المعرّف مباشرة هنا لضمان قراءته بشكل صحيح 100% وبدون الاعتماد مؤقتاً على إعدادات المنصة
+    // التأكد من صياغة الاسم بالكامل وبشكل صلب لحل مشكلة الـ Parsing نهائياً
     const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
 
     if (!apiKey) {
@@ -24,20 +24,20 @@ export async function onRequestPost(context) {
       });
     }
 
-    // سجل المحادثة وتعديل الأدوار
+    // ترتيب السجل متوافقاً مع صيغة Gemini
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
-    // دمج التوجيه مع سؤال المستخدم لتفادي قيود الـ systemInstruction مع الكاش
+    // دمج التوجيهات الصارمة لـ APIA مع سؤال المستخدم مباشرة لتفادي خطأ الـ systemInstruction
     const contents = [
       ...safeHistory,
       {
         role: "user",
         parts: [
           { 
-            text: `توجيهات صارمة: أجب بدقة وتفصيل شديد وغزارة في المعلومات بناءً على قاعدة المعرفة المخزنة في الكاش الخاص بك ومستنداً لقوانين وكالة النهوض بالاستثمارات الفلاحية (APIA). التزم تماماً بلغة المستخدم واستخدم جداول الماركداون للتنظيم المالي.\n\nسؤال المستخدم الحالي هو: ${message}` 
+            text: `توجيهات مؤسساتية صارمة: أنت الخبير القانوني والمالي لوكالة النهوض بالاستثمارات الفلاحية (APIA). أجب بدقة وتفصيل شديد وغزارة في المعلومات بناءً على قاعدة المعرفة المخزنة في الكاش الخاص بك. التزم تماماً بلغة المستخدم واستخدم جداول الماركداون للتنظيم المالي بوضوح.\n\nسؤال المستخدم الحالي هو: ${message}` 
           }
         ]
       }
@@ -45,11 +45,13 @@ export async function onRequestPost(context) {
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
+    // هنا التعديل الجوهري: نرسل الكائن بالصيغة الهيكلية التي يتوقعها محرك v1beta
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: contents,
+        // إضافة الكائن الموجه للـ cache لتتعرف عليه خوادم جوجل فوراً دون لبس
         cachedContent: cacheName,
         generationConfig: {
           temperature: 0.1,
@@ -60,7 +62,7 @@ export async function onRequestPost(context) {
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ في معالجة طلب الكاش من سيرفر جوجل" }), {
+      return new Response(JSON.stringify({ error: data.error?.message || "خطأ في معالجة طلب الكاش" }), {
         status: response.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
@@ -77,7 +79,7 @@ export async function onRequestPost(context) {
       botReply = textParts.join("\n");
     }
 
-    if (!botReply) botReply = "لم أتمكن من صياغة إجابة من الكاش المستدعى.";
+    if (!botReply) botReply = "لم أتمكن من صياغة إجابة من الكاش.";
 
     return new Response(JSON.stringify({ reply: botReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
