@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
     
     // تأكد أن هذا المعرّف هو آخر معرّف نشط قمت بتوليده من Postman
-    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
+    const cacheName = "cachedContents/g9f2il1zhqqledg5q261jggjdrvy38v2m52xdmxm";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
