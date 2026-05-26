@@ -101,13 +101,26 @@ ${selectedKnowledge}
       })
     });
 
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
-        status: response.status,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      });
-    }
+if (!response.ok) {
+  const data = await response.json().catch(() => ({}));
+  let googleMessage = data.error?.message || "";
+  
+  // رسالة افتراضية باللغتين تناسب هوية الوكالة
+  let friendlyErrorMessage = "السيرفر مشغول بمعالجة وتحليل بيانات ضخمة حالياً لتوفير إجابة دقيقة. يرجى إعادة المحاولة بعد 5 ثوانٍ.\n\nLe serveur est actuellement chargé. Veuillez réessuyer après 5 secondes.";
+
+  // إذا كان الخطأ قادم من جوجل بسبب الضغط أو تجاوز حد التوكنز
+  if (googleMessage.toLowerCase().includes("high demand") || googleMessage.toLowerCase().includes("quota") || response.status === 429) {
+    friendlyErrorMessage = "نعتذر منك، السيرفر يشهد ضغطاً عالياً حالياً نظراً لحجم ملفات المعرفة الضخم. يرجى إعادة الضغط على زر الإرسال فوراً لإعادة المحاولة.\n\nLe serveur est saturé. Veuillez cliquer à nouveau sur envoyer pour réessayer.";
+  } else if (googleMessage) {
+    // إذا كان هناك خطأ آخر مختلف، يمكنك ترك رسالة جوجل أو تخصيصها
+    friendlyErrorMessage = `خطأ في الاتصال: ${googleMessage}`;
+  }
+
+  return new Response(JSON.stringify({ error: friendlyErrorMessage }), {
+    status: response.status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" }
+  });
+}
 
     const data = await response.json();
     const candidate = data.candidates?.[0];
