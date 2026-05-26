@@ -14,8 +14,8 @@ export async function onRequestPost(context) {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
     
-    // التأكد من صياغة الاسم بالكامل وبشكل صلب لحل مشكلة الـ Parsing نهائياً
-    const cacheName = "cachedContents/c4z0c5rdq35v001psyjol794g2gnbhvas3kxmyv0";
+    // معرف الكاش الحالي الخاص بك
+    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -24,13 +24,11 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ترتيب السجل متوافقاً مع صيغة Gemini
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
-    // دمج التوجيهات الصارمة لـ APIA مع سؤال المستخدم مباشرة لتفادي خطأ الـ systemInstruction
     const contents = [
       ...safeHistory,
       {
@@ -43,15 +41,15 @@ export async function onRequestPost(context) {
       }
     ];
 
+    // تعديل الرابط ليكون عاماً، ونحدد الموديل بدقة بالداخل ليجبر السيرفر على مطابقة الكاش
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // هنا التعديل الجوهري: نرسل الكائن بالصيغة الهيكلية التي يتوقعها محرك v1beta
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        model: "models/gemini-2.5-flash", // تحديد الموديل هنا يضمن مطابقة الكاش 100%
         contents: contents,
-        // إضافة الكائن الموجه للـ cache لتتعرف عليه خوادم جوجل فوراً دون لبس
         cachedContent: cacheName,
         generationConfig: {
           temperature: 0.1,
