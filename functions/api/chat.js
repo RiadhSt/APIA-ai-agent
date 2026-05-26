@@ -1,3 +1,5 @@
+import { myKnowledgeBase } from "./knowledge.js";
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -13,10 +15,6 @@ export async function onRequestPost(context) {
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
-    
-    // الحل المستقر: نضع المعرف الصافي للكاش اليدوي هنا مباشرة
-    // تذكر: بمجرد تحديث الكاش من Postman كل 24 ساعة، استبدل الرمز هنا فقط.
-    const cacheName = "cachedContents/wa51sy0jfxq1geev7j6fld94gyvhwcl3n1ltoete";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -25,19 +23,51 @@ export async function onRequestPost(context) {
       });
     }
 
-    // بناء سجل المحادثة بشكل قياسي ونقي جداً ليتوافق مع بنية الكاش الأصلية
-    const safeHistory = (history || []).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-    }));
-
     const contents = [
-      ...safeHistory,
       {
         role: "user",
-        parts: [{ text: message }]
+        parts: [
+          {
+            text: `أنت المساعد الذكي لوكالة (APIA). التزم صارماً بالقواعد التالية:
+1. لغة الإجابة: تطابق لغة سؤال المستخدم تماماً (عربي/فرنسي) بما في ذلك الجداول.
+2. غزارة المعلومات: اسرد كامل الشروط القانونية والنسب والخطوات الإدارية دون أي اختصار مخل وبأعلى أمانة للنص.
+3. أولوية السياق: إذا تضارب الدليل السريع مع الأقسام الهيكلية، اعتمد دائماً التفاصيل الشاملة الواردة في الأقسام الهيكلية الأخرى.
+4. حظر المصادر: قدم المعلومة مباشرة كمساعد رسمي، ويُمنع تماماً قول "وفقاً للملف" أو "بحسب قاعدة البيانات".
+5. التنسيق الإجباري: يُمنع سرد الأرقام، النسب المئوية، والمبالغ المالية داخل نصوص إنشائية متصلة. يجب صياغتها وعرضها دائماً حصرياً في جداول ماركداون (Markdown Tables) واضحة ومحاذية.
+
+إليك قاعدة البيانات الرسمية لاعتمادها حرفياً:
+${myKnowledgeBase}`
+          }
+        ]
+      },
+      {
+        role: "model",
+        parts: [
+          { 
+            // هذا التعديل هنا هو المفتاح: إعطاء النموذج مثالاً هيكلياً جاهزاً للجدول ليتصرف مثله تماماً
+            text: `مفهوم تماماً. أنا المساعد الذكي لـ APIA، ملتزم بقاعدة البيانات حرفياً. سأقوم بتنسيق كافة المعطيات المالية والنسب المئوية والأرقام في جداول Markdown منظمة كالتالي:
+
+| العنصر / الشرط | القيمة / النسبة الجبائية | الملاحظات القانونية |
+| :--- | :--- | :--- |
+| ... | ... | ... |` 
+          }
+        ]
       }
     ];
+
+    if (history && history.length > 0) {
+      history.forEach(turn => {
+        contents.push({
+          role: turn.role === "assistant" ? "model" : turn.role,
+          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+        });
+      });
+    }
+
+    contents.push({
+      role: "user",
+      parts: [{ text: message }]
+    });
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
@@ -46,9 +76,8 @@ export async function onRequestPost(context) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: contents,
-        cachedContent: cacheName, // استدعاء الكاش المستقر
         generationConfig: {
-          temperature: 0.0, // حتمية ودقة متناهية والتزام حرفي مطلق بالنسب والمنح
+          temperature: 0.0, // صفر تلاعب وثبات كامل في الأرقام والتنسيق
           topP: 0.95
         }
       })
