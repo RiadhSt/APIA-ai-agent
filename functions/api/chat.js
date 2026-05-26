@@ -1,5 +1,9 @@
 import { myKnowledgeBase } from "./knowledge.js";
 
+// متغير داخلي لحفظ معرف الكاش حياً في ذاكرة السيرفر أثناء التشغيل
+let globalCacheName = null;
+let cacheExpireTime = 0;
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -23,13 +27,20 @@ export async function onRequestPost(context) {
       });
     }
 
-    // صياغة مكثفة ومباشرة جداً لتقليل وقت معالجة السيرفر (Latency Optimization)
-    const contents = [
-      {
-        role: "user",
-        parts: [
+    const currentTime = Date.now();
+
+    // 1. إدارة الكاش تلقائياً: إذا لم يكن هناك كاش أو شارف على الانتهاء، نقوم بتوليد كاش جديد فوراً
+    if (!globalCacheName || currentTime >= cacheExpireTime) {
+      const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
+      
+      const cacheBody = {
+        model: "models/gemini-2.5-flash",
+        contents: [
           {
-            text: `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية. التزم صارماً بالقواعد التالية:
+            role: "user",
+            parts: [
+              {
+                text: `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية. التزم صارماً بالقواعد التالية:
 1. لغة الإجابة: تطابق لغة سؤال المستخدم تماماً (عربي/فرنسي) بما في ذلك الجداول.
 2. غزارة المعلومات: اسرد كامل الشروط القانونية والنسب والخطوات الإدارية دون أي اختصار مخل.
 3. أولوية السياق: إذا تضارب الدليل السريع مع الأقسام الهيكلية، اعتمد دائماً التفاصيل الشاملة الواردة في الأقسام الهيكلية الأخرى.
@@ -38,41 +49,64 @@ export async function onRequestPost(context) {
 
 إليك قاعدة البيانات الرسمية لاعتمادها حرفياً:
 ${myKnowledgeBase}`
+              }
+            ]
           }
-        ]
-      },
+        ],
+        ttl: "86400s" // صلاحية الكاش 24 ساعة كاملة
+      };
+
+      const cacheResponse = await fetch(createCacheUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cacheBody)
+      });
+
+      if (cacheResponse.ok) {
+        const cacheData = await cacheResponse.json();
+        globalCacheName = cacheData.name; // حفظ المعرّف تلقائياً
+        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000); // تعيين وقت الانتهاء الآمن (23 ساعة)
+      } else {
+        const errData = await cacheResponse.json().catch(() => ({}));
+        // في حال فشل الكاش لأي سبب، ننتقل تلقائياً للطلب التقليدي كخطة بديلة (Fallback) لضمان عدم توقف البوت
+        console.error("فشل إنشاء الكاش التلقائي:", errData.error?.message);
+      }
+    }
+
+    // 2. بناء محتوى الطلب الحالي خفيفاً جداً ومتوافقاً مع صيغة جوجل للكاش
+    const safeHistory = (history || []).map(turn => ({
+      role: turn.role === "assistant" ? "model" : turn.role,
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+    }));
+
+    const contents = [
+      ...safeHistory,
       {
-        role: "model",
-        parts: [{ text: "مفهوم. أنا المساعد الذكي لـوكالة النهوض بالاستثمارات الفلاحية، ملتزم بالقواعد الخمس وقاعدة البيانات حرفياً." }]
+        role: "user",
+        parts: [{ text: message }]
       }
     ];
 
-    if (history && history.length > 0) {
-      history.forEach(turn => {
-        contents.push({
-          role: turn.role === "assistant" ? "model" : turn.role,
-          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-        });
-      });
-    }
-
-    contents.push({
-      role: "user",
-      parts: [{ text: message }]
-    });
-
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    
+    // تجهيز جسم الطلب
+    const requestBody = {
+      contents: contents,
+      generationConfig: {
+        temperature: 0.0, // دقة متناهية والتزام حرفي تام بالقوانين بناءً على رغبتك
+        topP: 0.95
+      }
+    };
+
+    // إذا نجح السيرفر في توليد أو قراءة الكاش التلقائي، نقوم بحقنه فوراً لتسريع الطلب وحمايته من الـ High Demand
+    if (globalCacheName) {
+      requestBody.cachedContent = globalCacheName;
+    }
 
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: contents,
-        generationConfig: {
-          temperature: 0.0,
-          topP: 0.95
-        }
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
