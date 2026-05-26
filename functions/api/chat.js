@@ -1,5 +1,3 @@
-import { myKnowledgeBase } from './knowledge.js';
-
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -8,9 +6,17 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
+    
+    // حقن معرف الكاش الخاص بك هنا (الذي سنحصل عليه في الخطوة 2)
+    // يمكنك وضعه كمتغير بيئي في Cloudflare وهو الأفضل لحمايته وتحديثه
+    const cacheName = env.GEMINI_CACHE_NAME || "cachedContents/YOUR_CACHE_ID_HERE";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -19,46 +25,25 @@ export async function onRequestPost(context) {
       });
     }
 
-    // تنظيف وتجهيز الـ History الممرر من الواجهة
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
-      parts: turn.parts
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
-    // مصفوفة الملفات فارغة تماماً للاعتماد الحصري على ملف المعرفة المحلي
-    const attachedFilesParts = [];
-
-    // إعداد التعليمات البرمجية الصارمة وحقن الـ 3660 سطراً بكامل تفاصيلها
-    const systemInstruction = `أنت المساعد الذكي والخبير القانوني لوكالة النهوض بالاستثمارات الفلاحية في تونس. 
-    
-تتركز مهامك الأساسية حول المنح، الامتيازات، الإجراءات القانونية، وكل الأنشطة والمعطيات الرسمية للوكالة.
-
-مصدر معلوماتك الحصري والوحيد:
-تعتمد بشكل كامل وصارم على قاعدة المعرفة المدمجة أدناه والمحصورة بين وسمي <knowledge_base>. يمنع منعاً باتاً التخمين، أو ابتكار أرقام، أو الاعتماد على أي معلومات خارجية أو مسبقة خارج هذا السياق المرفق.
-
-<knowledge_base>
-${myKnowledgeBase}
-</knowledge_base>
-
-قواعد تشغيلية حاسمة:
-1. الالتزام المطلق بلغة السؤال: أجب حصرياً بنفس لغة المستخدم تماماً (إذا سأل بالفرنسية أجب بالفرنسية، وإذا سأل بالعربية أجب بالعربية). يُمنع صياغة الجداول أو المصطلحات بلغة مغايرة للغة السؤال.
-2. غزارة وتفصيل المعلومات: اسرد الشروط القانونية، النسب، والخطوات الإدارية كاملة وبأقصى تفصيل ممكن دون أي اختصار مخل وبأعلى درجة من الأمانة للمحتوى الرقمي الأصلي.
-3. إدارة تضارب السياق (أولوية المعلومة): إذا وجدت سؤال المستخدم مذكوراً في قسم "الدليل السريع للأسئلة والأجوبة الشائعة" ووجدت نفس الموضوع مشروحاً بتفصيل أكبر في الأقسام الهيكلية الأخرى داخل قاعدة المعرفة، يجب عليك دائماً تقديم الإجابة التفصيلية والشاملة المتوفرة في الأقسام الهيكلية، واستخدم الدليل السريع فقط كمؤشر لفهم دلالة سؤال المستخدم أو في حالة غياب جواب مباشر في الأقسام الهيكلية الأخرى.
-4. منع ذكر المصادر: لا تشر إلى وجود الكود أو قاعدة المعرفة، ولا تقل "وفقاً للنص المرفق" أو "بحسب قاعدة البيانات"، قدم المعلومة مباشرة كخبير مسؤول في الوكالة.
-5. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً وبشكل منظم ومحاذٍ عند عرض الأرقام، النسب، والمنح المالية لتسهيل القراءة.
-`;    
+    // تعليمات النظام أصبحت خفيفة جداً لأن المعرفة مخزنة ومثبتة في الكاش مسبقاً
+    const systemInstruction = `أنت المساعد الذكي والخبير القانوني لوكالة النهوض بالاستثمارات الفلاحية في تونس (APIA).
+أجب بدقة وتفصيل شديد وغزارة في المعلومات بناءً على قاعدة المعرفة المخزنة في الكاش الخاص بك.
+التزم تماماً بلغة المستخدم واستخدم جداول الماركداون للتنظيم المالي.`;
 
     const contents = [
       ...safeHistory,
-      { 
-        role: "user", 
-        parts: [
-          ...attachedFilesParts,
-          { text: message }
-        ] 
+      {
+        role: "user",
+        parts: [{ text: message }]
       }
     ];
 
+    // رابط الطلب يتغير ليتضمن استخدام معطيات الكاش
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(geminiUrl, {
@@ -67,8 +52,10 @@ ${myKnowledgeBase}
       body: JSON.stringify({
         contents: contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
+        // هنا نخبر سيرفر جوجل بربط هذا الطلب بالكاش السريع المخزن لديه
+        cachedContent: cacheName,
         generationConfig: {
-          temperature: 0.2,
+          temperature: 0.1,
           topP: 0.95
         }
       })
@@ -83,33 +70,18 @@ ${myKnowledgeBase}
     }
 
     const data = await response.json();
-    // استخراج الجزء النصي الفعلي الموجه للمستخدم فقط واستبعاد أجزاء التفكير (Thought/Reasoning)
-const candidate = data.candidates?.[0];
-let botReply = "";
+    const candidate = data.candidates?.[0];
+    let botReply = "";
 
-if (candidate && candidate.content && candidate.content.parts) {
-  // فحص الأجزاء وتجنب أي جزء يحتوي على التفكير الداخلي أو أوسمة التحليل
-  const textParts = candidate.content.parts
-    .filter(part => !part.thought && part.text) // تصفية الأجزاء النصية الموجهة للمستخدم فقط
-    .map(part => part.text);
-    
-  botReply = textParts.join("\n");
-}
+    if (candidate && candidate.content && candidate.content.parts) {
+      const textParts = candidate.content.parts
+        .filter(part => !part.thought && part.text)
+        .map(part => part.text);
+      botReply = textParts.join("\n");
+    }
 
-// تنظيف إضافي في حال تم دمج كلمة THOUGHT داخل النص كـ String
-if (botReply.includes("THOUGHT:")) {
-  // اقتطاع النص الإنجليزي المتسرب والاحتفاظ بالإجابة النهائية فقط
-  const parts = botReply.split(/[\u0600-\u06FF]/); // تحديد بداية النص العربي
-  const firstArabicCharIndex = botReply.search(/[\u0600-\u06FF]/);
-  if (firstArabicCharIndex !== -1) {
-    botReply = botReply.substring(firstArabicCharIndex);
-  }
-}
+    if (!botReply) botReply = "لم أتمكن من صياغة إجابة.";
 
-if (!botReply) {
-  botReply = "لم أتمكن من صياغة إجابة.";
-}
-    
     return new Response(JSON.stringify({ reply: botReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
