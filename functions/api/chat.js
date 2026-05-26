@@ -1,9 +1,3 @@
-import { myKnowledgeBase } from "./knowledge.js";
-
-// متغير داخلي لحفظ معرف الكاش حياً في ذاكرة السيرفر أثناء التشغيل
-let globalCacheName = null;
-let cacheExpireTime = 0;
-
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -19,6 +13,10 @@ export async function onRequestPost(context) {
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
+    
+    // الحل المستقر: نضع المعرف الصافي للكاش اليدوي هنا مباشرة
+    // تذكر: بمجرد تحديث الكاش من Postman كل 24 ساعة، استبدل الرمز هنا فقط.
+    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -27,53 +25,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const currentTime = Date.now();
-
-    // 1. إدارة الكاش تلقائياً: إذا لم يكن هناك كاش أو شارف على الانتهاء، نقوم بتوليد كاش جديد فوراً
-    if (!globalCacheName || currentTime >= cacheExpireTime) {
-      const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
-      
-      const cacheBody = {
-        model: "models/gemini-2.5-flash",
-        contents: [
-          {
-            role: "user",
-            parts: [
-              {
-                text: `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية. التزم صارماً بالقواعد التالية:
-1. لغة الإجابة: تطابق لغة سؤال المستخدم تماماً (عربي/فرنسي) بما في ذلك الجداول.
-2. غزارة المعلومات: اسرد كامل الشروط القانونية والنسب والخطوات الإدارية دون أي اختصار مخل.
-3. أولوية السياق: إذا تضارب الدليل السريع مع الأقسام الهيكلية، اعتمد دائماً التفاصيل الشاملة الواردة في الأقسام الهيكلية الأخرى.
-4. حظر المصادر: قدم المعلومة مباشرة كمساعد رسمي، ويُمنع تماماً قول "وفقاً للملف" أو "بحسب قاعدة البيانات".
-5. التنسيق: عرض الأرقام والمنح والنسب حصرياً في جداول ماركداون (Markdown) منظمة ومتناسقة.
-
-إليك قاعدة البيانات الرسمية لاعتمادها حرفياً:
-${myKnowledgeBase}`
-              }
-            ]
-          }
-        ],
-        ttl: "86400s" // صلاحية الكاش 24 ساعة كاملة
-      };
-
-      const cacheResponse = await fetch(createCacheUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cacheBody)
-      });
-
-      if (cacheResponse.ok) {
-        const cacheData = await cacheResponse.json();
-        globalCacheName = cacheData.name; // حفظ المعرّف تلقائياً
-        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000); // تعيين وقت الانتهاء الآمن (23 ساعة)
-      } else {
-        const errData = await cacheResponse.json().catch(() => ({}));
-        // في حال فشل الكاش لأي سبب، ننتقل تلقائياً للطلب التقليدي كخطة بديلة (Fallback) لضمان عدم توقف البوت
-        console.error("فشل إنشاء الكاش التلقائي:", errData.error?.message);
-      }
-    }
-
-    // 2. بناء محتوى الطلب الحالي خفيفاً جداً ومتوافقاً مع صيغة جوجل للكاش
+    // بناء سجل المحادثة بشكل قياسي ونقي جداً ليتوافق مع بنية الكاش الأصلية
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
@@ -88,25 +40,18 @@ ${myKnowledgeBase}`
     ];
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    
-    // تجهيز جسم الطلب
-    const requestBody = {
-      contents: contents,
-      generationConfig: {
-        temperature: 0.0, // دقة متناهية والتزام حرفي تام بالقوانين بناءً على رغبتك
-        topP: 0.95
-      }
-    };
-
-    // إذا نجح السيرفر في توليد أو قراءة الكاش التلقائي، نقوم بحقنه فوراً لتسريع الطلب وحمايته من الـ High Demand
-    if (globalCacheName) {
-      requestBody.cachedContent = globalCacheName;
-    }
 
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        contents: contents,
+        cachedContent: cacheName, // استدعاء الكاش المستقر
+        generationConfig: {
+          temperature: 0.0, // حتمية ودقة متناهية والتزام حرفي مطلق بالنسب والمنح
+          topP: 0.95
+        }
+      })
     });
 
     if (!response.ok) {
