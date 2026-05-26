@@ -28,7 +28,7 @@ export async function onRequestPost(context) {
 
     const currentTime = Date.now();
 
-    // 1. إدارة وتوليد الكاش التلقائي
+    // 1. إنشاء الكاش التلقائي بالبنية السليمة
     if (!globalCacheName || currentTime >= cacheExpireTime) {
       const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
       
@@ -39,15 +39,7 @@ export async function onRequestPost(context) {
             role: "user",
             parts: [
               {
-                text: `You are the Smart Assistant for the Agricultural Investment Promotion Agency (APIA). Strictly adhere to these operational rules:
-1. LANGUAGE MATCHING (CRITICAL): Detect the user's input language. If the user asks in English, reply in English. If in French, reply in French. If in Arabic, reply in Arabic. Never mix or use a different language for text, terms, or tables.
-2. COMPREHENSIVENESS: Provide full legal conditions, percentages, and administrative steps in maximum detail without any omission.
-3. CONTEXT PRIORITY: If there is a conflict between the Quick FAQ and the structural sections, always prioritize the detailed structural sections.
-4. SOURCE HIDDEN: Reply directly as an official system. Never mention "according to the document" or "in the database".
-5. FORMATTING: Never write numbers, percentages, or financial grants inside raw text. Format them exclusively in clean, aligned Markdown tables matching the query language.
-
-Official Database:
-${myKnowledgeBase}`
+                text: `أنت المساعد الذكي لوكالة (APIA). التزم حرفياً بقاعدة البيانات الرسمية التالية وسرد كامل التفاصيل والشروط والنسب دون أي اختصار، وقدم إجاباتك مباشرة دون ذكر المصادر:\n\n${myKnowledgeBase}`
               }
             ]
           }
@@ -68,13 +60,8 @@ ${myKnowledgeBase}`
       }
     }
 
-    // 2. تعديل الرسالة التمهيدية للموديل لتكون متعددة اللغات لكسر العطالة اللغوية
-    const contents = [
-      {
-        role: "model",
-        parts: [{ text: "Understood. I am the APIA Smart Assistant. I will strictly apply the 5 operational rules and reply using the EXACT language of the user (Arabic/French/English) with precise Markdown tables." }]
-      }
-    ];
+    // 2. بناء السجل القياسي النقي (مصفوفة نظيفة تبدأ بالسجل وتنتهي بسؤال المستخدم)
+    const contents = [];
 
     if (history && history.length > 0) {
       history.forEach(turn => {
@@ -85,10 +72,16 @@ ${myKnowledgeBase}`
       });
     }
 
-    // حقن أمر لغوي لحظي مصاحب للسؤال الحالي لكسر عناد الموديل
+    // حقن القواعد الحاسمة (اللغة والجداول) ملتصقة ومباشرة بسؤال المستخدم الحالي لمنع التجميد والعطالة اللغوية
+    const formattedPrompt = `[قواعد تشغيلية فورية:
+1. أجب حصرياً بنفس لغة هذا السؤال تماماً (إذا كان بالإنجليزية أجب بالإنجليزية، فرنسي بالفرنسية، عربي بالعربية).
+2. اعرض كافة الأرقام، النسب المئوية، والمنح المالية حصرياً في جداول ماركداون (Markdown Tables) واضحة ومحاذية بلغة السؤال، ويُمنع سردها في نصوص].
+
+سؤال المستخدم: ${message}`;
+
     contents.push({
       role: "user",
-      parts: [{ text: `[SYSTEM NOTE: Reply exclusively in the language of this prompt. Do not use Arabic if this prompt is in English/French].\n\nUser Question: ${message}` }]
+      parts: [{ text: formattedPrompt }]
     });
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
@@ -96,7 +89,7 @@ ${myKnowledgeBase}`
     const requestBody = {
       contents: contents,
       generationConfig: {
-        temperature: 0.0,
+        temperature: 0.0, // صفر تلاعب لضمان الحتمية القانونية والالتزام بالجدول
         topP: 0.95
       }
     };
