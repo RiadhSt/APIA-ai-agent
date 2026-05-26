@@ -1,3 +1,5 @@
+import { myKnowledgeBase } from "./knowledge.js";
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -13,9 +15,6 @@ export async function onRequestPost(context) {
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
-    
-    // تأكد أن هذا المعرّف هو آخر معرّف نشط قمت بتوليده من Postman
-    const cacheName = "cachedContents/g9f2il1zhqqledg5q261jggjdrvy38v2m52xdmxm";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -24,22 +23,42 @@ export async function onRequestPost(context) {
       });
     }
 
-    // بناء سجل المحادثة بشكل نقي تماماً متوافق مع الكاش المخزن
-    const safeHistory = (history || []).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-    }));
-
-    // إضافة سؤال المستخدم الحالي بشكل نقي وصافٍ دون أي إضافات تكسر الكاش
+    // هندسة السياق: نضع قاعدة المعرفة في البداية كـ Context صلب وقوي
     const contents = [
-      ...safeHistory,
       {
         role: "user",
-        parts: [{ text: message }]
+        parts: [
+          {
+            text: `أنت المساعد الذكي والخبير القانوني والمالي المعتمد لوكالة النهوض بالاستثمارات الفلاحية (APIA). 
+إليك قاعدة البيانات القانونية والجبائية الرسمية والكاملة للوكالة، اعتمد عليها اعتماداً مطلقاً وحرفياً في إجاباتك ولا تغير الشروط أو النسب الجبائية:
+
+${myKnowledgeBase}`
+          }
+        ]
+      },
+      {
+        role: "model",
+        parts: [{ text: "مفهوم تماماً. أنا الآن بصفتي الخبير القانوني والمالي لـ APIA، محمل بقاعدة البيانات كاملة وجاهز للإجابة بدقة بالغة وبناء الجداول المالية الفورية." }]
       }
     ];
 
-    // الرابط القياسي المباشر لـ generateContent
+    // دمج سجل المحادثة الحالي (إن وجد)
+    if (history && history.length > 0) {
+      history.forEach(turn => {
+        contents.push({
+          role: turn.role === "assistant" ? "model" : turn.role,
+          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+        });
+      });
+    }
+
+    // إضافة سؤال المستخدم الحالي في نهاية السياق
+    contents.push({
+      role: "user",
+      parts: [{ text: message }]
+    });
+
+    // استخدام الرابط المستقر والمباشر لـ Gemini 2.5 Flash
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(geminiUrl, {
@@ -47,7 +66,6 @@ export async function onRequestPost(context) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: contents,
-        cachedContent: cacheName, // استدعاء الكاش الصافي هنا
         generationConfig: {
           temperature: 0.2,
           topP: 0.95
@@ -57,7 +75,6 @@ export async function onRequestPost(context) {
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      // إذا انتهت صلاحية الكاش، سيعطينا السيرفر تنبيهاً واضحاً هنا بدلاً من التأخير صامتاً
       return new Response(JSON.stringify({ error: data.error?.message || "خطأ في الاتصال بسيرفر جوجل" }), {
         status: response.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
