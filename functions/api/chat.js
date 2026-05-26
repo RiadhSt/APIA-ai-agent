@@ -16,7 +16,7 @@ export async function onRequestPost(context) {
     
     // الحل المستقر: نضع المعرف الصافي للكاش اليدوي هنا مباشرة
     // تذكر: بمجرد تحديث الكاش من Postman كل 24 ساعة، استبدل الرمز هنا فقط.
-    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
+    const cacheName = "cachedContents/wa51sy0jfxq1geev7j6fld94gyvhwcl3n1ltoete";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
