@@ -41,12 +41,19 @@ ${myKnowledgeBase}
 </knowledge_base>
 
 قواعد تشغيلية حاسمة:
-1. الالتزام المطلق بلغة السؤال: أجب حصرياً بنفس لغة المستخدم تماماً (إذا سأل بالفرنسية أجب بالفرنسية، وإذا سأل بالعربية أجب بالعربية). يُمنع صياغة الجداول أو المصطلحات بلغة مغايرة للغة السؤال.
+1. الالتزام المطلق بلغة السؤال: أجب حصرياً بنفس لغة المستخدم تماماً (إذا سأل بالفرنسية أجب بالفرنسية، وإذا سأل بالعربية أجب بالعربية، وإذا سأل بالإنجليزية أجب بالإنجليزية). يُمنع صياغة الجداول أو المصطلحات بلغة مغايرة للغة السؤال.
 2. غزارة وتفصيل المعلومات: اسرد الشروط القانونية، النسب، والخطوات الإدارية كاملة وبأقصى تفصيل ممكن دون أي اختصار مخل وبأعلى درجة من الأمانة للمحتوى الرقمي الأصلي.
 3. إدارة تضارب السياق (أولوية المعلومة): إذا وجدت سؤال المستخدم مذكوراً في قسم "الدليل السريع للأسئلة والأجوبة الشائعة" ووجدت نفس الموضوع مشروحاً بتفصيل أكبر في الأقسام الهيكلية الأخرى داخل قاعدة المعرفة، يجب عليك دائماً تقديم الإجابة التفصيلية والشاملة المتوفرة في الأقسام الهيكلية، واستخدم الدليل السريع فقط كمؤشر لفهم دلالة سؤال المستخدم أو في حالة غياب جواب مباشر في الأقسام الهيكلية الأخرى.
 4. منع ذكر المصادر: لا تشر إلى وجود الكود أو قاعدة المعرفة، ولا تقل "وفقاً للنص المرفق" أو "بحسب قاعدة البيانات"، قدم المعلومة مباشرة كخبير مسؤول في الوكالة.
 5. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً وبشكل منظم ومحاذٍ عند عرض الأرقام، النسب، والمنح المالية لتسهيل القراءة.
 `;    
+
+    // تطبيق استراتيجية الترجمة على مرحلتين (بلورة المخرج بلغة المصدر أولاً ثم ترجمة الناتج النهائي فقط)
+    const formattedMessage = `[CRITICAL INSTRUCTION / EXECUTION STAGE]:
+1. Step 1 (Drafting): Search the <knowledge_base>, find the exact info, and draft the full detailed answer with all numbers and Markdown Tables in the language of the source text (Arabic or French).
+2. Step 2 (Translation): Take that drafted answer and translate it completely to the exact language of the user's question below. Ensure that the Markdown tables and terms are perfectly translated into the user's language.
+
+User Question: ${message}`;
 
     const contents = [
       ...safeHistory,
@@ -54,7 +61,7 @@ ${myKnowledgeBase}
         role: "user", 
         parts: [
           ...attachedFilesParts,
-          { text: message }
+          { text: formattedMessage } // هنا تم حقن الأمر الجديد لحل مشكلة اللغة
         ] 
       }
     ];
@@ -88,19 +95,17 @@ ${myKnowledgeBase}
 
     if (candidate && candidate.content && candidate.content.parts) {
       const textParts = candidate.content.parts
-        .filter(part => !part.thought && part.text) // التصفية الأساسية والمعتمدة لأجزاء التفكير
+        .filter(part => !part.thought && part.text) // تصفية الأجزاء النصية الموجهة للمستخدم واستبعاد أجزاء التفكير
         .map(part => part.text);
         
       botReply = textParts.join("\n");
     }
 
-    // التنظيف الآمن لجميع اللغات (عربي/فرنسي/إنجليزي) في حال تسرب وسم الـ THOUGHT كمتن نصي
+    // التنظيف الآمن والشامل لجميع اللغات (عربي/فرنسي/إنجليزي) لمنع كراش الواجهة الأمامية
     if (botReply.includes("THOUGHT:")) {
       const parts = botReply.split("THOUGHT:");
-      // أخذ الجزء الأخير دائماً وهو يمثل الإجابة النهائية النظيفة بعد فك الحزمة
       botReply = parts[parts.length - 1].trim();
       
-      // إزالة أي وسم إغلاق قد يتبقى من عمليات التحليل الإنشائية
       if (botReply.includes("-->")) {
          const cleanParts = botReply.split("-->");
          botReply = cleanParts[cleanParts.length - 1].trim();
