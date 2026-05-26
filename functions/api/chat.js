@@ -1,6 +1,5 @@
 import { myKnowledgeBase } from "./knowledge.js";
 
-// متغيرات ديناميكية لحفظ الكاش حياً في الذاكرة السحابية المؤقتة
 let globalCacheName = null;
 let cacheExpireTime = 0;
 
@@ -29,7 +28,7 @@ export async function onRequestPost(context) {
 
     const currentTime = Date.now();
 
-    // 1. التوليد والتجديد التلقائي للكاش المدفوع (لضمان السرعة وتوفير التكلفة)
+    // 1. إدارة وتوليد الكاش التلقائي
     if (!globalCacheName || currentTime >= cacheExpireTime) {
       const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
       
@@ -40,20 +39,20 @@ export async function onRequestPost(context) {
             role: "user",
             parts: [
               {
-                text: `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية. التزم صارماً بالقواعد التشغيلية التالية:
-1. لغة الإجابة: تطابق لغة سؤال المستخدم تماماً (عربي/فرنسي/انجليزي) بما في ذلك الجداول والمصطلحات.
-2. غزارة المعلومات: اسرد كامل الشروط القانونية والنسب والخطوات الإدارية دون أي اختصار مخل وبأعلى أمانة للنص.
-3. أولوية السياق: إذا تضارب الدليل السريع مع الأقسام الهيكلية، اعتمد دائماً التفاصيل الشاملة الواردة في الأقسام الهيكلية الأخرى.
-4. حظر المصادر: قدم المعلومة مباشرة كمساعد رسمي، ويُمنع تماماً قول "وفقاً للملف" أو "بحسب قاعدة البيانات".
-5. التنسيق الإجباري للجداول: يُمنع سرد الأرقام، النسب المئوية، والمبالغ المالية داخل نصوص إنشائية متصلة. يجب تحويلها وعرضها دائماً حصرياً في جداول ماركداون (Markdown Tables) واضحة ومحاذية.
+                text: `You are the Smart Assistant for the Agricultural Investment Promotion Agency (APIA). Strictly adhere to these operational rules:
+1. LANGUAGE MATCHING (CRITICAL): Detect the user's input language. If the user asks in English, reply in English. If in French, reply in French. If in Arabic, reply in Arabic. Never mix or use a different language for text, terms, or tables.
+2. COMPREHENSIVENESS: Provide full legal conditions, percentages, and administrative steps in maximum detail without any omission.
+3. CONTEXT PRIORITY: If there is a conflict between the Quick FAQ and the structural sections, always prioritize the detailed structural sections.
+4. SOURCE HIDDEN: Reply directly as an official system. Never mention "according to the document" or "in the database".
+5. FORMATTING: Never write numbers, percentages, or financial grants inside raw text. Format them exclusively in clean, aligned Markdown tables matching the query language.
 
-إليك قاعدة البيانات الرسمية الشاملة لاعتمادها حرفياً:
+Official Database:
 ${myKnowledgeBase}`
               }
             ]
           }
         ],
-        ttl: "86400s" // صلاحية الكاش 24 ساعة كاملة على سيرفرات جوجل
+        ttl: "86400s"
       };
 
       const cacheResponse = await fetch(createCacheUrl, {
@@ -65,35 +64,43 @@ ${myKnowledgeBase}`
       if (cacheResponse.ok) {
         const cacheData = await cacheResponse.json();
         globalCacheName = cacheData.name;
-        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000); // تجديد تلقائي قبل الانتهاء بساعة
+        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000);
       }
     }
 
-    // 2. بناء سجل المحادثة خفيف ونقي جداً ليتطابق مع الـ Cache
-    const safeHistory = (history || []).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-    }));
-
+    // 2. تعديل الرسالة التمهيدية للموديل لتكون متعددة اللغات لكسر العطالة اللغوية
     const contents = [
-      ...safeHistory,
       {
-        role: "user",
-        parts: [{ text: message }]
+        role: "model",
+        parts: [{ text: "Understood. I am the APIA Smart Assistant. I will strictly apply the 5 operational rules and reply using the EXACT language of the user (Arabic/French/English) with precise Markdown tables." }]
       }
     ];
+
+    if (history && history.length > 0) {
+      history.forEach(turn => {
+        contents.push({
+          role: turn.role === "assistant" ? "model" : turn.role,
+          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+        });
+      });
+    }
+
+    // حقن أمر لغوي لحظي مصاحب للسؤال الحالي لكسر عناد الموديل
+    contents.push({
+      role: "user",
+      parts: [{ text: `[SYSTEM NOTE: Reply exclusively in the language of this prompt. Do not use Arabic if this prompt is in English/French].\n\nUser Question: ${message}` }]
+    });
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     
     const requestBody = {
       contents: contents,
       generationConfig: {
-        temperature: 0.0, // صفر تلاعب لضمان الحتمية القانونية والتنسيق الصارم للجداول
+        temperature: 0.0,
         topP: 0.95
       }
     };
 
-    // ربط الطلب بالكاش التلقائي
     if (globalCacheName) {
       requestBody.cachedContent = globalCacheName;
     }
