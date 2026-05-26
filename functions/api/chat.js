@@ -1,7 +1,4 @@
-import { myKnowledgeBase } from "./knowledge.js";
-
-let globalCacheName = null;
-let cacheExpireTime = 0;
+import { myKnowledgeBase } from './knowledge.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -10,10 +7,6 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
-
-  if (request.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
 
   try {
     const { message, history } = await request.json();
@@ -26,105 +19,97 @@ export async function onRequestPost(context) {
       });
     }
 
-    const currentTime = Date.now();
+    // تنظيف وتجهيز الـ History الممرر من الواجهة
+    const safeHistory = (history || []).map(turn => ({
+      role: turn.role === "assistant" ? "model" : turn.role,
+      parts: turn.parts
+    }));
 
-    // 1. إنشاء الكاش التلقائي بالبنية السليمة
-    if (!globalCacheName || currentTime >= cacheExpireTime) {
-      const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
-      
-      const cacheBody = {
-        model: "models/gemini-2.5-flash",
-        contents: [
-          {
-            role: "user",
-            parts: [
-              {
-                text: `أنت المساعد الذكي لوكالة (APIA). التزم حرفياً بقاعدة البيانات الرسمية التالية وسرد كامل التفاصيل والشروط والنسب دون أي اختصار، وقدم إجاباتك مباشرة دون ذكر المصادر:\n\n${myKnowledgeBase}`
-              }
-            ]
-          }
-        ],
-        ttl: "86400s"
-      };
+    // مصفوفة الملفات فارغة تماماً للاعتماد الحصري على ملف المعرفة المحلي
+    const attachedFilesParts = [];
 
-      const cacheResponse = await fetch(createCacheUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cacheBody)
-      });
+    // إعداد التعليمات البرمجية الصارمة وحقن الـ 3660 سطراً بكامل تفاصيلها
+    const systemInstruction = `أنت المساعد الذكي والخبير القانوني لوكالة النهوض بالاستثمارات الفلاحية في تونس. 
+    
+تتركز مهامك الأساسية حول المنح، الامتيازات، الإجراءات القانونية، وكل الأنشطة والمعطيات الرسمية للوكالة.
 
-      if (cacheResponse.ok) {
-        const cacheData = await cacheResponse.json();
-        globalCacheName = cacheData.name;
-        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000);
+مصدر معلوماتك الحصري والوحيد:
+تعتمد بشكل كامل وصارم على قاعدة المعرفة المدمجة أدناه والمحصورة بين وسمي <knowledge_base>. يمنع منعاً باتاً التخمين، أو ابتكار أرقام، أو الاعتماد على أي معلومات خارجية أو مسبقة خارج هذا السياق المرفق.
+
+<knowledge_base>
+${myKnowledgeBase}
+</knowledge_base>
+
+قواعد تشغيلية حاسمة:
+1. الالتزام المطلق بلغة السؤال: أجب حصرياً بنفس لغة المستخدم تماماً (إذا سأل بالفرنسية أجب بالفرنسية، وإذا سأل بالعربية أجب بالعربية). يُمنع صياغة الجداول أو المصطلحات بلغة مغايرة للغة السؤال.
+2. غزارة وتفصيل المعلومات: اسرد الشروط القانونية، النسب، والخطوات الإدارية كاملة وبأقصى تفصيل ممكن دون أي اختصار مخل وبأعلى درجة من الأمانة للمحتوى الرقمي الأصلي.
+3. إدارة تضارب السياق (أولوية المعلومة): إذا وجدت سؤال المستخدم مذكوراً في قسم "الدليل السريع للأسئلة والأجوبة الشائعة" ووجدت نفس الموضوع مشروحاً بتفصيل أكبر في الأقسام الهيكلية الأخرى داخل قاعدة المعرفة، يجب عليك دائماً تقديم الإجابة التفصيلية والشاملة المتوفرة في الأقسام الهيكلية، واستخدم الدليل السريع فقط كمؤشر لفهم دلالة سؤال المستخدم أو في حالة غياب جواب مباشر في الأقسام الهيكلية الأخرى.
+4. منع ذكر المصادر: لا تشر إلى وجود الكود أو قاعدة المعرفة، ولا تقل "وفقاً للنص المرفق" أو "بحسب قاعدة البيانات"، قدم المعلومة مباشرة كخبير مسؤول في الوكالة.
+5. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً وبشكل منظم ومحاذٍ عند عرض الأرقام، النسب، والمنح المالية لتسهيل القراءة.
+`;    
+
+    const contents = [
+      ...safeHistory,
+      { 
+        role: "user", 
+        parts: [
+          ...attachedFilesParts,
+          { text: message }
+        ] 
       }
-    }
-
-    // 2. بناء السجل القياسي النقي (مصفوفة نظيفة تبدأ بالسجل وتنتهي بسؤال المستخدم)
-    const contents = [];
-
-    if (history && history.length > 0) {
-      history.forEach(turn => {
-        contents.push({
-          role: turn.role === "assistant" ? "model" : turn.role,
-          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-        });
-      });
-    }
-
-    // حقن القواعد الحاسمة (اللغة والجداول) ملتصقة ومباشرة بسؤال المستخدم الحالي لمنع التجميد والعطالة اللغوية
-    const formattedPrompt = `[قواعد تشغيلية فورية:
-1. أجب حصرياً بنفس لغة هذا السؤال تماماً (إذا كان بالإنجليزية أجب بالإنجليزية، فرنسي بالفرنسية، عربي بالعربية).
-2. اعرض كافة الأرقام، النسب المئوية، والمنح المالية حصرياً في جداول ماركداون (Markdown Tables) واضحة ومحاذية بلغة السؤال، ويُمنع سردها في نصوص].
-
-سؤال المستخدم: ${message}`;
-
-    contents.push({
-      role: "user",
-      parts: [{ text: formattedPrompt }]
-    });
+    ];
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    
-    const requestBody = {
-      contents: contents,
-      generationConfig: {
-        temperature: 0.0, // صفر تلاعب لضمان الحتمية القانونية والالتزام بالجدول
-        topP: 0.95
-      }
-    };
-
-    if (globalCacheName) {
-      requestBody.cachedContent = globalCacheName;
-    }
 
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        contents: contents,
+        systemInstruction: { parts: [{ text: systemInstruction }] },
+        generationConfig: {
+          temperature: 0.2,
+          topP: 0.95
+        }
+      })
     });
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ في الاتصال بسيرفر جوجل" }), {
+      return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
         status: response.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
     }
 
     const data = await response.json();
-    const candidate = data.candidates?.[0];
-    let botReply = "";
+    // استخراج الجزء النصي الفعلي الموجه للمستخدم فقط واستبعاد أجزاء التفكير (Thought/Reasoning)
+const candidate = data.candidates?.[0];
+let botReply = "";
 
-    if (candidate && candidate.content && candidate.content.parts) {
-      const textParts = candidate.content.parts
-        .filter(part => !part.thought && part.text)
-        .map(part => part.text);
-      botReply = textParts.join("\n");
-    }
+if (candidate && candidate.content && candidate.content.parts) {
+  // فحص الأجزاء وتجنب أي جزء يحتوي على التفكير الداخلي أو أوسمة التحليل
+  const textParts = candidate.content.parts
+    .filter(part => !part.thought && part.text) // تصفية الأجزاء النصية الموجهة للمستخدم فقط
+    .map(part => part.text);
+    
+  botReply = textParts.join("\n");
+}
 
-    if (!botReply) botReply = "لم أتمكن من صياغة إجابة.";
+// تنظيف إضافي في حال تم دمج كلمة THOUGHT داخل النص كـ String
+if (botReply.includes("THOUGHT:")) {
+  // اقتطاع النص الإنجليزي المتسرب والاحتفاظ بالإجابة النهائية فقط
+  const parts = botReply.split(/[\u0600-\u06FF]/); // تحديد بداية النص العربي
+  const firstArabicCharIndex = botReply.search(/[\u0600-\u06FF]/);
+  if (firstArabicCharIndex !== -1) {
+    botReply = botReply.substring(firstArabicCharIndex);
+  }
+}
 
+if (!botReply) {
+  botReply = "لم أتمكن من صياغة إجابة.";
+}
+    
     return new Response(JSON.stringify({ reply: botReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
