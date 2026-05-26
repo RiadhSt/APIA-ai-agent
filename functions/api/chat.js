@@ -1,5 +1,9 @@
 import { myKnowledgeBase } from "./knowledge.js";
 
+// متغيرات ديناميكية لحفظ الكاش حياً في الذاكرة السحابية المؤقتة
+let globalCacheName = null;
+let cacheExpireTime = 0;
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -23,58 +27,81 @@ export async function onRequestPost(context) {
       });
     }
 
-    // السياق المباشر والسريع مع الدمج البصري للجداول
+    const currentTime = Date.now();
+
+    // 1. التوليد والتجديد التلقائي للكاش المدفوع (لضمان السرعة وتوفير التكلفة)
+    if (!globalCacheName || currentTime >= cacheExpireTime) {
+      const createCacheUrl = `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${apiKey}`;
+      
+      const cacheBody = {
+        model: "models/gemini-2.5-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `أنت المساعد الذكي لوكالة (APIA). التزم صارماً بالقواعد التشغيلية التالية:
+1. لغة الإجابة: تطابق لغة سؤال المستخدم تماماً (عربي/فرنسي) بما في ذلك الجداول والمصطلحات.
+2. غزارة المعلومات: اسرد كامل الشروط القانونية والنسب والخطوات الإدارية دون أي اختصار مخل وبأعلى أمانة للنص.
+3. أولوية السياق: إذا تضارب الدليل السريع مع الأقسام الهيكلية، اعتمد دائماً التفاصيل الشاملة الواردة في الأقسام الهيكلية الأخرى.
+4. حظر المصادر: قدم المعلومة مباشرة كمساعد رسمي، ويُمنع تماماً قول "وفقاً للملف" أو "بحسب قاعدة البيانات".
+5. التنسيق الإجباري للجداول: يُمنع سرد الأرقام، النسب المئوية، والمبالغ المالية داخل نصوص إنشائية متصلة. يجب تحويلها وعرضها دائماً حصرياً في جداول ماركداون (Markdown Tables) واضحة ومحاذية.
+
+إليك قاعدة البيانات الرسمية الشاملة لاعتمادها حرفياً:
+${myKnowledgeBase}`
+              }
+            ]
+          }
+        ],
+        ttl: "86400s" // صلاحية الكاش 24 ساعة كاملة على سيرفرات جوجل
+      };
+
+      const cacheResponse = await fetch(createCacheUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cacheBody)
+      });
+
+      if (cacheResponse.ok) {
+        const cacheData = await cacheResponse.json();
+        globalCacheName = cacheData.name;
+        cacheExpireTime = currentTime + (23 * 60 * 60 * 1000); // تجديد تلقائي قبل الانتهاء بساعة
+      }
+    }
+
+    // 2. بناء سجل المحادثة خفيف ونقي جداً ليتطابق مع الـ Cache
+    const safeHistory = (history || []).map(turn => ({
+      role: turn.role === "assistant" ? "model" : turn.role,
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+    }));
+
     const contents = [
+      ...safeHistory,
       {
         role: "user",
-        parts: [
-          {
-            text: `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية (APIA). 
-
-قواعد تشغيلية صارمة:
-1. الالتزام المطلق بلغة السؤال: أجب بنفس لغة المستخدم تماماً (عربي/فرنسي).
-2. غزارة المعلومات: اسرد الشروط والنسب والخطوات كاملة وبأقصى تفصيل ممكن.
-3. إدارة تضارب السياق: اعتمد دائماً الإجابة التفصيلية الشاملة المتوفرة في الأقسام الهيكلية بدلاً من الدليل السريع.
-4. منع ذكر المصادر: قدم المعلومة مباشرة كمساعد رسمي دون قول "وفقاً للملف المرفق".
-5. التنسيق الهيكلي (إجباري): قم بتحويل وتلخيص أي أرقام، مبالغ، نسب جبائية، أو منحة مالية واردة في النص أدناه وعرضها دائماً في جدول ماركداون (Markdown Table) منظم ومحاذٍ بدلاً من السرد النصي.
-
-إليك قاعدة البيانات لاعتمادها حرفياً:
-${myKnowledgeBase}`
-          }
-        ]
-      },
-      {
-        role: "model",
-        parts: [{ text: "مفهوم تماماً. أنا المساعد الذكي لـ APIA، سأعتمد على النص حرفياً وأعرض كافة الأرقام والنسب المئوية والمنح في جداول ماركداون (Markdown) منسقة تلقائياً." }]
+        parts: [{ text: message }]
       }
     ];
 
-    if (history && history.length > 0) {
-      history.forEach(turn => {
-        contents.push({
-          role: turn.role === "assistant" ? "model" : turn.role,
-          parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-        });
-      });
-    }
-
-    contents.push({
-      role: "user",
-      parts: [{ text: message }]
-    });
-
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    
+    const requestBody = {
+      contents: contents,
+      generationConfig: {
+        temperature: 0.0, // صفر تلاعب لضمان الحتمية القانونية والتنسيق الصارم للجداول
+        topP: 0.95
+      }
+    };
+
+    // ربط الطلب بالكاش التلقائي
+    if (globalCacheName) {
+      requestBody.cachedContent = globalCacheName;
+    }
 
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: contents,
-        generationConfig: {
-          temperature: 0.0, // الحفاظ على دقة الأرقام والنسب الرسمية بنسبة 100%
-          topP: 0.95
-        }
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
