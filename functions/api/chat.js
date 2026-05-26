@@ -14,8 +14,8 @@ export async function onRequestPost(context) {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
     
-    // معرف الكاش الحالي الخاص بك
-    const cacheName = "cachedContents/fux1uhfjikju4wj06w2c3yfd7gq5q204n4uorlei";
+    // تأكد أن هذا المعرّف هو آخر معرّف نشط قمت بتوليده من Postman
+    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
@@ -24,35 +24,32 @@ export async function onRequestPost(context) {
       });
     }
 
+    // بناء سجل المحادثة بشكل نقي تماماً متوافق مع الكاش المخزن
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
+    // إضافة سؤال المستخدم الحالي بشكل نقي وصافٍ دون أي إضافات تكسر الكاش
     const contents = [
       ...safeHistory,
       {
         role: "user",
-        parts: [
-          { 
-            text: `توجيهات مؤسساتية صارمة: أنت الخبير القانوني والمالي لوكالة النهوض بالاستثمارات الفلاحية (APIA). أجب بدقة وتفصيل شديد وغزارة في المعلومات بناءً على قاعدة المعرفة المخزنة في الكاش الخاص بك. التزم تماماً بلغة المستخدم واستخدم جداول الماركداون للتنظيم المالي بوضوح.\n\nسؤال المستخدم الحالي هو: ${message}` 
-          }
-        ]
+        parts: [{ text: message }]
       }
     ];
 
-    // تعديل الرابط ليكون عاماً، ونحدد الموديل بدقة بالداخل ليجبر السيرفر على مطابقة الكاش
+    // الرابط القياسي المباشر لـ generateContent
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "models/gemini-2.5-flash", // تحديد الموديل هنا يضمن مطابقة الكاش 100%
         contents: contents,
-        cachedContent: cacheName,
+        cachedContent: cacheName, // استدعاء الكاش الصافي هنا
         generationConfig: {
-          temperature: 0.1,
+          temperature: 0.2,
           topP: 0.95
         }
       })
@@ -60,7 +57,8 @@ export async function onRequestPost(context) {
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ في معالجة طلب الكاش" }), {
+      // إذا انتهت صلاحية الكاش، سيعطينا السيرفر تنبيهاً واضحاً هنا بدلاً من التأخير صامتاً
+      return new Response(JSON.stringify({ error: data.error?.message || "خطأ في الاتصال بسيرفر جوجل" }), {
         status: response.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
@@ -77,7 +75,7 @@ export async function onRequestPost(context) {
       botReply = textParts.join("\n");
     }
 
-    if (!botReply) botReply = "لم أتمكن من صياغة إجابة من الكاش.";
+    if (!botReply) botReply = "لم أتمكن من صياغة إجابة.";
 
     return new Response(JSON.stringify({ reply: botReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
