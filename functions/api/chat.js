@@ -22,7 +22,7 @@ export async function onRequestPost(context) {
     // تنظيف وتجهيز الـ History الممرر من الواجهة
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
-      parts: turn.parts
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
     // مصفوفة الملفات فارغة تماماً للاعتماد الحصري على ملف المعرفة المحلي
@@ -94,16 +94,6 @@ if (candidate && candidate.content && candidate.content.parts) {
     .map(part => part.text);
     
   botReply = textParts.join("\n");
-}
-
-// تنظيف إضافي في حال تم دمج كلمة THOUGHT داخل النص كـ String
-if (botReply.includes("THOUGHT:")) {
-  // اقتطاع النص الإنجليزي المتسرب والاحتفاظ بالإجابة النهائية فقط
-  const parts = botReply.split(/[\u0600-\u06FF]/); // تحديد بداية النص العربي
-  const firstArabicCharIndex = botReply.search(/[\u0600-\u06FF]/);
-  if (firstArabicCharIndex !== -1) {
-    botReply = botReply.substring(firstArabicCharIndex);
-  }
 }
 
 if (!botReply) {
