@@ -22,46 +22,33 @@ export async function onRequestPost(context) {
     // تنظيف وتجهيز الـ History الممرر من الواجهة
     const safeHistory = (history || []).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
-      parts: turn.parts
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
-    // مصفوفة الملفات فارغة تماماً للاعتماد الحصري على ملف المعرفة المحلي
     const attachedFilesParts = [];
 
-    // إعداد التعليمات البرمجية الصارمة وحقن الـ 3660 سطراً بكامل تفاصيلها
-    const systemInstruction = `أنت المساعد الذكي لوكالة النهوض بالاستثمارات الفلاحية في تونس. 
-    
-تتركز مهامك الأساسية حول المنح، الامتيازات، الإجراءات القانونية، وكل الأنشطة والمعطيات الرسمية للوكالة.
+    // تبسيط الـ System Instruction إلى لغة إنجليزية مباشرة لتقليل استهلاك السيرفر والمعالجة
+    const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
-مصدر معلوماتك الحصري والوحيد:
-تعتمد بشكل كامل وصارم على قاعدة المعرفة المدمجة أدناه والمحصورة بين وسمي <knowledge_base>. يمنع منعاً باتاً التخمين، أو ابتكار أرقام، أو الاعتماد على أي معلومات خارجية أو مسبقة خارج هذا السياق المرفق.
+CRITICAL RULES:
+1. LANGUAGE MATCH: Detect the user's input language. If the user asks in French, reply in French. If in Arabic, reply in Arabic. If in English, reply in English. NEVER mix languages.
+2. MARKDOWN TABLES: Format ALL numbers, percentages, and financial grants exclusively in clear Markdown tables. Do not write numbers in raw text.
+3. NO SOURCE MENTION: Reply directly as an official expert. Never say "according to the database" or "in the attached file".
+4. COMPLETENESS: Provide full administrative steps, percentages, and legal conditions in maximum detail without any abbreviation.
 
+OFFICIAL DATABASE TO USE:
 <knowledge_base>
 ${myKnowledgeBase}
-</knowledge_base>
+</knowledge_base>`;    
 
-قواعد تشغيلية حاسمة:
-1. الالتزام المطلق بلغة السؤال: أجب حصرياً بنفس لغة المستخدم تماماً (إذا سأل بالفرنسية أجب بالفرنسية، وإذا سأل بالعربية أجب بالعربية، وإذا سأل بالإنجليزية أجب بالإنجليزية). يُمنع صياغة الجداول أو المصطلحات بلغة مغايرة للغة السؤال.
-2. غزارة وتفصيل المعلومات: اسرد الشروط القانونية، النسب، والخطوات الإدارية كاملة وبأقصى تفصيل ممكن دون أي اختصار مخل وبأعلى درجة من الأمانة للمحتوى الرقمي الأصلي.
-3. إدارة تضارب السياق (أولوية المعلومة): إذا وجدت سؤال المستخدم مذكوراً في قسم "الدليل السريع للأسئلة والأجوبة الشائعة" ووجدت نفس الموضوع مشروحاً بتفصيل أكبر في الأقسام الهيكلية الأخرى داخل قاعدة المعرفة، يجب عليك دائماً تقديم الإجابة التفصيلية والشاملة المتوفرة في الأقسام الهيكلية، واستخدم الدليل السريع فقط كمؤشر لفهم دلالة سؤال المستخدم أو في حالة غياب جواب مباشر في الأقسام الهيكلية الأخرى.
-4. منع ذكر المصادر: لا تشر إلى وجود الكود أو قاعدة المعرفة، ولا تقل "وفقاً للنص المرفق" أو "بحسب قاعدة البيانات"، قدم المعلومة مباشرة كخبير مسؤول في الوكالة.
-5. الجداول المنظمة: استخدم جداول الماركداون (Markdown Tables) حصرياً وبشكل منظم ومحاذٍ عند عرض الأرقام، النسب، والمنح المالية لتسهيل القراءة.
-`;    
-
-    // تطبيق استراتيجية الترجمة على مرحلتين (بلورة المخرج بلغة المصدر أولاً ثم ترجمة الناتج النهائي فقط)
-    const formattedMessage = `[CRITICAL INSTRUCTION / EXECUTION STAGE]:
-1. Step 1 (Drafting): Search the <knowledge_base>, find the exact info, and draft the full detailed answer with all numbers and Markdown Tables in the language of the source text (Arabic or French).
-2. Step 2 (Translation): Take that drafted answer and translate it completely to the exact language of the user's question below. Ensure that the Markdown tables and terms are perfectly translated into the user's language.
-
-User Question: ${message}`;
-
+    // إرسال سؤال المستخدم نظيفاً تماماً دون أي إضافات تسبب تشتت أو معالجة مزدوجة
     const contents = [
       ...safeHistory,
       { 
         role: "user", 
         parts: [
           ...attachedFilesParts,
-          { text: formattedMessage } // هنا تم حقن الأمر الجديد لحل مشكلة اللغة
+          { text: message }
         ] 
       }
     ];
@@ -75,7 +62,7 @@ User Question: ${message}`;
         contents: contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
         generationConfig: {
-          temperature: 0.2,
+          temperature: 0.0, // صفر مطلق لضمان الثبات اللغوي الفوري ومنع التشتت والهلوسة
           topP: 0.95
         }
       })
@@ -95,21 +82,10 @@ User Question: ${message}`;
 
     if (candidate && candidate.content && candidate.content.parts) {
       const textParts = candidate.content.parts
-        .filter(part => !part.thought && part.text) // تصفية الأجزاء النصية الموجهة للمستخدم واستبعاد أجزاء التفكير
+        .filter(part => !part.thought && part.text)
         .map(part => part.text);
         
       botReply = textParts.join("\n");
-    }
-
-    // التنظيف الآمن والشامل لجميع اللغات (عربي/فرنسي/إنجليزي) لمنع كراش الواجهة الأمامية
-    if (botReply.includes("THOUGHT:")) {
-      const parts = botReply.split("THOUGHT:");
-      botReply = parts[parts.length - 1].trim();
-      
-      if (botReply.includes("-->")) {
-         const cleanParts = botReply.split("-->");
-         botReply = cleanParts[cleanParts.length - 1].trim();
-      }
     }
 
     if (!botReply) {
