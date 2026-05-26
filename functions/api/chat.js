@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
     
     // التأكد من صياغة الاسم بالكامل وبشكل صلب لحل مشكلة الـ Parsing نهائياً
-    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
+    const cacheName = "cachedContents/c4z0c5rdq35v001psyjol794g2gnbhvas3kxmyv0";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
