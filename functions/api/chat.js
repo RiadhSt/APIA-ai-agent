@@ -61,17 +61,20 @@ Output only the single word: GENERAL, INVESTMENT, DEVELOPMENT, or KNOWLEDGE. Do 
       category = rawCategory.trim().toUpperCase();
     }
 
+
+// ==========================================
+    // المرحلة الثانية: شحن الملفات التراكمي (تكامل السياق لمنع النقصان)
     // ==========================================
-    // المرحلة الثانية: تحميل الملف ديناميكياً (التوجيه الهرمي)
-    // ==========================================
-    let selectedKnowledge = generalKnowledge; // الافتراضي الأول
+    let selectedKnowledge = "";
 
     if (category.includes("INVESTMENT")) {
-      selectedKnowledge = investmentKnowledge;
+      // شحن المعلومات العامة + تفاصيل المنح والامتيازات معاً
+      selectedKnowledge = `${generalKnowledge}\n\n=== INVESTMENT & GRANTS DETAILED CONTEXT ===\n\n${investmentKnowledge}`;
     } else if (category.includes("DEVELOPMENT")) {
-      selectedKnowledge = developmentKnowledge;
-    } else if (category.includes("KNOWLEDGE") || category.includes("GENERAL") === false) {
-      // ملجأ الأمان الأخير: إذا احتار الموديل أو طلب الملف الكامل، يتم شحن قاعدة البيانات الشاملة
+      // شحن المعلومات العامة + تفاصيل القطاعات والمخططات التنموية معاً
+      selectedKnowledge = `${generalKnowledge}\n\n=== DEVELOPMENTAL ACTIVITIES DETAILED CONTEXT ===\n\n${developmentKnowledge}`;
+    } else {
+      // ملجأ الأمان التام في حال الحيرة أو التداخل العميق: شحن الملف الشامل كاملاً
       selectedKnowledge = myKnowledgeBase;
     }
 
