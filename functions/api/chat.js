@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
     
     // معرف الكاش الحالي الخاص بك
-    const cacheName = "cachedContents/8ifnvtga4d30om4mbzm8mphbkrzyy11cdcfd2jz";
+    const cacheName = "cachedContents/fux1uhfjikju4wj06w2c3yfd7gq5q204n4uorlei";
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
