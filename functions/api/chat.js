@@ -17,7 +17,7 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
+      return new Response(JSON.stringify({ error: "مفتاح GEMINI_API_KEY مفقود في الإعدادات!" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
@@ -29,113 +29,110 @@ export async function onRequestPost(context) {
     }));
 
     // ==========================================
-    // المرحلة الأولى: التوجيه البرمجي الفوري (0 ملي ثانية)
+    // 1. التوجيه البرمجي الفوري عبر الكلمات المفتاحية
     // ==========================================
     const lowerMessage = message.toLowerCase();
     let selectedKnowledge = "";
 
-    // 1. الكلمات المفتاحية لقسم الاستثمار والمنح (بالعربية والفرنسية)
     const investmentKeywords = [
       'منحة', 'منح', 'امتياز', 'امتيازات', 'حوافز', 'تمويل', 'قرض', 'قروض', 'تشجيع', 'مالية', 'مالي',
       'subvention', 'subventions', 'avantage', 'avantages', 'prime', 'primes', 'financier', 'financiere', 'incitation'
     ];
 
-    // 2. الكلمات المفتاحية لقسم الأنشطة التنموية والقطاعات
     const developmentKeywords = [
       'تربية', 'الأحياء', 'المائية', 'سمك', 'أسماك', 'صيد', 'بحري', 'أحياء', 'زيت', 'زيتون', 'صادرات', 'تنمية', 'قطاع', 'قطاعات', 'مشروع', 'مشاريع',
       'aquaculture', 'pêche', 'poisson', 'huile', 'olive', 'export', 'développement', 'projet', 'projets', 'secteur'
     ];
 
-    // فحص السؤال برمجياً لحقن السياق التراكمي المناسب فوراً
     const hasInvestment = investmentKeywords.some(keyword => lowerMessage.includes(keyword));
     const hasDevelopment = developmentKeywords.some(keyword => lowerMessage.includes(keyword));
 
     if (hasInvestment && hasDevelopment) {
-      // إذا كان السؤال يدمج الشقين معاً، نشحن الملف الشامل كاملاً لضمان الدقة
       selectedKnowledge = myKnowledgeBase;
     } else if (hasInvestment) {
-      // شحن القوانين العامة + تفاصيل المنح والمالية
       selectedKnowledge = `${generalKnowledge}\n\n=== INVESTMENT & GRANTS DETAILED CONTEXT ===\n\n${investmentKnowledge}`;
     } else if (hasDevelopment) {
-      // شحن القوانين العامة + تفاصيل القطاعات الفلاحية والتنموية
       selectedKnowledge = `${generalKnowledge}\n\n=== DEVELOPMENTAL ACTIVITIES DETAILED CONTEXT ===\n\n${developmentKnowledge}`;
     } else {
-      // الافتراضي الذكي عند عدم مطابقة الكلمات: نفتح الملف الشامل احتياطاً لمنع النقصان
       selectedKnowledge = myKnowledgeBase;
     }
 
-    // ==========================================
-    // المرحلة الثانية: بناء الأمر الفردي المباشر لـ Gemini
-    // ==========================================
     const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
-
 CRITICAL RULES:
-1. LANGUAGE MATCH: Detect the user's input language. If the user asks in French, reply in French. If in Arabic, reply in Arabic. If in English, reply in straightforward, professional English using standard business terms. NEVER mix languages.
-2. MARKDOWN TABLES: Format ALL numbers, percentages, and financial grants exclusively in clear Markdown tables. Do not write numbers in raw text.
-3. NO SOURCE MENTION: Reply directly as an official expert. Never say "according to the file" or "in the database".
-4. COMPLETENESS: Provide full administrative steps, percentages, and legal conditions in maximum detail without any abbreviation.
+1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French). Never mix languages.
+2. MARKDOWN TABLES: Format ALL numbers, percentages, and financial grants exclusively in clear Markdown tables.
+3. NO SOURCE MENTION: Never say "according to the file" or "in the database".
+4. COMPLETENESS: Provide full steps, percentages, and legal conditions in maximum detail without abbreviation.
 
 OFFICIAL DIRECTORY DATABASE:
 <knowledge_base>
 ${selectedKnowledge}
 </knowledge_base>`;
 
-    const contents = [
-      ...safeHistory,
-      { role: "user", parts: [{ text: message }] }
-    ];
-
+    const contents = [...safeHistory, { role: "user", parts: [{ text: message }] }];
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    // إرسال طلب واحد مباشر (سريع جداً وموفر للطاقة الحسابية)
-    const response = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: contents,
-        systemInstruction: { parts: [{ text: systemInstruction }] },
-        generationConfig: {
-          temperature: 0.0, // صفر لسرعة وثبات الصياغة اللغوية والجداول
-          topP: 0.95
+    // ==========================================
+    // 2. آلية التكرار التلقائي الذكية لحل مشكلة الضغط اللحظي
+    // ==========================================
+    let response;
+    let attempts = 0;
+    const maxAttempts = 3; // عدد محاولات إعادة الإرسال تلقائياً
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    while (attempts < maxAttempts) {
+      response = await fetch(geminiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: contents,
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          generationConfig: { temperature: 0.2, topP: 0.95 }
+        })
+      });
+
+      // إذا نجح الاتصال والسيرفر أجاب بشكل صحيح، نخرج من الحلقة فوراً
+      if (response.ok) break;
+
+      const errorData = await response.clone().json().catch(() => ({}));
+      const errorMsg = errorData.error?.message || "";
+
+      // إذا كان الخطأ بسبب الضغط اللحظي (كود 429 أو 503 أو جملة High Demand)
+      if (response.status === 429 || response.status === 503 || errorMsg.toLowerCase().includes("high demand")) {
+        attempts++;
+        if (attempts < maxAttempts) {
+          // الانتظار لفترة تزداد تدريجياً بين المحاولات (مثلاً 400 ملي ثانية ثم 800 ملي ثانية) لتخفيف الضغط
+          await delay(400 * attempts); 
+          continue; // إعادة المحاولة
         }
-      })
-    });
+      } else {
+        // إذا كان خطأ آخر مختلف ودائم (مثل مفتاح خطأ)، نخرج دون تكرار
+        break;
+      }
+    }
 
-if (!response.ok) {
-  const data = await response.json().catch(() => ({}));
-  let googleMessage = data.error?.message || "";
-  
-  // رسالة افتراضية باللغتين تناسب هوية الوكالة
-  let friendlyErrorMessage = "السيرفر مشغول بمعالجة وتحليل بيانات ضخمة حالياً لتوفير إجابة دقيقة. يرجى إعادة المحاولة بعد 5 ثوانٍ.\n\nLe serveur est actuellement chargé. Veuillez réessuyer après 5 secondes.";
-
-  // إذا كان الخطأ قادم من جوجل بسبب الضغط أو تجاوز حد التوكنز
-  if (googleMessage.toLowerCase().includes("high demand") || googleMessage.toLowerCase().includes("quota") || response.status === 429) {
-    friendlyErrorMessage = "نعتذر منك، السيرفر يشهد ضغطاً عالياً حالياً نظراً لحجم ملفات المعرفة الضخم. يرجى إعادة الضغط على زر الإرسال فوراً لإعادة المحاولة.\n\nLe serveur est saturé. Veuillez cliquer à nouveau sur envoyer pour réessayer.";
-  } else if (googleMessage) {
-    // إذا كان هناك خطأ آخر مختلف، يمكنك ترك رسالة جوجل أو تخصيصها
-    friendlyErrorMessage = `خطأ في الاتصال: ${googleMessage}`;
-  }
-
-  return new Response(JSON.stringify({ error: friendlyErrorMessage }), {
-    status: response.status,
-    headers: { ...corsHeaders, "Content-Type": "application/json" }
-  });
-}
+    // ==========================================
+    // 3. معالجة النتيجة النهائية وحجب رسائل جوجل المزعجة
+    // ==========================================
+    if (!response.ok) {
+      // حجب رسالة جوجل بالإنجليزية واستبدالها برسالة إدارية تعريبية محترفة تناسب هوية الوكالة
+      const friendlyError = "المنصة تقوم بمعالجة حجم بيانات ضخم حالياً لتوفير إجابة دقيقة ومكتملة. يرجى إعادة الضغط على زر الإرسال خلال 3 ثوانٍ لتأكيد طلبك.\n\nL'infrastructure traite actuellement un volume important de données. Veuillez cliquer à nouveau sur le bouton d'envoi dans 3 secondes.";
+      return new Response(JSON.stringify({ error: friendlyError }), {
+        status: response.status,
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      });
+    }
 
     const data = await response.json();
     const candidate = data.candidates?.[0];
     let botReply = "";
 
     if (candidate && candidate.content && candidate.content.parts) {
-      const textParts = candidate.content.parts
-        .filter(part => !part.thought && part.text)
-        .map(part => part.text);
-        
-      botReply = textParts.join("\n");
+      botReply = candidate.content.parts.map(part => part.text).join("\n");
     }
 
     if (!botReply) {
-      botReply = "لم أتمكن من صياغة إجابة.";
+      botReply = "المنصة قيد التحديث اللحظي، الرجاء إعادة صياغة السؤال ولكم جزيل الشكر.";
     }
         
     return new Response(JSON.stringify({ reply: botReply }), {
