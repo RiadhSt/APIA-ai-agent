@@ -1,16 +1,20 @@
 import { myKnowledgeBase } from "./knowledge.js";
 
-/* ================================
-   ✅ كلمات توقف بسيطة
-================================ */
+/* ===========================================
+   ✅ إعدادات النظام
+=========================================== */
 const STOPWORDS = [
   "ما","هو","هي","في","من","على","الى","عن","هل",
   "the","is","are","what","how","de","la","le"
 ];
 
-/* ================================
-   ✅ نقطة الدخول الرئيسية
-================================ */
+const MAX_SECTIONS = 2;
+const FAQ_THRESHOLD = 3;
+const TOPIC_THRESHOLD = 1;
+
+/* ===========================================
+   ✅ نقطة الدخول
+=========================================== */
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -19,63 +23,69 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return jsonResponse({ error: "GEMINI_API_KEY غير موجود" }, 500);
+      return jsonResponse({ error: "GEMINI_API_KEY missing" }, 500);
     }
 
-    const cleanMessage = normalize(message);
+    const normalized = normalize(message);
+    const tokens = tokenize(normalized);
 
-    /* =====================================
-       ✅ 1️⃣ البحث في FAQ أولاً
-    ===================================== */
-    const faqAnswer = searchFAQ(cleanMessage);
+    /* ==================================================
+       1️⃣ Context Awareness (موضوع المحادثة السابق)
+    =================================================== */
+    const contextTopicHint = detectContextHint(history);
+
+    /* ==================================================
+       2️⃣ FAQ Retrieval (Exact + Fuzzy Hybrid)
+    =================================================== */
+    const faqAnswer = retrieveFAQ(tokens);
 
     if (faqAnswer) {
       return jsonResponse({ reply: faqAnswer });
     }
 
-    /* =====================================
-       ✅ 2️⃣ اختيار أفضل Topic
-    ===================================== */
-    const topic = findBestTopic(cleanMessage);
+    /* ==================================================
+       3️⃣ Topic Ranking (Weighted TF-like Scoring)
+    =================================================== */
+    const bestTopic = retrieveBestTopic(tokens, contextTopicHint);
 
-    if (!topic) {
+    if (!bestTopic) {
       return jsonResponse({
         reply: "هذه المعلومة غير متوفرة حالياً."
       });
     }
 
-    /* =====================================
-       ✅ 3️⃣ اختيار أفضل Sections فقط
-    ===================================== */
-    const sections = selectRelevantSections(topic, cleanMessage);
+    /* ==================================================
+       4️⃣ Section-Level Ranking
+    =================================================== */
+    const bestSections = retrieveBestSections(bestTopic, tokens);
 
-    if (!sections.length) {
+    if (!bestSections.length) {
       return jsonResponse({
         reply: "لم يتم العثور على معلومات دقيقة حول هذا السؤال."
       });
     }
 
-    /* =====================================
-       ✅ 4️⃣ استدعاء Gemini بسياق محدود
-    ===================================== */
+    /* ==================================================
+       5️⃣ Gemini Strict Call (Minimal Context Only)
+    =================================================== */
     const systemInstruction = `
-You are the official Smart Assistant for APIA.
+You are the official APIA Assistant.
 
 STRICT RULES:
 1. Use ONLY the authorized content below.
-2. If answer not found in content, say it is unavailable.
-3. Reply in same language as the user.
-4. Use Markdown tables for numbers and percentages.
-5. Be direct and professional.
+2. If answer not found → reply "المعلومة غير متوفرة".
+3. Do NOT invent data.
+4. Reply in same language as user.
+5. Use Markdown tables for numbers.
 
 AUTHORIZED CONTENT:
-${sections.join("\n\n")}
+${bestSections.join("\n\n")}
 `;
 
     const contents = [
       ...(Array.isArray(history) ? history.slice(-4) : []).map(turn => ({
         role: turn.role === "assistant" ? "model" : "user",
-        parts: [{ text: typeof turn.parts === "string" ? turn.parts : "" }]
+        parts: [{ text: safeText(turn.parts) }]
       })),
       { role: "user", parts: [{ text: message }] }
     ];
@@ -90,7 +100,7 @@ ${sections.join("\n\n")}
           systemInstruction: { parts: [{ text: systemInstruction }] },
           generationConfig: {
             temperature: 0.0,
-            topP: 0.9,
+            topP: 0.85,
             maxOutputTokens: 1200
           }
         })
@@ -112,10 +122,10 @@ ${sections.join("\n\n")}
   }
 }
 
-/* =====================================
-   ✅ FAQ Search
-===================================== */
-function searchFAQ(message) {
+/* ==================================================
+   ✅ FAQ Retrieval (Hybrid Exact + Weighted)
+================================================== */
+function retrieveFAQ(tokens) {
   const faqList = Array.isArray(myKnowledgeBase?.faq)
     ? myKnowledgeBase.faq
     : [];
@@ -124,7 +134,7 @@ function searchFAQ(message) {
   let bestAnswer = null;
 
   for (const item of faqList) {
-    const score = calculateScore(message, item?.keywords || []);
+    const score = scoreKeywords(tokens, item?.keywords);
 
     if (score > bestScore) {
       bestScore = score;
@@ -132,13 +142,13 @@ function searchFAQ(message) {
     }
   }
 
-  return bestScore >= 2 ? bestAnswer : null;
+  return bestScore >= FAQ_THRESHOLD ? bestAnswer : null;
 }
 
-/* =====================================
-   ✅ Topic Selection
-===================================== */
-function findBestTopic(message) {
+/* ==================================================
+   ✅ Topic Retrieval (Weighted Ranking + Context Boost)
+================================================== */
+function retrieveBestTopic(tokens, contextHint) {
   const topics = Array.isArray(myKnowledgeBase?.topics)
     ? myKnowledgeBase.topics
     : [];
@@ -147,7 +157,11 @@ function findBestTopic(message) {
   let bestTopic = null;
 
   for (const topic of topics) {
-    const score = calculateScore(message, topic?.keywords || []);
+    let score = scoreKeywords(tokens, topic?.keywords);
+
+    if (contextHint && topic?.name?.includes(contextHint)) {
+      score += 2;
+    }
 
     if (score > bestScore) {
       bestScore = score;
@@ -155,13 +169,13 @@ function findBestTopic(message) {
     }
   }
 
-  return bestScore >= 1 ? bestTopic : null;
+  return bestScore >= TOPIC_THRESHOLD ? bestTopic : null;
 }
 
-/* =====================================
-   ✅ Section Extraction
-===================================== */
-function selectRelevantSections(topic, message) {
+/* ==================================================
+   ✅ Section Retrieval
+================================================== */
+function retrieveBestSections(topic, tokens) {
   const sections = Array.isArray(topic?.sections)
     ? topic.sections
     : [];
@@ -169,32 +183,29 @@ function selectRelevantSections(topic, message) {
   const ranked = [];
 
   for (const section of sections) {
-    const keywords = extractKeywords(section?.content || "");
-    const score = calculateScore(message, keywords);
+    const sectionTokens = tokenize(section?.content || "");
+    const score = scoreTokens(tokens, sectionTokens);
 
     if (score > 0) {
-      ranked.push({
-        score,
-        content: section.content
-      });
+      ranked.push({ score, content: section.content });
     }
   }
 
   ranked.sort((a, b) => b.score - a.score);
 
-  return ranked.slice(0, 2).map(r => r.content);
+  return ranked.slice(0, MAX_SECTIONS).map(r => r.content);
 }
 
-/* =====================================
-   ✅ Smart Scoring (Safe)
-===================================== */
-function calculateScore(text, keywords) {
+/* ==================================================
+   ✅ Keyword Scoring
+================================================== */
+function scoreKeywords(tokens, keywords) {
   if (!Array.isArray(keywords)) return 0;
 
   let score = 0;
 
   for (const word of keywords) {
-    if (typeof word === "string" && text.includes(word.toLowerCase())) {
+    if (tokens.includes(normalize(word))) {
       score += 2;
     }
   }
@@ -202,31 +213,57 @@ function calculateScore(text, keywords) {
   return score;
 }
 
-/* =====================================
-   ✅ Extract Keywords from Content
-===================================== */
-function extractKeywords(text) {
-  return text
-    .split(/\W+/)
-    .filter(
-      w =>
-        w.length > 4 &&
-        !STOPWORDS.includes(w.toLowerCase())
-    );
+/* ==================================================
+   ✅ Token Overlap Scoring (Section-level)
+================================================== */
+function scoreTokens(queryTokens, sectionTokens) {
+  let score = 0;
+
+  for (const token of queryTokens) {
+    if (sectionTokens.includes(token)) {
+      score++;
+    }
+  }
+
+  return score;
 }
 
-/* =====================================
-   ✅ Normalize Text
-===================================== */
+/* ==================================================
+   ✅ Context Hint
+================================================== */
+function detectContextHint(history) {
+  if (!Array.isArray(history) || history.length === 0) return null;
+
+  const last = history[history.length - 1]?.parts || "";
+  return normalize(last).slice(0, 20);
+}
+
+/* ==================================================
+   ✅ Text Utilities
+================================================== */
 function normalize(text) {
   return (text || "")
     .toLowerCase()
     .replace(/[^\w\s\u0600-\u06FF]/g, "");
 }
 
-/* =====================================
-   ✅ JSON Response Helper
-===================================== */
+function tokenize(text) {
+  return normalize(text)
+    .split(/\s+/)
+    .filter(
+      word =>
+        word.length > 2 &&
+        !STOPWORDS.includes(word)
+    );
+}
+
+function safeText(text) {
+  return typeof text === "string" ? text : "";
+}
+
+/* ==================================================
+   ✅ Response Helper
+================================================== */
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
