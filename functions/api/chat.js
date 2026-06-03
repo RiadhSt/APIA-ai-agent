@@ -1,10 +1,16 @@
-import { myKnowledgeBase } from './knowledge.js';
+import { myKnowledgeBase } from "./knowledge.js";
 
+/* ================================
+   ✅ كلمات توقف بسيطة
+================================ */
 const STOPWORDS = [
-  "ما", "هو", "هي", "في", "من", "على", "الى", "عن", "هل",
-  "the", "is", "are", "what", "how", "de", "la", "le"
+  "ما","هو","هي","في","من","على","الى","عن","هل",
+  "the","is","are","what","how","de","la","le"
 ];
 
+/* ================================
+   ✅ نقطة الدخول الرئيسية
+================================ */
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -13,26 +19,24 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return jsonResponse({ error: "API Key missing" }, 500);
+      return jsonResponse({ error: "GEMINI_API_KEY غير موجود" }, 500);
     }
 
     const cleanMessage = normalize(message);
 
-    // =====================================================
-    // ✅ 1️⃣ FAQ Search (Weighted Matching)
-    // =====================================================
+    /* =====================================
+       ✅ 1️⃣ البحث في FAQ أولاً
+    ===================================== */
+    const faqAnswer = searchFAQ(cleanMessage);
 
-    const faqResult = searchFAQAdvanced(cleanMessage);
-
-    if (faqResult) {
-      return jsonResponse({ reply: faqResult });
+    if (faqAnswer) {
+      return jsonResponse({ reply: faqAnswer });
     }
 
-    // =====================================================
-    // ✅ 2️⃣ Topic Selection (Best Match)
-    // =====================================================
-
-    const topic = findBestTopicAdvanced(cleanMessage);
+    /* =====================================
+       ✅ 2️⃣ اختيار أفضل Topic
+    ===================================== */
+    const topic = findBestTopic(cleanMessage);
 
     if (!topic) {
       return jsonResponse({
@@ -40,40 +44,38 @@ export async function onRequestPost(context) {
       });
     }
 
-    // =====================================================
-    // ✅ 3️⃣ Section Selection (Precise Context Extraction)
-    // =====================================================
+    /* =====================================
+       ✅ 3️⃣ اختيار أفضل Sections فقط
+    ===================================== */
+    const sections = selectRelevantSections(topic, cleanMessage);
 
-    const bestSections = selectRelevantSections(topic, cleanMessage);
-
-    if (!bestSections.length) {
+    if (!sections.length) {
       return jsonResponse({
         reply: "لم يتم العثور على معلومات دقيقة حول هذا السؤال."
       });
     }
 
-    // =====================================================
-    // ✅ 4️⃣ Call Gemini With Minimal Context
-    // =====================================================
-
+    /* =====================================
+       ✅ 4️⃣ استدعاء Gemini بسياق محدود
+    ===================================== */
     const systemInstruction = `
-You are the official APIA Assistant.
+You are the official Smart Assistant for APIA.
 
 STRICT RULES:
-1. Use ONLY the provided authorized content.
-2. If the answer is not present → say it is unavailable.
-3. Reply in same language as user.
+1. Use ONLY the authorized content below.
+2. If answer not found in content, say it is unavailable.
+3. Reply in same language as the user.
 4. Use Markdown tables for numbers and percentages.
-5. Be precise and official.
+5. Be direct and professional.
 
 AUTHORIZED CONTENT:
-${bestSections.join("\n\n")}
+${sections.join("\n\n")}
 `;
 
     const contents = [
-      ...(history || []).slice(-4).map(turn => ({
+      ...(Array.isArray(history) ? history.slice(-4) : []).map(turn => ({
         role: turn.role === "assistant" ? "model" : "user",
-        parts: [{ text: turn.parts }]
+        parts: [{ text: typeof turn.parts === "string" ? turn.parts : "" }]
       })),
       { role: "user", parts: [{ text: message }] }
     ];
@@ -98,7 +100,7 @@ ${bestSections.join("\n\n")}
     const data = await response.json();
 
     const reply =
-      data.candidates?.[0]?.content?.parts
+      data?.candidates?.[0]?.content?.parts
         ?.filter(p => p.text)
         ?.map(p => p.text)
         ?.join("\n") || "لم أتمكن من صياغة إجابة.";
@@ -110,35 +112,43 @@ ${bestSections.join("\n\n")}
   }
 }
 
-// =====================================================
-// 🔎 FAQ Advanced Search
-// =====================================================
+/* =====================================
+   ✅ FAQ Search
+===================================== */
+function searchFAQ(message) {
+  const faqList = Array.isArray(myKnowledgeBase?.faq)
+    ? myKnowledgeBase.faq
+    : [];
 
-function searchFAQAdvanced(message) {
   let bestScore = 0;
   let bestAnswer = null;
 
-  for (const item of myKnowledgeBase.faq) {
-    const score = calculateScore(message, item.keywords);
+  for (const item of faqList) {
+    const score = calculateScore(message, item?.keywords || []);
+
     if (score > bestScore) {
       bestScore = score;
-      bestAnswer = item.answer;
+      bestAnswer = item?.answer || null;
     }
   }
 
   return bestScore >= 2 ? bestAnswer : null;
 }
 
-// =====================================================
-// 🔎 Topic Advanced Search
-// =====================================================
+/* =====================================
+   ✅ Topic Selection
+===================================== */
+function findBestTopic(message) {
+  const topics = Array.isArray(myKnowledgeBase?.topics)
+    ? myKnowledgeBase.topics
+    : [];
 
-function findBestTopicAdvanced(message) {
   let bestScore = 0;
   let bestTopic = null;
 
-  for (const topic of myKnowledgeBase.topics) {
-    const score = calculateScore(message, topic.keywords);
+  for (const topic of topics) {
+    const score = calculateScore(message, topic?.keywords || []);
+
     if (score > bestScore) {
       bestScore = score;
       bestTopic = topic;
@@ -148,18 +158,25 @@ function findBestTopicAdvanced(message) {
   return bestScore >= 1 ? bestTopic : null;
 }
 
-// =====================================================
-// 🔎 Select Relevant Sections
-// =====================================================
-
+/* =====================================
+   ✅ Section Extraction
+===================================== */
 function selectRelevantSections(topic, message) {
-  const sections = topic.sections || [];
+  const sections = Array.isArray(topic?.sections)
+    ? topic.sections
+    : [];
+
   const ranked = [];
 
   for (const section of sections) {
-    const score = calculateScore(message, extractKeywords(section.content));
+    const keywords = extractKeywords(section?.content || "");
+    const score = calculateScore(message, keywords);
+
     if (score > 0) {
-      ranked.push({ score, content: section.content });
+      ranked.push({
+        score,
+        content: section.content
+      });
     }
   }
 
@@ -168,15 +185,16 @@ function selectRelevantSections(topic, message) {
   return ranked.slice(0, 2).map(r => r.content);
 }
 
-// =====================================================
-// 🧠 Smart Scoring
-// =====================================================
-
+/* =====================================
+   ✅ Smart Scoring (Safe)
+===================================== */
 function calculateScore(text, keywords) {
+  if (!Array.isArray(keywords)) return 0;
+
   let score = 0;
 
   for (const word of keywords) {
-    if (text.includes(word.toLowerCase())) {
+    if (typeof word === "string" && text.includes(word.toLowerCase())) {
       score += 2;
     }
   }
@@ -184,30 +202,31 @@ function calculateScore(text, keywords) {
   return score;
 }
 
-// =====================================================
-// 🧠 Extract Keywords From Section
-// =====================================================
-
+/* =====================================
+   ✅ Extract Keywords from Content
+===================================== */
 function extractKeywords(text) {
   return text
     .split(/\W+/)
-    .filter(w => w.length > 4 && !STOPWORDS.includes(w.toLowerCase()));
+    .filter(
+      w =>
+        w.length > 4 &&
+        !STOPWORDS.includes(w.toLowerCase())
+    );
 }
 
-// =====================================================
-// 🔧 Normalize Text
-// =====================================================
-
+/* =====================================
+   ✅ Normalize Text
+===================================== */
 function normalize(text) {
-  return text
+  return (text || "")
     .toLowerCase()
     .replace(/[^\w\s\u0600-\u06FF]/g, "");
 }
 
-// =====================================================
-// ✅ JSON Response
-// =====================================================
-
+/* =====================================
+   ✅ JSON Response Helper
+===================================== */
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
