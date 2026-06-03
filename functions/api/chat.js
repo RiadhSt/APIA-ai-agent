@@ -8,12 +8,36 @@ const STOPWORDS = [
   "the","is","are","what","how","de","la","le"
 ];
 
-const MAX_SECTIONS = 2;
+/* ===========================================
+   ✅ استخراج FAQ من النص
+=========================================== */
+function parseFAQ(rawFAQ) {
+  const faqItems = [];
+  const qaRegex = /<qa>([\s\S]*?)<\/qa>/g;
+
+  let match;
+
+  while ((match = qaRegex.exec(rawFAQ)) !== null) {
+    const block = match[1];
+
+    const qMatch = block.match(/<q>([\s\S]*?)<\/q>/);
+    const aMatch = block.match(/<a>([\s\S]*?)<\/a>/);
+
+    if (qMatch && aMatch) {
+      faqItems.push({
+        question: qMatch[1].trim(),
+        answer: aMatch[1].trim()
+      });
+    }
+  }
+
+  return faqItems;
+}
 
 /* ===========================================
-   ✅ استخراج Topics من النص الخام
+   ✅ استخراج Topics
 =========================================== */
-function parseTopicsFromKnowledge(rawKnowledge) {
+function parseTopics(rawKnowledge) {
   const topics = [];
   const topicRegex = /<topic([\s\S]*?)>([\s\S]*?)<\/topic>/g;
 
@@ -24,16 +48,10 @@ function parseTopicsFromKnowledge(rawKnowledge) {
     const content = match[2];
 
     const nameMatch = attributes.match(/name="([^"]+)"/);
-    const keywordsMatch = attributes.match(/keywords="([^"]+)"/);
-
     const name = nameMatch ? nameMatch[1] : "";
-    const keywords = keywordsMatch
-      ? keywordsMatch[1].split(",").map(k => k.trim())
-      : [];
 
     topics.push({
       name,
-      keywords,
       content
     });
   }
@@ -57,25 +75,43 @@ export async function onRequestPost(context) {
 
     const tokens = tokenize(message);
 
-    /* ✅ استخراج topics من النص */
-    const topics = parseTopicsFromKnowledge(myKnowledgeBase.knowledge);
+    /* ===============================
+       ✅ 1️⃣ البحث في FAQ
+    ================================ */
+    const faqItems = parseFAQ(myKnowledgeBase.faq);
 
-    /* =====================================
-       ✅ اختيار أفضل topic
-    ===================================== */
+    let bestFAQScore = 0;
+    let bestFAQ = null;
+
+    for (const item of faqItems) {
+      const score = scoreTokens(tokens, tokenize(item.question));
+
+      if (score > bestFAQScore) {
+        bestFAQScore = score;
+        bestFAQ = item;
+      }
+    }
+
+    // ✅ لا نقبل FAQ إلا إذا التطابق قوي
+    if (bestFAQScore >= 2) {
+      return jsonResponse({ reply: bestFAQ.answer });
+    }
+
+    /* ===============================
+       ✅ 2️⃣ البحث في Topics
+    ================================ */
+    const topics = parseTopics(myKnowledgeBase.knowledge);
+
     let bestScore = 0;
     let bestTopic = null;
 
     for (const topic of topics) {
       let score = 0;
 
-      // ✅ مطابقة الاسم
+      // مطابقة الاسم
       score += scoreTokens(tokens, tokenize(topic.name)) * 3;
 
-      // ✅ مطابقة keywords
-      score += scoreTokens(tokens, topic.keywords.map(k => normalize(k)));
-
-      // ✅ مطابقة المحتوى
+      // مطابقة المحتوى
       score += scoreTokens(tokens, tokenize(topic.content));
 
       if (score > bestScore) {
@@ -90,9 +126,9 @@ export async function onRequestPost(context) {
       });
     }
 
-    /* =====================================
-       ✅ إرسال topic المختار فقط
-    ===================================== */
+    /* ===============================
+       ✅ 3️⃣ Gemini
+    ================================ */
     const systemInstruction = `
 You are the official APIA assistant.
 
@@ -139,7 +175,7 @@ ${bestTopic.content}
 }
 
 /* ===========================================
-   ✅ أدوات معالجة النص
+   ✅ أدوات
 =========================================== */
 function normalize(text) {
   return (text || "")
