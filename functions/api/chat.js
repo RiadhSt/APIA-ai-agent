@@ -26,6 +26,7 @@ function parseTopics(rawKnowledge) {
     const name = nameMatch ? nameMatch[1] : "";
 
     topics.push({
+      id: topics.length, // ✅ نستخدم index بدلاً من الاسم
       name,
       content
     });
@@ -45,11 +46,10 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return jsonResponse({ error: "API Key missing" }, 500);
+      return jsonResponse({ error: "GEMINI_API_KEY missing" }, 500);
     }
 
     const topics = parseTopics(myKnowledgeBase.knowledge);
-
     const queryTokens = tokenize(message);
 
     /* =====================================================
@@ -70,17 +70,16 @@ export async function onRequestPost(context) {
       }
     }
 
-    /* =====================================================
-       ✅ إذا الثقة عالية → لا نحتاج Router
-    ====================================================== */
     if (bestTopic && bestScore >= FAST_MATCH_THRESHOLD) {
       return await generateAnswer(bestTopic.content, message, apiKey);
     }
 
     /* =====================================================
-       ✅ المرحلة 2️⃣: Gemini Router (عند الحاجة فقط)
+       ✅ المرحلة 2️⃣: Gemini Router باستخدام ID
     ====================================================== */
-    const topicNames = topics.map(t => t.name).join("\n");
+    const topicList = topics
+      .map(t => `${t.id}: ${t.name}`)
+      .join("\n");
 
     const routerPrompt = `
 You are a classification engine.
@@ -89,10 +88,11 @@ User Question:
 "${message}"
 
 Available Topics:
-${topicNames}
+${topicList}
 
-Return ONLY the exact topic name.
-If none matches → return NONE.
+Return ONLY the numeric ID of the best matching topic.
+If none match, return -1.
+Do not explain.
 `;
 
     const routerResponse = await fetch(
@@ -104,7 +104,7 @@ If none matches → return NONE.
           contents: [{ role: "user", parts: [{ text: routerPrompt }] }],
           generationConfig: {
             temperature: 0.0,
-            maxOutputTokens: 50
+            maxOutputTokens: 20
           }
         })
       }
@@ -112,27 +112,21 @@ If none matches → return NONE.
 
     const routerData = await routerResponse.json();
 
-    const selectedTopicName =
+    const routerText =
       routerData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
 
-    if (!selectedTopicName || selectedTopicName === "NONE") {
+    const selectedId = parseInt(routerText);
+
+    if (isNaN(selectedId) || selectedId < 0 || selectedId >= topics.length) {
       return jsonResponse({
         reply: "هذه المعلومة غير متوفرة حالياً."
       });
     }
 
-    const selectedTopic = topics.find(
-      t => t.name === selectedTopicName
-    );
-
-    if (!selectedTopic) {
-      return jsonResponse({
-        reply: "هذه المعلومة غير متوفرة حالياً."
-      });
-    }
+    const selectedTopic = topics[selectedId];
 
     /* =====================================================
-       ✅ المرحلة 3️⃣: الإجابة النهائية
+       ✅ المرحلة 3️⃣: توليد الإجابة النهائية
     ====================================================== */
     return await generateAnswer(selectedTopic.content, message, apiKey);
 
@@ -153,7 +147,7 @@ STRICT RULES:
 2. Do not invent information.
 3. Reply in same language as user.
 4. Provide complete structured answer.
-5. Use Markdown tables where relevant.
+5. Use Markdown tables when needed.
 
 AUTHORIZED CONTENT:
 ${content}
@@ -177,12 +171,23 @@ ${content}
 
   const data = await response.json();
 
-  const reply =
-    data?.candidates?.[0]?.content?.parts
-      ?.map(p => p.text)
-      ?.join("\n") || "لم أتمكن من صياغة إجابة.";
+  if (
+    data &&
+    data.candidates &&
+    data.candidates.length > 0 &&
+    data.candidates[0].content &&
+    data.candidates[0].content.parts
+  ) {
+    return jsonResponse({
+      reply: data.candidates[0].content.parts
+        .map(p => p.text)
+        .join("\n")
+    });
+  }
 
-  return jsonResponse({ reply });
+  return jsonResponse({
+    reply: "هذه المعلومة غير متوفرة حالياً."
+  });
 }
 
 /* ===========================================
