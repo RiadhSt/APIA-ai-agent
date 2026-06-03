@@ -1,7 +1,7 @@
 import { myKnowledgeBase } from "./knowledge.js";
 
 /* ===========================================
-   ✅ إعدادات
+   ✅ إعدادات عامة
 =========================================== */
 const STOPWORDS = [
   "ما","هو","هي","في","من","على","الى","عن","هل",
@@ -9,8 +9,6 @@ const STOPWORDS = [
 ];
 
 const FAQ_THRESHOLD = 2;
-const TOPIC_THRESHOLD = 1;
-const MAX_SECTIONS = 2;
 
 /* ===========================================
    ✅ Parser FAQ
@@ -93,23 +91,38 @@ export async function onRequestPost(context) {
       }
     }
 
+    let faqContext = null;
+
     if (bestFAQScore >= FAQ_THRESHOLD) {
-      return jsonResponse({ reply: bestFAQ.answer });
+      faqContext = `
+FAQ REFERENCE:
+Question: ${bestFAQ.question}
+Answer: ${bestFAQ.answer}
+`;
     }
 
     /* ===============================
-       ✅ 2️⃣ Topic Ranking
+       ✅ 2️⃣ Topic Ranking (ذكي)
     ================================ */
     let bestTopic = null;
     let bestTopicScore = 0;
 
+    const normalizedQuery = normalize(message);
+
     for (const topic of topics) {
       let score = 0;
 
-      // تطابق الاسم
-      score += scoreOverlap(queryTokens, tokenize(topic.name)) * 3;
+      const normalizedName = normalize(topic.name);
 
-      // تطابق المحتوى
+      // ✅ تطابق مباشر مع الاسم
+      if (
+        normalizedQuery.includes(normalizedName) ||
+        normalizedName.includes(normalizedQuery)
+      ) {
+        score += 10;
+      }
+
+      score += scoreOverlap(queryTokens, tokenize(topic.name)) * 3;
       score += scoreOverlap(queryTokens, tokenize(topic.content));
 
       if (score > bestTopicScore) {
@@ -118,7 +131,7 @@ export async function onRequestPost(context) {
       }
     }
 
-    if (!bestTopic || bestTopicScore < TOPIC_THRESHOLD) {
+    if (!bestTopic) {
       return jsonResponse({
         reply: "هذه المعلومة غير متوفرة حالياً."
       });
@@ -134,15 +147,22 @@ export async function onRequestPost(context) {
         score: scoreOverlap(queryTokens, tokenize(section)),
         content: section
       }))
-      .filter(s => s.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, MAX_SECTIONS)
-      .map(s => s.content);
+      .sort((a, b) => b.score - a.score);
 
-    const authorizedContent =
+    const isGeneral =
+      message.length < 30 ||
+      message.includes("شرح") ||
+      message.includes("تفاصيل") ||
+      message.includes("كل");
+
+    const maxSections = isGeneral ? 4 : 2;
+
+    const selectedSections =
       rankedSections.length > 0
-        ? rankedSections.join("\n\n")
-        : bestTopic.content.slice(0, 2000);
+        ? rankedSections.slice(0, maxSections).map(s => s.content)
+        : [bestTopic.content.slice(0, 2000)];
+
+    const authorizedContent = selectedSections.join("\n\n");
 
     /* ===============================
        ✅ 4️⃣ Gemini Strict Call
@@ -152,12 +172,15 @@ You are the official APIA Assistant.
 
 STRICT RULES:
 1. Use ONLY the authorized content below.
-2. If answer not found → reply: "المعلومة غير متوفرة".
+2. If FAQ reference exists, use it as primary answer and expand using topic.
 3. Do not invent information.
 4. Reply in same language as user.
 5. Use Markdown tables for numbers and percentages.
+6. Provide a complete structured answer.
 
-AUTHORIZED CONTENT:
+${faqContext || ""}
+
+AUTHORIZED TOPIC CONTENT:
 ${authorizedContent}
 `;
 
