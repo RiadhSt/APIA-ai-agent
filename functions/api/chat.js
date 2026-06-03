@@ -2,6 +2,7 @@ import { myKnowledgeBase } from './knowledge.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -13,44 +14,59 @@ export async function onRequestPost(context) {
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      return jsonResponse({ error: "GEMINI_API_KEY غير موجود" }, 500);
+    }
+
+    const userMessage = message.trim().toLowerCase();
+
+    // ======================================================
+    // ✅ 1️⃣ البحث في FAQ أولاً (بدون Gemini)
+    // ======================================================
+
+    const faqMatch = searchFAQ(userMessage);
+
+    if (faqMatch) {
+      return jsonResponse({ reply: faqMatch });
+    }
+
+    // ======================================================
+    // ✅ 2️⃣ البحث عن topic مناسب
+    // ======================================================
+
+    const matchedTopic = findBestTopic(userMessage);
+
+    if (!matchedTopic) {
+      return jsonResponse({
+        reply: "هذه المعلومة غير متوفرة حالياً، يُرجى التواصل مع خبرائنا."
       });
     }
 
-    // تنظيف وتجهيز الـ History الممرر من الواجهة
-    const safeHistory = (history || []).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+    // ======================================================
+    // ✅ 3️⃣ إرسال الـ topic المختار فقط إلى Gemini
+    // ======================================================
+
+    const safeHistory = (history || []).slice(-6).map(turn => ({
+      role: turn.role === "assistant" ? "model" : "user",
+      parts: [{ text: turn.parts }]
     }));
 
-    const attachedFilesParts = [];
+    const systemInstruction = `
+You are the official Smart Assistant for APIA (Agricultural Investment Promotion Agency).
 
-    // تبسيط الـ System Instruction إلى لغة إنجليزية مباشرة لتقليل استهلاك السيرفر والمعالجة
-    const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
+STRICT RULES:
+1. Answer ONLY using the provided topic content.
+2. Do NOT invent information.
+3. Reply in the same language as the user.
+4. Use Markdown tables for percentages and numbers.
+5. Be precise and official.
 
-CRITICAL RULES:
-1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French or English). Never mix languages.
-2. STRICT CONTEXT FOCUS: Answer ONLY the specific topic raised in the user's question. Provide all technical figures, percentages, and steps related exclusively to that topic. NEVER drift into other types of grants, secondary regulations, or unrelated laws unless the user explicitly asks for them.
-3. CONCISE YET POWERFUL: Be highly direct, official, and professional. Avoid introductory filler, extra prose, or general overviews. Deliver the required exact data immediately.
-4. MARKDOWN TABLES: Format numbers, percentages, and financial grants exclusively in clear Markdown tables.
+AUTHORIZED TOPIC:
+${matchedTopic.content}
+`;
 
-OFFICIAL DATABASE TO USE:
-<knowledge_base>
-${myKnowledgeBase}
-</knowledge_base>`;    
-
-    // إرسال سؤال المستخدم نظيفاً تماماً دون أي إضافات تسبب تشتت أو معالجة مزدوجة
     const contents = [
       ...safeHistory,
-      { 
-        role: "user", 
-        parts: [
-          ...attachedFilesParts,
-          { text: message }
-        ] 
-      }
+      { role: "user", parts: [{ text: message }] }
     ];
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
@@ -59,47 +75,91 @@ ${myKnowledgeBase}
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: contents,
+        contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
         generationConfig: {
-          temperature: 0.0, // صفر مطلق لضمان الثبات اللغوي الفوري ومنع التشتت والهلوسة
-          topP: 0.95
+          temperature: 0.0,
+          topP: 0.9,
+          maxOutputTokens: 1500
         }
       })
     });
 
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
-        status: response.status,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      });
-    }
-
     const data = await response.json();
-    const candidate = data.candidates?.[0];
-    let botReply = "";
 
-    if (candidate && candidate.content && candidate.content.parts) {
-      const textParts = candidate.content.parts
-        .filter(part => !part.thought && part.text)
-        .map(part => part.text);
-        
-      botReply = textParts.join("\n");
-    }
+    const botReply =
+      data.candidates?.[0]?.content?.parts
+        ?.filter(p => p.text)
+        ?.map(p => p.text)
+        ?.join("\n") || "لم أتمكن من صياغة إجابة.";
 
-    if (!botReply) {
-      botReply = "لم أتمكن من صياغة إجابة.";
-    }
-        
-    return new Response(JSON.stringify({ reply: botReply }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" }
-    });
+    return jsonResponse({ reply: botReply });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" }
-    });
+    return jsonResponse({ error: error.message }, 500);
   }
+}
+
+// ======================================================
+// ✅ البحث في FAQ
+// ======================================================
+
+function searchFAQ(userMessage) {
+  for (const item of myKnowledgeBase.faq) {
+    const score = calculateMatchScore(userMessage, item.keywords);
+    if (score >= 2) { // شرط تطابق
+      return item.answer;
+    }
+  }
+  return null;
+}
+
+// ======================================================
+// ✅ اختيار أفضل Topic
+// ======================================================
+
+function findBestTopic(userMessage) {
+  let bestMatch = null;
+  let highestScore = 0;
+
+  for (const topic of myKnowledgeBase.topics) {
+    const score = calculateMatchScore(userMessage, topic.keywords);
+
+    if (score > highestScore) {
+      highestScore = score;
+      bestMatch = topic;
+    }
+  }
+
+  return highestScore > 0 ? bestMatch : null;
+}
+
+// ======================================================
+// ✅ حساب عدد الكلمات المتطابقة
+// ======================================================
+
+function calculateMatchScore(text, keywords) {
+  let score = 0;
+
+  for (const word of keywords) {
+    if (text.includes(word.toLowerCase())) {
+      score++;
+    }
+  }
+
+  return score;
+}
+
+// ======================================================
+// ✅ دالة الرد الموحد
+// ======================================================
+
+function jsonResponse(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json"
+    }
+  });
 }
