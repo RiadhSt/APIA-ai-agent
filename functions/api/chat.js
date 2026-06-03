@@ -1,158 +1,212 @@
 import { myKnowledgeBase } from './knowledge.js';
 
+const STOPWORDS = [
+  "ما", "هو", "هي", "في", "من", "على", "الى", "عن", "هل",
+  "the", "is", "are", "what", "how", "de", "la", "le"
+];
+
 export async function onRequestPost(context) {
   const { request, env } = context;
-
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
 
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return jsonResponse({ error: "GEMINI_API_KEY غير موجود" }, 500);
+      return jsonResponse({ error: "API Key missing" }, 500);
     }
 
-    const userMessage = message.trim().toLowerCase();
+    const cleanMessage = normalize(message);
 
-    // ======================================================
-    // ✅ 1️⃣ البحث في FAQ أولاً (بدون Gemini)
-    // ======================================================
+    // =====================================================
+    // ✅ 1️⃣ FAQ Search (Weighted Matching)
+    // =====================================================
 
-    const faqMatch = searchFAQ(userMessage);
+    const faqResult = searchFAQAdvanced(cleanMessage);
 
-    if (faqMatch) {
-      return jsonResponse({ reply: faqMatch });
+    if (faqResult) {
+      return jsonResponse({ reply: faqResult });
     }
 
-    // ======================================================
-    // ✅ 2️⃣ البحث عن topic مناسب
-    // ======================================================
+    // =====================================================
+    // ✅ 2️⃣ Topic Selection (Best Match)
+    // =====================================================
 
-    const matchedTopic = findBestTopic(userMessage);
+    const topic = findBestTopicAdvanced(cleanMessage);
 
-    if (!matchedTopic) {
+    if (!topic) {
       return jsonResponse({
-        reply: "هذه المعلومة غير متوفرة حالياً، يُرجى التواصل مع خبرائنا."
+        reply: "هذه المعلومة غير متوفرة حالياً."
       });
     }
 
-    // ======================================================
-    // ✅ 3️⃣ إرسال الـ topic المختار فقط إلى Gemini
-    // ======================================================
+    // =====================================================
+    // ✅ 3️⃣ Section Selection (Precise Context Extraction)
+    // =====================================================
 
-    const safeHistory = (history || []).slice(-6).map(turn => ({
-      role: turn.role === "assistant" ? "model" : "user",
-      parts: [{ text: turn.parts }]
-    }));
+    const bestSections = selectRelevantSections(topic, cleanMessage);
+
+    if (!bestSections.length) {
+      return jsonResponse({
+        reply: "لم يتم العثور على معلومات دقيقة حول هذا السؤال."
+      });
+    }
+
+    // =====================================================
+    // ✅ 4️⃣ Call Gemini With Minimal Context
+    // =====================================================
 
     const systemInstruction = `
-You are the official Smart Assistant for APIA (Agricultural Investment Promotion Agency).
+You are the official APIA Assistant.
 
 STRICT RULES:
-1. Answer ONLY using the provided topic content.
-2. Do NOT invent information.
-3. Reply in the same language as the user.
-4. Use Markdown tables for percentages and numbers.
+1. Use ONLY the provided authorized content.
+2. If the answer is not present → say it is unavailable.
+3. Reply in same language as user.
+4. Use Markdown tables for numbers and percentages.
 5. Be precise and official.
 
-AUTHORIZED TOPIC:
-${matchedTopic.content}
+AUTHORIZED CONTENT:
+${bestSections.join("\n\n")}
 `;
 
     const contents = [
-      ...safeHistory,
+      ...(history || []).slice(-4).map(turn => ({
+        role: turn.role === "assistant" ? "model" : "user",
+        parts: [{ text: turn.parts }]
+      })),
       { role: "user", parts: [{ text: message }] }
     ];
 
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-    const response = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents,
-        systemInstruction: { parts: [{ text: systemInstruction }] },
-        generationConfig: {
-          temperature: 0.0,
-          topP: 0.9,
-          maxOutputTokens: 1500
-        }
-      })
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents,
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          generationConfig: {
+            temperature: 0.0,
+            topP: 0.9,
+            maxOutputTokens: 1200
+          }
+        })
+      }
+    );
 
     const data = await response.json();
 
-    const botReply =
+    const reply =
       data.candidates?.[0]?.content?.parts
         ?.filter(p => p.text)
         ?.map(p => p.text)
         ?.join("\n") || "لم أتمكن من صياغة إجابة.";
 
-    return jsonResponse({ reply: botReply });
+    return jsonResponse({ reply });
 
   } catch (error) {
     return jsonResponse({ error: error.message }, 500);
   }
 }
 
-// ======================================================
-// ✅ البحث في FAQ
-// ======================================================
+// =====================================================
+// 🔎 FAQ Advanced Search
+// =====================================================
 
-function searchFAQ(userMessage) {
+function searchFAQAdvanced(message) {
+  let bestScore = 0;
+  let bestAnswer = null;
+
   for (const item of myKnowledgeBase.faq) {
-    const score = calculateMatchScore(userMessage, item.keywords);
-    if (score >= 2) { // شرط تطابق
-      return item.answer;
+    const score = calculateScore(message, item.keywords);
+    if (score > bestScore) {
+      bestScore = score;
+      bestAnswer = item.answer;
     }
   }
-  return null;
+
+  return bestScore >= 2 ? bestAnswer : null;
 }
 
-// ======================================================
-// ✅ اختيار أفضل Topic
-// ======================================================
+// =====================================================
+// 🔎 Topic Advanced Search
+// =====================================================
 
-function findBestTopic(userMessage) {
-  let bestMatch = null;
-  let highestScore = 0;
+function findBestTopicAdvanced(message) {
+  let bestScore = 0;
+  let bestTopic = null;
 
   for (const topic of myKnowledgeBase.topics) {
-    const score = calculateMatchScore(userMessage, topic.keywords);
-
-    if (score > highestScore) {
-      highestScore = score;
-      bestMatch = topic;
+    const score = calculateScore(message, topic.keywords);
+    if (score > bestScore) {
+      bestScore = score;
+      bestTopic = topic;
     }
   }
 
-  return highestScore > 0 ? bestMatch : null;
+  return bestScore >= 1 ? bestTopic : null;
 }
 
-// ======================================================
-// ✅ حساب عدد الكلمات المتطابقة
-// ======================================================
+// =====================================================
+// 🔎 Select Relevant Sections
+// =====================================================
 
-function calculateMatchScore(text, keywords) {
+function selectRelevantSections(topic, message) {
+  const sections = topic.sections || [];
+  const ranked = [];
+
+  for (const section of sections) {
+    const score = calculateScore(message, extractKeywords(section.content));
+    if (score > 0) {
+      ranked.push({ score, content: section.content });
+    }
+  }
+
+  ranked.sort((a, b) => b.score - a.score);
+
+  return ranked.slice(0, 2).map(r => r.content);
+}
+
+// =====================================================
+// 🧠 Smart Scoring
+// =====================================================
+
+function calculateScore(text, keywords) {
   let score = 0;
 
   for (const word of keywords) {
     if (text.includes(word.toLowerCase())) {
-      score++;
+      score += 2;
     }
   }
 
   return score;
 }
 
-// ======================================================
-// ✅ دالة الرد الموحد
-// ======================================================
+// =====================================================
+// 🧠 Extract Keywords From Section
+// =====================================================
+
+function extractKeywords(text) {
+  return text
+    .split(/\W+/)
+    .filter(w => w.length > 4 && !STOPWORDS.includes(w.toLowerCase()));
+}
+
+// =====================================================
+// 🔧 Normalize Text
+// =====================================================
+
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s\u0600-\u06FF]/g, "");
+}
+
+// =====================================================
+// ✅ JSON Response
+// =====================================================
 
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
