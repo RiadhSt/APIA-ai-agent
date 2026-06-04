@@ -1,6 +1,5 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// ── تحليل الـ topics مرة واحدة عند التحميل ──
 const TOPICS = (() => {
   const regex = /<topic\s+name="([^"]+)">([\s\S]*?)<\/topic>/g;
   const map = [];
@@ -52,13 +51,11 @@ function retrieveRelevantTopics(query, topK = 3) {
     .join('\n\n');
 }
 
-// ── تقليص الـ history ──
 function trimHistory(history, maxTurns = 6) {
   if (!history || history.length <= maxTurns) return history || [];
   return history.slice(-maxTurns);
 }
 
-// ── Retry تلقائي ──
 async function callGeminiWithRetry(url, body, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const response = await fetch(url, {
@@ -84,9 +81,6 @@ async function callGeminiWithRetry(url, body, maxRetries = 3) {
   }
 }
 
-// ══════════════════════════════════════════════
-//  Handler الرئيسي
-// ══════════════════════════════════════════════
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -106,13 +100,24 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ── RAG: knowledge ذات الصلة فقط ──
+    // ── حد الـ 5 أسئلة ── التغيير الوحيد
+    const questionCount = (history || [])
+      .filter(t => t.role === "user").length;
+
+    if (questionCount >= 5) {
+      return new Response(JSON.stringify({
+        reply: "⚠️ لقد وصلتم إلى الحد الأقصى من الرسائل في محادثة واحدة. الرجاء تحديث الصفحة لبدء محادثة جديدة.\n\n⚠️ Vous avez atteint le nombre maximum de messages pour une seule conversation. Veuillez actualiser la page pour démarrer une nouvelle conversation."
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      });
+    }
+
     const relevantKnowledge = retrieveRelevantTopics(message);
     const knowledgeBlock = relevantKnowledge.trim()
       ? relevantKnowledge
       : "لا توجد معلومات مباشرة متعلقة بهذا السؤال في قاعدة البيانات.";
 
-    // ── History مُقلَّصة ──
     const safeHistory = trimHistory(history, 6).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
