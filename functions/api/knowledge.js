@@ -608,1296 +608,713 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
   </topic>
 
  <topic name="الدليل السريع للاستشارات الفلاحية: أسئلة وأجوبة شائعة">
+<qa>
+<q>ما المقصود بالإحداث / création ؟</q>
+<a>كل مشروع جديد مستقل بذاته بغرض إنتاج سلع أو إسداء خدمات وموضوع أول طلب لإسناد الامتيازات.
+كما تصنّف إحداث عملية الاستثمار التي تلي مباشرة عملية استثمار مصادق عليها منذ فترة تزيد عن 10 سنوات.
+[FR] Par création, on entend tout projet nouveau, indépendant, ayant pour objet de produire un bien ou de fournir un service.</a>
+</qa>
 
-"س1: Quels sont les privilèges de l’État pour encourager les investissements en Tunisie ?
-ج1: Les investissements à réaliser dans des projets bénéficient des avantages fiscaux et financiers. Les investisseurs tunisiens et étrangers bénéficient des mêmes privilèges (le promoteur étranger ne peut pas être propriétaire du terrain à vocation agricole).
----"
-"س2: Quels sont les avantages fiscaux ?
-ج2: Déduction de l’assiette de l’impôt des revenus ou des bénéfices au titre de l’exploitation
----"
-"س3: Qu’entend-on par création d'un projet ?
-ج3: Par création, on entend tout projet nouveau, indépendant, ayant pour objet de produire un bien ou de fournir un service
----"
-"س4: C'est quoi l'opération de création?
-ج4: Par création, on entend tout projet nouveau, indépendant, ayant pour objet de produire un bien ou de fournir un service
----"
-"س5: que veut dire création?
-ج5: Par création, on entend tout projet nouveau, indépendant, ayant pour objet de produire un bien ou de fournir un service
----"
-"س6: quelle est la Définition d'une création?
-ج6: Par création, on entend tout projet nouveau, indépendant, ayant pour objet de produire un bien ou de fournir un service
----"
-"س7: Qu’entend-on par extension d'un projet ?
-ج7: L’extension désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. Exemple:
-- secteur agricole (productions végétales et animales) l'extension est réalisée sur les mêmes terres exploitées,
-- secteur de la pêche si les mêmes ressources ou moyens de production sont utilisés (investissements dans le même bateau par exemple),
-- En aquaculture, si elle se déroule sur le même site d'élevage ou utilise les mêmes ressources ou moyens de production,
-- les services et la 1ère transformation s'ils ont lieu au même endroit ou utilisent les mêmes ressources ou moyens de production,
-- Opérations d'investissements en 1ère transformation intégrées à un projet agricole existant,
----"
-"س8: C'est quoi l'opération d'extension?
-ج8: L’extension désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. Exemple:
-- secteur agricole (productions végétales et animales) l'extension est réalisée sur les mêmes terres exploitées,
-- secteur de la pêche si les mêmes ressources ou moyens de production sont utilisés (investissements dans le même bateau par exemple),
-- En aquaculture, si elle se déroule sur le même site d'élevage ou utilise les mêmes ressources ou moyens de production,
-- les services et la 1ère transformation s'ils ont lieu au même endroit ou utilisent les mêmes ressources ou moyens de production,
-- Opérations d'investissements en 1ère transformation intégrées à un projet agricole existant,
----"
-"س9: que veut dire extension?
-ج9: L’extension désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. Exemple:
-- secteur agricole (productions végétales et animales) l'extension est réalisée sur les mêmes terres exploitées,
-- secteur de la pêche si les mêmes ressources ou moyens de production sont utilisés (investissements dans le même bateau par exemple),
-- En aquaculture, si elle se déroule sur le même site d'élevage ou utilise les mêmes ressources ou moyens de production,
-- les services et la 1ère transformation s'ils ont lieu au même endroit ou utilisent les mêmes ressources ou moyens de production,
-- Opérations d'investissements en 1ère transformation intégrées à un projet agricole existant,
----"
-"س10: quelle est la Définition d'une extension?
-ج10: L’extension désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. Exemple:
-- secteur agricole (productions végétales et animales) l'extension est réalisée sur les mêmes terres exploitées,
-- secteur de la pêche si les mêmes ressources ou moyens de production sont utilisés (investissements dans le même bateau par exemple),
-- En aquaculture, si elle se déroule sur le même site d'élevage ou utilise les mêmes ressources ou moyens de production,
-- les services et la 1ère transformation s'ils ont lieu au même endroit ou utilisent les mêmes ressources ou moyens de production,
-- Opérations d'investissements en 1ère transformation intégrées à un projet agricole existant,
----"
-"س11: Qu’entend-on par renouvellement d'un projet ?
-ج11: Le renouvellement désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente pour renouveler des moyens de production amortis, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. 
----"
-"س12: C'est quoi l'opération de renouvellement?
-ج12: Le renouvellement désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente pour renouveler des moyens de production amortis, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. 
----"
-"س13: que veut dire renouvellement?
-ج13: Le renouvellement désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente pour renouveler des moyens de production amortis, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. 
----"
-"س14: quelle est la Définition d'une renouvellement?
-ج14: Le renouvellement désigne toutes les opérations d’investissement postérieures à une opération d'investissement précédente pour renouveler des moyens de production amortis, réalisée par une entreprise existante ou un promoteur dans le cadre du même projet permettant d'augmenter sa capacité productive, technologique ou sa compétitivité. 
----"
-"س15: Qu’entend-on par première transformation intégrée ?
-ج15: Les opérations d'investissement visant à transformer le ou les produits  issues de l'activité agricole ou de pêche du même investisseur, même si les deux opérations d'investissement sont situées dans deux lieux géographiquement éloignés
-Le concept d'intégration s'applique même à la transformation d'un produit issu d'une entreprise agricole ou de pêche n'ayant pas bénéficié d'avantages.
----"
-"س16: C'est quoui la première transformation intégrée ?
-ج16: Les opérations d'investissement visant à transformer le ou les produits  issues de l'activité agricole ou de pêche du même investisseur, même si les deux opérations d'investissement sont situées dans deux lieux géographiquement éloignés
-Le concept d'intégration s'applique même à la transformation d'un produit issu d'une entreprise agricole ou de pêche n'ayant pas bénéficié d'avantages.
----"
-"س17: Quelle est la condition de base pour bénéficier des privilèges de la loi de l'investissement n° 71 de 2016 ?
-ج17: l'obtention d'une attestation de dépôt de déclaration d'investissement avant de commencer à réaliser le projet
----"
-"س18: Que faut-il pour obtenir une attestation de dépôt de déclaration d’investissement ?
-ج18: Déposerune liasse unique selon le formulaire en vigueur auprès de la structure compétente en fonction de l'activité, (joindre le cahier des charges ou l'autorisations préalables si l'activité est soumise).
----"
-"س19: Quel est le délai maximum pour réaliser le projet ?
-ج19: Avant l'expiration d'un an à compter de la date d'émission du certificat de dépôt de déclaration d'investissement
----"
-"س20: Quel est le délais maximum pour déposer une demande pour bénéficier des prestations (avantage, subventions, primes)?
-ج20: Avant l'expiration d'un délai de deux ans à compter de la date de délivrance du certificat de dépôt de déclaration d'investissement
----"
-"س21: Quels est le délais maximum pour réaliser le projet ?
-ج21: Avant l'expiration d'un délai de quatre ans à compter de la date de délivrance du certificat de dépôt de déclaration d'investissement (ce délais peut être prologé de deux ans sous réserve de demander ce faveur avant 6 mois de la date d'expiration des 4 ans)
----"
-"س22: Quels est le délais maximum pour demander le versement (ou déblocage) d’une subvention ?
-ج22: Avant l'expiration d'un délai de cinq ans à compter de la date de délivrance du certificat de dépôt de déclaration d'investissement
----"
-"س23: C'est quoi le prêt foncier
-ج23: Il s'agit d'un prêt pour acheter un terrain agricole et l'aménager pour lancer un projet agricole
----"
-"س24: Quel sont les aménagements financer par le prêt foncier agricole ?
-ج24: la création d'un point d'eau et l'électrification
----"
-"س25: Quelle est la valeur (plafond) du prêt foncier agricole ?
-ج25: Un montant maximum de 250 mille dinars et 125 mille dinars si l'achat du terrain auprès des ascendants (parents et / ou grands parents)
----"
-"س26: Comment rembourser le prêt foncier agricole ?
-ج26: Le prêt foncier est remboursé sur une durée de 25 ans, dont 7 ans de grâce, avec un intérêt de 3%.
----"
-"س27: Quel est le montant minimum de fonds propres requis pour obtenir un prêt foncier agricole ?
-ج27: L'autofinancement s'élève à au moins 5 % de la valeur du terrain et à 10 % de la valeur des travaux d'aménagement,
----"
-"س28: Quelles sont les conditions les plus importantes que doivent remplir ceux qui souhaitent obtenir un prêt foncier agricole ?
-ج28: Les jeunes de moins de quarante ans et ayant une expérience dans le domaine agricole et n'exerçant pas d'activité de salarié dans les secteurs public ou privé et n'exerçant pas une activité soumise à permis d'existence (patente).
----"
-"س29: Quelles sont les conditions les plus importantes pour mener à bien un projet d’élevage de vaches (&/ou bovin) ?
-ج29: Avoi une étable conforme aux spécifications du cahier des charges établi à cet effet et avoir une superficie agricole suffisante pour les cultures fourragères
----"
-"س30: Quel est la superficie minimale requise pour acheter un premier tracteur agricole ?
-ج30: 30 hectares pluviales ou 03 hectares irrigués, Si la superficie exploitée est à la fois irriguée et pluviale, le taux de conversion est de 01 hectare irrigué est équivalent à 10 hectares pluvials.
----"
-"س31: Quel est la superficie minimale requise pour acheter un deuxième tracteur agricole ?
-ج31: 75 hectares pluviales ou 15 hectares irrigués, Si la superficie exploitée est à la fois irriguée et pluviale, le taux de conversion est de 01 hectare irrigué est équivalent à 05 hectares pluvials.
----"
-"س32: C'est quoi un petit tracteur?
-ج32: La puissance du moteur est égale ou inférieure à 45 chevaux-vapeur
----"
-"س33: Quel est superficie minimale requise pour acheter une moisonneuse batteuse pour la première fois
-ج33: 100 Ha
----"
-"س34: Quel est superficie minimale requise pour acheter une moisonneuse batteuse pour la deuxième fois
-ج34: 500 Ha
----"
-"س35: Comment sont classées les opérations d’investissement dans le secteur agricole ?
-ج35: La catégorie « A » pour un investissement égal ou inférieur à 200 mille dinars, 
-La catégprie « B » pour un investissement supérieur à 200 mille dinars.
----"
-"س36: Comment sont classées les opérations d’investissement dans le secteur de la pêche ?
-ج36: La catégorie « A » pour un investissement égal ou inférieur à 300 mille dinars, 
-La catégprie « B » pour un investissement supérieur à 300 mille dinars.
----"
-"س37: Comment sont classées les opérations d’investissement dans le secteur de l'aquaculture (ou pisciculture) ?
-ج37: La catégorie « A » pour un investissement égal ou inférieur à 500 mille dinars, 
-La catégprie « B » pour un investissement supérieur à 500 mille dinars.
----"
-"س38: Comment sont classées les opérations d’investissement dans les activité de services ?
-ج38: Pour les personnes physiques et les sociétés de type SARL, SUARL, SA, les activités de services liées à l'agriculture ou à la pêche sont toujours classées dans la catégorie B
-Pour les Sociétés de type SMSA (Société Mutuelles de Services Agricoles) our DGA (Groupement de Developpement Agricole) ou Société communotaire les projets sont Toujours classés dans la catégorie A
----"
-"س39: Comment sont classées les opérations d’investissement dans les activité  première transformation ?
-ج39: Pour les personnes physiques et les sociétés de type SARL, SUARL, SA, les activités de services liées à l'agriculture ou à la pêche sont toujours classées dans la catégorie B
-Pour les Sociétés de type SMSA (Société Mutuelles de Services Agricoles) our DGA (Groupement de Developpement Agricole) ou Société communotaire les projets sont Toujours classés dans la catégorie A
----"
-"س40: La valeur de l’acquisition des bateaux de pêche usagés  est-elle prise en compte dans le classement du projet ?
-ج40: La valeur de l'acquisition des vieux bateaux de pêche n'est pas prise en compte dans le classement du projet.
----"
-"س41: La valeur d’achat du terrain est-elle prise en compte dans la classification du projet ?
-ج41: La valeur d'achat du terrain n'est pas prise en compte dans la classification du projet
----"
-"س42: Comment sont classés les investissements réalisés par les sociétés de services agricoles  ?
-ج42: Dans la catégorie « A », quelle que soit la valeur de l'investissement
----"
-"س43: Comment sont classés les investissements réalisés par les sociétés communotaires ?
-ج43: Dans la catégorie « A », quelle que soit la valeur de l'investissement
----"
-"س44: Comment sont classés les investissements réalisés par les Groupements de Développement Agricole ?
-ج44: Dans la catégorie « A », quelle que soit la valeur de l'investissement
----"
-"س45: Quelle est la valeur minimale des fonds personnels / propres requise dans la structure de financement du projet ?
-ج45: 30% du coût d'investissement pour les projets dont le coût d'investissement dépasse un million de dinars et 10% pour les projets dont le coût d'investissement n'excède pas un million de dinars
----"
-"س46: Comment les subventions sont-elles versées/débloquées ?
-ج46: Les subventions sont décaissées en deux versements : 40 % à l'achèvement de 40 % du coût d'investissement approuvé et le reste de la subvention à l'achèvement de toutes les composantes approuvées.
----"
-"س47: Quelle est la période d'amortissement des tracteurs agricoles ?
-ج47: Six ans
----"
-"س48: Quelle est la période d'amortissement des accessoires des tracteurs ?
-ج48: Six ans
----"
-"س49: Quelle est la période d'amortissement du  matériel d'irrigation ?
-ج49: Six ans
----"
-"س50: Quelle est la période d'amortissement du  moissonneuse batteuse ?
-ج50: 10 ans
----"
-"س51: Qui est l'accompagnateur spécialisé ?
-ج51: C'est ingénieur agronome formé dans le domaine de l'accompagnement et de la gestion des exploitations agricoles.
----"
-"س52: Quelle est la durée nécessaire pour contracter auprès d’un accompagnateur spécialisé pour les bénéficiaires de prêts fonciers agricoles ?
-ج52: Quatre ans à compter de la date d'achat du terrain
----"
-"س53: Quelles sont les conditions les plus importantes nécessaires à la mise en œuvre d’un projet d’agriculture biologique ?
-ج53: Avoir un Contrat avec un bureau de contrôle et de certification de la production selon le mode biologique pendant toute la période d'activité
----"
-"س54: Quelles sont les conditions les plus importantes pour réaliser un projet d’élevage ovin (ou moutons) ?
-ج54: Fournir une bergerie conforme aux spécifications techniques de l'élevage et prévoir les zones de production fourragères nécessaires.
----"
-"س55: Quelles sont les conditions les plus importantes pour réaliser un projet d’élevage caprin (ou chèvres) ?
-ج55: Fournir une bergerie conforme aux spécifications techniques de l'élevage et prévoir les zones de production fourragères nécessaires.
----"
-"س56: Quelles sont les conditions les plus importantes pour créer un sondage profond ?
-ج56: Obtention d'un permis de recherche et d'exploration des eaux souterraines des services régionales du ministère de l'agriculture 
----"
-"س57: Quelles sont les conditions les plus importantes pour mener à bien un projet d’élevage de volailles (ou poules ou avicole) ?
-ج57: Respect du cahier des charges établi à cet effet et obtention de l'agrément sanitaire vétérinaire
----"
-"س58: Quelles sont les conditions les plus importantes pour établir un centre de production (élevage) de génisses pleines ?
-ج58: Appliquer ce qui est indiqué dans le cahier des charges préparé à cet effet.
----"
-"س59: Comment sont répartis (répartion) les dossiers d'investissement entre l'Agence de Promotion des Investissements Agricoles (apia) et les Comissariats Régionales de Développement Agricoles (CRDA) ?
-ج59: Selon le coût de l'investissement et le secteur d'activité (l'Agence de Promotion des Investissements Agricoles est responsable des dossiers dont les investissements dépassent 60 mille dinars dans le secteur agricole, 300 mille dinars dans le secteur de la pêche et 500 mille dinars dans le secteur de l'aquaculture, ainsi que les projets de services et de première transformation).
----"
-"س60: Quel est le pourcentage de subvention pour les investissements matériels visant à contrôler la technologie et à améliorer la productivité ?
-ج60: 50% pour les projets de classe B, 55% pour les projets de classe A et 60% pour les structures professionnelles
----"
-"س61: Quel est le plafond des subventions pour les investissements de la  maîtriser la technologie et à améliorer la productivité ?
-ج61: 500 mille dinars
----"
-"س62: Que sont les filières économiques ?
-ج62: il y a 2 filiaires actuellement: la filiaire des de la géothermie et la filaire des plantes arômatiques et médicinales
----"
-"س63: Quel est le pourcentage de subventions à l’issue d’un projet de filaire économique ?
-ج63: 15% pour tous les projets
----"
-"س64: Quel est le plafond des subventions pour les investissements réalisés dans le cadre des filiaires économiques ?
-ج64: 1 million de dinars
----"
-"س65: Quel est le pourcentage de subventions pour les investissements immatériels ?
-ج65: 50%, quel que soit le type de projet, elle est attribuée aux projets de création seulement, y compris la prime des études
----"
-"س66: Quel est le pourcentage de subventions pour les investissements réalisés dans les secteurs prioritaires ?
-ج66: 30% pour les projets de la catégorie A et 15% pour les projets de la catégorie B
----"
-"س67: Es ce que l'achat du terrain agricole beneficie d'une subvention
-ج67: Non
----"
-"س68: Les projets de services agricole peuvent-ils bénéficier de subventions pour la  maîtrise de la technologie et de l'améliorer de la productivité ?
-ج68: Non, sauf les projets promus par les organsations professionnelles type SMSA, Société communotaire ou GDA
----"
-"س69: Est-il possible de demander le réexamen d’un dossier rejeté ?
-ج69: Oui, dans un délai maximum de 30 jours à compter de la date de notification du rejet en présentant une demande écrite à cet effet et de nouveaux supports
----"
-"س70: Comment obtenir à distance / en ligne une attestation de dépôt d'une déclaration d’investissement ?
-ج70: En accédant au site de services en ligne https://adi.apia.com.tn/promoteur
----"
-"س71: Combien de fois un Tunisien résidant à l’étranger peut-il bénéficier d’avantages fiscaux lors de l’importation de matériel agricole ?
-ج71: un seule fois dans sa vie
----"
-"س72: Quels sont les normes adoptées pour la culture d’un hectare d’olivier ?
-ج72:  +Olivier en sec :
-* au nord (100 pieds/ha)    2000 DT/HA
-* Au centre (35 à 69 pieds/ha)   2000 DT/HA
-* Au sud (25 à 17 pieds /ha)    2000 DT/ha
-+ Olivier en irrigué en intensif : 
-* 100 pieds à 204 pieds /ha     4200 DT/HA
-* 206 pieds à 550 pieds/ha    4500DT/HA
-+ Olivier en irrigué en intensif : 1250 à 1666 pieds /ha avec palissage  13000 DT/HA
+<qa>
+<q>ما المقصود بالتوسعة / extension ؟</q>
+<a>كل عمليات الاستثمار الموالية لعمليات الإحداث المرتبطة بها:
+- القطاع الفلاحي: على نفس المستغلة أو أراضٍ أخرى مع استعمال نفس الموارد
+- الصيد البحري: نفس الموارد أو وسائل الإنتاج (نفس المركب مثلاً)
+- تربية الأحياء المائية: نفس الموقع أو نفس الموارد
+- الخدمات والتحويل الأولي: نفس المكان أو نفس الموارد
+- التحويل الأولي المندمج مع استثمارات فلاحية سابقة
+[FR] L'extension désigne toutes les opérations d'investissement postérieures permettant d'augmenter la capacité productive, technologique ou la compétitivité.</a>
+</qa>
 
----"
-"س73: Quels sont les avantages accordés à la plantation d’olivier ?
-ج73: • Les incitations financières accordées à la plantation d’olivier : 
-- Coût d’investissement < 200 MDT , la subvention est du 55%
-- Coût d’investissement >ou = 200 MDT,la subvention est de 50%
+<qa>
+<q>ما المقصود بالتجديد / renouvellement ؟</q>
+<a>كل عملية استثمار تتعلق بتجديد استثمارات انتفعت بامتيازات سابقة في إطار مجلة تشجيع الاستثمار أو قانون الاستثمار، ويعتمد في ذلك المدة الاندثارية لكل مكونة.
+[FR] Le renouvellement désigne toutes les opérations d'investissement pour renouveler des moyens de production amortis.</a>
+</qa>
 
----"
-"س74: Quelles sont les procédures à adopter pour l’instruction de dossiers d’investissement pour la création d’une huilerie intégrée
-ج74: * Pour bénéficier des avantages, les promoteurs doivent déposer une déclaration d’investissement auprès des services de l’agence de promotion des investissements agricoles avant de lancer l’investissement ensuite il doit déposer une demande pour l’accord des incitations financières dans un délai ne dépassant deux ans.
-* Les pièces nécessaires a fournir   sont 
-*   un plan d’affaires ou étude de faisabilité
-* les autorisations et licences requises par les autorités locales 
-* des certificats environnementales si nécessaire 
-* des factures proforma  
-* certificat de propriété  ou contrat de location long terme
+<qa>
+<q>ما المقصود بالتحويل الأولي المندمج / première transformation intégrée ؟</q>
+<a>عمليات الاستثمار لتحويل منتوج المستثمر نفسه من نشاطه الفلاحي أو الصيد البحري، حتى وإن كانت العمليتان في موقعين متباعدين جغرافياً، شرط أن يمثّل الإنتاج ما لا يقل عن 10% من طاقة التحويل.
+ينطبق مفهوم الاندماج حتى بالنسبة لتحويل منتوج متأتٍ من مشروع غير مصادق عليه.</a>
+</qa>
 
----"
-"س75: Quelles sont les conditions nécessaires pour l’obtention de l’accord de subvention de la création d’une huilerie au niveau de l’APIA 
-ج75:  Au niveau de l’Agence de promotion des investissements agricole et pour l’obtention des primes de la création d’une huilerie, il faut que la production d’olive représente 10% de la capacité de l’huilerie. sinon le dossiers sera instruit par les services de l’APII
----"
-"س76: La création d’une huilerie est- elle soumise au cahier de charges 
-ج76:  La création d’une huilerie est soumise à un cahier de charges de l'Agence Nationale Protection de l'Environnement ANPE
-Si l'huilerir est en mode biologique il faut quel répond au exigences du cahier de charge de la production en mode biologique
----"
-"س77: Quelle est la production des oliviers au niveau du gouvernorat de Jendouba 
-ج77: - La production des olives est de 10952 tonnes en 2022
----"
-"س78: Quelle est le nombre des huileries au niveau du gouvernorat de Jendouba 
-ج78: - Le nombre des huileries est de 11 en 2024
----"
-"س79: Quelle est la capacité des huileries au niveau du gouvernorat de Jendouba est de
-ج79:   la capacité des huileries au gouvernorat de jendouba est de l’ordre de  500 tonnes par jour en 2024
----"
-"س80: superficie des oliveraies en Tunisie  
-ج80: la superficie globale des oliveraies en Tunisie est de l’ordre de 02 millions ha dont 94% en sec et 06% en irriguées
----"
-"س81: quel sont les marchés actuels des exportations de l’huile d’olives
-ج81: les principales marchés des exportations de l’huile d’olives tunisiennes sont : les marchés européens dont   l’Italie et Espagne 70%; les pays d’Amérique 15% et d’autres marchés 15%  
----"
-"س82: superficie des oliviers au gouvernorat de jendouba 
-ج82: la superficies des oliviers au gouvernorat de jendouba est de l’ordre de 30384 ha dont 526 ha conduites en irrigués ,  26323 ha des oliviers a huile et 4061 ha des oliviers de table. le nombre de pieds est de l’ordre de 03 millions dont 85 % des oliviers productives
----"
-"س83: Quels sont les avantages/prime/subvention accordés à l'huilerie ?
-ج83: l'huilerie est considérée comme première transformation, le projet est classée dans la catégorie B et bénéficie de 15% comme prime des secteurs proritaires, en plus de la prime de développement régional 15% si l'implantation du projet est dans zone 1 et 30% si l'implantation est la zone 2
----"
-"س84: quelles sont les etapes de creation d’un verger d’oliviers biologuiques 
-ج84: pour la création d’un verger d’oliviers biologiques  il faut :
--  faire un contrat avec un bureau agrée de certification
-- obtenir une certification auprès d’un organisme de certification agrée 
----"
-"س85: quel avantages accorde la loi d’investissement pour la creation des unités de conserves des olives de tables et les unités d’emballages de huiles d’olives 
-ج85: les dossiers d’octroi d’avantages de la la loi d’investissement des projets de creation des unités de conserves des oliviers de tables et les unités d’emballages de huiles d’olives non integrés sont traités par l’agence de promotion de l’industrie et l’innovation APII.
----"
-"س86: quel organismes sera traités les projets de creation des unités de conserves des olives de tables et les unités d’emballages de huiles d’olives 
-ج86: les dossiers d’octroi d’avantages de la la loi d’investissement des projets de creation des unités de conserves des oliviers de tables et les unités d’emballages de huiles d’olives non integrés sont traités par l’agence de promotion de l’industrie et l’innovation APII.
----"
-"س87: quels sont les salons à l'étranger spécialisés oléioculture auquels l'APIA participent
-ج87: Expoliva se tiendra à Espagne-Jaen en présentant les nouvelles de les entreprises de Espagne et internationales liées à les secteurs de machineries, nouvelles Technologie, huile, industrie alimentaire
----"
-"س88: pépinière public pour plants oliviers
-ج88: le centre de multilplication des oliviers à Béjaoua est situé au gouvernorat de Manouba à 12 km route de Mateur
----"
-"س89: variètés locaux d'olive en Tunisie
-ج89: insérer le lien Institut de l'olivier
----"
-"س90: Quand commence la cueillette des olives en Tunisie
-ج90: la saison de récolte des olives débutera début  Octobre 
----"
-"س91: la Banque Tunisienne de Solidarité (BTS) finance t-elle les projets de plantation des oliviers
-ج91: non actuellement ce genre peut etre financé par les banques commerciales 
----"
-"س92:  ماهو القرض العقاري؟
-ج92: تم التنصيص على القرض العقاري ضمن الفصل 23 من قانون الإستثمار عدد 71 لسنة 2016. وهو يعتبر إمتياز أتى بطرق ميسرة لإعانة المستثمرين الراغبين في بعث مشاريع فلاحية للإنتصاب على الحساب الخاص عن طريق شراء أراض فلاحية وتهيئتها في ضيعة فلاحية تكون وحدة اقتصادية قائمة بذاتها ، قصد إنجاز مشاريع فلاحية .
-ملاحظة : يشمل القرض العقاري أيضا أشغال التهيئة على غرار حفر الآبار والربط بالتيار الكهربائي . 
----"
-"س93: Qu'est-ce qu'un prêt foncier?
-ج93: Le prêt foncier a été stipulé au chapitre 23 de la loi de l'investissement n° 71 - 2016. C'est un privilège, avec des conditions acceptables, destiné aux jeunes investisseurs souhaitant lancer leurs projets agricoles, en leur permettant d'acquerir un terrain agricole et l'aménager en vue de former un domaine agricole constituant une unité économique viable et autonome, afin de mettre en œuvre des projets agricoles.
- Remarque : Le prêt foncier couvre également les aménagements tels que la création d'un point d'eau et son  raccordement au réseau électrique.
----"
-"س94:  من يمكنه الإنتفاع بالقرض العقاري؟
-ج94:  ينص الفصل 23 من قانون الإستثمار عدد 71 لسنة 2016 على أنه من يمكنهم الإنتفاع بالقروض العقارية هم : 
-  ـ الشبان الذين لا يتجاوز عمرهم الأربعين سنة والحاملون لشهادة إثبات الكفاءة المهنية أو شهادة إقرار بمكتسبات الخبرة المهنية من مؤسسة تكوين مهني فلاحي أو صيد بحري أو الحاملون لشهادة الكفاءة المهنية أو شهادة مهارة من مؤسسة تكوين مهني فلاحي او صيد بحري ، أو أي شهادة أخرى معادلة، 
-  ـ الفنيون الحاملون لشهادات من معاهد التعليم العالي الفلاحي أو التكوين في الفلاحة أو في الصيد البحري، 
-  ـ الراغبون في اقتناء منابات شركائهم في الملك على الشياع دون شرط السن .
- ملاحظة : لايمكن للباعثين المذكورين أعلاه أن ينتفعوا بالقرض العقاري إلا مرة واحدة في حياتهم .
----"
-"س95: Qui peut bénéficier d'un prêt foncier?
-ج95: Ceux qui peuvent bénéficier de prêts fonciers selon les dispositions de l'article N°23 de la loi de l'investissement n° 71 de 2016, sont :
-  - les jeunes  âgés de moins de 40 ans, titulaires d'un certificat d'aptitude professionnelle ou d'un certificat de reconnaissance des acquis de l'expérience professionnelle d'un établissement de formation professionnelle agricole ou de la pêche, ou titulaires d'un certificat d'aptitude professionnelle ou d'un certificat de compétence d'un établissement de formation professionnelle de l'agriculture ou de la pêche, ou de tout autre diplôme équivalent,
-  - les techniciens diplômés des instituts d'enseignement supérieur agricole ou de formation agricole ou halieutique,
-  - Ceux qui souhaitent acquérir les parts de leurs co-proprietaires dans une propriété agricoles à parts indivises sans condition d'âge.
- Attention : L'avantage de prêt foncier est octroyé une seule fois dans la vie du bénéficiaire. 
----"
-"س96: ماهي القيمة القصوى للقرض العقاري؟
-ج96: يمنح القرض العقاري لشراء عقار فلاحي وتمويل مصاريف التهيئة  (حفر الآبار والربط بالتيار الكهربائي) في حـدود مبلغ أقصاه 250 ألف دينـار ويقع تخفيض هذا الحد الأقصى إلى 125 ألف دينار في صورة وقوع شـراء العقار لدى الأصـول ( الأب ، الأم ، الجد ، الجدة ) .
- ملاحظة : 
- ـ تقدر قيمة القرض العقاري لشراء الأرض بما يوافق نسبة 95 % من قيمة الأرض التي يتم إقرارها من طرف لجنة إسناد الإمتيازات (على ضوء التقييم الجهوي للأرض الحاصل بالتعاون بين الإدارة الجهوية الراجعة لها الأرض بالنظر والفرع الجهوي للبنك الوطني الفلاحي).
- ـ  تقدر قيمة القرض العقاري لإنجاز أشغال التهيئة ( حفر الآبار والربط بالتيار الكهربائي) بما يوافق نسبة 90 % من كلفة القيام بأشغال التهيئة
----"
-"س97: Quelle est la valeur maximale du prêt foncier?
-ج97: Le prêt foncier est accordé pour  (i) : acquérir une propriété agricole et (ii) : financer les frais d’aménagement (création d'un puits ou d'un sondage et son raccordement au réseau électrique) dans la limite d'un montant maximum de 250 mille dinars.
- Remarque :
-. La valeur maximale du prêt foncier attribué pour l'achat du terrain, est estimée à 95% de sa valeur agréée par le comité d'octroi des avantages (au vu de l'évaluation du coût du terrain réalisée en collaboration entre les services régionales de l’APIA et de la BNA).
-. La valeur maximale du prêt foncier octroyé pour la réalisation des travaux d'aménagement est estimée à 90% du coût de ces travaux.
----"
-"س98:  ما هي قيمة التمويل الذاتي  القرض العقاري؟
-ج98: على الراغب في الإنتفاع بالقرض العقاري أن يثبت أنه سدد من أمواله الخاصة نسبة تساوي على الأقل 5 % من ثمن شراء الأرض و 10 % من قيمة أشغال التهيئة على غرار حفر الآبار والربط بالتيار الكهربائي .
- ملاحظة :
- ـ  في كل الحـالات على المشتري أن يتحمل الفارق الحاصل بين ثمن شراء الأرض وقيمة القرض العقاري التي يتم إقرارها من طرف لجنة إسناد الإمتيازات 
----"
-"س99: Quelle est la valeur de l'autofinancement?
-ج99: La personne souhaitant bénéficier d’un prêt foncier doit justifier le payement sur ses fonds propres un pourcentage d’au moins égale à 5% du prix d'achat du terrain et 10% de la valeur des travaux d’aménagements.
- Remarque :
- Dans tous les cas, l'acquéreur devra supporter la différence entre le prix d'achat du terrain et des travaux d’aménagement et la valeur du prêt foncier approuvée par le comité d’octroi des avantages.
----"
-"س100:   ما هي مدة تسديد القرض العقاري؟
-ج100:  تحدّد مدة تسديد القرض بـ  25 سنة منها مدة إمهال بـ  7 سنوات .
----"
-"س101:   Quelle est la durée de remboursement du prêt ?
-ج101: La durée de remboursement du prêt foncier est de 25 ans, dont une période de grâce de 7 ans.
----"
-"س102: ما هي نسبة الفائض لتسديد القرض ؟
-ج102: يتم تسديد القرض العقاري بفائض يقدر بـ 3% .
-ويقع توزيع مبلغ فوائض رأس المال الخاصة بسنوات الإمهال السبعة على بقية الأقساط الثمانية عشر لتسديد القرض
----"
-"س103: Quel est le taux d'intérêt pour rembourser le prêt?
-ج103: Le taux d'intérêt du prêt foncier est fixé à 3 %.
-Le montant des principaux excédents des sept années de grâce sera réparti sur le reste des versements pendant les dix-huit années restantes pour rembourser l'emprunt.
----"
-"س104: ماهي شروط الإنتفاع بالقرض العقاري ؟
-ج104:  يتعين على الراغبين في الانتفاع بالقروض العقارية إحترام الشروط التالية  : 
-  1 ـ  توفر الخبرة أو الكفاءة الفلاحية :
-         *  بالنسبة للشاب الذي لا يتجاوز عمره الأربعين سنة : عليه الإستظهار أ بشهادة إثبات الكفاءة المهنية أو شهادة إقرار بمكتسبات الخبرة المهنية من مؤسسة تكوين مهني فلاحي أو صيد بحري أو شهادة مهارة من مؤسسة تكوين مهني فلاحي او صيد بحري ، أو أي شهادة أخرى معادلة، 
-        *  بالنسبة للفني : الإستظهار بشهادة من إحدى معاهد التعليم العالي الفلاحي أو التكوين في الفلاحة أو في الصيد البحري، 
-        *  بالنسبة للراغب في اقتناء منابات شركائه في ملك على الشياع : الإستظهار بشهادة في إثبات الخبرة الفلاحية  .
-  2 ـ التفرغ الكلي للمشروع :
-       في كل الحالات، على طالب الانتفاع بالقرض العقاري أن يلتزم بالتفرغ الكلي لإدارة مشروعه الذي يعتزم إحداثه على الأرض موضوع القرض ( تبعا لإنموذج يتم تسليمه من الإدارة الجهوية للوكالة ، يقع تعميره والتعريف بإمضاءه ). 
- 3 ـ  ثبوت إستحقاق البائع  :
-       يخصص القرض العقاري الفلاحي لاقتناء أراضي فلاحية ذات وضعية عقـاريـة سليمة  تمكن من نقـلة ملـكيتها حسب التراتيب الجاري بها العمل من المالك إلى المشتري وكذلك من توظيف رهن بقيمة القرض لفائدة البنك الوطني الفلاحي.
- 4 ـ  ثبوت إستحقاق الأرض للبيع عن طريق القرض العقاري :
-       * لا تباع عن طريق القرض العقاري الأراض التي أقيمت عليها إستثمارات إنتفعت بإمتيازات الدولة إلا بعد إرجاعها من طرف المالك والتي تخص المكونات التي لم تتجاوز الفترة الإندثارية .
-       * لا تباع عن طريق القرض العقاري الأراض التي سبق لمالكها ان إقتناها عن طريق قرض عقاري .
-       * لا تباع عن طريق القرض العقاري الأرض التي لا تتوفر بها موارد غير مستغلة أو التي لا تكون  مؤهلة لاحتواء مشروع فلاحي ذي وحدة إقتصادية قائمة بذاتها.
-5 ـ  ثبوت مردودية المشروع المزمع إحداثه على الأرض :
-     إختيار أرض تتوفر بها موارد تتلاءم ومكونات المشروع ( نوع التربة ، توفر الموارد المائية ، نوعية الموارد المائية ، ... ) وأن تكون مؤهلة لإحتواء مشروع ذو مردودية . 
----"
-"س105: Quelles sont les conditions pour bénéficier d'un crédit foncier ?
-ج105: Les personnes souhaitant bénéficier de prêts foncier doivent respecter les conditions suivantes :
-1- Avoir de l’expérience et/ou de la compétence agricole :
-* Pour le jeune dont l'âge n'excède pas quarante ans : il doit présenter un certificat d'aptitude professionnelle ou un certificat de compétence d'un établissement de formation professionnelle de l'agriculture ou de la pêche, ou de tout autre diplôme équivalent
-* Pour le technicien : sur présentation d'un certificat de l'un des instituts d'enseignement supérieur agricole ou de formation en agriculture ou en pêche,
-* Pour la personne souhaitant acquérir les parts indivises de ses co-propriétaires: présenter une attestation prouvant l'expérience dans le domaine.
-2- Dévouement total au projet : Le demandeur du prêt foncier doit s'engager entièrement dans la gestion de son projet, qu'il prévoit réaliser sur le terrain objet du prêt (selon un formulaire à délivrer par l'administration régionale de l'agence).
- 3- Eligibilité foncière : 
-- Le prêt est affecté à l'acquisition de terrains agricoles ayant une situation foncière permettant le transfert de propriété du propriétaire à l'acheteur selon les textes juridiques en vigueur ainsi que de l'emploi d'une hypothèque pour la valeur du prêt au profit de la Banque Nationale Agricole.
-- Les terrains sur lesquels des investissements ont été établis et qui ont bénéficié des privilèges de l'État, ne peuvent pas être vendus par le biais d'un prêt foncier à moins que les avantages soient restitués par le vendeur (avantages relatifs aux composants qui n'ont pas dépassé la durée d'amortissement).
-- Les terrains précédemment acquis par le biais d'un prêt foncier ne sont pas éligibles.
-- Les terrains n’ayant pas de ressources inexploitées ou qui ne sont pas qualifié pour contenir un projet agricole viable ne peuvent pas être acquis par le biais d'un prêt foncier.
-5- Preuve de la rentabilité du projet : Il est primordial de choisir un terrain disposant de ressources compatibles avec les composantes du futur projet (type de sol, disponibilité en eau et sa qualité, ...) et de prouver que ce terrain peut contenir un projet rentable.
----"
-"س106: ماهي التزامات المنتفع بالقرض العقاري؟
-ج106: على المنتفع بالقرض العقاري أن يتحصل على  "" مقرر إسناد الحوافز"" طبقا لأحكام الفصل 10 من الأمر الحكومي عدد 389 لسنة 2017 وأن يلتزم بــ : 
- ـ  الشروع في إنجاز المشروع الفلاحي موضوع القرض العقاري في أجل لا يتجاوز السنة الواحدة بداية من تاريخ شراء الأرض ، 
- ـ  الإستغلال المباشر للأرض الفلاحية موضوع الشراء خلال مدة التسديد الكـامـل للقـرض مـع التحـمـل شخـصـيا لمسؤولـية إستغـلال هذه الأرض الفلاحية ،
- ـ  عدم مباشرة المنتفع بالقرض العقاري نشاطا بصفة أجير في القطاعين العام أوالخاص خلال كامل المدة المنصوص عليها لتسديد القرض،
- ـ  التعاقد مع مرافق مختص في بعث المشاريع والتصرف في المستغلات الفلاحية لمدة 5 سنوات بداية من تاريخ شراء الأرض ،
- ـ  عدم التفويت في الأرض موضوع الشراء أو فسخ عقد الشراء كامل المدة المنصوص عليها لتسديد القرض، ويتم لهذا الغرض ترسيم شرط فسخي لفائدة الدولة في الرسم العقاري موضوع الشراء، 
- ـ  توظيف رهن عقاري على الأرض موضوع الشراء لفائدة المؤسسة المقرضة بالنسبة لمبلغ القرض .
-  في صورة عدم تطبيق إحدى الإلتزامات المذكورة أعلاه (الفصل 25 من الأمر الحكومي عدد 389 لسنة 2017 ) أو عدم تقديم عقد شراء مدرجا بالرسم العقاري عند الإقتضاء ،يلزم المنتفع حالا بإرجاع الجزء الذي لم يسـدد من القـرض مع تطـبـيـق نـسـبة فـوائـض القروض البنكية الطويلة الأمد الجاري بها العمل في ذلك التاريخ وذلك بالنسبة للمدة المنقضية وكذلك الشأن في صورة ما إذا فقدت الأرض المقتناة صبغتها الفلاحية وأصبحت لا يمكن استعمالها لغايات فلاحية خلال مدة تسديد القرض.
----"
-"س107: Quels sont les obligations du bénificiaire?
-ج107: Le bénéficiaire d'un prêt foncier doit obtenir une ""décision d'octroi d'avantages"" conformément aux dispositions du chapitre 10 du décret gouvernemental n° 389 de 2017, et il doit respecter ce qui suit :
- - le commencement de la réalisation du projet agricole objet du prêt foncier dans un délai n'excédant pas un an à compter de la date d'achat du terrain,
- - l'exploitation directe de la terre agricole objet de l'achat pendant la période de remboursement intégral du prêt, tout en assumant personnellement la responsabilité de l'exploitation de cette terre agricole,
- - le bénéficiaire du prêt foncier n’est pas autorisé à exercer une activité de salariée dans le secteur public ou privé pendant toute la durée prévue pour le remboursement du prêt,
-- avoir un contrat avec un accompagnateur spécialisé dans la création de projets et la gestion des exploitations agricoles pour une durée de 5 ans à compter de la date d'achat du terrain,
- -ne pas vendre le terrain objet de l'achat et ne pas résilier le contrat d'achat pour toute la durée du remboursement de l’emprun, à cet effet une clause résolutoire est délimitée en faveur de l'Etat est à inscrire dans le titre de propriété,
-- Inscrire une hypothèque sur le terrain au profit de l'établissement prêteur égal au montant du prêt
-En cas de non-application de l'une des obligations susmentionnées (chapitre 25 du décret gouvernemental n° 389 de 2017) ou la non présentation d'un contrat d'achat en bon uniforme le cas échéant, le bénéficiaire est tenu de restituer immédiatement la partie impayée du prêt avec application du taux d’intérêt des prêts bancaires à long terme en vigueur à cette date par rapport à la période écoulée.
----"
-"س108: ماهي الوضعية الإستحقاقية للأراضي المخولة للإنتفاع بالقرض العقاري؟
-ج108: تعتبر أرض فلاحية مخولة للإنتفاع بالقرض العقاري كل أرض فلاحية ذات وضعية عقارية سليمة تمكن من نقلة ملكيتها من المـالـك الأصلي إلى المشتري وقابلة لتوظيف رهن عقاري عليها لفائدة البنك الوطني الفلاحي ، لها إحدى وثائق إثبات الملكية التالية :
-- شهادة ملكية حديثة بإسم البائع ، 
-- شهادة إشتراك في الملك حديثة ( مع ضرورة توفير شهادة ملكية للعقار المقتطعة منه الأرض موضوع البيع ومقاسمة رضائية أو قضائية بيـن جميع المالكـين على الشياع في الملك تنص على مناب كل منهم ، تكون مشفوعة بمثال تقسيمي يعد في الغرض من قبل خبير عدلي (قلاحي) في قيس الأراضي .
-- مضمون من قرار إسناد أرض إشتراكية على وجه الملكية الخاصة بالنسبة للمناطق التي لم يشملها المسح العقاري ، 
-- عقدة إسناد أرض إشتراكية على وجه الملكية الخاصة بالنسبة للمناطق التي لم يشملها المسح العقاري ، 
-- شهادة حوز ( مشفوعة بموافقة السيد الوالي في إتمام عملية البيع ) .
-- في صورة توفر وثائق أخرى يجب التثبت في إمكانية إعتمادها مع المصالح الجهوية أو المركزية بالوكالة  .
-ملاحظة : إذا كان العقار كائن بدوائر تدخل الوكالة العقارية الفلاحية فعلى طالب الإنتفاع بالقرض العقاري أن يستظهر بترخـيـص السيـد والي الجهة بخصوص إتمام عملية البيع بين مالكها الأصلي والمشتري.
----"
-"س109: Quel est le statut d’éligibilité des terrains pouvant bénéficier d’un prêt foncier ?
-ج109: Est considéré comme terrain agricole éligible à bénéficier d'un prêt foncier tout terrain agricole jouissant d'un statut foncier sain permettant le transfert de sa propriété et susceptible d’inscrire un hypothèque au profit de la Banque Nationale Agricole et disposant de l'un des titres de propriété suivants :
-- Un certificat de propriété récent au nom du vendeur.
-- une attestation de co-propriété récente (avec obligation de fournir une attestation de propriété de la totalité de la propriété avec un acte de partage consensuel ou judiciaire entre tous les propriétaires indiquant les parts de chacun d'eux, accompagné d'un plan de partage établi à cet effet par un expert judiciaire en topographie
-Acte de la décision d'assignation d’une terre collectifs en propriété privée Pour les zones non cadastrée,
-- La décision d'attribution d’une terre collective en tant que propriété privée Pour les zones non cadastrée,
-- Dans le cas où d'autres documents sont disponibles، il faut vérifier qu'ils peuvent être approuvés auprès des services régionaux ou centraux de l'agence.
-Remarque: Si le bien est situé dans une zone d'intervention de l’agence foncière agricole, le demandeur doit présenter une autorisation du gouverneur de la région relative à l’acte de vente.
----"
-"س110: ماهي مكونات الملف للحصول على القرض العقاري؟
-ج110: يجب أن يتضمّن الملف المتعلق بطلب الحصول على قرض عقاري فلاحي :
-  ـ  مطلب في الحصول على قرض عقاري فلاحي بإسم السيد المدير العام للوكالة ،
-  ـ  نسخة من بطاقة التعريف الوطنية لكل من البائع (أو البائعين) والمشتري، 
-  ـ  إلتزام بتسديد نسبة تساوي على الأقل 5 % من ثمن شراء الأرض من أمواله الخاصة ، 
-  ـ  وثيقة رسمية تثبت أن الطالب يستجيب لشروط الفصل 23 من الأمر الحكومي عدد 389 لسنة 2017 ،
-  ـ  وعد بيع نافذ المفعول عند عرض الملف على لجنة إسناد الإمتيـازات ( محرر من طرف محامي غـير متـربص أو عدل إشهـاد أو محـرر العقـود بإدارة الملكية العقارية )،  
-  ـ  تقديم هيكل تمويل يتضمن نسبة  دنيا من التمويلات الذاتية لا تقل عن 5 %  من قيمة شراء الأرض و 10 %  من قيمة أشغال التهيئة التي يخول لها الإنتفاع بالمنح المنصوص عليها بالفصل 3 من الأمر الحكومي عدد 389 لسنة 2017،
-  ـ  تقديم الوثائق والمؤيدات الازمة وخاصة الفواتير التقديرية المتعلقة بأشغال التهيئة ،
-  ـ  وثيقة قانونية تثبت ملكية الأرض(*) وتمكن حسب التراتيب الجـاري بها العـمل من نقلة ملكيتهـا وتوظيف علـيها رهن لفـائدة البنك الوطني الفلاحي ( شهادة ملكـية مصحوبة بنسخة من السجل التجاري ، شهادة حوز مشفوعة بموافقة السيد الوالي في إتمام عملية البيع ،  مضمون  من قرار إسناد أرض إشتراكية على وجه الملكية الخاصة أو عقدة إسناد أرض إشتراكية على وجه الملكية الخاصة ) ،
-  ـ  ترخيص من والي الجهة بخصوص عملية البيع إذا كان العقار كائنا بدوائر تدخل الوكالة العقارية الفلاحية ، 
-  ـ  شهادة تتضـمن رأيا فنيـا في المـوارد المائية وشهـادة في اختبـار التـربة تسلمـان من المصـالح الجهوية للوكالة ذات النظر. وفي حالة حفر  بئر عميقة يجب توفير رخصة في الغرض باسم المنتفع مسلمة من طرف المصالح المختصة بوزارة الفلاحة والموارد المائية، 
-  ـ  الخطوط الكبرى للمشروع المزمع إنجازه ، 
-  ـ  وثيقة "" إلتزامـات الانتفاع بالقـرض العقـاري الفلاحـي"" تسـلم من قبل الإدارة الجهـوية للوكـالة ويـتم تعميرها من طرف العارض وإمضائهما (معرف به) ،
-  ـ  إلتـزام بـتسـديد الفـارق الحـاصل بين قيمة الأرض المنصـوص عليـهـا بوعــد البـيع وقيـمـة القرض العـقـاري في صورة تجـاوز نسبة التمويـل الذاتي المطـلوب (معرف به)،
- ـ   كل وثيقة إضافية من شأنها أن تدعم جدوى إنجاز المشروع على الأرض موضوع طلب القرض.
- (*)   في صورة ما إذا كان الشراء يخص مقسما على الشياع من عقار، ينبغي تحديد مساحة وموقع الأرض طبقا لمقاسمة قضائية نافذة المفعول بين  جميع المالكين على الشياع أو رضائية مؤشر عليها من قبل جميع المستحقين تنص على مناب كل واحد منهم من حيث المساحة والحدود وتكون مشفوعة برسم بياني معد للغرض من طرف مهندس معماري أو خبير عدلي في قيس الأراضي أو مـن طرف مصالح ديوان قيس الأراضي ورسـم الخرائط.
----"
-"س111: Dossier à fournir ?
-ج111: Le dossier lié à la demande de prêt immobilier agricole doit comprendre :
-   - Une demande d'obtention d'un prêt immobilier agricole au nom du Directeur Général de l'Agence,
-   - Une copie de la carte nationale d'identité tant du vendeur (ou des vendeurs) que de l'acheteur,
-   - Un engagement à payer un pourcentage égal à au moins 5% du prix d'achat du terrain sur ses fonds propres,
-   - Un document officiel prouvant que l'étudiant remplit les conditions du chapitre 23 de l'arrêté gouvernemental n° 389 de 2017,
-   - Une promesse de vente prenant effet lors de la présentation du dossier à la Commission d'attribution des concessions (rédigée par un avocat non exerçant, un éditeur de certificat ou un rédacteur de contrat).
-       Gestion de biens immobiliers)
-   - Fournir une structure de financement qui comprend un pourcentage minimum d'autofinancement d'au moins 5% de la valeur de l'achat du terrain et 10% de la valeur des travaux de préparation entrepris.
-      Il a le droit de bénéficier des subventions prévues au chapitre 3 de l'arrêté gouvernemental n° 389 de 2017,
-   - Fournir les documents et pièces justificatives nécessaires, notamment les factures estimées liées aux travaux de préparation,
-   - Un document légal prouvant la propriété du terrain (*) et permettant, selon la réglementation en vigueur, le transfert de propriété et la constitution d'une hypothèque sur celui-ci au profit de la Banque Nationale.
-     Al-Falahi (certificat de propriété accompagné d'une copie du registre du commerce, un certificat de propriété accompagné de l'approbation du Gouverneur pour finaliser le processus de vente, garanti
-     De la décision d'attribuer les terres socialistes à la propriété privée ou du complexe d'attribution des terres socialistes à la propriété privée),
-   - Une autorisation du gouverneur de région concernant le processus de vente si le bien est situé dans les zones d'intervention de l'agence immobilière agricole,
-   - Une attestation contenant un avis technique sur les ressources en eau et une attestation d'analyse de sol délivrée par les services régionaux à l'agence compétente. En cas de perçage
-      Pour un puits profond, une autorisation doit être fournie à cet effet au nom du bénéficiaire, délivrée par les services compétents du ministère de l'Agriculture et des Ressources hydrauliques.
-   - Les grandes lignes du projet à réaliser,
-   - Le document « Obligations pour bénéficier du prêt immobilier agricole » est délivré par l'administration régionale de l'agence et est complété par le soumissionnaire et signé par lui.
-     (défini comme),
-   - Un engagement à payer la différence entre la valeur du terrain stipulée dans la promesse de vente et la valeur du prêt immobilier dans le cas où celui-ci dépasserait le pourcentage de financement.
-      Le soi requis (identifié par lui),
-  - Tout document complémentaire qui justifierait la faisabilité de réaliser le projet sur le terrain faisant l'objet de la demande de prêt.
+<qa>
+<q>ما المقصود بالشروع في انجاز الاستثمار ؟</q>
+<a>بداية إنجاز مكونة من مكونات الاستثمار المصرح به، ويتم الإثبات بالاستظهار بما يفيد خلاص مبلغ مالي أو بناءً على معاينة ميدانية.</a>
+</qa>
 
-(*) Dans le cas où l'achat concerne une propriété divisée, la superficie et l'emplacement du terrain doivent être déterminés selon un partage judiciaire valide entre tous les propriétaires de la propriété commune ou un accord consensuel signé par tous les ayants droit qui précise la localisation de chacun d'entre eux en termes de superficie et de limites, accompagné d'un schéma préparé à cet effet par un architecte, un expert médico-légal en mesure foncière ou par les services du Bureau d'évaluation et de cartographie des terres.
----"
-"س112: أين يتم إيداع الملف ودراسته والبت فيه ؟
-ج112: 1 / مكان إيداع الملف :
-يتم تكوين ملف في نسختين : واحدة يتم إيداعها لدى الإدارة الجهوية للوكالة والأخرى لدى فرع البنك الوطني الفلاحي حيث توجد الأرض .  
-2 / دراسة الملف : 
-تقوم المصالح الجهوية لكل من الوكالة والبنك الوطني الفلاحي بإستقصاء فني مشترك، مع التثبت في القيمة المقترحة بوعد بيع الأرض ومقارنتها بالأسعار المعتمدة بنفس الجهة وذلك دون إعتبار قيمة الإنجازات الموجـودة عليها ، وإبداء الرأي بخصـوص الخطوط الكبـرى للمشروع المـمكن إنجازه عليها وإعداد تقرير في الغرض.
-3 / البت في الطلب من قبل أعضاء اللجنة المركزية :
- تحال الملفـات المدروسـة مصحوبة بالتقـارير الجهـوية المشـتـركة بـيـن المصـالح الجهوية لكل من الوكالة والبنـك الوطني الفلاحي إلى المصالح المركزية بالوكالة لتقييمها من النواحي العقارية والفنية والإقتصادية ثم عرضها على لجنة إسناد الإمتيازات التي تنعقد بصفة دورية بالمقر المركزي بالوكالة :
-- في صورة الموافقة على المطلب يتولى المنتفع تجسيم مقرر إسناد القرض مع مصالح البنك الوطني الفلاحي . 
-- في صورة رفض المطلب يتم إعلام المعني بالأمر بذلك مع تعليل الرفض .
----"
-"س113: ما هي النصائح المقترحة لإقتناء أرض عن طريق القرض العقاري؟
-ج113: على كل من يرغب في إقتناء أرض فلاحية عن طريق القرض العقاري التأكد من أن:  
-- قطعة الأرض ذات وضعية عقارية سليمة أو في أقصى الحالات قابلة للتصفية،  
-- قطعة أرض تتوفر بها موارد غير مستغلة وهي قادرة بإمكانياتها الذاتية على إحتواء مشروع فلاحي ذو جدوى إقتصادية مستقلة ،
-- قطعة أرض لا ينجر عن شرائها التشتت والتجزئة أو التي تكون في شكل قطع متعددة أو متباعدة ،    
-- المساحة كافية لإقامة مشروع ذي مردودية حسب النشاط وخاصيات الجهة،
-- خصائص التربة مناسبة لإنجاح المشروع، 
-- موارد مائية متوفرة بكميات كافية وذات خصائص مناسبة للمشروع،
-- توفّر مسلك على الأقلّ للعبور للضيعة مع التأكّد من إمكانية استعماله في الفصول الممطرة.
-وتجدر الإشارة بالنسبة للمقدمين على إبرام عقود وعد بالبيع لإعداد ملفات طلـب الحصول على قرض  عقاري، أنه بإمكانهم بالاتفـاق مع الواعـد بالبيع إدراج فصل ضمن العقد ينص على استرجاع التسبقة أو قسط منها في صورة عدم الموافقة على الملف من طرف لجنة إسناد الإمتيازات.
- وبصفة عامة، على الراغب في الحصول على قرض عقاري الإطلاع بروية على متطلبات الملف تجنبا لبذل مجهودات لاقتناء أرض لا تتوفر فيها الشروط.
----"
-"س114: ما هي إمتيازات الدولة المخولة للمنتفع بالقرض العقاري؟
-ج114:   يتمتع المنتفع بالقرض العقاري بالإضافة إلى الحوافز المنصوص عليها بقانون الإستثمار عدد 71 لسنة 2016 بإمتياز جبائي يتمثل في التسجيل بالمعلوم القار لعقود نقل ملكية الأراض الفلاحية موضوع الشراء.
----"
-"س115: هل ترغب في الحصول على مساندة وتأطير لبعث مشروع ؟
-ج115:  في إطار مساندة وتأطير الباعثين الراغبين في بعث مشاريع فلاحية والإنتصاب للحساب الخاص ، تضع الوكالة على  ذمتهم قائمة في المرافقين المختصين ( Coachs ) متوفرة بموقع واب الوكالة لمساعدتهم في بلورة  أفكار مشاريعهم ومرافقتهم في مشوارهم بخصوص إستخراج كافة الوثائق والرخص اللازمة وإعداد مخطط الأعمال مع التركيز على الجوانب الفنية والإقتصادية والحصول على الموافقات المبدئية للتمويل ومتابعة إنجاز جميع مراحل المشروع بصفة مستمرة إلى حين تحقيق الإنجاز الكلي للإستثمارات المصادق عليها . 
----"
-"س116: ماهي وكالة النهوض بالاستثمارات الفلاحية؟
-ج116: وكالة النهوض بالاستثمارات الفلاحية هي مؤسسة عمومية ذات صبغة غير إدارية، تم إحداثها سنة 1982 بمقتضى القانون عدد 76 المؤرخ في 6 أوت 1982 . وهي تعمل على النهوض بالإستثمار الخاص وتعصير الانتاج في قطاعات الفلاحة والصيد البحري والخدمات المرتبطة بهما وعمليات التحويل الأولي للمنتوجات الفلاحية والصيد البحري وتكييفهما عندما تكون مندمجة مع مشروع فلاحي ، بواسطة تقديمها لخدمات مجانية إلى الفلاحين والصيادين البحريين والباعثين الشبان والمستثمرين التونسيين والأجانب خلال فترات تشخيص ودراسة وتنفيذ مشاريعهم في تلك القطاعات.
----"
-"س117: Qui est l'APIA?
-ج117: L'Agence de Promotion des Investissements Agricoles est un établissement public non administratif créé en 1982 par la loi n° 76 du 6 août 1982. les Attributions de l'APIA: promouvoir l'investissement privé et la modernisation de la production dans les secteurs de l'agriculture et de la pêche et les services qui y sont liés et les processus de transformation primaire des produits agricoles et de la pêche et leur adaptation lorsqu'ils sont intégrés à un projet agricole, en fournissant gratuitement ses services aux agriculteurs, pêcheurs, jeunes entrepreneurs et investisseurs tunisiens et étrangers pendant les périodes de diagnostic, d'étude et de mise en œuvre de leurs projets dans ces secteurs.
----"
-"س118: ما هي نشاطات وكالة النهوض بالاستثمارات الفلاحية؟
-ج118: تتلخص نشاطات الوكالة في ما يلي:
- منح الامتيازات الماليـة و الجباـئية لباعـثـي المشاريع في الفـلاحـة والصـيـد البحـري والخدمات المرتبـطة بهما والتحويل الأولي المندمج لمنتجات الفلاحة و الصيد البحري
-تشخيص فرص الاستثمـار وأفـكـار المشـاريـع الواعــدة التـي يمـكن بعـثـهـا من قـبـل المستثمـرين للمسـاهمة في تحقيق الأهداف الوطـنية المنوطة بعهدة القطاع
-الإحاطــة بالباعثين في تكوين ملفاتهم وتأطيرهم في مختلف مراحل إنجاز مشاريعهم
-ربـط الصلة بين المستثمرين التونسيين ونظرائهم الأجانب لإنجاز مشاريع مشتركة في الإنتاج والتصدير
-تنظيم الندوات والأيام الإعلامية ولقاءات الشراكة والمعارض
-المشــاركــة في المعارض والصالونات المختصة بتونس وبالخارج
- تكــويــن الباعثين الشبان والإحاطة بهم طيلـة مراحل التشخيص والدراسة والإنجاز لمشاريعهم والبرامج الخصوصـية للتكوين
-تسيير محاضن المؤسسـات في الفـلاحة والصيـد البحـري لإستحثـاث حركـيـة بـعـث المشـاريع المجـددة والإنتصـاب للحسـاب الخـاص من طرف خريجي الـتـعليـم العالي
-تنمية الجودة من خلال أنشطة تتعلق بتطوير نوعية المنتجات الفلاحية والتصدير
----"
-"س119: Quelles sont les activités de l'APIA?
-ج119: Les activités de l'agence se résument comme suit :
- Accorder des privilèges / avantages Financiers et fiscales pour les porteurs de projets dans l'agriculture et la pêche et services associées et la première transformation des  produits de l'agriculture et de la pêche.
- Diagnostic Des opportunités d'investissement et des idées de projets prometteurs qui peuvent être envoyées par des investisseurs pour contribuer à l'atteinte des objectifs nationaux qui lui sont confiés au secteur.
- Accompagner les promoteurs dans la constitution de leurs dossiers et leur encadrement dans les différentes étapes de réalisation de leurs projets.
- Mise en relation Entre les investisseurs tunisiens et leurs homologues étrangers pour réaliser des projets communs dans la production et l'exportation.
- Organisation des Séminaires, des journées d'information, des rencontres de partenariales et salons (SIAT et Salon de l'Agriculture Biologique).
-Participation aux expositions et salons spécialisés en Tunisie et à l'étranger.
- formation des Jeunes universitaires et les informer tout au long des étapes de diagnostic, d'étude et de réalisation de leurs projets et programmes de formation spécifiques.
- Gestion des  Incubateurs d'établissements d'agriculture et de pêche pour stimuler le mouvement d'envoi de projets innovants et d'érection à compte propre par les diplômés   L'enseignement supérieur.
- Promouvoir la  Qualité à travers des activités liées au développement de la qualité des produits agricoles et à l'exportation
----"
-"س120: ما هي وسائل وكالة النهوض بالاستثمارات الفلاحية؟
-ج120: تتوفر لدى وكالة النهوض بالاستثمارات الفلاحية العديد من الوسائل التي من شأنها أن تدعم فرص الاستثمار بتونس في قطاعي الفلاحة والصيد البحري والخدمات المرتبطة بهما ومنها: 
- الشباك موحد
- مكتب العلاقات مع المواطن
- إدارة جهوية على مستوى كلّ ولاية
- لجان إسناد الامتيازات على المستوى المركزي وعلى مستوى كل ولاية
- فريق من المختصين في تقييم عمليات الاستثمار
- فريق من المختصين في تنظيم التظاهرات الاقتصادية
- فريق مكلّف بتكوين الباعثين الشّبان
- محاضن مؤسسات بأغلب المعاهد العليا للتكوين الفلاحي
- فريق يُعنى بتأطير الباعثين حول النهوض بجودة المنتجات
-مكتبة تحتوي على معلومات ومراجع ووثائق مختصة موضوعة على ذمة الباعثين
-موقع واب يحتوي على معطيات تتعلق بمناخ وفرص الاستثمار وكذلك عروض الشراكة الاقتصـاديـة في الفـلاحـة والصيـد البحـري والخدمات المرتبطة بهما
----"
-"س121: Quels sont les moyens de l'APIA?
-ج121: L'Agence de Promotion des Investissements Agricoles dispose de nombreux moyens pour soutenir les opportunités d'investissement en Tunisie dans les secteurs de l'agriculture, de la pêche et des services connexes. Nous mentionnons notamment :
- - un quiché unique au siège de l'APIA,
-- un Bureau des relations avec les citoyens,
- - une administration régionale au niveau de chaque Gouvenorat
- - des Comités d'octroi des avantages au niveau central et au niveau de chaque gouvernorat
-- Une équipe de spécialistes de l'évaluation des opérations d'investissement,
- - Une équipe de spécialistes de l'organisation d'événements économiques,
- - Une équipe en charge de la formation des jeunes entrepreneurs,
- - Des pépinières d'entreprises et des Incubateurs de projets dans la plupart des instituts supérieurs agricoles,
- - Une équipe soucieuse d'encadrer les promoteurs sur l'amélioration de la qualité des produits,
- - Une bibliothèque contenant des informations, des références et des documents spécialisés mis à la disposition des expéditeurs,
- - Un site Web qui contient des données liées au climat et aux opportunités d'investissement, ainsi que des offres de partenariat économique dans l'agriculture, la pêche et les services associés à eux.
----"
-"س122: ما هي نشريات وكالة النهوض بالاستثمارات الفلاحية؟
-ج122: تقوم وكالة النهوض بالاستثمارات الفلاحية بإعداد العديد من الإصدارات والمنشورات الخاصة للتعريف بأهم الحوافز والامتيازات المالية والجبائية التي يمكن إسنادها عند الاستثمار في قطاعات الفلاحة والصيد البحري والخدمات المرتبطة بهما ومنها: 
- تقديم موجز لحوافز الاستثمار في الفلاحة والصيد البحري
- أدلة قطاعية موجهة للمستثمرين والباعثين الشبان
- دليل المستثمر الأجنبي في الفلاحة والصيد البحري بعديد اللغات
- دليل الشراكة في الفلاحة والصيد البحري باللغتين الفرنسية والأنقليزية
- دليل المستثمر في شكل قرص مضغوط
- دليل التونسيين المقيمين بالخارج في شكل قرص مضغوط
-  "" APIA News "" نشرية شهرية باللغتين العربية والفرنسية ( متوفرة بموقع واب الوكالة )
- إصدار مجلة ""المستثمر الفلاحي"" كل ثلاثة أشهر باللغتين العربية والفرنسية
-  ملخص في دراسات قطاعية
- دليل أفكار مشاريع يشمل بطاقات وصفية للعديد من المشاريع النموذجية
- أدلة جهوية حول الإستثمار في مختلف الجهات
- نشرية الإحصائيات الشهرية للإستثمار
- التقرير السنوي لنشاط الوكالة
----"
-"س123: Quelles sont les publications de l'APIA?
-ج123: L'Agence pour la Promotion des Investissements Agricoles prépare de nombreuses publications et publications spéciales pour présenter les incitations les plus importantes et les privilèges financiers et fiscaux qui peuvent être attribués lors de l'investissement dans les secteurs de l'agriculture, de la pêche et des services connexes:
- - présenter une synthèse des incitations à l'investissement dans l'agriculture et la pêche,
- - des guides sectoriels destinés aux jeunes investisseurs et entrepreneurs,
- - Un guide pour l'investisseur étranger dans l'agriculture et la pêche en plusieurs langues,
- - Le guide du partenariat dans l'agriculture et la pêche, en français et en anglais,
-- Guide de l'investisseur au format CD,
- - Annuaire des Tunisiens résidant à l'étranger sous format CD,Diffusion d'une newsletter électronique bimensuelle « APIA News » en arabe et en français (disponible sur le site internet de l'agence).
- - Publication du magazine ""L'Investisseur Agricole"" tous les trois mois en arabe et en français,
-  - une synthèse des études sectorielles,
- - Un répertoire d'idées de projets comprenant des fiches descriptives de plusieurs projets types,
- - Des guides régionaux sur l'investissement dans différentes régions,
- - Le bulletin mensuel des statistiques d'investissement,
- - Le rapport annuel des activités de l'agence.
----"
-"س124: ما هي المصالح المعنية لتعهد ملفات المشاريع التي تساوي قيمتها أو تقل عن 60 ألف دينار؟
-ج124: يعتبر هذا النوع من المشروع من صنف  "" أ "" وهو إما أن يكون من مشمولات المندوبية الجهوية للتنمية الفلاحية أو من مشمولات الإدارة الجهوية لوكالة النهوض بالإستثمارات الفلاحية المختصين الإثنين ترابيا، وذلك حسب مدى تطابق مساحة الأرض موضوع المشروع والمساحات الواردة بجدول المساحات القصوى للزراعات حسب المناطق. 
-    فعليك أن تتثبت في مساحة الأرض المزمع إحداث المشروع عليها  : 
-     * إذا كانت مساحتها تساوي أو تقل عن المساحات الواردة بجدول المساحات القصوى للزراعات حسب المناطق ← يكون المشروع من مشمولات المندوبية الجهوية للتنمية الفلاحية المختصة ترابيا ← عليك الإتصال بمصالحها المختصة للتثبـت معهـم في الجوانب الفنية لمكونات الإستثمار وتقييم الكلفة الجملية الحقيقية  للمشروع . 
-    * إذا كانت مساحتها تفوق المساحات الواردة بجدول المساحات القصوى للزراعات حسب المناطق ←  يكون المشروع من مشمولات  الإدارة الجهوية لوكالة النهوض بالإستثمارات الفلاحية المختصة ترابيا ← عليك الإتصال بمصالحها المختص للتثبـت معهـم في الجوانب الفنية لمكونات الإستثمار وتقييم الكلفة الجملية الحقيقية للمشروع . 
----"
-"س125: ما هي المصالح المعنية لتعهد ملفات المشاريع التي تفوق قيمتها 60 ألف دينار وتساوي أو تقل عن 15 مليون دينار ؟
-ج125: يعتبر هذا النوع من المشروع من صنف "" أ "" إذا كانت قيمة إستثماراته تساوي أو تقل عن 200 ألف دينار ويعتبر من صنف "" ب "" إذا كانت قيمة إستثماراته تفوق  200 ألف دينار . وعليك أن تتثبت في ما يلي :
-     * إذا كانت القيمة التقريبية للمشروع تفوق 60 ألف دينار و تقل عن 1 مليون دينار ← إتـصل بمصالح الإدارة الجهوية لوكالة النهوض بالإستثمارات الفلاحية المختصة ترابيا للتثبـت معهـم في الجوانب الفنية لمكونات الإستثمار وتقييم الكلفة الجملية الحقيقية للمشروع .
-     * إذا كانت القيمة التقريبية للمشروع تساوي أو تفوق 1 مليون دينار ولا تتجاوز 15 مليون دينار  ← إتـصل بمصالح الإدارة الجهوية للوكالة المختصة ترابيا أو بالمصالح المختصة بالمقر المركزي لوكالة النهوض بالإستثمارات الفلاحية للتثبـت معهـم في الجوانب الفنية لمكونات الإستثمار وتقييم الكلفة الجملية الحقيقية للمشروع
----"
-"س126: ما هي المصالح المعنية لتعهد ملفات المشاريع التي تفوق قيمتها 15 مليون دينار؟
-ج126:  يعتبر هذا النوع من المشروع  الذي تفوق قيمة إستثماراته  15 مليون دينار من صنف "" ب "" .  
-    ← إتـصل بمصالح الهيئة التونسية للإستثمار للتثبـت معهـم في الجوانب الفنية لمكونات الإستثمار وتقييم الكلفة  الجملية الحقيقية للمشروع . 
----"
-"س127: معلومات أخرى بخصوص المصالح التي تتعهد الملفات
-ج127: • بالنسبة للاستثمارات التي سبق أن انتفعت بشهائد إيـداع تصاريح بالاستثمـار أو مقررات إسنـاد امتيـازات من وكالة النهـوض بالاستثمارات الفلاحية، يتم تعهد عمليات التوسعة والتجديد والتحيين المرتبطة بها من قبل وكالة النهوض بالاستثمارات الفلاحية مهما كانت قيمة استثماراتها وذلك تفاديا لتشتت الباعث والملفّات بين مصالح وكالة النهوض بالاستثمارات الفلاحية والمندوبيات.
-• بالنسبـة للاستثـمارات التي تقـوم بهـا شركـات الاحياء، يتم التعهد بها حصريـا من قـبـل الإدارة المـركزيـة لوكـالة النهـوض بالاستثمارات الفلاحية مهما كانت قيمتها.
-• بالنسبة للاستثمارات المتعلقة بمشاريع التحويل الأوّلي البيولوجي يتمّ التعهّد بها حصريا من قبل وكالة النهوض بالاستثمارات الفلاحية ما دامت قيمتها استثماراتها لا تتجاوز 15 م د.
-• بالنسبة لمطالب القروض العقارية، يتمّ التعهّد بها حصريا من قبل المصالح المركزية لوكالة النهوض بالاستثمارات الفلاحية وذلك بعد أن يتم إيداع الملفّ على المستوى الجهوي ومطالبة الباعث بإتمامه بالمعطيات والوثائق الضرورية والقيام بمعاينة الأرض موضوع مطلب القرض العقاري وإعداد تقرير في الغرض وإحالة الملفّ إلى الإدارة المركزية
----"
-"س128: ما هي الإمتيازات الجبائية ؟ 
-ج128: تتمثل الإمتيازات الجبائية في :
- ـ  طرح المداخيل أو الأرباح بعنوان الاستغلال من أساس الضريبة، 
- ـ  طرح المداخيل أو الأرباح بعنوان إعادة الاستثمار خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة ،
- ـ  توقيف العمل بالآداء على القيمة المضافة،
- ـ  الإعفاء من المعاليم الديوانية 
----"
-"س129: ما هي الإمتيازات المالية ؟ 
-ج129: تتمثل الإمتيازات المالية في إسناد منح بعنوان إنجاز عمليات الإستثمار المباشر كما يلي :
- ـ  منحة الترفيع من القيمة المضافة والقدرة التنافسية ، 
- ـ  منحة التنمية الجهوية ،
- ـ  منحة تطوير القدرة التشغيلية ،
- ـ  منحة التنمية المستدامة بعنوان مقاومة التلوث وحماية البيئة ،
- ـ  مساهمة في رأس المال محملة على موارد الصندوق التونسي للإستثمار
----"
-"س130: ما هي الإمتيازات الأخرى ؟
-ج130: إنتداب إطارات من ذوي الجنسية الأجنبية :
- يمكن لكل مؤسسة انتداب إطارات من ذوي الجنسية الأجنبية في حدود 30% من العدد الجملي للإطارات بالمؤسسة وذلك إلى نهاية السنة الثالثة من تاريخ التكوين القانوني للمؤسسة أو من تاريخ دخولها طور النشاط الفعلي حسب اختيار المؤسسة. وتخفض هذه النسبة وجوبا إلى 10 % ابتداء من السنة الرابعة من هذا التاريخ. وفي كل الحالات، يمكن للمؤسسة انتداب أربعة إطارات من ذوي الجنسية الأجنبية. 
----"
-"س131: ما المقصود بالقطاعات ذات الأولوية  ؟
-ج131:  تعتبر قطاعات ذات الأولوية القطاعات التي تتميز بطابعها الاستراتيجي وقدرتها على الرفع من نسق النمو أو ذات تشغيلية عالية، وتحظى بأولوية طبقا للمخططات التنموية. وقد وتمّ اعتبار القطاع الفلاحي والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأوّلى ذات أولوية.
----"
-"س132: ما المقصود بالمنظومات الإقتصادية ؟
-ج132:  المنظومات الإقتصادية هي الأنشطة التي تعتمد بشكل أساسي على تثمين الموارد الإنشائية والفلاحية والمخزون الطبيعي والثقافي من خلال التصنيع والتوظيف بمناطق الإنتاج وتساهم في تطوير سلاسل القيم من خلال التحويل الجذري لطبيعة المنتوج، وهي تضم منظومتين:
-- منظومة الزراعات الجيوحرارية،
-- منظومة النباتات الطبية والعطرية.
-وتسند الامتيازات المتعلقة بالمنظومات الاقتصادية لعمليات الاستثمار الخاصّة بالتحويل فقط
----"
-"س133: ما المقصود بالإحداث ؟
-ج133:  يقصد بالإحداث كلّ مشروع جديد مستقل بذاته بغرض إنتاج سلع أو إسداء خدمات وموضوع أول طلب لإسناد الامتيازات.
-كما تصنّف إحداث عملية الاستثمار التي تلي مباشرة عملية استثمار مصادق عليها منذ فترة تزيد عن 10 سنوات وذلك في تاريخ إيداع الملف المتعلّق بها.
----"
-"س134: ما المقصود بالتوسعة ؟
-ج134: يقصد بالتوسعة كلّ عمليات الاستثمار الموالية لعمليات الاحداث أو لعمليات التوسعة ومرتبطة بها:
-ـ بالنسبة للاستثمارات في القطاع الفلاحي (إنتاج نباتي وإنتاج حيواني) إذا تمّت على نفس المستغلة أو في أراض أخرى مع استعمال نفس الموارد أو وسائل الإنتاج،
-ـ بالنسبة للاستثمارات في نفس النشاط في قطاعات الصيد البحري إذا استعملت نفس الموارد أو وسائل الانتاج (استثمارات تخصّ نفس المركب مثلا)،
-ـ بالنسبة لتربية الأحياء المائية إذا تمّت في نفس الموقع (Site) أو استعملت نفس الموارد أو وسائل الانتاج،
-ـ بالنسبة للخدمات والتحويل الأوّلي إذا تمت في نفس المكان أو استعملت نفس الموارد أو وسائل الانتاج،
-ـ عمليات الاستثمار في التحويل الأوّلي المندمج مع استثمارات فلاحية انتفعت بامتيازات سابقا. 
----"
-"س135: ما المقصود بالتجديد ؟ 
-ج135: يقصد بالتجديد كلّ عملية استثمار تتعلّق بتجديد استثمارات انتفعت بامتيازات سابقا في إطار مجلة تشجيع الاستثمار أو قانون الاستثمار. ويعتمد في ذلك المدّة الإندثارية لكل مكونة
----"
-"س136: ما المقصود بالتحويل الأولي المندمج ؟ 
-ج136: • تعتبر عمليات الاستثمار لتحويل المنتوج مندمجة مع عملية استثمار في النشاط الفلاحي أو الصيد البحري عندما يتعلق التحويل بمنتوج المستثمر نفسه وإن كانت عمليتي الاستثمار على موقعين متباعدين جغرافيا على أن يمثّل الإنتاج ما لا يقلّ عن 10% من طاقة التحويل.
-• ينطبق مفهوم الاندماج حتّى بالنسبة لتحويل منتوج متأت من مشروع فلاحي أو صيد بحري غير مصادق عليهما.
----"
-"س137: ما المقصود بالشروع في انجاز الإستثمار  ؟
-ج137: يعتبر شروعا في إنجاز الاستثمار، بداية إنجاز مكونة من مكونات الاستثمار المصرح به ويتمّ الإثبات بالاستظهار بما يفيد خلاص مبلغ مالي مقابل ذلك أو بناء على معاينة ميدانية.
----"
-"س138: ما المقصود بدخول طور النشاط الفعلي   ؟
-ج138: يعتبر دخولا طور النشاط الفعلي الانتهاء من إنجاز كلّ مكونات الاستثمار المصادق عليها
----"
-"س139:  ماذا تعرف عن قانون الإستثمار عدد 71  لسنة 2016 ؟
-ج139:  في نطاق مساهمة الدولة في النهوض بالإستثمار بما في ذلك الإستثمار في قطاعي الفلاحة والصيد البحري والتشجيع عليه  فقد أقرت للغرض العديد من الحوافز لفائدة الباعثين من خلال قانون الإستثمار الصادرة بالقانون عدد 71 لسنة 2016 بتاريخ 30 سبتمبر 2016.
-يهدف قانون الإستثمار إلى النهوض بالاستثمار وتشجيع إحداث المؤسسات وتطويرها حسب أولويات الاقتصاد الوطني خاصة عبر
-ترفيع القيمة المضافة والقدرة التنافسية والتصديرية والمحتوى التكنولوجي للاقتصاد الوطني على المستويين الإقليمي والدولي وتنمية القطاعات ذات الأولوية
-إحداث مواطن الشغل والرفع من كفاءة الموارد البشرية
-  تحقيق تنمية جهوية مندمجة ومتوازنة
-تحقيق تنمية مستدامة
-كما يخوّل هذا القانون لكل شخص طبيعي أو معنوي سواء كان تونسيا أو أجنبيّا، مقيما أو غير مقيم أو في نطاق الشراكة، من الاستثمار بحرية في قطاع الفلاحة والصيد البحري.
----"
-"س140: ماهو تعريف الاستثمار حسب قانون الإستثمار عدد 71 لسنة 2016 ؟
-ج140: هو كل توظيف مستدام لأموال يقوم به المستثمر لإنجاز مشروع من شأنه المساهمة في تنمية الاقتصاد التونسي مع تحمل مخاطره ويكون في شكل عمليات استثمار مباشر (إحداث، توسعة، تجديد) أو استثمار بالمساهمة النقدية أو العينية في رأس مال شركات بالبلاد التونسية سواء عند تكوينها أو عند الترفيع في رأس مالها أو اقتناء مساهمة في رأس مالها.
----"
-"س141: ماهي الحوافز الواردة في قانون الاستثمار  عدد 71 لسنة 2016 ؟
-ج141: أقرّ قانون الاستثمار مجموعة من الحوافز للقطاع الفلاحي تحت أربع عناوين رئيسية وهي : 
-  -  منحة الترفيع من القيمة المضافة والقدرة التنافسية ،
-  -  منحة التنمية الجهوية ،
-  -  منحة تطوير القدرة التشغيلية ،
-  -  منحة التنمية المستدامة بعنوان مقاومة التلوّث وحماية البيئة ،
-كما تمّ إقرار حوافز في شكل مساهمة في رأس المال محمّلة على موارد الصندوق التونسي للاستثمار وقروض عقارية
-وتمّ كذلك وضع حوافز جبائية ومالية للمشاريع ذات الأهمية الوطنية والتي تمّ تعريفها على أساس حجمها الاستثماري (يفوق 50 م د) أو طاقتها التشغيلية (500 موطن شغل) واستجابتها على الأقلّ لأحد الأهداف الواردة أعلاه
-وتضمّن قانون الاستثمار أحكاما انتقالية تتمثّل في مواصلة الانتفاع بامتيازات مجلة تشجيع الاستثمار شريطة الحصول شهادة تصريح بالاستثمار قبل دخول قانون الاستثمار حيّز التطبيق وعلى مقرّر إسناد امتيازات مالية ودخول الاستثمارات طور النشاط الفعلي في أجل أقصاه سنتان ابتداء من تاريخ دخول قانون الاستثمار حيز التطبيق.
----"
-"س142: ما المقصود بالشروع في انجاز الإستثمار؟
-ج142: يعتبر شروعا في إنجاز الاستثمار، بداية إنجاز مكونة من مكونات الاستثمار المصرح به ويتمّ الإثبات بالاستظهار بما يفيد خلاص مبلغ مالي مقابل ذلك أو بناء على معاينة ميدانية.
----"
-"س143: ما المقصود بدخول طور النشاط الفعلي؟
-ج143: يعتبر دخولا طور النشاط الفعلي الانتهاء من إنجاز كلّ مكونات الاستثمار المصادق عليها.
----"
-"س144: ما المقصود بالمؤسسات المصدرة كليا؟
-ج144: • تعتبر مؤسسات مصدرة كليا المؤسسات التي تبيع كامل سلعها أو منتجاتها أو تسدي كامل خدماتها خارج البلاد التونسية أو التي تنجز كامل خدماتها بالبلاد التونسية والتي يتم استعمالها بالخارج.
-• كما تعتبر مؤسسات مصدرة كليا المؤسسات التي تبيع كامل منتجاتها أو تسدي كامل خدماتها للمؤسسات المصدّرة كليا.
+<qa>
+<q>ما المقصود بدخول طور النشاط الفعلي ؟</q>
+<a>الانتهاء من إنجاز كل مكونات الاستثمار المصادق عليها.</a>
+</qa>
 
-  ملاحظات : 
-ـ يمكن للمؤسسات المصدرة كليا بيع جزء من إنتاجها أو إسداء جزء من خدماتها بالسوق المحلية بنسبة لا تتعدى 30% من رقم معاملاتها للتصدير المحقق خلال السنة المدنية المنقضية، وبالنسبة إلى المؤسسات الجديد .
-ـ تحتسب نسبة 30% على أساس رقم معاملاتها للتصدير المحقق منذ الدخول طور الإنتاج الفعلي.
-ـ وتضبط نسبة 30% باعتماد قيمة المنتوج بالنسبة للفلاحة والصيد البحري.
----"
-"س145: ماذا تعرف عن تصنيف عمليات الإستثمار؟
-ج145: يصنف الفصل الثاني من الأمر الحكومي عدد 389 لسنة 2017 المؤرخ في 9 مارس 2017 (المتعلق بالحوافز المالية لفائدة الإستثمارات المنجزة في إطار قانون الإستثمار) الإستثمار المباشر في القطاع الفلاحي والصيد البحري والخدمات والتحويل الأولي المرتبط بهما إلى صنفين إثنين "" أ "" و "" ب "" .
-ويعتمد في تصنيف مشاريع الفلاحة والصيد البحري وتربية الأحياء المائية على قيمة مكونات الإستثمار ،أما بالنسبة لمشاريع الخدمات والتحويل الأولي المندمج فهم يصنفون "" ب"" مهما كانت قيمة استثماراتهم وبالنسبة لمشاريع الشركات التعاونية أو مجامع التنمية فهم يصنفون "" أ ""  مهما كانت قيمة استثماراتهم.
-ويتلخص تصنيف عمليات الاستثمار في:
-- الفلاحة: استثمار يساوي أو أقل من 200 ألف دينار : الصنف ""أ""
-- الفلاحة: استثمار يفوق 200 ألف دينار : الصنف ""ب""
-- الصيد البحري: استثمار يساوي أو أقل من 300 ألف دينار : الصنف ""أ""
-- الصيد البحري: استثمار يفوق 300 ألف دينار : الصنف ""ب""
-- تربية الأحياء المائية: استثمار يساوي أو أقل من 500 ألف دينار : الصنف ""أ""
-- الصيد البحري: استثمار يفوق 500 ألف دينار : الصنف ""ب""
----"
-"س146: Quelle est la condition pricipale pour bénéficier des privilèges de la loi de l'investissement n° 71 de 2016 ?
-ج146: Avant de commencer la réalisation du projet, il est essentiel d'obtenir une attestation de dépôt de déclaration d'investissement (ADI) afin de bénéficier des privilèges de la loi de l'investissement n° 71 de 2016.
----"
-"س147: Secteur d’élevage camelin.
-ج147: L'effectif camelin en Tunisie en 2023 est estimé à 52000 têtes.
-Le cheptel camelin est réparti sur 16 gouvernorats principalement au sud de la Tunisie. Plus de 90% du cheptel (soit 42 000 unités femelles productives) est concentré sur les six gouvernorats du Sud tunisien (Tataouine, Médenine, Kébili, Tozeur, Gafsa et Gabés) et qui adopte en majorité le mode d’élevage extensif).
-Le nombre des éleveurs de camelin est de l’ordre de 2300 (soit plus de 70% des éleveurs possèdent un troupeau qui ne dépasse pas 20 têtes).
-Le secteur permet la production des divers produits tel que la viande rouge (3500 tonnes), lait (12 tonnes : principalement destiné à la consommation familiales), peaux (57 tonnes) et poils (30 tonnes).
-Les chameaux contribuent à la conservation de l’équilibre environnementale et de la biodiversité en valorisant les parcours marginaux pastoral et sebkha….
----"
-"س148: Quelles sont les incitations allouées aux investissements dans le secteur d’élevage camelin ?
-ج148: : l’état encourage l’élevage camelin en mode semi-intensif. Les incitations concernent l’acquisition du troupeau, la construction des bâtiments et des étables d’elevage et d’engraissement et l’achat des équipements nécessaires à l’élevage (machine a traire, tank frigorifique, engins..), alors que en mode extensif les avantages financières se limitent à l’acquisition des tracteurs équipés d’accessoires et de moyens de transport.
----"
-"س149: Quelles sont les pourcentage des primes allouées aux promoteurs dans le secteur camelin ?
-ج149: Les projets classées A (cout d’investissement inférieur ou égale à 200 000 DT) bénéficient d’une prime de l’ordre de 30% du cout d’investissement. Alors que les projets classées B (cout d’investissement supérieur à 200 000 DT) bénéficient d’une prime de l’ordre de 15% du cout d’investissement.
----"
-"س150: Les conditions spécifiques d’octroi des avantages dans le secteur d’élevage camelin en mode semi-intensif ?
-ج150: La nécessité de fournir une superficie fourragère en irrigué minimale a raison d’un hectare pour 20 têtes (dont 10 têtes au parcours en alternance) et une étable de superficie couverte de 100 m2  (10 m2 par têtes).   
-Concernant le troupeau, la chamelle doit être pleine et primipare, l’âge entre 4 et 6 ans, alors que l’âge maximal du chameau est de 6 ans.
----"
-"س151: Les conditions d’octroi des avantages dans le secteur d’élevage camelin en mode extensif ?
-ج151: Concernant l’acquisition du matériels agricoles (tracteurs équipés d’accessoires et de moyens de transport), l’éleveur doit être propriétaire d’un cheptel constitué au minimum de 50 chamelles reproductives 
----"
-"س152: Quelles sont les composantes qui bénéficient des avantages pour les projets d’engraissement des chamelons ?
-ج152: Les avantages concernent les bâtiments d’exploitations (étables, dépôts de stockage) citernes souterraines et matériels d’élevage. 
----"
-"س153: Répartition du cheptel camelin en Tunisie
-ج153: Le cheptel camelin est réparti sur 16 gouvernorats principalement au sud de la Tunisie. Plus de 95% de l’effectif est concentré dans les six gouvernorats du Sud tunisien et qui adopte le mode en majorité d’élevage extensif :
-Médenine : 15000,
-Tataouine 13300,
- Kébili 13000, 
- Tozeur 4900,
-Gabés 1700,
- Gafsa 1600, 
----"
-"س154: Nombres des éleveurs de camélidés en Tunisie ? 
-ج154: Le nombre des éleveurs de camelin est de l’ordre de 2300 (soit plus de 70% des éleveurs possèdent un troupeau qui ne dépasse pas 20 têtes).
----"
-"س155: Les produits issus de l’élevage camelin ?
-ج155: Le secteur permet la production des divers produits tel que la viande rouge (3500 tonnes), lait (12 tonnes : principalement destiné à la consommation familiales), peaux (57 tonnes) et poils (30 tonnes).
----"
-"س156:  Les idées des projets liées à l’élevage camelin ?
-ج156: Transport frigorifique du lait et du viande rouge, centre de collecte du lait, unité de pastorisations du lait, engraissement des chamelons, unité d’extraction des gélatine, unité de valorisation des poils et du peaux …  
----"
-"س157: Y a-t-il une stratégie nationale pour la promotion du secteur camelin.
-ج157: En 2016 le ministère de l’agriculture à traves l’office d’élevage et du pâturage a élaboré une stratégie nationale pour la promotion du secteur camelin.
----"
-"س158: Les principales composantes de la stratégie nationale pour la promotion du secteur camelin ?
-ج158: : Les principales composantes de la stratégie nationale pour la promotion du secteur camelin sont :
--	Organisation du secteur
--	Développement du cheptel camelin
--	Amélioration de la production et de la productivité
----"
-"س159: Les principaux objectifs de la stratégie nationale pour la promotion du secteur camelin ?
-ج159: Les principaux objectifs de la stratégie nationale pour la promotion du secteur camelin sont :
--	L’évolution de l’effectif
--	Conservation de l’équilibre environnementale et de la biodiversité en valorisant le parcours marginaux pastoral et sebkha
--	L’organisation des éleveurs au sein des organismes professionnels
--	L’amélioration des revenues des éleveurs
--	La promotion du secteur à travers l’organisation des évènements à l’échelle nationale et internationale  
----"
-"س160: Y’a-t-il des avantages liés à la production  accordés aux éleveurs camelin dans le cadre de la stratégie nationale pour la promotion du secteur camelin
-ج160: Les avantages liés à la production  accordés aux éleveurs camelin dans le cadre de la stratégie nationale pour la promotion du secteur camelin sont comme suit :
-•	Une prime allouée à l’elevage de la Chamelonne (700 dt par tête sur 3 années)
-•	Une prime allouée à l’engraissement du chamelon (75 dt par tête à l’abatage pour un poids de 250 Kg )
----"
-"س161: Quels sont les organismes intervenants dans le secteur camelin
-ج161: les principaux organismes intervenants dans le secteur camelin sont comme suit :
-•	L’APIA
-•	L’Office d’élevage et de paturage (OEP)
-•	La CRDA
-•	L’AVFA
-•	L’école vétérinaire Sidi Thabet, 
-•	La direction générale des services vétérinaires 
-•	Institut des Régions Arides (IRA)
-•	L’office de devloppement de Sud
----"
-"س162: Quelles sont races du camélidé en Tunisie
-ج162: : Les races du camélidés en Tunisie sont comme suit :
-•	Ardhaoui Tataouine  عرضاوي
-•	Ardhaoui  Medenine (عرضاوي)
-•	Marzougui (مرزوقي)
-•	Ghiloufi (غيلوفي)
-•	Gouaudi (قعودي)
----"
-"س163: La superficie du parcours et du sbekha alloué à l’élevage camelin
-ج163: La superficie du parcours et du sbekha est d’environ 1.2 millions d’hectares.
----"
-"س164: Evolution du cheptel camelin en Tunisie ?
-ج164: Grace a la stratégie nationale pour la promotion du secteur camelin l’effectif a connu une évolution de 2	% (entre 2016 et 2023) 
----"
-"س165: La production moyenne du lait par chamelle ?
-ج165: La production moyenne du lait par chamelle est de 6 l/j (1800 l/lactation).
----"
-"س166: La période de lactation chez la chamelle ?
-ج166: La période de lactation chez la chamelle est de 10 mois
----"
-"س167: le Gain quotidien moyen chez les camélidés ?
-ج167: le GMQ varie entre 500 et 800 g/j
----"
-"س168: La période d’engraissement pour les chamelons ?
-ج168: La période d’engraissement varie entre 5 et 11 mois
----"
-"س169: l’âge de sevrage ?
-ج169: : l’âge de sevrage de chamelons dépend du mode d’engraissement ; il est de 3 à 5 mois pour le sevrage précoce et entre 10 à 12 mois pour le sevrage tardive.
----"
-"س170: Le poids de chamelons avant et après l’engraissement ?
-ج170: : Le poids de chamelon avant engraissement varie entre 80 et 100 kg (sevrage précoce) et entre 130 et 170 kg (sevrage tardive) Après la période d’engraissement le chamelon atteindra un poids de 250 kg
----"
-"س171: Méthode adopté pour la traite des chamelles ?
-ج171: : La méthode adopté pour la traite des chamelles  est la traite mécanique (machine à traire)
----"
-"س172: La durée de la période inter vêlage ?
-ج172: la période inter vêlage est de 24 mois en régime extensif et varie entre 18 à 24 mois en régime intensif
----"
-"س173: Secteur des dattes.
-ج173: La Tunisie est le premier exportateur mondial de dattes en termes de valeur, et les dattes sont le deuxième produit d’exportation de la filière agroalimentaire tunisienne après l’huile d’olive. Dans les zones oasiennes, les revenus de la majorité de la population sont liés au palmier dattier. En Tunisie on cultive plus que 200 variétés de dattes, mais la plus répandue est la variété Deglet Ennour. La production de Deglet Ennour représente 30% de la production mondiale et 70% de la production nationale totale de dattes. Au cours des dernières décennies la production en Tunisie a plus que doublé ; les exportations des dattes certifiées biologiques sont également en train d’augmenter et représente presque 10% des recettes.
-La superficie totale du palmier dattier est de l’ordre de 60800 ha repartie sur quatre gouvernorats comme suit : 
--	Kébili 40000 ha (65%)
--	Tozeur 8500 ha (14%)
--	Gabes 7325 ha (12%)
--	Gafsa 3800 ha (6%)
-On peut distinguer 3 types d’oasis en Tunisie :
--	Oasis Continentales (Kébili et Tozeur)
--	Oasis littorales (Gabes)
--	Oasis Montagneuses (Gafsa)
-L’effectif total du palmier dattier en Tunisie est d’environ 6.5 millions palmiers dattiers repartie entre les périmètres publics irrigués et les exploitations agricoles privées.
-La production nationale moyenne de dattes durant la dernière décennie est estimée à 282000 Tonnes avec un taux de croissance moyenne de 6.9%. 
-La Tunisie exporte vers 84 pays. Pour l’année 2023-2024 la quantité exportée est de l’ordre 138000 Tonnes avec une valeur de 886000 milles dinars.
----"
-"س174: Superficie palmier dattier
-ج174: Les oasis tunisiennes constituent des centres importants de production agricole. Elles couvrent une superficie totale estimé à près 60800 ha qui représente 14% de la superficie totale d’arboricultures et 34% de superficie irriguée.
----"
-"س175: la réparation des oasis en Tunisie. 
-ج175: : les oasis se localisent principalement dans quatre gouvernorats répartis comme suit : 
--	Kébili 40000 ha (65%)
--	Tozeur 8500 ha (14%)
--	Gabes 7325 ha (12%)
--	Gafsa 3800 ha (6%)
----"
-"س176: production nationale des dattes en Tunisie 
-ج176: La production nationale moyenne de dattes durant la dernière décennie est estimée à 282000 Tonnes avec un taux de croissance moyenne de 6.8%. 
-Pour l’année 2024-2025 la production nationale a atteint 347000 tonnes
----"
-"س177: Types des oasis en Tunisie 
-ج177: Selon leur situation géographique, trois types d’oasis peuvent être distingués en Tunisie :
--	Oasis Continentales (sahariennes) (Kébili et Tozeur)
--	Oasis littorales (Gabes)
--	Oasis Montagneuses (Gafsa)
-Les oasis Tunisiennes sont aussi reparties entre les oasis traditionnelles représentant 46% du total de superficie et les oasis modernes qui représentent 54% du total de la superficie. 
----"
-"س178: l’effectif palmier 
-ج178: L’effectif total du palmier dattier en Tunisie est d’environ 8.7 millions palmiers dattiers repartie entre les périmètres publics irrigués et les exploitations agricoles privées dont 6.7 millions Deglet Ennour.
----"
-"س179: Quantités exportées 
-ج179: La Tunisie exporte vers 84 pays. Pour l’année 2023-2024 la quantité exportée est de l’ordre 138000 Tonnes avec une valeur de 886000 milles dinars.
----"
-"س180: Variétés des dattes
-ج180: En Tunisie on cultive plus que 200 variétés de dattes (Deglet Ennour, Gosbi, Kenta, Alig, Kentichi, Horra, lemssi, bouhatem…), la plus répandue est la variété Deglet Ennour qui représente 70% de la production nationale.
----"
-"س181: Dattes Biologique
-ج181: Les exportations des dattes certifiées biologiques en train d’augmenter et représente presque 10% des recettes.
----"
-"س182: Les variétés des dattes communes
-ج182: Les dattes communes (مطلق) (Gosbi, Kenta, bisr, Kentichi, Horra, Rochdi ; Akhwat, lemssi..), produites en Tunisie sont de l’ordre de 54174 Tonnes (2024-2025)   
----"
-"س183: La densité moyenne de pieds de palmier dattier par hectare ?
-ج183: : la densité moyenne est de l’ordre de 150 pieds de palmier dattier par hectare.
----"
-"س184: Le rendement de production moyenne des dattes par hectare
-ج184: Le rendement moyenne de dattes dépend de la variété, des conduites culturales et de l’âge. Il est de l’ordre de 10 tonnes par hectare pour la variété Deglet Ennour.
----"
-"س185: Les techniques d’irrigation adoptés dans l’oasis.
-ج185: : Les techniques d’irrigation adoptés dans l’ancienne oasis est la submersion alors que dans les oasis modernes les agriculteurs adoptent aussi l’irrigation localisée.
----"
-"س186: La période de récolte des dattes 
-ج186: : La periode de recolte des dattes depend de la varité , elle commence à partir du fin juillet pour quelques variétés communes molles et s’etend jusqu’au mois de décembre (variété aligue)  NB : La période de récolte de la varité de deglete Ennoure est entre Octobre et décembre
----"
-"س187: Les avantages accordées dans le secteur dattier
-ج187: Les avantages accordées dépendent du cout d’investissement ( catégorie A ou B) et des composantes d’investissement à mettre en place.
-Pour les investissement qui ne dépassent pas les 200 000 dt, les taux des primes varient entre 30 et 55%  alors que pour les investissement qui dépassent les 200 000 dt le pourcentage varie entre 15 et 50%.
-NB : Les organismes professionnelles tel que ; les GDA  (groupement de développement agricoles), les SMSA (société  mutuelle de service agricole),  les sociétés citoyennes,  bénéficient des avantages accordées à  la catégorie A et d’une prime spécifique qui peut atteindre 60% du cout d’investissement 
----"
-"س188: L’année d’entrée en production pour les dattiers
-ج188: : L’entrée en production pour les dattiers est à partir de la 5 -ème année et entre en pleine production à partir de 12 ans 
----"
-"س189: La part de la production des dattes dans la valeur de la production totale agricole
-ج189: La part de la production des dattes dans la valeur de la production totale agricole est en moyenne de 6 %.
----"
-"س190: La part des dattes dans l’exportation alimentaire 
-ج190: Les dattes contribuent dans l’exportation alimentaire d’environ 11 %
----"
-"س191: Nombre de producteurs des dattes en Tunisie
-ج191: Le Nombre de producteurs des dattes en Tunisie est de l’ordre de 60000 agriculteurs dont la plupart exploitent des petites superficies 
----"
-"س192: Nombre de collecteur des dattes 
-ج192: Il existe 400 unités de collecte accréditée
----"
-"س193: Nombre de station de conditionnement de dattes ?
-ج193: Il existe 80 stations conditionnement de dattes.
----"
-"س194: Nombre des unités d’exportation de dattes ?
-ج194: 150 unités d’exportation de dattes sont implantées en Tunisie. 
----"
-"س195: Nombre des pieds de palmier dattier productifs ?
-ج195: L’effectif total du palmier dattier productif est de l’ordre de 5.96 millions pieds dont 4.54 millions des pieds variété Deglet Ennour (76%) 
----"
-"س196: Y a-t-il une stratégie nationale pour la promotion du secteur dattier.
-ج196: le ministère de l’agriculture a élaboré une stratégie nationale pour la promotion du secteur dattier à l’horizon du 2035.
----"
-"س197: Les principales composantes de la stratégie nationale pour la promotion du secteur dattier ?
-ج197: Les principales composantes de la stratégie nationale pour la promotion du secteur dattier sont :
--	Amelioiration de l’efficience du système oasien et de la filiere datte
--	Assurer la perennité du système oasien et l’adaptation aux changement climatiques
--	-Consolidation de la gouvernance et la gestion pérenne de la filière datte.
+<qa>
+<q>ما المقصود بالقطاعات ذات الأولوية ؟</q>
+<a>القطاعات ذات الطابع الاستراتيجي والقدرة على الرفع من نسق النمو أو ذات تشغيلية عالية.
+القطاع الفلاحي والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي كلها تُعتبر ذات أولوية.</a>
+</qa>
 
----"
-"س198: Les principaux objectifs de la stratégie nationale pour la promotion du secteur dattier ?
-ج198: Les principaux objectifs de la stratégie nationale pour la promotion du secteur dattier sont :
--	Assurer la pérennité des oasis 
--	Amélioration de la qualité des dattes
--	Amélioration du positionnement de la Tunisie en matière d’exportation de dattes au niveau mondial
--	Développement des superficies des oasis BIO (Objectif 5000 ha et 30milles tonnes)
----"
-"س199: les principaux organismes intervenants de l’état dans le secteur dattier ?
-ج199: les principaux organismes de l’état intervenants dans le secteur dattier sont comme suit :
-•	L’APIA
-•	La CRDA
-•	L’AVFA
-•	Le centre technique de dattes
-•	Le centre régional de recherches en agriculture oasienne
-•	Institut des Régions Arides (IRA)
-•	L’office de devloppement de Sud..
----"
-"س200: Qui peuvent suivre la formation pour l’obtention d’un crédit foncier
-ج200: Les jeunes de mois du 40 ans et les acquéreurs de part de leurs co-propriétaires peuvent suivre une formation  pour l’obtention d’un crédit foncier
----"
-"س201: Ou peut on suivre la formation professionnelle pour l’obtention d’un crédit foncier 
-ج201:  la formation professionnelle pour l’obtention d’un crédit foncier est organisé  dans les centres de formations en agricultures agrées 
----"
-"س202: Quelles sont les thèmes de la formation à suivre pour l’obtention d’un PF
-ج202: La formation à suivre doit être dans la spécialité de la composante principale du projet à mettre en place
----"
-"س203: Superficie minimale requise pour le crédit foncier
-ج203: Il n’y a pas de superficie minimum mais le projet proposé sur le terrain agricole doit être rentable (entité économique indépendante)
----"
-"س204: Comment prouver la rentabilité du projet, sujet d’un prêt foncier
-ج204: Vous prouvez la rentabilité du projet à travers un plan d’affaire dont vous trouvez un modèle sur le site de l’APIA
----"
-"س205: Les titulaires des diplômes des établissements d’enseignement supérieur agricoles ou de formation agricole ou de pêche ont le droit de bénéficier de crédit foncier
-ج205: Les titulaires des diplômes des établissements d’enseignement supérieur agricoles ou de formation agricole ou de pêche ont le droit de bénéficier de crédit foncier
----"
-"س206: Quand le bénéficiaire du  crédit foncier peut céder le terrain
-ج206: Le bénéficiaire du crédit foncier ne doit  pas céder et  doit exploiter la terre agricole acquise en sa qualité d’investisseur direct durant la période de remboursement du prêt sans qu’elle soit inférieure à dix ans à partir de la réalisation de toutes les composantes de l’investissement
----"
-"س207: Le fonctionnaire de la fonction publique ou privée a le droit de bénéficier du crédit foncier
-ج207: ne pas exercer une activité en tant qu’employé dans le secteur public ou privé, ni une activité soumise à la déclaration d’existence et ce durant toute la période prévue pour le remboursement du prêt,
----"
-"س208: Les sociétés peuvent bénéficier de crédit foncier
-ج208: Les sociétés ne peuvent pas bénéficier de crédit foncier,
-L’article 25 du decret 182-2024 dit qu’il faut exploiter la terre agricole acquise en sa qualité d’investisseur direct
----"
-"س209: L’autofinancement minimum de l’aménagement pour un prêt foncier
-ج209: L'autofinancement est de 10% de la valeur des travaux d’aménagement
----"
-"س210: L’autofinancement minimum pour l’achat du terrain
-ج210: L’autofinancement minimum pour l’achat du terrain est de 5% du prix d’achat du terrain
----"
-"س211: Est-ce que le crédit foncier requière une déclaration d’investissement
-ج211: La déclaration du crédit foncier se fait après l’achat du terrain
----"
-"س212: Quant signer le contrat d’accompagnement
-ج212: Après l’achat du terrain et avant la déclaration d’investissement, le contrat d'accopagnement sera signé
----"
-"س213: Quand se verse le crédit d’aménagement pour un crédit foncier
-ج213: Après le versement du crédit d’achat du terrain, le crédit d’aménagement sera versé sur 3 tranches pour les points d’eau et une seule tranche pour l’électrification
----"
-"س214: Quelles sont Les composantes d’aménagement sujet du crédit foncier
-ج214: Les composantes d’aménagement sujet du crédit foncier sont; la création de sources d’eau et l’éléctrification
----"
-"س215: Quel est le cout total du crédit foncier
-ج215: Pour avoir une ideé sur le montant du credit foncier vous pouvez essayer le simulateur suivant: https://www.apia.com.tn/simulateur-de-pret-foncier.html
----"
-"س216: Est ce que l’APIA offre des terrains pour l’achat à travers le PF
-ج216: L’APIA ne dispose pas d’une liste de terrains agricoles pour l’achat à travers le PF
----"
-"س217: Quelles sont les conditions et spécificités du terrain aqui par PF
-ج217: Terrain nu
-S’il renforme une partie planté , il faut que la superficie non planté représente une entité économique viable
-Ne se compose pas de partie éloigné 
----"
-"س218: C'est quoi une chaine de valeur de l'entreprenariat ?
-ج218: La chaine de valeur de l'entreprenariat se shematise comme étant un processus multi-phases; depuis le stade de l'ideationjusqu'à l'entré en production du perojet, Le jeune promoteur doit appliquer les principes de la chaine de valeur afin ded valiriser chacune des étapes de son projet.
----"
-"س219: Quelle est la premiére phase pour lancer mon projet agricole ou agroalimentaire
-ج219: Tout projet de création d'entreprise quel que soit le secteur commence par une idée de projet ou une opportunité identifié. L'idée prend souvent la forme d'une intuition ou un désir qui s'appreffondit et mature avec le temps. Vous pouvez etre encadré durant cette phase par les bureaux d'accompagnement privés ou bien par les structures d'appui publiques: les pepinaires d'entreprises agricoles (url), les centres d'affaires et le reseau national des pepiniaires agricoles (url , et page fb), ou les espaces engtreprendres (sous tutelle de l'ANETI). Cette assistance offerte par les structures d'appui est publique est gratuite et contribue ainsi à limiter les couts  de l'étude et à vous doter d'une formation adapté à votre projet et d'un accompagnement personalisé.
----"
-"س220: Comment étudier la faisabilité technico-économique de mon projet
-ج220: La faisabilité technique est un volet tres important de l'entreprenariat dans le secteur agricole et agro-alimentaire la faisabilité technique depend souvant de 2 facteurs clés: l'un est un facteur inert
----"
-"س221: Comment démarrer le montage de mon entreprise ?
-ج221: Si vous avez confirmé et avez évalué
-votre idée de projet, vous devrez passer à un stade de détails approfondis de votre projet. À savoir réaliser des études et des actions comme suit :                                                                                                                                                                                         
-Étude de faisabilité technico-économique;
-Recherche de financement;
-Montage juridique.                                                                                                                                                                                           
- Si à ce stade, vous êtes un porteur/une porteuse d’idée de projet,
-vous pouvez aussi bénéficier d’un accompagnement personnalisé durant les phases de préparation du projet moyennant une formation ciblée et adaptée. Cet accompagnement couvre
-notamment :                                                                                                                                                                                                      
-L’étude du projet;
-L’aspect comptable;
-L’aspect fiscal;
-L’environnement juridique;
-La gestion du projet;
-Les incitations fiscales et financières;
-La formation technique, dans le domaine du projet
-envisagé.
----"
-"س222: La formation CREE
-ج222: La formation CREE est offerte par les espaces entreprendre et les
-bureaux de l’emploi et du travail indépendant relevant de l’ANETI
-Elle cible les personnes ayant des idées de projets et voulant
-lancer leurs propres entreprises.
-Cette formation vise à outiller les jeunes porteurs d’idées de
-projets d’outils et de savoirs en évaluation des projets et en
-gestion d’entreprises.
-Lors de la formation, les porteurs des projets évaluent leurs
-projets respectifs, dressent leurs plans d’affaires, et prennent
-leurs décisions au sujet de la création de leurs entreprises.
----"
-"س223: Quelle est la durée de formation CREE
-ج223: La formation dure 14 J.
----"
-"س224: QUELS SONT LES THÈMES ABORDÉS
-LORS DE LA FORMATION ?
-ج224: Développez votre projet d’entreprise
-Evaluez votre marché – plan Marketing
-Organisez votre entreprise
-Etude technique
-Evaluez vos charges
-Statut légal de votre entreprise
-Capital initial requis
-Responsabilités légales et Assurances
-Etude financière
-Elaboration de son propre Plan d’affaire.
----"
-"س225: Qui ce qu'un Plan d'affaire
-ج225: 
----"
-"س226: A quoi correspond une phase  de lancement de mon projet 
-ج226: La phase de lancement de projet correspond à la finalisation de l’investissement et le démarrage de l’activité
-(qu’il soit agricole ou de transformation agroalimentaire).
-Pour les projets agricoles il est important de distinguer entre la phase de lancement où la création juridique
-de l’entreprise est assurée et la phase d’entrée en production qui peut prendre même 3 à 5 ans après le
-lancement et ce pour les exploitations agricoles arboricoles.
-La phase dite « entrée en production » correspond au moment où les plantations entrent en production
-réelle.
-La phase de financement est une phase importante qui fait partie de la phase de lancement.
----"
-"س227: Quelle est la difference entre la phase  de lancement de projet et la phase d'entré en production
-ج227: La phase de lancement de projet correspond à la finalisation de l’investissement et le démarrage de l’activité
-(qu’il soit agricole ou de transformation agroalimentaire).
-Pour les projets agricoles il est important de distinguer entre la phase de lancement où la création juridique
-de l’entreprise est assurée et la phase d’entrée en production qui peut prendre même 3 à 5 ans après le
-lancement et ce pour les exploitations agricoles arboricoles.
-La phase dite « entrée en production » correspond au moment où les plantations entrent en production
-réelle.
-La phase de financement est une phase importante qui fait partie de la phase de lancement.
+<qa>
+<q>ما المقصود بالمنظومات الاقتصادية ؟</q>
+<a>الأنشطة التي تعتمد على تثمين الموارد الفلاحية والمخزون الطبيعي من خلال التصنيع بمناطق الإنتاج.
+تضم منظومتين فقط:
+- منظومة الزراعات الجيوحرارية
+- منظومة النباتات الطبية والعطرية
+⚠️ تسند الامتيازات لعمليات التحويل فقط.</a>
+</qa>
 
----"
-"س228: BMC : BUSINESS MODEL CANEVAS
-ج228: Le Business Model Canevas est un outil utilisé pour retranscrire de manière simplifiée un modèle économique
-d’une entreprise. Parfaitement adapté à la phase de création, il est utilisé pour le lancement d’un nouveau
-produit ou d’un nouveau service.
-Il fait partie des outils indispensables pour concevoir le business model sur une seule page en forme de
-tableau et pour procéder étape par étape pour concevoir le modèle économique.
-Idéalement, le BMC se définit au lancement de l’entreprise puis s’améliore et s’adapte au fur et à mesure de
-son développement et au cours de toutes les étapes de son déroulement.  Il permet de valider la cohérence entre la solution
-proposée sous forme de produit ou de service et
-les problématiques des clients. Il met la lumière
-sur les canaux de communication et de vente, et
-il permet davantage de faire évoluer la réflexion
-autour du produit, de la cible, des moyens de
-l’attendre et des modèles de revenus. La structure
-d’un BMC est présentée par le tableau dans la
-page suivante.  Le BMC donne notamment des indications
-simplifiées sur :Les moyens de financement de l’entreprise.
-La proposition de valeur.
-Le segment de clientèle visée.
-La structure des coûts.
----"
-"س229: ما هوالشّرط الأساسي للإنتفاع بإمتيازات قانون الإستثمار عدد 71 لسنة 2016
-ج229: الحصول على شهادة إيداع تصريح بالإستثمار قبل الشّروع في إنجاز المشروع
----"
-"س230: ماذا يتطلب الحصول على شهادة إيداع تصريح بالإستثمار
-ج230: إيداع إضبارة وحيدة طبقا للأنموذج الجاري به العمل لدى الهيكل المعني حسب النّشاط مرفقة بكرّاس شروط والتّراخيص المسبقة بالنّسبة للأنشطة الخاضعة لذلك
----"
-"س231: ما هي الآجال القصوى للدّخول في إنجاز المشروع
-ج231: قبل نهاية السّنة الواحدة من تاريخ صدور شهادة إيداع التّصريح بالإستثمار
----"
-"س232: ما هي الآجال القصوى لإيداع طلب الإنتفاع بالإمتيازات 
-ج232: قبل نهاية السّنتين من تاريخ صدور شهادة إيداع التّصريح بالإستثمار
----"
-"س233: ما هي الآجال القصوى لإتمام إنجاز المشروع
-ج233: قبل نهاية الأربع سنوات من تاريخ صدور شهادة إيداع التّصريح بالإستثمار
----"
-"س234: ما هي الآجال القصوى لطلب صرف المنح
-ج234: قبل نهاية الخمس سنوات من تاريخ صدور شهادة إيداع التّصريح بالإستثمار
----"
-"س235: ما هوالقرض العقاري الفلاحي
-ج235: هوقرض لشراء أرض فلاحية وتهيئتها  لإنجاز مشروع فلاحي
----"
-"س236: ماهي قيمة القرض العقاري الفلاحي 
-ج236: مبلغ أقصاه 250 ألف دينار و125ألف دينار في صورة شراء الأرض لدى الأصول
----"
-"س237: كيف يتم  تسديد القرض  العقاري الفلاحي 
-ج237: يتم تسديد القرض العقاري على مدة 25 سنة  منها 07 سنوات إمهال وبفائض قدره 03%
----"
-"س238: كم هي قيمة الأموال الذاتية الدنيا المطلوبة للحصول على  القرض العقاري الفلاحي
-ج238: التمويلات الذاتية لا تقل عن 05%من قيمة شراء الأرض و10%قيمة أشعال التهيئة.
----"
-"س239: ماهي اهم الشروط الي يجب أن تتوفر في الراغيبين في الحصول على قرض عقاري فلاحي 
-ج239: االشبان الذين لا يتجاوز عمرهم الأربعين سنة وأصحاب خبرة في المجال الفلاحي وعدم ممارسة نشاط بصفة أجير في القطاعين العام والخاص وعدم ممارسة نشاط خاضع للتصريح بالوجود
----"
-"س240: ماهي أهم الشروط لإنجاز مشروع تربية الأبقار 
-ج240: توفير إسطبل مطابق لمواصفات كراس الشروط المعدة في الغرض وتوفر مساحات زراعات علفية سقوية .
----"
-"س241: ماهي المساحة الدنيا المطلوبة لإقتناء جرار فلاحي أول .
-ج241: 30هك بعلي أو03 هك سقوي وعند وجود مستغلة بها مساحات سقوية وبعلية يتم إعتماد معدل تحويل المساحات 01 هك سقوي يعادل 10هك بعلي 
----"
-"س242: ماهي المساحة الدنيا المطلوبة لإقتناء جرار فلاحي ثاني .
-ج242: 75هك بعلي أو15 هك سقوي وعند وجود مستغلة بها مساحات سقوية وبعلية يتم إعتماد معدل تحويل المساحات 01 هك سقوي يعادل 05هك بعلي
----"
-"س243: ماهو الجرار الفلاحي الصغير 
-ج243: قوة المحرك تساوي أوتقل عن 45 حصان بخاري
----"
-"س244: ماهي المساحة الدنيا المطلوبة لإقتناء جرار فلاحي صغير 
-ج244: دون تحديد مساحة دنيا وبالنسبة للإستغلال السقوي فقط.
----"
-"س245: ماهي المساحة الدنيا المطلوبة لإقتناء آلة حصاد 
-ج245: 100هكتار
----"
-"س246: ماهي المساحة المطلوبة لإقتناء آلة حصاد ثانية 
-ج246: 500هكتار
----"
-"س247: كيف يتم تصنيف عمليات الإستثمار في القطاع الفلاحي
-ج247: صنف"" أ"" إستثمار يساوي أويقل عن 200ألف دينار وصنف ""ب"" إستثمار يفوق 200ألف دينار
----"
-"س248: كيف يتم تصنيف عمليات الإستثمار في قطاع الصيد البحري
-ج248: صنف"" أ"" إستثمار يساوي أويقل عن 300ألف دينار وصنف ""ب"" إستثمار يفوق 300ألف دينار
----"
-"س249: كيف يتم تصنيف عمليات الإستثمار في قطاع تربية الأحياء المائية
-ج249: صنف"" أ"" إستثمار يساوي أويقل عن 500ألف دينار وصنف ""ب"" إستثمار يفوق 500 ألف دين
----"
-"س250: كيف يتم تصنيف عمليات الإستثمار في قطاع  الخدمات والتحويل الأولي المرتبطة بالفلاحة والصيد البحري
-ج250: صنف ""ب"" مها كانت قيمة الإستثمار
----"
-"س251: هل تعتبر قيمة إقتناء مراكب الصيد البحري القديمة في تصنيف المشروع
-ج251: لا تعتبر قيمة إقتناء مراكب الصيد البحري القديمة في تصنيف المشروع .
----"
-"س252: هل تعتبر قيمة شراء الأرض في تصنيف المشروع
-ج252: لا تعتبر قيمة شراء الأرض في تصنيف المشروع
----"
-"س253: كيف يتم تصنيف الإستثمارات المنجزة من قبل الشركات التعاونية ومجامع التنمية 
-ج253: صنف ""أ"" مها كانت قيمة الإستثمار
----"
-"س254: كم هي قيمة الأموال الذاتية الدنيا المطلوبة بهيكل تمويل المشروع
-ج254: 30%من كلفة الإستثمار بالنسبة للمشاريع التي تتجاوز كلفة إستثماراتها واحد مليون دينارو10%بالنسبة للمشاريع التي لاتتجاوز كلفة إستثماراتها واحد مليون دينار  
----"
-"س255: كيف يتم صرف المنح
-ج255: تصرف المنح على قسطين 40%عند إنجاز 40%من كلفة الإستثمار المصادق عليها وباقي المنحة عند إنجاز كامل المكونات المصادق عليها.
----"
-"س256: ماهي المدة الإندثارية للجرارات الفلاحية وتوابعها ومعدات الري 
-ج256: 06 سنوات
----"
-"س257: ماهي المدة الإندثارية للحاصدات
-ج257: 10 سنوات
----"
-"س258: من هوالمرافق المختص
-ج258: هومهندس فلاحي يستجيب لشروط تعاطي مهنة مستشار فلاحي ومتكون في مجال المرافقة والتصرف في المستغلات الفلاحية
----"
-"س259: ماهي المدة اللازمة للتعاقد مع مرافق مختص للمنتفعين على قروض عقارية فلاحية
-ج259: أربع سنوات من تاريخ شراء الأرض
----"
-"س260: ماهي اهم الشروط الضرورية لإنجاز مشروع فلاحة بيولوجية 
-ج260: التعاقد مع مكتب مراقبة وتصديق للإنتاج وفق النمط البيولوجي طيلة فترة النشاط
----"
-"س261: ماهي أهم الشروط لإنجاز مشروع تربية أغنام أوماعز 
-ج261: توفير زريبة مطابق لمواصفات كراس الشروط المعدة في الغرض وتوفر مساحات زراعات علفية الضرورية.
----"
-"س262: ماهي أهم الشروط لإحداث بئر عميقة 
-ج262: الحصول على رخصة بحث وتنقيب على المياه الجوفية 
----"
-"س263: ماهي أهم الشروط لإنجاز مشروع تربية الدواجن 
-ج263: التقيد بكراس الشروط المعد في الغرض والحصول على المصادقة الصحية البيطرية
----"
-"س264: ماهي أهم الشروط لإحداث مركز تربية الآراخي المؤصلة
-ج264: تطبيق ماهووارد بكراس الشروط المعدة الغرض .
----"
-"س265: كيف يتم توزيع تعهد الملفات  بين وكالة النهوض بالإستثمارات الفلاحية والمندوبيات الجهوية
-ج265: حسب كلفة الإستثمار والقطاع (  وكالة النهوض بالإستثمارات الفلاحية  تتعهد بالملفات التي تفوق إستثماراتها 60 ألف ديناربالقطاع الفلاحي ومشاريع قطاع الخدمات والتحويل الاولي ).
----"
-"س266: ماهي الإستثمارات المادية للتحكم في التكنولوجيا وتحسين الإنتاجية
-ج266: قائمة بالملحق عدد 01 من الأمر الحكومي عدد389 بتاريخ 09/03/2017
----"
-"س267: كم هي نسبة المنحة لإستثمارات المادية للتحكم في التكنولوجيا وتحسين الإنتاجية
-ج267: 50%للمشاريع صنف ب و55%للمشاريع صنف أ و60%بالنسبة للهياكل المهنية والشركات الأهلية 
----"
-"س268: كم هوسقف المنح  للإستثمارات المادية للتحكم في التكنولوجيا وتحسين الإنتاجية
-ج268: 500ألف دينار
----"
-"س269: ماهي المنظومات الاقتصادية 
-ج269: منظومتين:منظومة الزراعات الجيوحرارية ومنظومة النباتات الطبية والعطرية
----"
-"س270: كم هي نسبة المنح عند إنجاز مشروع منظومة إقتصادية
-ج270: 15%مهما كان صنف المشروع
----"
-"س271: كم هوسقف المنح للإستثمارات المنجزة في إطار المنظومات الاقتصادية 
-ج271: 01مليون دينار
----"
-"س272: ماهي الإستثمارات اللامادية 
-ج272: قائمة بالملحق عدد 01 من الأمر الحكومي عدد389 بتاريخ 09/03/2017
----"
-"س273: كم هي نسبة المنح للإستثمارات اللامادية 
-ج273: 50%مهما كان صنف المشروع وتسند المنحة عند عملية الإحداث بما في ذلك منحة الدراسة
----"
-"س274: ماهي القطاعات ذات الأولوية 
-ج274: كل القطاع الفاحي ذوأولوية (قائمة بالملحق عدد 01 من الأمر الحكومي عدد389 بتاريخ 09/03/2017)
----"
-"س275: كم هي نسبة المنح للإستثمارات المنجزة في إطار القطاعات ذات أولوية
-ج275: 30%مشاريع صنف أ و15%مشاريع صنف ب
----"
-"س276: ماهي أهم الشروط لإنجاز مشروع خدمات أوتحويل أولي مرتبط بالفلاحة 
-ج276:  أنشطة خاضعة لتصريح بالوجود ومسك محاسبة.
----"
-"س277: هل تسند منحة  لقيمة شراء الأرض بعنوان الأستثمار المباشر في المشاريع الفلاحية
-ج277: لا  تسند منحة  لقيمة شراء الأرض بعنوان الأستثمار المباشر 
----"
-"س278: هل يمكن للمشاريع المنجزة في قطاع الخدمات أن تنتفع بمنحة الإستثمارات المادية للتحكم في التكنولوجيا الحديثة وتحسين الإنتاجية
-ج278: لايمكن للمشاريع المنجزة في قطاع الخدمات أن تنتفع بمنحة الإستثمارات المادية للتحكم في التكنولوجيا الحديثة وتحسين الإنتاجية
----"
-"س279: ماهي أهم الشروط للإنتفاع بإمتيازات لإقتناء شاحنة فلاحية .
-ج279: يمكن إسناد إمتيازات شاحنة فلحية حمولة 01 طن في إطار مشروع فلاحي.
----"
-"س280: هل يمكن التمديد في صلوحية شهادة إيداع التصريح بالإستثمار 
-ج280: لا يمكن التمديد في صلوحية شهائد إيداع التصريح بالإستثمار
----"
-"س281: هل يمكن طلب إعادة النظر في ملف مرفوض
-ج281: نعم في أجل أقصاه 30يوما من تاريخ الإعلام بالرفض بتقديم مطلب كتابي في الغرض ومؤيدات جديدة
----"
-"س282: كيف يمكن الحصول على شهادة إيداع تصريح الإستثمار عن بعد
-ج282: بالولوج ألى موقع الخدمات على الخط https://adi.apia.com.tn/promoteur
----"
-"س283: كم مرة يمكن للتونسي المقيم بالخارج الإنتفاع بالإمتيازات الجبائية عند توريد معدات فلاحية
-ج283: مرة واحدة خلال طيلة فترة الإقامة 
----"
+<qa>
+<q>ما تعريف المؤسسات المصدّرة كلياً ؟</q>
+<a>المؤسسات التي تبيع كامل منتجاتها أو تسدي كامل خدماتها خارج تونس.
+✅ يمكنها بيع حتى 30% من إنتاجها بالسوق المحلية (محسوبة على رقم معاملاتها التصديري).
+📌 تُضبط نسبة 30% باعتماد قيمة المنتوج في الفلاحة والصيد البحري.</a>
+</qa>
 
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 2. قانون الاستثمار والشروط العامة        -->
+<!-- ========================================== -->
+<faq_category name="قانون الاستثمار والشروط العامة">
+
+<qa>
+<q>ما هو قانون الاستثمار عدد 71 لسنة 2016 ؟</q>
+<a>قانون صادر بتاريخ 30 سبتمبر 2016 يهدف إلى:
+- ترفيع القيمة المضافة والقدرة التنافسية والمحتوى التكنولوجي
+- تنمية القطاعات ذات الأولوية
+- إحداث مواطن الشغل
+- تحقيق تنمية جهوية متوازنة ومستدامة
+يخوّل لكل شخص طبيعي أو معنوي تونسي أو أجنبي مقيم أو غير مقيم الاستثمار في قطاع الفلاحة والصيد البحري.
+⚠️ المستثمر الأجنبي لا يمكنه تملّك الأراضي ذات الوجهة الفلاحية.</a>
+</qa>
+
+<qa>
+<q>ما الشرط الأساسي للانتفاع بامتيازات قانون الاستثمار ؟</q>
+<a>الحصول على شهادة إيداع تصريح بالاستثمار (ADI) قبل الشروع في إنجاز المشروع.
+[FR] Obtenir une attestation de dépôt de déclaration d'investissement (ADI) avant de commencer la réalisation du projet.</a>
+</qa>
+
+<qa>
+<q>كيف تحصل على شهادة إيداع تصريح بالاستثمار ؟</q>
+<a>إيداع إضبارة وحيدة طبقاً للأنموذج الجاري به العمل لدى الهيكل المعني حسب النشاط، مرفقة بكراس الشروط والتراخيص المسبقة للأنشطة الخاضعة لذلك.
+🌐 يمكن الحصول عليها عن بعد: https://adi.apia.com.tn/promoteur</a>
+</qa>
+
+<qa>
+<q>ما هي الآجال القانونية الرئيسية لإنجاز المشروع والانتفاع بالامتيازات ؟</q>
+<a>
+| المرحلة | الأجل الأقصى |
+|---|---|
+| الشروع في الإنجاز | سنة واحدة من تاريخ ADI |
+| إيداع طلب الامتيازات | سنتان من تاريخ ADI |
+| إتمام إنجاز المشروع | 4 سنوات من تاريخ ADI (قابلة للتمديد سنتين بطلب قبل 6 أشهر من الانتهاء) |
+| طلب صرف المنح | 5 سنوات من تاريخ ADI |
+
+⚠️ لا يمكن التمديد في صلاحية شهادة إيداع التصريح بالاستثمار ذاتها.</a>
+</qa>
+
+<qa>
+<q>ما هي الامتيازات الجبائية المقررة ؟</q>
+<a>- طرح المداخيل أو الأرباح بعنوان الاستغلال من أساس الضريبة
+- طرح المداخيل بعنوان إعادة الاستثمار خارج المؤسسة من أساس الضريبة
+- توقيف العمل بالأداء على القيمة المضافة
+- الإعفاء من المعاليم الديوانية</a>
+</qa>
+
+<qa>
+<q>ما هي الامتيازات المالية (المنح) المقررة ؟</q>
+<a>تشمل أربعة أنواع من المنح:
+1. منحة الترفيع من القيمة المضافة والقدرة التنافسية
+2. منحة التنمية الجهوية
+3. منحة تطوير القدرة التشغيلية
+4. منحة التنمية المستدامة (مقاومة التلوث وحماية البيئة)
++ مساهمة في رأس المال من موارد الصندوق التونسي للاستثمار
++ قروض عقارية فلاحية</a>
+</qa>
+
+<qa>
+<q>هل يمكن طلب إعادة النظر في ملف مرفوض ؟</q>
+<a>نعم، في أجل أقصاه 30 يوماً من تاريخ الإعلام بالرفض، بتقديم مطلب كتابي ومؤيدات جديدة.</a>
+</qa>
+
+<qa>
+<q>كم مرة يمكن للتونسي المقيم بالخارج الانتفاع بالامتيازات الجبائية عند توريد معدات فلاحية ؟</q>
+<a>مرة واحدة فقط طيلة فترة الإقامة بالخارج.</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 3. تصنيف عمليات الاستثمار              -->
+<!-- ========================================== -->
+<faq_category name="تصنيف عمليات الاستثمار">
+
+<qa>
+<q>كيف يتم تصنيف عمليات الاستثمار حسب القطاع ؟</q>
+<a>
+| القطاع | صنف أ | صنف ب |
+|---|---|---|
+| الفلاحة | ≤ 200 ألف دينار | > 200 ألف دينار |
+| الصيد البحري | ≤ 300 ألف دينار | > 300 ألف دينار |
+| تربية الأحياء المائية | ≤ 500 ألف دينار | > 500 ألف دينار |
+| الخدمات والتحويل الأولي (أفراد، SARL، SA) | دائماً صنف ب | - |
+| SMSA / GDA / شركات أهلية | دائماً صنف أ | - |
+
+⚠️ لا تُحتسب في التصنيف:
+- قيمة شراء الأرض
+- قيمة اقتناء مراكب الصيد القديمة</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 4. نسب المنح وسقوفها                   -->
+<!-- ========================================== -->
+<faq_category name="نسب المنح وسقوفها">
+
+<qa>
+<q>ما نسبة منحة الاستثمارات المادية للتحكم في التكنولوجيا وتحسين الإنتاجية ؟</q>
+<a>
+| نوع المشروع | نسبة المنحة |
+|---|---|
+| صنف ب | 50% |
+| صنف أ | 55% |
+| هياكل مهنية وشركات أهلية | 60% |
+
+📌 السقف الأقصى: 500 ألف دينار
+⚠️ لا تستفيد منها مشاريع قطاع الخدمات إلا إذا كانت SMSA أو GDA أو شركة أهلية.</a>
+</qa>
+
+<qa>
+<q>ما نسبة منحة القطاعات ذات الأولوية ؟</q>
+<a>
+| صنف المشروع | نسبة المنحة |
+|---|---|
+| صنف أ | 30% |
+| صنف ب | 15% |
+</a>
+</qa>
+
+<qa>
+<q>ما نسبة منحة المنظومات الاقتصادية ؟</q>
+<a>15% مهما كان صنف المشروع.
+📌 السقف الأقصى: 1 مليون دينار.</a>
+</qa>
+
+<qa>
+<q>ما نسبة منحة الاستثمارات اللامادية ؟</q>
+<a>50% مهما كان صنف المشروع.
+📌 تُسند عند عملية الإحداث فقط، بما في ذلك منحة الدراسة.</a>
+</qa>
+
+<qa>
+<q>ما نسبة منحة زراعة الزيتون ؟</q>
+<a>
+| كلفة الاستثمار | نسبة المنحة |
+|---|---|
+| أقل من 200 ألف دينار | 55% |
+| 200 ألف دينار وأكثر | 50% |
+
+📌 معايير كلفة زراعة هكتار زيتون:
+
+| النوع | الكثافة | التكلفة/هكتار |
+|---|---|---|
+| بعلي شمال | 100 شجرة/هك | 2000 دت |
+| بعلي وسط | 35-69 شجرة/هك | 2000 دت |
+| بعلي جنوب | 17-25 شجرة/هك | 2000 دت |
+| سقوي مكثف (100-204 شجرة) | - | 4200 دت |
+| سقوي مكثف (206-550 شجرة) | - | 4500 دت |
+| سقوي فائق الكثافة (1250-1666 شجرة) | - | 13000 دت |
+</a>
+</qa>
+
+<qa>
+<q>ما نسبة المنحة لمشاريع قطاع الإبل ؟</q>
+<a>
+| صنف المشروع | نسبة المنحة |
+|---|---|
+| صنف أ (≤ 200 ألف دينار) | 30% |
+| صنف ب (> 200 ألف دينار) | 15% |
+</a>
+</qa>
+
+<qa>
+<q>ما نسبة منحة قطاع النخيل والتمور ؟</q>
+<a>تعتمد النسبة على كلفة الاستثمار والمكونات:
+- صنف أ (≤ 200 ألف دينار): تتراوح المنح بين 30% و55%
+- صنف ب (> 200 ألف دينار): تتراوح المنح بين 15% و50%
+📌 GDA وSMSA والشركات الأهلية تُصنَّف أ وتستفيد من منحة خاصة تصل إلى 60%.</a>
+</qa>
+
+<qa>
+<q>ما نسبة المنحة للمعصرة (هيلري) ؟</q>
+<a>المعصرة تُصنَّف كتحويل أولي → صنف ب دائماً:
+- منحة القطاعات ذات الأولوية: 15%
+- منحة التنمية الجهوية: 15% (المنطقة 1) أو 30% (المنطقة 2)
+⚠️ شرط اعتبارها تحويلاً أولياً مندمجاً: أن يمثل إنتاج الزيتون الخاص 10% على الأقل من طاقة المعصرة، وإلا تُحال الملفات إلى APII.</a>
+</qa>
+
+<qa>
+<q>كيف تصرف المنح ؟</q>
+<a>على قسطين:
+- القسط الأول: 40% عند إنجاز 40% من كلفة الاستثمار المصادق عليها
+- القسط الثاني: باقي المنحة عند إنجاز كامل المكونات المصادق عليها</a>
+</qa>
+
+<qa>
+<q>هل تُسند منحة على قيمة شراء الأرض ؟</q>
+<a>لا، لا تُسند أي منحة على قيمة شراء الأرض بعنوان الاستثمار المباشر.</a>
+</qa>
+
+<qa>
+<q>ما هي المدد الاندثارية للمعدات الفلاحية ؟</q>
+<a>
+| المعدة | المدة الاندثارية |
+|---|---|
+| الجرارات الفلاحية وتوابعها | 6 سنوات |
+| معدات الري | 6 سنوات |
+| الحاصدات | 10 سنوات |
+</a>
+</qa>
+
+<qa>
+<q>ما هي الأموال الذاتية الدنيا المطلوبة في هيكل تمويل المشروع ؟</q>
+<a>
+| كلفة الاستثمار | نسبة الأموال الذاتية |
+|---|---|
+| لا تتجاوز 1 مليون دينار | 10% |
+| تتجاوز 1 مليون دينار | 30% |
+</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 5. المعدات الفلاحية وشروطها            -->
+<!-- ========================================== -->
+<faq_category name="المعدات الفلاحية وشروطها">
+
+<qa>
+<q>ما المساحة الدنيا لاقتناء جرار فلاحي أول ؟</q>
+<a>30 هك بعلي أو 3 هك سقوي.
+معدل التحويل: 1 هك سقوي = 10 هك بعلي.</a>
+</qa>
+
+<qa>
+<q>ما المساحة الدنيا لاقتناء جرار فلاحي ثانٍ ؟</q>
+<a>75 هك بعلي أو 15 هك سقوي.
+معدل التحويل: 1 هك سقوي = 5 هك بعلي.</a>
+</qa>
+
+<qa>
+<q>ما هو الجرار الفلاحي الصغير وما شروطه ؟</q>
+<a>الجرار الصغير: قوة المحرك ≤ 45 حصان بخاري.
+📌 لا تحديد لمساحة دنيا، لكن يُشترط أن يكون للاستغلال السقوي فقط.</a>
+</qa>
+
+<qa>
+<q>ما المساحة الدنيا لاقتناء آلة حصاد ؟</q>
+<a>
+| الاقتناء | المساحة الدنيا |
+|---|---|
+| أول آلة حصاد | 100 هكتار |
+| ثاني آلة حصاد | 500 هكتار |
+</a>
+</qa>
+
+<qa>
+<q>ما شروط الانتفاع بامتيازات شاحنة فلاحية ؟</q>
+<a>يمكن إسناد امتيازات شاحنة فلاحية حمولة 1 طن في إطار مشروع فلاحي فقط.</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 6. القرض العقاري الفلاحي               -->
+<!-- ========================================== -->
+<faq_category name="القرض العقاري الفلاحي">
+
+<qa>
+<q>ما هو القرض العقاري الفلاحي ؟</q>
+<a>قرض منصوص عليه في الفصل 23 من قانون الاستثمار عدد 71 لسنة 2016، يُمكّن الشباب من شراء أرض فلاحية وتهيئتها (حفر آبار + ربط بالكهرباء) لإنجاز مشروع فلاحي ذي وحدة اقتصادية قائمة بذاتها.</a>
+</qa>
+
+<qa>
+<q>من يحق له الانتفاع بالقرض العقاري الفلاحي ؟</q>
+<a>ثلاث فئات فقط:
+1. **الشباب ≤ 40 سنة**: يحملون شهادة كفاءة مهنية فلاحية أو معادلة
+2. **الفنيون**: حاملو شهادات معاهد التعليم العالي الفلاحي أو الصيد البحري
+3. **الراغبون في اقتناء منابات شركائهم في الملك على الشياع**: بدون شرط السن
+
+⚠️ الامتياز يُمنح مرة واحدة في الحياة فقط.
+❌ لا يمكن للشركات الانتفاع بالقرض العقاري.</a>
+</qa>
+
+<qa>
+<q>ما هي شروط الانتفاع بالقرض العقاري ؟</q>
+<a>1. **الكفاءة الفلاحية**: شهادة مهنية معترف بها حسب الفئة
+2. **التفرغ الكلي**: الالتزام الكامل بإدارة المشروع (لا عمل بالأجر في القطاع العام أو الخاص)
+3. **الوضعية العقارية السليمة للأرض**: قابلة لنقل الملكية وتوظيف الرهن لفائدة البنك الوطني الفلاحي
+4. **أهلية الأرض**: لا تكون مثقلة بامتيازات سابقة، ولا سبق شراؤها بقرض عقاري
+5. **مردودية المشروع**: أرض بموارد مائية وتربة مناسبة لمشروع ذي جدوى اقتصادية مستقلة</a>
+</qa>
+
+<qa>
+<q>ما قيمة القرض العقاري وكيف يُحتسب ؟</q>
+<a>
+| العنصر | القيمة |
+|---|---|
+| الحد الأقصى الإجمالي | 250 ألف دينار |
+| الحد في حالة الشراء من الأصول (أب/أم/جد/جدة) | 125 ألف دينار |
+| نسبة تمويل شراء الأرض | 95% من قيمتها المُقرَّة |
+| نسبة تمويل أشغال التهيئة | 90% من كلفة الأشغال |
+</a>
+</qa>
+
+<qa>
+<q>ما هي الأموال الذاتية الدنيا للقرض العقاري ؟</q>
+<a>
+| العنصر | النسبة الدنيا |
+|---|---|
+| شراء الأرض | 5% من ثمن الشراء |
+| أشغال التهيئة | 10% من كلفة الأشغال |
+
+⚠️ في كل الحالات يتحمل المشتري الفرق بين ثمن الشراء وقيمة القرض المُقرَّة.</a>
+</qa>
+
+<qa>
+<q>ما شروط سداد القرض العقاري ؟</q>
+<a>
+| العنصر | القيمة |
+|---|---|
+| مدة السداد الإجمالية | 25 سنة |
+| فترة الإمهال | 7 سنوات |
+| نسبة الفائدة | 3% |
+
+📌 فوائد سنوات الإمهال السبع تُوزَّع على الأقساط الـ18 الباقية.</a>
+</qa>
+
+<qa>
+<q>ما التزامات المنتفع بالقرض العقاري ؟</q>
+<a>يجب على المنتفع:
+- الشروع في إنجاز المشروع خلال سنة من تاريخ الشراء
+- الاستغلال المباشر للأرض طيلة مدة السداد
+- عدم ممارسة نشاط بالأجر في القطاع العام أو الخاص
+- التعاقد مع مرافق مختص لمدة **5 سنوات** من تاريخ الشراء
+- عدم التفويت في الأرض طيلة مدة السداد
+- توظيف رهن عقاري على الأرض لفائدة البنك الوطني الفلاحي
+⚠️ مخالفة أي من هذه الالتزامات تُوجب إرجاع القرض فوراً بفائدة السوق.</a>
+</qa>
+
+<qa>
+<q>ما مكونات أشغال التهيئة الممولة بالقرض العقاري ؟</q>
+<a>مكونتان فقط:
+1. إنشاء نقطة مياه (بئر أو سبر)
+2. الربط بالتيار الكهربائي
+📌 يُصرف قرض التهيئة على 3 أقساط للمياه وقسطة واحدة للكهرباء.</a>
+</qa>
+
+<qa>
+<q>ما مواصفات الأرض المؤهلة للقرض العقاري ؟</q>
+<a>الأرض يجب أن:
+✅ تكون ذات وضعية عقارية سليمة قابلة لنقل الملكية والرهن
+✅ تتوفر فيها موارد غير مستغلة
+✅ تكون أرضاً خاماً (إذا كان فيها جزء مزروع، فالجزء الخام يجب أن يشكل وحدة اقتصادية قابلة)
+✅ لا تكون متشتتة أو مقطعة
+✅ يكون فيها مسلك للعبور صالح حتى في الفصول الممطرة
+❌ لا تكون قد اشتُريت سابقاً بقرض عقاري
+❌ لا تكون مثقلة بامتيازات دولة في فترة اندثارها</a>
+</qa>
+
+<qa>
+<q>أين يُودَع ملف القرض العقاري ومن يبت فيه ؟</q>
+<a>- **الإيداع**: نسختان → واحدة للإدارة الجهوية للوكالة + واحدة لفرع البنك الوطني الفلاحي
+- **الدراسة**: معاينة مشتركة بين مصالح الوكالة والبنك
+- **البت**: لجنة إسناد الامتيازات المركزية بمقر الوكالة
+📌 ملفات القروض العقارية تُعالَج حصرياً من المصالح المركزية للوكالة.</a>
+</qa>
+
+<qa>
+<q>ما هي وثائق ملف القرض العقاري ؟</q>
+<a>الوثائق الأساسية المطلوبة:
+1. مطلب باسم المدير العام للوكالة
+2. نسخة بطاقة التعريف للبائع والمشتري
+3. التزام بدفع 5% ذاتياً من ثمن الأرض
+4. وثيقة إثبات الكفاءة الفلاحية (حسب الفئة)
+5. وعد بيع نافذ المفعول (محرر من محامٍ أو عدل إشهاد)
+6. هيكل تمويل يتضمن نسب التمويل الذاتي
+7. فواتير تقديرية لأشغال التهيئة
+8. وثيقة ملكية الأرض سليمة قانونياً
+9. شهادة تقنية في الموارد المائية وتحليل التربة من مصالح الوكالة
+10. الخطوط الكبرى للمشروع
+11. وثيقة "التزامات الانتفاع بالقرض العقاري" من الإدارة الجهوية</a>
+</qa>
+
+<qa>
+<q>ما هي الامتيازات الإضافية للمنتفع بالقرض العقاري ؟</q>
+<a>بالإضافة لامتيازات قانون الاستثمار:
+✅ التسجيل بالمعلوم القار لعقود نقل ملكية الأراضي الفلاحية موضوع الشراء (امتياز جبائي)</a>
+</qa>
+
+<qa>
+<q>هل هناك حد أدنى لمساحة الأرض في القرض العقاري ؟</q>
+<a>لا يوجد حد أدنى للمساحة، لكن يجب أن يكون المشروع المقترح على الأرض ذا مردودية وأن يُشكّل وحدة اقتصادية مستقلة.
+📊 يُثبَت ذلك من خلال خطة أعمال (Business Plan) - يتوفر نموذج على موقع APIA.</a>
+</qa>
+
+<qa>
+<q>هل يشترط تصريح بالاستثمار للقرض العقاري ومتى يُودَع ؟</q>
+<a>نعم، لكن التصريح يكون بعد شراء الأرض لا قبله.
+ترتيب الخطوات: شراء الأرض ← توقيع عقد المرافقة ← التصريح بالاستثمار.</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 7. توزيع الملفات بين الهياكل           -->
+<!-- ========================================== -->
+<faq_category name="توزيع الملفات بين الهياكل">
+
+<qa>
+<q>كيف يتم توزيع تعهد الملفات بين APIA والمندوبيات والهيئة التونسية للاستثمار ؟</q>
+<a>
+| كلفة الاستثمار | القطاع | الجهة المعنية |
+|---|---|---|
+| ≤ 60 ألف دينار | فلاحي (مساحة ضمن الجدول) | المندوبية الجهوية للتنمية الفلاحية |
+| ≤ 60 ألف دينار | فلاحي (مساحة تفوق الجدول) | الإدارة الجهوية للوكالة |
+| > 60 ألف دينار و< 1 مليون | فلاحي | الإدارة الجهوية للوكالة |
+| 1 مليون → 15 مليون | فلاحي | الإدارة الجهوية أو المقر المركزي للوكالة |
+| > 15 مليون دينار | أي قطاع | الهيئة التونسية للاستثمار (TIA) |
+| أي قيمة | خدمات وتحويل أولي | الوكالة حصرياً |
+| أي قيمة | تحويل أولي بيولوجي (≤ 15م.د) | الوكالة حصرياً |
+| أي قيمة | شركات إحياء | المقر المركزي للوكالة حصرياً |
+| أي قيمة | توسعة/تجديد مشاريع APIA سابقة | الوكالة حصرياً |
+</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 8. شروط القطاعات الخاصة               -->
+<!-- ========================================== -->
+<faq_category name="شروط القطاعات الخاصة">
+
+<qa>
+<q>ما أهم شروط مشروع تربية الأبقار / الأغنام / الماعز ؟</q>
+<a>**الأبقار**: إسطبل مطابق لمواصفات كراس الشروط + مساحات زراعات علفية سقوية
+**الأغنام والماعز**: زريبة مطابقة لكراس الشروط + مساحات علفية ضرورية</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط مشروع تربية الدواجن ؟</q>
+<a>التقيد بكراس الشروط المُعدّ في الغرض + الحصول على المصادقة الصحية البيطرية.</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط مشروع الفلاحة البيولوجية ؟</q>
+<a>التعاقد مع مكتب مراقبة وتصديق للإنتاج وفق النمط البيولوجي طيلة فترة النشاط.</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط إحداث بئر عميقة ؟</q>
+<a>الحصول على رخصة بحث وتنقيب على المياه الجوفية من المصالح الجهوية لوزارة الفلاحة.</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط إحداث مركز تربية آراخي مؤصلة ؟</q>
+<a>تطبيق ما هو وارد في كراس الشروط المُعدّ للغرض.</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط مشاريع الخدمات أو التحويل الأولي ؟</q>
+<a>الأنشطة خاضعة لتصريح بالوجود (patente) + مسك محاسبة نظامية.</a>
+</qa>
+
+<qa>
+<q>ما شروط مشروع الإبل في النمط شبه المكثف ؟</q>
+<a>- مساحة علفية سقوية: 1 هكتار لكل 20 رأس (منها 10 رؤوس بالمرعى بالتناوب)
+- إسطبل مغطى: 100م² (10م² لكل رأس)
+- الناقة: حامل وبكر، عمرها بين 4 و6 سنوات
+- الجمل: عمر أقصاه 6 سنوات</a>
+</qa>
+
+<qa>
+<q>ما شروط مشروع الإبل في النمط الرعوي (extensif) ؟</q>
+<a>يجب أن يكون المربي مالكاً لقطيع لا يقل عن 50 ناقة منتجة لاقتناء الجرارات والمعدات.</a>
+</qa>
+
+<qa>
+<q>ما أهم شروط إحداث معصرة زيتون ؟</q>
+<a>1. خاضعة لكراس شروط ANPE (البيئة)
+2. للانتفاع بامتيازات APIA: إنتاج الزيتون الخاص لا يقل عن 10% من طاقة المعصرة
+3. إذا كانت بيولوجية: يجب استيفاء كراس شروط الإنتاج البيولوجي
+⚠️ وحدات تعليب الزيتون وتعبئة زيت الزيتون غير المندمجة تُحال لـ APII لا APIA.</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 9. وكالة APIA                          -->
+<!-- ========================================== -->
+<faq_category name="وكالة APIA">
+
+<qa>
+<q>ما هي وكالة APIA ؟</q>
+<a>وكالة النهوض بالاستثمارات الفلاحية: مؤسسة عمومية غير إدارية أُحدثت سنة 1982 بالقانون عدد 76.
+مهمتها: النهوض بالاستثمار الخاص في الفلاحة والصيد البحري والخدمات المرتبطة بهما والتحويل الأولي المندمج.
+خدماتها **مجانية** للفلاحين والصيادين والباعثين الشباب والمستثمرين التونسيين والأجانب.</a>
+</qa>
+
+<qa>
+<q>من هو المرافق المختص (Coach) ؟</q>
+<a>مهندس فلاحي متكون في مجال المرافقة والتصرف في المستغلات الفلاحية.
+📌 قائمة المرافقين المعتمدين متوفرة على موقع APIA.
+⏱️ المدة المطلوبة للقرض العقاري: 5 سنوات من تاريخ شراء الأرض (وفق المرسوم 182-2024).</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 10. قطاع الإبل                         -->
+<!-- ========================================== -->
+<faq_category name="قطاع الإبل">
+
+<qa>
+<q>ما حجم قطيع الإبل في تونس ومناطق توزيعه ؟</q>
+<a>إجمالي القطيع: **52,000 رأس** (2023) موزعة على 16 ولاية.
+أكثر من 95% مركّزة في 6 ولايات جنوبية:
+
+| الولاية | العدد |
+|---|---|
+| مدنين | 15,000 |
+| تطاوين | 13,300 |
+| قبلي | 13,000 |
+| توزر | 4,900 |
+| قابس | 1,700 |
+| قفصة | 1,600 |
+
+عدد المربين: ~2,300 (أكثر من 70% يمتلكون أقل من 20 رأساً)</a>
+</qa>
+
+<qa>
+<q>ما منتجات قطاع الإبل ؟</q>
+<a>
+| المنتوج | الكمية السنوية |
+|---|---|
+| اللحوم الحمراء | 3,500 طن |
+| الحليب | 12 طن (للاستهلاك العائلي أساساً) |
+| الجلود | 57 طن |
+| الصوف والشعر | 30 طن |
+</a>
+</qa>
+
+<qa>
+<q>ما المعطيات التقنية الرئيسية لتربية الإبل ؟</q>
+<a>
+| المعطى | القيمة |
+|---|---|
+| إنتاج الحليب اليومي للناقة | 6 لتر/يوم |
+| مدة الحليب | 10 أشهر (1800 لتر/دورة) |
+| فترة ما بين الولادتين (extensif) | 24 شهراً |
+| فترة ما بين الولادتين (intensif) | 18-24 شهراً |
+| عمر الفطام المبكر | 3-5 أشهر |
+| عمر الفطام المتأخر | 10-12 شهراً |
+| وزن قبل التسمين | 80-170 كغ (حسب الفطام) |
+| وزن بعد التسمين | 250 كغ |
+| مدة التسمين | 5-11 شهراً |
+| المكسب اليومي في الوزن (GMQ) | 500-800 غ/يوم |
+</a>
+</qa>
+
+<qa>
+<q>ما سلالات الإبل في تونس ؟</q>
+<a>عرضاوي تطاوين / عرضاوي مدنين / مرزوقي / غيلوفي / قعودي</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 11. قطاع النخيل والتمور               -->
+<!-- ========================================== -->
+<faq_category name="قطاع النخيل والتمور">
+
+<qa>
+<q>ما حجم قطاع التمور في تونس ؟</q>
+<a>- المساحة الإجمالية: **60,800 هكتار** (14% من الأشجار المثمرة، 34% من المساحات السقوية)
+- إجمالي النخيل: ~8.7 مليون نخلة (منها 6.7 مليون دڤلة النور)
+- النخيل المنتجة: ~5.96 مليون نخلة
+- الإنتاج السنوي المتوسط: 282,000 طن (معدل نمو 6.8%)
+- إنتاج 2024-2025: 347,000 طن
+- تونس: **أول مُصدِّر عالمي للتمور** بالقيمة
+- الصادرات 2023-2024: 138,000 طن بقيمة 886 مليون دينار نحو 84 دولة</a>
+</qa>
+
+<qa>
+<q>كيف تتوزع مساحات النخيل على الولايات ؟</q>
+<a>
+| الولاية | المساحة | النسبة |
+|---|---|---|
+| قبلي | 40,000 هك | 65% |
+| توزر | 8,500 هك | 14% |
+| قابس | 7,325 هك | 12% |
+| قفصة | 3,800 هك | 6% |
+</a>
+</qa>
+
+<qa>
+<q>ما أنواع الواحات في تونس وما أصناف التمور ؟</q>
+<a>**أنواع الواحات**:
+- قارية/صحراوية: قبلي وتوزر
+- ساحلية: قابس
+- جبلية: قفصة
+- تقليدية (46%) / حديثة (54%)
+
+**أصناف التمور** (+200 صنف):
+- **دڤلة النور**: 70% من الإنتاج الوطني، 30% من الإنتاج العالمي
+- تمور شائعة: ڤسبي، كنتة، عليڤ، كنتيشي، حرة، روشدي، لمسي... (54,174 طن في 2024-2025)
+- التمور البيولوجية: ~10% من عائدات التصدير
+
+**معطيات تقنية**:
+- كثافة الزراعة: 150 نخلة/هكتار
+- الإنتاجية: ~10 طن/هكتار (دڤلة النور)
+- الدخول في الإنتاج: من السنة الخامسة، الإنتاج الكامل من السنة الثانية عشرة
+- موسم الحصاد: أكتوبر-ديسمبر للدڤلة النور</a>
+</qa>
+
+</faq_category>
+
+<!-- ========================================== -->
+<!-- 📁 12. قطاع الزيتون                       -->
+<!-- ========================================== -->
+<faq_category name="قطاع الزيتون">
+
+<qa>
+<q>ما حجم قطاع الزيتون في تونس ؟</q>
+<a>- المساحة الإجمالية: **2 مليون هكتار** (94% بعلي، 6% سقوي)
+- إنتاج زيتون ولاية جندوبة: 10,952 طن (2022)
+- عدد المعاصر بجندوبة: 11 معصرة (2024)، طاقة: 500 طن/يوم
+- مساحة الزيتون بجندوبة: 30,384 هك (منها 526 هك سقوي)
+  - زيتون زيت: 26,323 هك
+  - زيتون مائدة: 4,061 هك
+  - عدد الأشجار: ~3 مليون (85% منتجة)
+
+**أسواق تصدير زيت الزيتون**:
+- أوروبا (إيطاليا + إسبانيا): 70%
+- أمريكا: 15%
+- أسواق أخرى: 15%</a>
+</qa>
+
+<qa>
+<q>ما شروط إنشاء بستان زيتون بيولوجي ؟</q>
+<a>1. التعاقد مع مكتب مراقبة معتمد للتصديق البيولوجي
+2. الحصول على شهادة من هيئة تصديق معتمدة</a>
+</qa>
+
+<qa>
+<q>متى يبدأ قطاف الزيتون في تونس ؟</q>
+<a>يبدأ موسم الحصاد مطلع أكتوبر.</a>
+</qa>
+</faq_category>
   </topic>
 
 <topic name="Guide de L'INVESTISSEUR ÉTRANGER 2022 - APIA">
