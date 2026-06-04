@@ -1,6 +1,8 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// ── تحليل الـ topics مرة واحدة عند التحميل ──
+// ══════════════════════════════════════════════
+//  تحليل الـ topics مرة واحدة عند التحميل
+// ══════════════════════════════════════════════
 const TOPICS = (() => {
   const regex = /<topic\s+name="([^"]+)">([\s\S]*?)<\/topic>/g;
   const map = [];
@@ -15,6 +17,9 @@ const TOPICS = (() => {
   return map;
 })();
 
+// ══════════════════════════════════════════════
+//  Stop words عربية + فرنسية + إنجليزية
+// ══════════════════════════════════════════════
 const STOP_WORDS = new Set([
   'في','من','إلى','على','هل','ما','هو','هي','عن','مع','أو','و','كيف',
   'الذي','التي','هذا','هذه','تلك','ذلك','كل','لا','نعم','أي','كم',
@@ -22,6 +27,9 @@ const STOP_WORDS = new Set([
   'the','of','in','is','are','for','what','how','which','does','do'
 ]);
 
+// ══════════════════════════════════════════════
+//  استخراج الكلمات المفيدة من السؤال
+// ══════════════════════════════════════════════
 function extractKeywords(query) {
   return query
     .replace(/[?؟!،,\.]/g, ' ')
@@ -30,6 +38,9 @@ function extractKeywords(query) {
     .filter(w => w.length > 2 && !STOP_WORDS.has(w));
 }
 
+// ══════════════════════════════════════════════
+//  RAG — استخراج الـ topics ذات الصلة فقط
+// ══════════════════════════════════════════════
 function retrieveRelevantTopics(query, topK = 3) {
   const keywords = extractKeywords(query);
   if (keywords.length === 0) return '';
@@ -37,9 +48,9 @@ function retrieveRelevantTopics(query, topK = 3) {
   const scored = TOPICS.map(topic => {
     let score = 0;
     keywords.forEach(word => {
-      if (topic.name.toLowerCase().includes(word)) score += 5;
-      if (topic.headings.some(h => h.toLowerCase().includes(word))) score += 3;
-      if (topic.content.toLowerCase().includes(word)) score += 1;
+      if (topic.name.toLowerCase().includes(word))                    score += 5;
+      if (topic.headings.some(h => h.toLowerCase().includes(word)))   score += 3;
+      if (topic.content.toLowerCase().includes(word))                 score += 1;
     });
     return { ...topic, score };
   });
@@ -52,13 +63,17 @@ function retrieveRelevantTopics(query, topK = 3) {
     .join('\n\n');
 }
 
-// ── تقليص الـ history ──
+// ══════════════════════════════════════════════
+//  تقليص الـ history — آخر N رسائل فقط
+// ══════════════════════════════════════════════
 function trimHistory(history, maxTurns = 6) {
   if (!history || history.length <= maxTurns) return history || [];
   return history.slice(-maxTurns);
 }
 
-// ── Retry تلقائي ──
+// ══════════════════════════════════════════════
+//  Retry تلقائي عند خطأ مؤقت من Google
+// ══════════════════════════════════════════════
 async function callGeminiWithRetry(url, body, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const response = await fetch(url, {
@@ -70,11 +85,14 @@ async function callGeminiWithRetry(url, body, maxRetries = 3) {
     if (response.ok) return response;
 
     const status = response.status;
+
+    // خطأ مؤقت — أعد المحاولة بعد انتظار متصاعد
     if ((status === 429 || status === 503) && attempt < maxRetries) {
-      await new Promise(r => setTimeout(r, attempt * 1500));
+      await new Promise(r => setTimeout(r, attempt * 1500)); // 1.5s ثم 3s
       continue;
     }
 
+    // خطأ دائم — رسالة واضحة
     const data = await response.json().catch(() => ({}));
     const msg = status === 429 ? "الخدمة مشغولة، حاول بعد لحظة"
                : status === 401 ? "خطأ في مفتاح الـ API"
@@ -95,6 +113,11 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
+  // معالجة OPTIONS preflight
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: corsHeaders });
+  }
+
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
@@ -106,25 +129,40 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ── RAG: knowledge ذات الصلة فقط ──
+    // ── حماية Backend: حد أقصى 5 أسئلة للمحادثة الواحدة ──
+    const questionCount = (history || [])
+      .filter(t => t.role === "user").length;
+
+    if (questionCount >= 5) {
+      return new Response(JSON.stringify({
+        error: "limit_reached",
+        reply: "⚠️ لقد وصلت إلى الحد الأقصى لهذه المحادثة (5 أسئلة). يرجى بدء محادثة جديدة."
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      });
+    }
+
+    // ── RAG: استخراج المعرفة ذات الصلة فقط ──
     const relevantKnowledge = retrieveRelevantTopics(message);
     const knowledgeBlock = relevantKnowledge.trim()
       ? relevantKnowledge
       : "لا توجد معلومات مباشرة متعلقة بهذا السؤال في قاعدة البيانات.";
 
-    // ── History مُقلَّصة ──
+    // ── History مُقلَّصة: آخر 6 رسائل فقط ──
     const safeHistory = trimHistory(history, 6).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
 
+    // ── System Instruction ──
     const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
 CRITICAL RULES:
-1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French or English). Never mix languages.
-2. STRICT CONTEXT FOCUS: Answer ONLY using the knowledge provided below. If the answer is not in the knowledge, say so clearly.
-3. CONCISE YET POWERFUL: Be highly direct, official, and professional.
-4. MARKDOWN TABLES: Format numbers, percentages, and financial grants in clear Markdown tables.
+1. LANGUAGE: If the user writes in Arabic reply in Arabic. If the user writes in French reply in French. If the user writes in English reply in French. Never mix languages.
+2. STRICT CONTEXT FOCUS: Answer ONLY using the knowledge provided below. If the answer is not in the knowledge, say clearly in the user's language that you don't have this information.
+3. CONCISE YET POWERFUL: Be highly direct, official, and professional. No filler or introductory prose.
+4. MARKDOWN TABLES: Format numbers, percentages, and financial data exclusively in clear Markdown tables.
 
 RELEVANT KNOWLEDGE (retrieved for this query only):
 <knowledge_base>
@@ -138,12 +176,16 @@ ${knowledgeBlock}
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
+    // ── استدعاء Gemini مع Retry ──
     let response;
     try {
       response = await callGeminiWithRetry(geminiUrl, {
         contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
-        generationConfig: { temperature: 0.0, topP: 0.95 }
+        generationConfig: {
+          temperature: 0.0,
+          topP: 0.95
+        }
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: err.message }), {
