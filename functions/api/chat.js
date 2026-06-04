@@ -1,36 +1,46 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// ══════════════════════════════════════════════
-//  RAG خفيف: استخراج الـ topics ذات الصلة فقط
-// ══════════════════════════════════════════════
-
-// 1. تقسيم قاعدة المعرفة إلى topics عند أول تحميل (مرة واحدة فقط)
+// ── تحليل الـ topics مرة واحدة عند التحميل ──
 const TOPICS = (() => {
   const regex = /<topic\s+name="([^"]+)">([\s\S]*?)<\/topic>/g;
   const map = [];
   let match;
   while ((match = regex.exec(myKnowledgeBase)) !== null) {
-    map.push({ name: match[1], content: match[0] });
+    const name = match[1];
+    const content = match[2];
+    const headings = [];
+    content.replace(/^#{1,3}\s+(.+)$/gm, (_, h) => headings.push(h.trim()));
+    map.push({ name, content: match[0], headings });
   }
   return map;
 })();
 
-// 2. دالة بحث بسيطة: تُعيد الـ topics التي يتقاطع اسمها أو محتواها مع كلمات السؤال
-function retrieveRelevantTopics(query, topK = 3) {
-  const words = query
-    .replace(/[^\u0600-\u06FFa-zA-Z\s]/g, ' ')
-    .toLowerCase()
+const STOP_WORDS = new Set([
+  'في','من','إلى','على','هل','ما','هو','هي','عن','مع','أو','و','كيف',
+  'الذي','التي','هذا','هذه','تلك','ذلك','كل','لا','نعم','أي','كم',
+  'les','des','du','de','la','le','un','une','est','sont','pour','avec',
+  'the','of','in','is','are','for','what','how','which','does','do'
+]);
+
+function extractKeywords(query) {
+  return query
+    .replace(/[?؟!،,\.]/g, ' ')
     .split(/\s+/)
-    .filter(w => w.length > 2);
+    .map(w => w.trim().toLowerCase())
+    .filter(w => w.length > 2 && !STOP_WORDS.has(w));
+}
+
+function retrieveRelevantTopics(query, topK = 3) {
+  const keywords = extractKeywords(query);
+  if (keywords.length === 0) return '';
 
   const scored = TOPICS.map(topic => {
-    const haystack = (topic.name + ' ' + topic.content).toLowerCase();
-    const score = words.reduce((acc, w) => {
-      // وزن أعلى إذا الكلمة في اسم الـ topic
-      const nameHit = topic.name.toLowerCase().includes(w) ? 3 : 0;
-      const contentHit = haystack.includes(w) ? 1 : 0;
-      return acc + nameHit + contentHit;
-    }, 0);
+    let score = 0;
+    keywords.forEach(word => {
+      if (topic.name.toLowerCase().includes(word)) score += 5;
+      if (topic.headings.some(h => h.toLowerCase().includes(word))) score += 3;
+      if (topic.content.toLowerCase().includes(word)) score += 1;
+    });
     return { ...topic, score };
   });
 
@@ -40,6 +50,38 @@ function retrieveRelevantTopics(query, topK = 3) {
     .slice(0, topK)
     .map(t => t.content)
     .join('\n\n');
+}
+
+// ── تقليص الـ history ──
+function trimHistory(history, maxTurns = 6) {
+  if (!history || history.length <= maxTurns) return history || [];
+  return history.slice(-maxTurns);
+}
+
+// ── Retry تلقائي ──
+async function callGeminiWithRetry(url, body, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    if (response.ok) return response;
+
+    const status = response.status;
+    if ((status === 429 || status === 503) && attempt < maxRetries) {
+      await new Promise(r => setTimeout(r, attempt * 1500));
+      continue;
+    }
+
+    const data = await response.json().catch(() => ({}));
+    const msg = status === 429 ? "الخدمة مشغولة، حاول بعد لحظة"
+               : status === 401 ? "خطأ في مفتاح الـ API"
+               : status === 503 ? "سيرفر Google غير متاح مؤقتاً"
+               : data.error?.message || "خطأ غير متوقع";
+    throw new Error(msg);
+  }
 }
 
 // ══════════════════════════════════════════════
@@ -64,15 +106,14 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ── استخراج المعرفة ذات الصلة فقط ──
+    // ── RAG: knowledge ذات الصلة فقط ──
     const relevantKnowledge = retrieveRelevantTopics(message);
-    
-    // fallback: إذا لم يُطابق شيء، أعد رسالة واضحة بدل إرسال الكل
     const knowledgeBlock = relevantKnowledge.trim()
       ? relevantKnowledge
       : "لا توجد معلومات مباشرة متعلقة بهذا السؤال في قاعدة البيانات.";
 
-    const safeHistory = (history || []).map(turn => ({
+    // ── History مُقلَّصة ──
+    const safeHistory = trimHistory(history, 6).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
     }));
@@ -97,20 +138,16 @@ ${knowledgeBlock}
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-    const response = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    let response;
+    try {
+      response = await callGeminiWithRetry(geminiUrl, {
         contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
         generationConfig: { temperature: 0.0, topP: 0.95 }
-      })
-    });
-
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      return new Response(JSON.stringify({ error: data.error?.message || "خطأ من سيرفر جوجل" }), {
-        status: response.status,
+      });
+    } catch (err) {
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 503,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
     }
