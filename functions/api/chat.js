@@ -1,7 +1,7 @@
-import { myKnowledgeBase } from "./knowledge.js";
+import { myKnowledgeBase } from './knowledge.js';
 
 /* ===========================================
-   ✅ Parser Topics
+   ✅ استخراج Topics من النص
 =========================================== */
 function parseTopics(rawKnowledge) {
   const topics = [];
@@ -25,23 +25,32 @@ function parseTopics(rawKnowledge) {
 }
 
 /* ===========================================
-   ✅ Entry Point
+   ✅ Main Handler
 =========================================== */
 export async function onRequestPost(context) {
   const { request, env } = context;
 
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
   try {
-    const { message } = await request.json();
+    const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return jsonResponse({ error: "API Key missing" }, 500);
+      return new Response(JSON.stringify({ error: "مفتاح GEMINI_API_KEY مفقود!" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      });
     }
 
     const topics = parseTopics(myKnowledgeBase.knowledge);
 
     /* =====================================================
-       ✅ Router باستخدام اسم الموضوع
+       ✅ المرحلة 1️⃣: Router خفيف (اختيار topic فقط)
     ====================================================== */
     const topicNames = topics.map(t => `- ${t.name}`).join("\n");
 
@@ -54,9 +63,9 @@ User Question:
 Available Topics:
 ${topicNames}
 
-Return ONLY the exact topic name from the list above.
-If none match clearly, return: NONE
-Do not explain anything.
+Return ONLY the exact topic name from the list.
+If none matches clearly, return: NONE
+Do not explain.
 `;
 
     const routerResponse = await fetch(
@@ -80,43 +89,54 @@ Do not explain anything.
       routerData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
 
     if (!selectedName || selectedName === "NONE") {
-      return jsonResponse({
+      return new Response(JSON.stringify({
         reply: "هذه المعلومة غير متوفرة حالياً."
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
     }
 
-    // ✅ تنظيف الاسم من أي رموز أو تنصيص
     selectedName = selectedName.replace(/["']/g, "").trim();
 
-    // ✅ مطابقة مرنة
     const selectedTopic = topics.find(t =>
-      normalize(t.name) === normalize(selectedName) ||
-      normalize(selectedName).includes(normalize(t.name)) ||
-      normalize(t.name).includes(normalize(selectedName))
+      t.name === selectedName ||
+      t.name.includes(selectedName) ||
+      selectedName.includes(t.name)
     );
 
     if (!selectedTopic) {
-      return jsonResponse({
+      return new Response(JSON.stringify({
         reply: "هذه المعلومة غير متوفرة حالياً."
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
       });
     }
 
     /* =====================================================
-       ✅ إرسال topic فقط للإجابة
+       ✅ المرحلة 2️⃣: إرسال Topic فقط (بدون كامل المعرفة)
     ====================================================== */
-    const systemInstruction = `
-You are the official APIA Assistant.
+    const safeHistory = (history || []).map(turn => ({
+      role: turn.role === "assistant" ? "model" : turn.role,
+      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
+    }));
 
-STRICT RULES:
-1. Use ONLY the authorized content below.
-2. Do not invent information.
-3. Reply in same language as user.
-4. Provide complete structured answer.
-5. Use Markdown tables when relevant.
+    const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
-AUTHORIZED CONTENT:
+CRITICAL RULES:
+1. LANGUAGE MATCH: Reply in the same language as the user query.
+2. STRICT CONTEXT FOCUS: Answer ONLY using the provided content.
+3. Provide complete structured official answer.
+4. Use Markdown tables for numbers and percentages.
+5. Do NOT invent information.
+
+AUTHORIZED KNOWLEDGE:
 ${selectedTopic.content}
 `;
+
+    const contents = [
+      ...safeHistory,
+      { role: "user", parts: [{ text: message }] }
+    ];
 
     const answerResponse = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -124,10 +144,11 @@ ${selectedTopic.content}
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: message }] }],
+          contents,
           systemInstruction: { parts: [{ text: systemInstruction }] },
           generationConfig: {
             temperature: 0.0,
+            topP: 0.95,
             maxOutputTokens: 1200
           }
         })
@@ -136,6 +157,8 @@ ${selectedTopic.content}
 
     const answerData = await answerResponse.json();
 
+    let botReply = "لم أتمكن من صياغة إجابة.";
+
     if (
       answerData &&
       answerData.candidates &&
@@ -143,42 +166,20 @@ ${selectedTopic.content}
       answerData.candidates[0].content &&
       answerData.candidates[0].content.parts
     ) {
-      return jsonResponse({
-        reply: answerData.candidates[0].content.parts
-          .map(p => p.text)
-          .join("\n")
-      });
+      botReply = answerData.candidates[0].content.parts
+        .filter(part => part.text)
+        .map(part => part.text)
+        .join("\n");
     }
 
-    return jsonResponse({
-      reply: "هذه المعلومة غير متوفرة حالياً."
+    return new Response(JSON.stringify({ reply: botReply }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
 
   } catch (error) {
-    return jsonResponse({ error: error.message }, 500);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
-}
-
-/* ===========================================
-   ✅ Normalize
-=========================================== */
-function normalize(text) {
-  return (text || "")
-    .toLowerCase()
-    .replace(/[^\w\s\u0600-\u06FF]/g, "")
-    .replace(/\bال/g, "")
-    .replace(/ات\b/g, "")
-    .replace(/ون\b/g, "")
-    .replace(/ة\b/g, "")
-    .trim();
-}
-
-function jsonResponse(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json"
-    }
-  });
 }
