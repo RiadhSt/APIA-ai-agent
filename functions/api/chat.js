@@ -1,8 +1,6 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// ══════════════════════════════════════════════
-//  تحليل الـ topics مرة واحدة عند التحميل
-// ══════════════════════════════════════════════
+// ── تحليل الـ topics مرة واحدة عند التحميل ──
 const TOPICS = (() => {
   const regex = /<topic\s+name="([^"]+)">([\s\S]*?)<\/topic>/g;
   const map = [];
@@ -39,9 +37,9 @@ function retrieveRelevantTopics(query, topK = 3) {
   const scored = TOPICS.map(topic => {
     let score = 0;
     keywords.forEach(word => {
-      if (topic.name.toLowerCase().includes(word))                  score += 5;
+      if (topic.name.toLowerCase().includes(word)) score += 5;
       if (topic.headings.some(h => h.toLowerCase().includes(word))) score += 3;
-      if (topic.content.toLowerCase().includes(word))               score += 1;
+      if (topic.content.toLowerCase().includes(word)) score += 1;
     });
     return { ...topic, score };
   });
@@ -54,11 +52,13 @@ function retrieveRelevantTopics(query, topK = 3) {
     .join('\n\n');
 }
 
+// ── تقليص الـ history ──
 function trimHistory(history, maxTurns = 6) {
   if (!history || history.length <= maxTurns) return history || [];
   return history.slice(-maxTurns);
 }
 
+// ── Retry تلقائي ──
 async function callGeminiWithRetry(url, body, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const response = await fetch(url, {
@@ -95,10 +95,6 @@ export async function onRequestPost(context) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
-  }
-
   try {
     const { message, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
@@ -110,11 +106,13 @@ export async function onRequestPost(context) {
       });
     }
 
+    // ── RAG: knowledge ذات الصلة فقط ──
     const relevantKnowledge = retrieveRelevantTopics(message);
     const knowledgeBlock = relevantKnowledge.trim()
       ? relevantKnowledge
       : "لا توجد معلومات مباشرة متعلقة بهذا السؤال في قاعدة البيانات.";
 
+    // ── History مُقلَّصة ──
     const safeHistory = trimHistory(history, 6).map(turn => ({
       role: turn.role === "assistant" ? "model" : turn.role,
       parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
@@ -123,10 +121,10 @@ export async function onRequestPost(context) {
     const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
 CRITICAL RULES:
-1. LANGUAGE: If the user writes in Arabic reply in Arabic. If the user writes in French reply in French. If the user writes in English reply in French. Never mix languages.
-2. STRICT CONTEXT FOCUS: Answer ONLY using the knowledge provided below. If the answer is not in the knowledge, say clearly in the user's language that you don't have this information.
-3. CONCISE YET POWERFUL: Be highly direct, official, and professional. No filler or introductory prose.
-4. MARKDOWN TABLES: Format numbers, percentages, and financial data exclusively in clear Markdown tables.
+1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French or English). Never mix languages.
+2. STRICT CONTEXT FOCUS: Answer ONLY using the knowledge provided below. If the answer is not in the knowledge, say so clearly.
+3. CONCISE YET POWERFUL: Be highly direct, official, and professional.
+4. MARKDOWN TABLES: Format numbers, percentages, and financial grants in clear Markdown tables.
 
 RELEVANT KNOWLEDGE (retrieved for this query only):
 <knowledge_base>
