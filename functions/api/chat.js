@@ -23,10 +23,11 @@ const STOP_WORDS = new Set([
 ]);
 
 function extractKeywords(query) {
-  return query
-    .replace(/[?؟!،,\.]/g, ' ')
+  const normalized = normalizeArabic(query);
+
+  return normalized
     .split(/\s+/)
-    .map(w => w.trim().toLowerCase())
+    .map(w => w.trim())
     .filter(w => w.length > 2 && !STOP_WORDS.has(w));
 }
 
