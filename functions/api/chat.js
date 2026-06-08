@@ -66,12 +66,11 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ✅ حساب عدد أسئلة المستخدم
+// ✅ حساب عدد أسئلة المستخدم
 const previousUserQuestions = Array.isArray(history)
   ? history.filter(turn => turn?.role === "user").length
   : 0;
 
-// ✅ نضيف السؤال الحالي
 const totalUserQuestions = previousUserQuestions + 1;
 
 if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
@@ -82,13 +81,6 @@ if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
     headers: corsWithJson,
   });
 }
-      return new Response(JSON.stringify({
-        error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
-      }), {
-        status: 429,
-        headers: corsWithJson,
-      });
-    }
 
     const safeHistory = normalizeHistory(history);
 
