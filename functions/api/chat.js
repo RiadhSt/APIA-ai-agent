@@ -30,6 +30,18 @@ function extractKeywords(query) {
     .filter(w => w.length > 2 && !STOP_WORDS.has(w));
 }
 
+function normalizeArabic(text) {
+  return text
+    .toLowerCase()
+    .replace(/[أإآ]/g, "ا")
+    .replace(/ة/g, "ه")
+    .replace(/ى/g, "ي")
+    .replace(/\bال/g, "")
+    .replace(/ات\b/g, "")
+    .replace(/ون\b/g, "")
+    .replace(/[?؟!،,\.]/g, " ");
+}
+
 function retrieveRelevantTopics(query, topK = 3) {
   const normalizedQuery = normalizeArabic(query);
   const keywords = extractKeywords(normalizedQuery);
