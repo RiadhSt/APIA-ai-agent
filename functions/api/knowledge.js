@@ -558,415 +558,84 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 
   </topic>
 
-<topic name="Guide de L'INVESTISSEUR ÉTRANGER 2022 - APIA">
-    Guide de L'INVESTISSEUR ÉTRANGER 2022
-    Agence de Promotion des Investissements Agricoles
-    ΑΡΙΑ
-    Ensemble, pour des projets fructueux
+<topic name="دليل المستثمر الأجنبي">
+1. شروط استغلال الأراضي الفلاحية للمستثمرين الأجانب
+الأراضي الدولية (أراضي الدولة)
+مدة الكراء: 10 إلى 25 سنة قابلة للتمديد حتى 40 سنة - الشكل القانوني: شركة مجهولة الاسم (SA) - رأس المال: 50% من كلفة الاستثمار على الأقل - نسبة المشاركة الأجنبية: 2/3 كحد أقصى
 
-    INTRODUCTION
-    La Modernisation, la compétitivité, le libéralisme et l'intégration dans le nouvel ordre économique mondial, l'adaptation aux changements et aux nouvelles technologies d'information et de communication (TIC) sont les défis de la Tunisie d'aujourd'hui dans un context d'ouverture des frontières, de mondialisation et de modernisation visant un développement durable.
-    Face à ces défis, l'Agence de Promotion des Investissements Agricoles « APIA » a voulu élaborer ce guide pour donner un aperçu sur l'environnement propice de l'investissement agricole privé en Tunisie orienté vers l'amélioration de la production, de la productivité, de la qualité des produits et mieux les positionner sur les marchés, et donner un aperçu sur la législation en vigueur régissant les primes et subventions octroyées par l'Etat aux investisseurs étrangers dans le secteur agricole, la pêche et l'aquaculture, les services y afférents ainsi que la première transformation et la valorisation des produits agricoles et de la pêche.
+الأراضي الخاصة
+مدة الكراء: 9 سنوات كحد أدنى - رأس المال: 30% من كلفة الاستثمار على الأقل - نسبة المشاركة الأجنبية: 2/3 كحد أقصى في رأس مال الشركة
 
-    APERCU SUR LA TUNISIE
-    Une position stratégique
-    Située au cœur du bassin méditerranéen juste au Sud de l'Italie avec une superficie de 163.610 Km² et 11,708 millions d'habitants, la Tunisie occupe une position stratégique lui permettant l'établissement de liens directs avec les pays de l'Union Européenne et les pays d'Afrique du Nord, de l'Ouest et du Moyen Orient.
-    Ainsi, Tunis est à environ une heure de vol de Rome et deux heures de vol de plusieurs villes de l'Union Européenne et du bassin méditerranée.
-    En ligne avec sa vocation millénaire d'ouverture sur l'environnement extérieur et de relais aux échanges internationaux, la Tunisie a opté pour le développement d'une économie de marché ainsi que pour une intégration progressive dans l'économie mondiale.
+2. الحوافز الجبائية (قانون 8-2017)
+إعفاء من المعاليم الديوانية على التجهيزات المستوردة التي لا يوجد لها مثيل مصنع محلياً - توقيف الأداء على القيمة المضافة للتجهيزات المصنعة محلياً (قائمة 419-2017) - خصم المداخيل المستثمرة من الوعاء الضريبي خلال أول 10 سنوات من بداية النشاط
 
-    Une économie de marché
-    La Tunisie a adapté plusieurs réformes visant le rétablissement des mécanismes du marché et l'encouragement de l'initiative privée. Il s'agit notamment de la libéralisation des prix, l'allégement de la fiscalité, la convertibilité courante du Dinar (monnaie nationale), le désengagement de l'Etat des activités concurrentielles au profit du secteur privé et l'introduction de réformes sur le système monétaire et financier.
+الشركات المصدرة كلياً (تصدير 70% من الإنتاج)
+إعفاءات ضريبية شاملة - خصم 100% من مداخيل التصدير من الوعاء الضريبي خلال أول 10 سنوات - توظيف 4 أجانب في منصب إدارة وإشراف دون ترخيص مسبق
 
-    Une ouverture sur l'économie internationale et un libre accès au marché de l'union européenne
-    Cette libération de l'économie s'est étendue au commerce extérieur. La Tunisie est en effet signataire entre autres des accords du GATT, membre fondateur de I'OMC et signataire des accords concernant l'agriculture et les mesures sanitaires et phytosanitaires.
-    La Tunisie a été le premier pays sud méditerranéen à avoir signé un accord avec l'Union Européenne en vue de la création d'une zone de libre-échange, prévoyant la suppression des droits de douane et des facilités réciproques pour les échanges des produits agricoles.
-    Ces accords, consacrant l'intégration de l'économie tunisienne dans le contexte de globalisation des marchés, offrent aux investisseurs dans le pays de nouvelles opportunités de production et de commercialisation.
-    Pour aider les entreprises à s'adapter aux exigences de la concurrence internationale et à tirer profit des nouvelles opportunités qui leur sont offertes, un programme national ambitieux a été mis en place pour la mise à niveau du système productif tunisien.
+3. الحوافز المالية (للمشاريع التي تتجاوز 200أ.د / 300أ.د / 500أ.د)
+منحة رفع القيمة المضافة والقدرة التنافسية
+القطاعات ذات الأولوية: 15% من كلفة الاستثمار، سقف 1 مليون دينار
+المنظومات الاقتصادية (جيوحرارية، نباتات طبية وعطرية): 15% من كلفة الاستثمار، سقف 1 مليون دينار
+الاستثمارات المادية للتكنولوجيا الحديثة وتحسين الإنتاجية: 50% من كلفة الاستثمار، سقف 500 ألف دينار
+الاستثمارات اللامادية: 50% من الكلفة، سقف 500 ألف دينار (منحة الدراسات 20ألف د)
+البحث والتطوير: 50% من نفقات البحث، سقف 300 ألف دينار
+تكوين الأعوان للشهادات: 70% من كلفة التكوين، سقف 20 ألف دينار سنوياً
 
-    Des atouts appréciables favorisant les investissements et le partenariat
-    Several facteurs concourent pour faire de la Tunisie un pays particulièrement attrayant pour des projets d'investissement et de partenariat dont notamment :
-    • La proximité du marché de l'Union Européenne et des autres marchés environnants (Maghreb et Moyen Orient)
-    La Tunisie jouit d'une excellente réputation dans les marchés financiers internationaux.
-    • Un système économique compétitif
-    • Une législation fiscale avantageuse: La loi 2017-8 du 14 février 2017 portant refonte du dispositifs des avantages fiscaux
-    • Une législation financière: La loi de l'investissement n 71-2016 du 30 septembre 2016, qui régit aussi bien l'investissement étranger que nationale.
-    • Des structures de soutien adaptées
-    • Un système de transport développé
-    • Sept ports ouverts au commerce international
-    • Neuf aéroports internationaux répartis sur l'ensemble du territoire et fréquentés par les principales lignes aériennes.
-    • Un réseau routier, de plus de 32 000 kilomètres, permet un accès facile à toutes les régions à potentiel économique du pays.
-    • Un réseau de télécommunications performant
-    • Neuf techno parcs
-    • Quinze cyber parcs
-    • Des ressources humaines qualifiées
+منحة التنمية الجهوية (لخدمات والتحويل الأولي)
+المجموعة الأولى: 15% من كلفة الاستثمار، سقف 1.5 مليون دينار + 65% من أشغال التهيئة (سقف مليون د)
+المجموعة الثانية: 30% من كلفة الاستثمار، سقف 3 مليون دينار + 85% من أشغال التهيئة (سقف مليون د)
 
-    APERCU SUR L'AGRICULTURE TUNISIENNE (2020)
-    Contribution moyenne à l'économie
-    • Part dans le PIB : 8,5%
-    • Part dans la population employée: 16%
-    • Part dans les exportations de biens: 11%
-    • Investissements agricoles: 10% des investissements dans l'ensemble de l'économie
+منحة تطوير القدرة التشغيلية
+تحمل الدولة للاشتراكات الاجتماعية على الأجور (للتونسيين المنتدبين أول مرة): 3 سنوات للقطاعات ذات الأولوية، 5 سنوات للمجموعة الأولى لمناطق التنمية الجهوية، 10 سنوات للمجموعة الثانية - تحمل الدولة بنسبة من الأجور (250 دينار شهرياً): نسبة تأطير 10-15% لمدة سنة، نسبة تأطير ≥15% لمدة 3 سنوات
 
-    Principales richesses agricoles
-    Céréaliculture, cultures maraîchères, oléiculture, agrumiculture, phéniculture et pêche.
+منحة التنمية المستدامة
+50% من قيمة مكونات مكافحة التلوث وحماية البيئة، سقف 300 ألف دينار
 
-    Principaux produits agricoles exportés
-    Huile d'olive, dattes, agrumes, légumes, poissons et fruits de mer
+4. الرسوم والضريبة
+إجراءات التأسيس: 150 ديناراً ثابتاً لكل عقد - الشركات المصدرة كلياً: معفاة من حقوق التسجيل - ضريبة الشركات الفلاحية: 10%، بقية الأنشطة: 15% - الأداء على القيمة المضافة: 7% حساسة، 13% تجهيزات وخدمات، 19% أغلب المنتجات (منتج فلاحي غير خاضع)
 
-    Principaux produits agricoles importés
-    Sucre, céréales, huiles végétales.
-
-    Superficie agricole totale
-    La superficie des terres à vocation agricole est estimée à 10.5 millions d'Ha dont:
-    * Terres labourables: 5 millions d'Ha
-    * Parcours naturels et forêts: 5.5 millions d'Ha
-
-    Les ressources hydrauliques
-    Ressources mobilisables: 4,9 milliards de m3 (DGRE) répartis entre :
-    - Eaux de surface: 2,7 milliards de m3
-    - Eaux souterraines: 2,1 milliards de m3
-    Ressources mobilisées: 4,1 milliards de m3 (2019) répartis entre :
-    - Eaux de surface: 2,1 milliards de m3 par le biais de 29 grands barrages, 222 barrages collinaires et 810 lacs collinaires.
-    - Eaux souterraines: 2 milliards de m3
-
-    Les ressources halieutiques
-    - 1 350 Km de côtes
-    - 41 ports de pêche et 50 sites naturels de débarquement
-
-    Climatologie
-    - Semi aride supérieur à humide au nord. La pluviométrie dépasse 400 mm/an.
-    - Aride supérieur à semi aride inférieur au centre. La pluviométrie se situe entre 200 et 400 mm/an
-    - Saharien à aride inférieur au sud. La pluviométrie est inférieure à 200 mm/an
-
-    * Principales régions et gouvernorats correspondants
-    - Nord Est: Tunis, Ariana, Ben Arous, Manouba, Nabeul, Zaghouan, Bizerte
-    - Nord Ouest: Béja, Jendouba, Le Kef, Siliana
-    - Centre Est: Sousse, Monastir, Mahdia, Sfax
-    - Centre Ouest: Kasserine, Kairouan, Sidi Bouzid
-    - Sud Est: Gabès, Mednine, Tataouine
-    - Sud Ouest: Gafsa, Tozeur, Kébili.
-
-    CONDITIONS D'EXPLOITATION DES TERRES AGRICOLES DANS LES PROJETS DE PARTENARIAT
-    Dans le secteur agricole, les investisseurs étrangers peuvent détenir jusqu'à 2/3 du capital social des sociétés œuvrant dans l'agriculture, l'aquaculture et la pêche sur le littoral Nord de la Tunisie et en haute mer (de Bizerte à Tabarka) et peuvent exploiter les terres agricoles par le biais de location sans que la terre fasse l'objet d'apport dans le capital.
-
-    Location des terres agricoles
-    1- Les terres domaniales
-    La location des terres domaniales se fait par le biais de concours, les fermes destinées à être érigées en sociétés de mise en valeur et de développement agricole (SMVDA) sont publiées périodiquement.
-    - Période de location: de 10 à 25 ans avec possibilité de prolongation, dans ce cas, la période totale de location atteindra 40 ans.
-    - Forme juridique: société anonyme.
-    - Capital social: au moins 50% du coût total de l'investissement.
-    - Participation étrangère au capital: maximum 2/3.
-
-    2- Les terres privées
-    - Durée de la location : 9 ans au minimum
-    - Exploitation dans le cadre d'une société: maximum 2/3 du capital de la société peuvent être considérés comme participation étrangère
-    - Capital social: au moins 30% du montant total de l'investissement.
-
-    3-Contrats de culture
-    Le partenariat technique et commercial (contrats de culture) peut se réaliser sur les terrains privés ainsi que sur les terres exploitées par les SMVDA, la modification de la structure du capital des SMVDA est soumise à une autorisation préalable du Ministre chargé de l'Agriculture.
-
-    INCITATIONS AUX INVESTISSEMENTS EN PARTENARIAT
-    Les investissements dans l'agriculture et la pêche sont réalisés librement sous réserve de satisfaire les conditions d'exercice dans ce secteur conformément à la législation en vigueur.
-    Les projets d'investissement font l'objet d'une simple déclaration déposée auprès des services de l'Agence de Promotion des Investissements Agricoles (ΑΡΙΑ).
-    Les étrangers résidents ou non-résidents peuvent investir librement dans le secteur agricole moyennant la location des terres agricoles.
-    Les encouragements prévus par la loi de l'investissement sont accordés sous forme d'incitations communes et d'incitations spécifiques.
-
-    Champs d'application
-    Bénéficient des encouragements prévus par la loi de l'investissement et au titre du développement agricole, les investissements qui se rapportent à :
-    • L'augmentation de la valeur ajoutée, de la compétitivité et de la capacité d'exportation de l'économie nationale et de son contenu technologique aux niveaux régional et international, ainsi que le développement des secteurs prioritaires
-    • La création d'emplois et la promotion de la compétence des ressources humaines
-    • La réalisation d'un développement régional intégré et équilibré
-    • La réalisation d'un développement durable.
-
-    ACTIVITÉS COUVERTES PAR LA LOI DE L'INVESTISSEMENT DANS L'AGRICULTURE, LA PECHE, L'AQUACULTURE, LES SERVICES LIÉES ET LA PREMIÈRE TRANSFORMATION DES PRODUITS AGRICOLES ET DE LA PECHE
-    1- LES ACTIVITÉS AGRICOLES:
-    - Production végétale
-    - Production animale
-
-    2- LES ACTIVITÉS DE PÊCHE ET D'AQUACULTURE
-
-    3- LES ACTIVITÉS DE PREMIÈRE TRANSFORMATION DE PRODUITS AGRICOLES ET DE PÊCHE :
-    • Transformation du lait dans les zones de production à l'exclusion de la production du yaourt.
-    • Production de fromage à partir du lait frais local.
-    • Conserveries et semi-conserveries des fruits et légumes et des produits de la pêche à l'exception des olives.
-    • Semi conserves de l'olive de table selon les procédés modernes.
-    • Production des dérivés de tomate.
-    • Conditionnement des produits agricoles et de pêche.
-    • Unité d'extraction d'huile d'olive.
-    • Conditionnement d'huile d'olive.
-    • Transformation d'oeufs.
-    • Extraction des huiles essentielles et aromatiques.
-    • Production d'aliments biologiques conditionnés et transformés.
-    • Production de jus de fruits frais.
-    • Abattage industriel des animaux.
-    • Unités de transformation des viandes.
-    • Sciage, conditionnement et transformation des produits forestiers.
-
-    4- LES ACTIVITÉS DE SERVICE LIÉES À L'AGRICULTURE ET À LA PÊCHE :
-    Services liés aux activités agricoles:
-    • Valorisation de sous-produits d'origine végétale ou animale
-    • Insémination artificielle.
-    • Services de cabinets et cliniques vétérinaires
-    • Services de laboratoires d'analyses vétérinaires et agricoles.
-    • Conseils agricoles.
-    • Préparation de la terre, récolte, moisson, protection et entretien des végétaux.
-    • Collecte et stockage des céréales.
-    • Collecte de lait
-    • Conditionnement et commercialisation des semences
-    • Pulvérisation aérienne d'insecticides et de pesticides pour les cultures et l'arboriculture
-    • Forage de puits et prospection d'eau
-    • Stockage des fourrages grossiers produits localement.
-    • Les unités ambulantes de gestion et de maintenance des réseaux hydrauliques agricoles
-    • Les unités ambulantes de maintenance de matériels agricoles
-    • Les unités ambulantes de traitement des végétaux d'approvisionnement en intrants pour la production et la récolte
-    • Transport réfrigéré des produits agricoles
-
-    Services liés à la pêche :
-    • Montage d'équipements et de matériel de pêche
-    • Distribution des produits de la pêche à travers les circuits intégrés
-    • Services de laboratoire d'analyses bactériologiques et chimiques vétérinaires
-    • Fabrique de glace
-    • Transport réfrigéré des produits de la pêche
-    • Nettoyage des outils de production
-    • Les unités ambulantes de maintenance des équipements et des matériels de pêche
-
-    LES ENCOURAGEMENTS
-    1-LES INCITATIONS FISCALES: LOI N° 8-2017
-    La Tunisie a contre mis en place plusieurs outils d'incitations aux investissements complétés par des mécanismes pour l'encouragement des exportations
-    Les investissements réalisés au titre du développement agricole bénéficient de:
-    - Déduction des revenus ou bénéfices investis, des revenus ou bénéfices nets soumis à l'impôt sur les revenus ou à l'impôt sur les sociétés, lors de la souscription au capital initial de l'entreprise ou à son augmentation.
-    - Exonération des droits et taxes dû à l'importation des équipements n'ayant pas de similaires fabriqués localement.
-    - Suspension de la TVA sur les équipements fabriqués localement suivant les listes fixées par le décret n° 419-2017.
-    - Déduction des revenus provenant des investissements de l'assiette de l'impôt sur le revenu et de l'impôt sur les sociétés durant les 10 premières années à partir de l'entrée en activité.
-
-    2-ENTREPRISES TOTALEMENT EXPORTATRICES
-    Sont considérées totalement exportatrices, les entreprises agricoles ou de pêche qui exportent au moins 70% de leur production en valeur avec la possibilité d'écouler le reliquat sur le marché local sans paiement de droits et de taxes.
-    1) Ces entreprises ne sont soumises au titre de leurs activités en Tunisie qu'au paiement des impôts, droits, taxes, prélèvements et contributions suivants :
-    - Les droits et taxes relatifs aux véhicules de tourisme,
-    - La taxe unique de compensation sur le transport routier,
-    - Les droits et taxes perçus au titre des prestations directes de services conformément à la législation en vigueur.
-    - Les contributions et cotisations au régime légal de sécurité sociale. Toutefois, les personnes de nationalité étrangère ayant la qualité de non-résident peuvent opter avant leur recrutement par l'entreprise pour un régime de sécurité sociale autre que le régime tunisien.
-    - L'impôt sur le revenu des personnes physiques ou l'impôt sur les sociétés après déduction de 50% des revenus provenant de l'exportation. Les revenus provenant de l'exportation sont déduits en totalité de l'assiette de cet impôt durant les dix premières années à partir de la première opération d'exportation.
-    2) La souscription au capital initial des entreprises totalement exportatrices ou à son augmentation donne lieu à la déduction des revenus ou bénéfices investis, des revenus ou bénéfices nets soumis à l’impôt sur le revenu des personnes physiques ou à l’impôt sur les sociétés.
-    3) Les investissements réalisés par les entreprises totalement exportatrices donnent lieu à la déduction des bénéfices investis au sein même de l’entreprise, du bénéfice net soumis à l’impôt sur les sociétés.
-    4) La possibilité de recruter librement sur simple déclaration, quatre agents de direction et d’encadrement de nationalité étrangère.
-
-    3 – LES INCITATIONS FINANCIÈRES
-    Les projets promus en partenariat dont le coût dépasse 200 milles DT (pour les projets agricoles), 300 milles DT (pour les projets de pêche) et 500 milles DT (pour les projets d’aquaculture) bénéficient des incitations suivantes :
-
-    1. La prime de l’augmentation de la valeur ajoutée et de la compétitivité
-    | Opération / Axe d'investissement | Taux et Plafond de la Prime |
-    | :--- | :--- |
-    | Au titre de la réalisation des opérations d’investissement direct dans les secteurs prioritaires | 15% du coût d’investissement approuvé avec un plafond de un (1) million de dinars. |
-    | Au titre des filieres economiques : Geothermie et Plants Aromatiques et Medicinales (PAM) | 15% du coût d’investissement approuvé avec un plafond de un (1) million de dinars. |
-    | Au titre de la performance économique dans le domaine : Des investissements matériels pour la maîtrise des nouvelles technologies et l’amélioration de la productivité | 50% du coût des investissements approuvé avec un plafond de cinq cent (500) mille dinars. |
-    | Des investissements immatériels | 50% du coût des investissements immatériels approuvés avec un plafond de cinq cent (500) mille dinars y compris la prime des études dont le plafond est fixé à vingt (20) mille dinars. |
-    | De la recherche et développement | 50% des dépenses de recherche et développement approuvées avec un plafond de trois cent (300) mille dinars. |
-    | De la formation des employés qui conduit à la certification des compétences | 70% du coût de formation des employés de nationalité tunisienne qui conduit à la certification des compétences conformément aux normes internationales avec un plafond annuel de vingt (20) mille dinars au titre de chaque entreprise. |
-
-    2. La prime de développement regional (Services lies à l’agriculture et la premiere transformation)
-    | Catégorie de Zone | Taux et Plafond de la Prime / Avantage |
-    | :--- | :--- |
-    | Le premier groupe des zones de développement regional | - 15% du coût d’investissement approuvé avec un plafond de 1.5 millions de dinars.<br>- 65% des dépenses des travaux d’infrastructures dans le secteur de l’industrie et ce dans la limite de 10% du coût du projet avec un plafond de un (1) million de dinars. |
-    | Le deuxième groupe des zones de développement régional | - 30% du coût d’investissement approuvé avec un plafond de trois (3) millions de dinars.<br>- 85% des dépenses des travaux d’infrastructures dans le secteur de l’industrie et ce dans la limite de 10% du coût du projet avec un plafond de un (1) million de dinars. |
-
-    3. La prime de développement de la capacité d’employabilité
-    - La prise en charge par l’Etat de la contribution patronale au régime légal de la sécurité sociale au titre des salaires versés aux employés de nationalité tunisienne recrutés pour la première fois et d’une manière permanente à partir de la date d’entrée en activité effective:
-      * 3 ans (les secteurs prioritaires)
-      * 5 ans (le premier groupe des zones de développement régional)
-      * 10 ans (le deuxième groupe des zones de développement régional)
-    - La prise en charge par l’Etat d’une partie des salaires versés aux employés tunisiens en fonction du niveau d’encadrement dans toutes les activités exceptées les activités exclues des incitations au titre du développement régional :
-      * taux d’encadrement 10-15% : 50% du salaire versé avec un plafond de (250) dinars mensuellement sur une période d’une année
-      * taux d’encadrement >=15% : 50% du salaire versé avec un plafond de (250) dinars mensuellement sur une période de trois années
-
-    4. Prime de développement durable
-    - Au titre des investissements réalisés dans la lutte contre la pollution et la protection de l’environnement: 50% de la valeur des composantes d’investissement approuvée avec un plafond de (300) mille dinars.
-
-    4 – AUTRES ENCOURAGEMENTS ET FACILITÉS
-    1 – Procédure de montage d’un dossier d’investissement agricole
-    Les investissements dans le cadre du projet de partenariat dans le secteur agricole, de la pêche et de l’agroalimentaire doivent faire l’objet :
-    • D’une déclaration d’investissement (ADI), suite à laquelle l’investisseur reçoit une attestation de déclaration d’investissement lui permettant de bénéficier des avantages fiscaux et de constituer juridiquement sa société. Les procédures de constitution juridique de la société s’effectuent dans des délais courts au sein d’un guichet unique opérant à l’Agence de Promotion de l’Industrie et l’Innovation APII.
-    • Du dépôt d’une étude technico-économique du projet pour l’obtention des avantages financiers. Une Décision d’Octroi d’Avantages (DOA) est accordé au promoteur – après l’examen de l’étude en question et le bouclage du schéma de financement – par un comité inter-institutionnel siégeant à l’APIA tous les mois pour les inferieurs ou égales à 15 millions de dinars et au siège de l’autorité tunisienne de l’investissement ( TIA ) pour les investissements supérieurs à 15 millions de dinars.
-
-    Certaines activités couvertes par le code sont soumises soit à une autorisation ou à un cahier des charges au préalable, relevant des services concernés du ministère d’agriculture. Il s’agit de :
-    • La pêche : autorisation du Ministère de l’agriculture.
-    • L’Agriculture biologique : Signature d’un cahier des charges et une convention avec un bureau de certification
-
-    2 – Droit d’enregistrement
-    • Les actes de constitution des sociétés et d’augmentation du capital sont soumis à un droit fixe de 150 DT/ acte.
-    • Pour les sociétés anonymes, elles sont soumises à un droit de souscription de versement du capital de 150 DT dens et de 20 DT pour tout autre acte.
-    • Les sociétés totalement exportatrices sont exonérées du droit d’enregistrement.
-
-    3– Fiscalité
-    Taux d’imposition des bénéfices et des revenus:
-    - Sociétés agricoles : 10%
-    - Autres activités : 15%
-    Taxe sur la valeur ajoutée (T.V.A) :
-    - 7% pour les produits sensibles
-    - 13% pour les biens d’équipement et pour certains services
-    - 19% pour la majorité des produits
-    * La TVA ne s’applique pas aux produits agricoles
-
-    4- Charges sociales
-    Régime légal : 25.75%
-    - Contribution patronale au régime de la sécurité sociale : 25.75 % (9.18 % à la charge du salarié et 16.57 % à la charge de l’employeur (12.29% pour l’agriculture)
-    - Fonds spécial pour le compte de l’Etat : 0.5 %
-    - Taxe de la formation professionnelle : TFP : 1%
-
-    Régime d’exonération
-    Une exonération et une prise en charge par l’Etat sont prévues pour les sociétés :
-    • Qui emploient des diplômés de l’enseignement supérieur : prise en charge totale de la contribution patronale pendant 5 ans.
-    • Totalement exportatrice : exonération totale du Fonds Spécial pour le compte de l’Etat et de la TFP.
-    • Installés dans les zones de développement régional : prise en charge par l’Etat de la contribution patronale au régime légal.
-
-    5-Emploi des cadres de nationalité étrangère
-    Les entreprises totalement exportatrices peuvent recruter quatre personnes de nationalité étrangère sans autorisation préalable.
-
-    6- Facilités et garanties accordées aux investisseurs étrangers
-    La Tunisie a adhéré à plusieurs conventions internationales et a conclu des accords avec un certain nombre de pays :
-    • Liberté de transfert des bénéfices et des produits de cession des capitaux investis y compris les plus values : Loi 93-48 instituant la convertibilité courante du dinar tunisien.
-    • Accords bilatéraux de protection des investissements conclus avec les pays partenaires de la Tunisie notamment : Allemagne, Belgique, Corée du Sud, Espagne, France, Indonésie, Italie, Pays-Bas, Portugal, Royaume-Uni, Suède, Suisse, Turquie, USA et Pays Arabes.
-    • Accords bilatéraux de non double imposition signés notamment avec : Allemagne, Autriche, Belgique, Canada, Corée du Sud, Danemark, Egypte, Espagne, France, Indonésie, Italie, Jordanie, Norvège, Suède, Royaume-Uni, USA et les Pays de l’UMA.
-    • Adhésion de la Tunisie à la convention de New York du 10/06/1958 assurant la reconnaissance, et l’exécution des sentences arbitrales étrangères.
-    • Promulgation en Avril 1993 du code sur l’arbitrage, autorisant l’administration tunisienne à recourir à la procédure arbitrale et garantissant l’exécution en Tunisie des sentences arbitrales rendues dans n’importe quel pays en n’importe quelle langue.
-    • Adhésion de la Tunisie au MIGA (Multilateral Investment Guarantee Agency) pour la couverture des risques non commerciaux.
-    • Adhésion de la Tunisie à l’O.M.C (Organisation Mondiale du Commerce).
-    • Accord Euro-Méditerranéen entre l’Union Européenne et la République Tunisienne.
-    De même, les investisseurs étrangers jouissent de la liberté de rapatriement des bénéfices et du produit de cession de capital investi en devises.
-
-    LES ANTENNES DE L’APIA
-    | Direction Régionale / Gouvernorat | Téléphone | E-mail |
-    | :--- | :--- | :--- |
-    | Tunis | 71 771 300 | dr.tunis@apia.com.tn |
-    | Ariana | 70 730 710 | dr.ariana@apia.com.tn |
-    | Manouba | 70 615 765 | dr.manouba@apia.com.tn |
-    | Ben Arous | 71 310 746 | dr.benarous@apia.com.tn |
-    | Nabeul | 72 010 287 | dr.nabeul@apia.com.tn |
-    | Zaghouan | 72 675 476 | dr.zaghouan@apia.com.tn |
-    | Bizerte | 72 432 650 | dr.bizerte@apia.com.tn |
-    | Beja | 78 451 652 | dr.beja@apia.com.tn |
-    | Jendouba | 78 600 741 | dr.jendouba@apia.com.tn |
-    | Le Kef | 78 224 398 | dr.kef@apia.com.tn |
-    | Siliana | 78 872 174 | dr.sliana@apia.com.tn |
-    | Kairouan | 77 232 878 | dr.kairouan@apia.com.tn |
-    | Kasserine | 77 474 662 | dr.kasserine1@apia.com.tn |
-    | Sidi Bouzid | 76 632 539 | dr.sidibouzid@apia.com.tn |
-    | Sousse | 73 229 090 | dr.sousse@apia.com.tn |
-    | Monastir | 73 463 454 | dr.monastir@apia.com.tn |
-    | Mahdia | 73 694 500 | dr.mahdia@apia.com.tn |
-    | Sfax | 74 226 035 | dr.sfax@apia.com.tn |
-    | Gafssa | 76 220 706 | dr.gafsa@apia.com.tn |
-    | Tozeur | 76 452 690 | dr.tozeur@apia.com.tn |
-    | Kibili | 75 491 085 | dr.kebili@apia.com.tn |
-    | Gabes | 75 275 830 | dr.gabes@apia.com.tn |
-    | Tataouine | 75 862 800 | dr.tataouine@apia.com.n |
-    | Mednine | 74 242 332 | dr.mednine@apia.com.tn |
+5. الضمانات للمستثمرين الأجانب
+حرية تحويل الأرباح وعوائد التصرف (قانون 93-48) - اتفاقيات حماية الاستثمارات مع: ألمانيا، بلجيكا، كوريا الجنوبية، إسبانيا، فرنسا، إندونيسيا، إيطاليا، هولندا، البرتغال، بريطانيا، السويد، سويسرا، تركيا، أمريكا، الدول العربية - اتفاقيات منع الازدواج الضريبي مع الدول المذكورة + النمسا، كندا، الدانمارك، مصر، الأردن، النرويج، دول اتحاد المغرب العربي - الانضمام إلى اتفاقية نيويورك للتحكيم (1958)، ومؤسسة MIGA، ومنظمة التجارة العالمية - اتفاق الشراكة الأوروبية المتوسطية
   </topic>
 
 <topic name="دليل الشركات الأهلية - sociétés communautaires">
+1. مفهوم الشركة الأهلية
+شخص معنوي تحدثه مجموعة من أهالي الجهة لتحقيق التنمية الجهوية والمحلية، يعتمد على المبادرة الجماعية والتنمية التضامنية.
 
-    توطئة
-    يندرج دليل الشركات الأهلية في إطار توفير رؤية واضحة وشاملة حولها، باعتبارها خيارا استراتيجيا يهدف إلى تحقيق الرفاه الاجتماعي والاقتصادي بتونس في إطار السياسة العامة للدولة. ويمثل هذا الدليل مرجعًا عمليا يوضح مفهوم الشركات الأهلية ومسار إحداثها القانوني وطرق تسييرها ومرافقة باعثيها وما أقرّ لفائدتها من منح وامتيازات، بما يعزّز المبادرة الجماعية الأهلية ويساهم في دفع التنمية على المستويين المحلي والوطني.
+2. الأهداف
+دفع التنمية المحلية والجهوية
+خلق مواطن شغل لأبناء الجهة
+تثمين الموارد المحلية غير المستغلة
 
-    المحور الأول: مفهوم الشركة الأهلية
-    1. التعريف:
-    الشركة الأهلية هي شخص معنوي تحدثه مجموعة من أهالي الجهة (المشاركين) يكون الهدف منه تحقيق التنمية الجهوية والمحلية وتعتمد أساسا على المبادرة الجماعية والتنمية التضامنية.
+3. أصناف الشركات الأهلية
+محلية: تنشط في حدود معتمدية واحدة
+جهوية: يمتد نشاطها إلى أكثر من معتمدية في حدود ولاية واحدة
 
-    2. المراجع القانونية:
-    * المرسوم عدد 15 لسنة 2022 المؤرخ في 20 مارس 2022 المتعلق بالشركات الأهلية.
-    * الأمر الحكومي والأوامر الترتيبية ذات الصلة الصادرة عن الوزارات المكلفة بالتشغيل، الفلاحة، وأملاك الدولة.
+4. مرافقة ومساندة الشركات الأهلية
+التأطير والمرافقة
+وزارة التشغيل والتكوين المهني عبر هياكلها والهياكل الشريكة (APIA، APII) لمرافقة باعثي الشركات الأهلية في إعداد دراسات الجدوى والمساعدة على استكمال الإجراءات القانونية.
 
-    3. حوكمة الشركات الأهلية:
-    تخضع الشركات الأهلية لقواعد الحوكمة الرشيدة والشفافية وإشراك أعضاء الجهة في اتخاذ القرار وتوزيع العوائد بما يضمن المصلحة الجماعية.
+5. متابعة الشركات الأهلية وتوزيع المنح والامتيازات
+صرف المنح (قسطان)
+القسط الأول: 40% من كلفة الاستثمار عند إنجاز 40% من المشروع
 
-    4. الأهداف:
-    * دفع التنمية المحلية والجهوية.
-    * خلق مواطن شغل جديدة لأبناء الجهة.
-    * تثمين الموارد المحلية والإنشائية والخدماتية غير المستغلة.
+القسط الثاني: 60% عند دخول المشروع طور النشاط الفعلي
 
-    5. أصناف الشركات الأهلية:
-    * الشركات الأهلية المحلية: تنشط في حدود معتمدية واحدة.
-    * الشركات الأهلية الجهوية: يمتد نشاطها إلى أكثر من معتمدية في حدود ولاية واحدة.
-
-    6. شروط التأسيس:
-    * الحد الأدنى للمشاركين في الشركة الأهلية المحلية: لا يقل عن 50 شخصاً من أهالي المعتمدية.
-    * رأس المال: يقع الاكتتاب فيه من قبل المشاركين عبر حصص متساوية القيمة، ولا يجوز للشخص الواحد امتلاك أكثر من حصة واحدة لضمان ديمقراطية التسيير (صوت واحد لكل عضو).
-
-    المحور الثاني: هيكلة وتسيير الشركات الأهلية
-    يتولى إدارة وتسيير الشركة الأهلية مجلس إدارة ينتخب من قبل الجلسة العامة للمشاركين.
-
-    1. تركيبة مجلس الإدارة حسب صنف الشركة:
-    * الشركات الأهلية المحلية: يتراوح عدد الأعضاء من 3 إلى 5 أعضاء.
-    * الشركات الأهلية الجهوية: يتراوح عدد الأعضاء من 5 إلى 10 أعضاء.
-
-    2. شروط الترشح لعضوية مجلس الإدارة:
-    * أن يكون المترشح من بين المشاركين (المكتتبين في رأس مال الشركة).
-    * ألا يشارك مباشرة أو بصورة غير مباشرة، وبصفة دائمة أو عرضية، في نشاط منافس لنشاط الشركة الأهلية.
-    * ألا يكون قد سبقت إدانته من أجل جناية أو جنحة قصدية.
-    * ألا يكون قد مُنع من مسك الصكوك (الشيكات) البنكية.
-    * ألا يكون من ضمن أعضاء مجلس إدارة تم حلّه سابقاً.
-    * منع الجمع: لا يمكن الجمع بين عضوية مجلس إدارة الشركة الأهلية وأجهزة تسيير الشركات التجارية والتعاونيات.
-    * تحديد العضوية: لا يمكن تولي عضوية مجلس الإدارة بأكثر من شركة أهلية واحدة.
-
-    3. آلية الانتخاب والمدة الزمنية:
-    * الانتخاب: يتم انتخاب أعضاء مجلس الإدارة من قبل المشاركين الحاضرين في الجلسة العامة التأسيسية أو الجلسة العامة العادية.
-    * طريقة التصويت: يجري الانتخاب بواسطة الاقتراع السري وبأغلبية الأصوات المصرّح بها.
-    * المدة: يُنتخب المجلس لمدة 3 سنوات.
-    * التجديد: المدة قابلة للتجديد مرتين فقط.
-
-    4. تركيبة هيئة تسيير المجلس (الرئاسة):
-    ينتخب مجلس الإدارة من بين أعضائه:
-    * رئيساً للمجلس وله صفة المدير العام.
-    * نائباً لرئيس المجلس.
-    يتم الانتخاب خلال الاجتماع الأول للمجلس الموالي للجلسة العامة التأسيسية أو العادية، بواسطة التصويت السري وبأغلبية الأصوات المصرّح بها.
-
-    5. شروط خاصة برئيس مجلس الإدارة:
-    * أن يكون من المشاركين في رأس مال الشركة.
-    * أن يكون مقيماً بالمعتمدية التي تنتصب بها الشركة (إذا كانت محلية) أو بالولاية (إذا كانت جهوية).
-    * ألا يكون مباشراً لوظيفة نيابية.
-    * ألا يكون متحملاً لمسؤولية حزبية.
-    * أن يكون له مستوى تعليمي يُمكّنه من الاضطلاع بالمهام الموكولة إليه، على أن يُحدّد هذا المستوى بدقة في النظام الداخلي لكل شركة أهلية.
-
-    6. أحكام وحالات استثنائية (الشغور، العزل، والتخلي):
-    * التخلي عن المهام: لا يمكن لأعضاء مجلس الإدارة التخلي عن مهامهم تلقائياً إلا في صورة وجود عذر معتبر يمنعهم من القيام بها.
-    * حالات العزل: يمكن عزل أي عضو من أعضاء مجلس الإدارة أو رئيس المجلس من طرف الجلسة العامة العادية في الحالات التالية:
-      1. إذا تمت إدانته من أجل جناية أو جنحة قصدية.
-      2. إذا أضرّ بمصالح الشركة الأهلية أو حاول إلحاق الضرر بها.
-      3. إذا ثبت وجود تعارض مصالح من جانبه.
-    * حالة الشغور المؤقت: في صورة حصول شغور في المجلس (بسبب وفاة، استقالة، أو عزل عضو أو عدة أعضاء)، يمكن لمجلس الإدارة – في الفترة الفاصلة بين جلستين عامتين عاديتين – القيام بتسميات مؤقتة لسد الشغور وبلوغ الحد الأدنى القانوني للأعضاء، على أن يخضع هذا التعيين المؤقت وجوباً لمصادقة أول جلسة عامة عادية لاحقة.
-
-    المحور الثالث: مرافقة ومساندة الشركات الأهلية
-    1. التأطير والمرافقة:
-    تتولى وزارة التشغيل والتكوين المهني عبر هياكلها الجهوية والمركزية والهياكل والمؤسسات الشريكة (مثل وكالة النهوض باالستثمارات الفلاحية APIA، ووكالة النهوض بالصناعة والتجديد APII) مرافقة باعثي الشركات الأهلية في إعداد دراسات الجدوى الفنية والاقتصادية والمساعدة على استكمال الإجراءات القانونية.
-
-    2. الخدمات المسداة لفائدة الشركات الأهلية الناشطة في قطاع الصناعات التقليدية:
-    * الانتفاع بدورات تنمية المعارف والمهارات التي يتولى ديوان الصناعات التقليدية تنظيمها بالشراكة.
-
-    المحور الرابع: متابعة الشركات الأهلية وتوزيع المنح والامتيازات
-    تخضع الشركات الأهلية لآليات تشجيع استثمارية ومالية لتسهيل انطلاق نشاطها الفعلي وتأمين ديمومتها الاقتصاية.
-
-    1. صرف المنح:
-    تصرف المنح على قسطين وذلك على النحو التالي:
-    * القسط الأول: 40% من كلفة الاستثمار المصادق عليها عند إنجاز 40% من المشروع.
-    * القسط الثاني: 60% عند دخول المشروع طور النشاط الفعلي.
-
-    2. هياكل التشجيع على الاستثمار:
+6. هياكل التشجيع على الاستثمار
     للحصول على الامتيازات يتم التوجه إلى الهياكل المعنية حسب الكلفة الجملية للاستثمار وفق التقسيم التالي:
     | الهيكل المعني بالملف | كلفة الاستثمار المستهدفة | طبيعة اللجنة / الصعيد |
     | :--- | :--- | :--- |
     | الهيئة التونسية للاستثمار (TIA) | كلفة الاستثمار تتجاوز 15 مليون دينار | على الصعيد المركزي |
     | وكالة النهوض بالصناعة والتجديد / وكالة النهوض بالاستثمارات الفلاحية | المشاريع ذات كلفة استثمار ما بين 1 مليون دينار و15 مليون دينار | على الصعيد المركزي |
-    | الإدارات والمكاتب الجهوية للهياكل المعنية بالاستثمار | المشاريع ذات كلفة استثمار أقل من 1 مليون دينار | على الصعيد الجهوي |
+    | الإدارات والمكاتب الجهوية للهياكل المعنية بالاستثمار | المشاريع ذات كلفة استثمار أقل من 1 مليون دينار | على الصعيد الجهوي |النظام الجبائي والامتيازات المالية
 
-    المحور الخامس: النظام الجبائي والامتيازات المالية للشركات الأهلية
-    تتمتع الشركات الأهلية بنظام جبائي تفضيلي وإعفاءات مخصصة لدعم المبادرات التنموية الجماعية.
+7. النظام الجبائي والامتيازات المالية
+الإعفاء من الأداء على أرباح الشركات (نسب تفضيلية حسب القوانين المالية الجارية)
+إعفاءات وتسهيلات جمركية عند توريد التجهيزات التي لا يوجد لها مثيل مصنع محلياً
+التسجيل بالمعلوم القار للقرارات وعقود التأسيس
 
-    1. الحوافز الجبائية والمالية:
-    * الإعفاء من الأداء على أرباح الشركات (تخضع لنسب تفضيلية وضوابط تحيينية وفق القوانين المالية الجارية).
-    * إعفاءات وتسهيلات جمركية عند توريد التجهيزات والمعدات اللازمة للانطلاق الفعلي والتي لا يوجد لها مثيل مصنوع محلياً.
-    * التسجيل بالمعلوم القار للقرارات وعقود التأسيس.
-
-    ملاحظة هامة: إن الامتيازات الممنوحة ليست ثابتة بطبيعتها، بل تخضع للتعديل والتحيين بموجب كل تعديل تشريعي قانوني يتعلق بها الصادر في قوانين المالية السنوية.
+ملاحظة
+الامتيازات غير ثابتة، تخضع للتعديل والتحيين بموجب قوانين المالية السنوية.
   </topic>
 
 
@@ -1094,9 +763,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - بعد استيفاء مدة الطرح الكلي:
       * طرح ثلثي المداخيل من أساس الضريبة.
       * دفع ضريبة بنسبة 10% من الأرباح.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي: طرح المداخيل أو الأرباح بعنوان الاستغلال من أساس الضريبة
     القطاع المستهدف:
     الخدمات والتحويل الأولي داخل مناطق التنمية الجهوية
@@ -1107,18 +774,14 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - بعد استيفاء مدة الطرح الكلي:
       * طرح ثلثي المداخيل من أساس الضريبة.
       * دفع ضريبة بنسبة 10% من الأرباح.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي: طرح المداخيل أو الأرباح بعنوان الاستغلال من أساس الضريبة
     القطاع المستهدف:
     الخدمات والتحويل الأولي خارج مناطق التنمية الجهوية
     تفاصيل الامتياز:
     - طرح ثلثي المداخيل المتأتية من التصدير من أساس الضريبة.
     - دفع ضريبة بنسبة 10% من الأرباح المتأتية من التصدير.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي: طرح المداخيل أو الأرباح بعنوان الاستغلال من أساس الضريبة
     القطاع المستهدف:
     الخدمات والتحويل الأولي خارج مناطق التنمية الجهوية
@@ -1128,36 +791,28 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - إعفاء 75% من المداخيل أو الأرباح في السنة الثانية.
     - إعفاء 50% من المداخيل أو الأرباح في السنة الثالثة.
     - إعفاء 25% من المداخيل أو الأرباح في السنة الرابعة.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     طرح المداخيل أو الأرباح بعنوان إعادة الاستثمار خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي داخل مناطق التنمية الجهوية
     تفاصيل الامتياز:
     - طرح كلي للمداخيل والأرباح المعاد استثمارها خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة في حدود المداخيل أو الأرباح الخاضعة للضريبة.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     طرح المداخيل أو الأرباح بعنوان إعادة الاستثمار خارج المؤسسة in الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي
     تفاصيل الامتياز:
     - طرح المداخيل أو الأرباح المعاد استثمارها خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه في المؤسسات المصدرة كليا أو في القطاعات المجددة من أساس الضريبة في حدود الأرباح الخاضعة للضريبة مع مراعاة الضريبة الدنيا.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     طرح المداخيل أو الأرباح بعنوان إعادة الاستثمار خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي
     تفاصيل الامتياز:
     - طرح كلي وفي حدود الدخل أو الربح الخاضع للضريبة للمداخيل أو الأرباح المعاد استثمارها في الاكتتاب في رأس المال الأصلي أو الترفيع فيه للمؤسسات المحدثة من قبل الشبان أصحاب الشهائد العليا الذين لا تتجاوز أعمارهم 30 سنة ويتحملون مسؤولية التصرف في المشروع بصفة شخصية ودائمة، مع مراعاة الضريبة الدنيا.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     طرح المداخيل أو الأرباح بعنوان إعادة الاستثمار خارج المؤسسة في الاكتتاب في رأس المال الأصلي أو الترفيع فيه من أساس الضريبة
     القطاع المستهدف:
@@ -1166,9 +821,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - الخدمات والتحويل الأولي خارج مناطق التنمية الجهوية مع مراعاة الضريبة الدنيا.
     تفاصيل الامتياز:
     - طرح كلي للمداخيل أو الأرباح المكتتبة في رأس مال شركات الاستثمار ذات رأس مال تنمية أو الموظفة لديها في شكل صناديق ذات رأس مال تنمية من أساس الضريبة في حدود المداخيل أو الأرباح الخاضعة للضريبة.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     توقيف العمل بالأداء على القيمة المضافة
     القطاع المستهدف:
@@ -1177,9 +830,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - توقيف العمل بالأداء على القيمة المضافة بالنسبة لعمليات التوريد للتجهيزات التي ليس لها مثيل مصنوع محليا والواردة بالقائمة عدد 3.
     - التخفيض في نسبة الأداء على القيمة المضافة إلى 6% بالنسبة لعمليات التوريد للتجهيزات التي ليس لها مثيل مصنوع محليا والواردة بالقائمة عدد 1.
     - توقيف العمل بالأداء على القيمة المضافة بالنسبة للاقتناء المحلي للتجهيزات اللازمة للاستثمار والواردة بالقائمة عدد 4.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     توقيف العمل بالأداء على القيمة المضافة
     القطاع المستهدف:
@@ -1188,52 +839,40 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
     - التخفيض في نسبة الأداء على القيمة المضافة إلى 6% بالنسبة لعمليات التوريد للتجهيزات التي ليس لها مثيل مصنوع محليا والواردة بالقائمة عدد 1.
     - توقيف العمل بالأداء على القيمة المضافة بالنسبة لاقتناء التجهيزات المصنوعة محليا اللازمة لاستثمارات الإحداث المقتناة قبل الدخول في طور النشاط الفعلي (القائمة عدد 2).
     - التخفيض in نسبة الأداء على القيمة المضافة إلى 6% في الحالات الأخرى.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     توقيف العمل بالأداء على القيمة المضافة
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي
     تفاصيل الامتياز:
     - توقيف العمل بالأداء على القيمة المضافة للمؤسسات المصدرة كليا بالنسبة إلى التوريد والاقتناء المحلي للمواد والمنتجات والتجهيزات وعمليات إسداء الخدمات اللازمة لنشاطها والتي تمنح حق الطرح.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     توقيف العمل بالأداء على القيمة المضافة
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولي
     تفاصيل الامتياز:
     - توقيف العمل بالأداء على القيمة المضافة لعمليات التصدير بالنسبة إلى التوريد والاقتناء المحلي للمواد والمنتجات وعمليات إسداء الخدمات التي تمنح حق الطرح واللازمة لإنجاز عمليات التصدير.
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     الإعفاء من المعاليم الديوانية
     القطاع المستهدف:
     الفلاحة والصيد البحري وتربية الأحياء المائية
     تفاصيل الامتياز:
     - إعفاء من المعاليم الديوانية للتجهيزات الموردة التي ليس لها مثيل مصنوع محليا.
-
-    --------------------------------------------------
-
+    -------------------------------------------------
     نوع الامتياز الجبائي:
     الإعفاء من المعاليم الديوانية
     القطاع المستهدف:
     الخدمات والتحويل الأولي
     تفاصيل الامتياز:
     - إعفاء من المعاليم الديوانية للتجهيزات الموردة التي ليس لها مثيل مصنوع محليا.
-
-    --------------------------------------------------
-
+    -------------------------------------------------
     نوع الامتياز الجبائي:
     معاليم التسجيل الموظفة على اقتناء الأراضي الفلاحية
     تفاصيل الامتياز:
     - التسجيل بالمعلوم القار لعقود شراء الأراضي الفلاحية بالنسبة للمنتفعين بقروض عقارية (20 دينارا على كل صفحة).
-
     --------------------------------------------------
-
     نوع الامتياز الجبائي:
     معاليم التسجيل الموظفة على اقتناء الأراضي الفلاحية
     تفاصيل الامتياز:
@@ -1253,9 +892,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 1 مليون دينار
 ملاحظات هامة:
 تشمل كل القطاع الفلاحي والصيد البحري وتربية الأحياء المائية.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الاستثمار المباشر
 
 اسم المنحة: منحة المنظومات الاقتصادية (جيوحرارية، نباتات طبية وعطرية)
@@ -1264,9 +901,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 1 مليون دينار
 ملاحظات هامة:
 قائمة المنظومات محددة بالملحق 1 من الأمر عدد 389.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الأداء الاقتصادي
 
 اسم المنحة: منحة الاستثمارات المادية للتحكم في التكنولوجيا الحديثة
@@ -1276,9 +911,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 ملاحظات هامة:
 تسند عند الإحداث.
 تبلغ النسبة 60% بالنسبة للهياكل المهنية والشركات الأهلية.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الأداء الاقتصادي
 
 اسم المنحة: منحة الاستثمارات المادية لتحسين الإنتاجية
@@ -1288,9 +921,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 ملاحظات هامة:
 تسند عند الإحداث والتوسعة والتجديد.
 تبلغ النسبة 60% بالنسبة للهياكل المهنية والشركات الأهلية.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الأداء الاقتصادي
 
 اسم المنحة: منحة الاستثمارات اللامادية
@@ -1299,9 +930,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 500 ألف دينار
 ملاحظات هامة:
 تشمل منحة الدراسة بسقف 20 ألف دينار.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الأداء الاقتصادي
 
 اسم المنحة: منحة البحث والتطوير
@@ -1310,9 +939,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 300 ألف دينار
 ملاحظات هامة:
 حسب الملحق 1 من الأمر عدد 389.
-
 --------------------------------------------------
-
 نوع المنحة: منحة الترفيع من القيمة المضافة والقدرة التنافسية بعنوان الأداء الاقتصادي
 
 اسم المنحة: منحة تكوين الأعوان (المصادقة على الكفاءات)
@@ -1321,9 +948,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 20 ألف دينار سنويا
 ملاحظات هامة:
 مخصصة للهياكل المهنية.
-
 --------------------------------------------------
-
 نوع المنحة: منحة التنمية الجهوية
 
 اسم المنحة: منحة التنمية الجهوية (المجموعة الأولى)
@@ -1332,9 +957,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 1.5 مليون دينار
 ملاحظات هامة:
 القطاع الفلاحي مستثنى، وتشمل فقط أنشطة التحويل والخدمات.
-
 --------------------------------------------------
-
 نوع المنحة: منحة التنمية الجهوية
 
 اسم المنحة: منحة التنمية الجهوية (المجموعة الثانية)
@@ -1343,9 +966,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: 3 مليون دينار
 ملاحظات هامة:
 تشمل التحويل الأولي المندمج وغير المندمج والخدمات.
-
 --------------------------------------------------
-
 نوع المنحة: منحة التنمية المستدامة بعنوان مقاومة التلوث وحماية البيئة
 
 اسم المنحة: منحة التنمية المستدامة (حماية البيئة)
@@ -1354,23 +975,17 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 السقف المالي: أكثر من 300 ألف دينار
 ملاحظات هامة:
 تخص مشاريع معالجة التلوث المائي والهوائي والتقنيات النظيفة.
-
 --------------------------------------------------
-
 نوع المنحة: منحة تطوير القدرة التشغيلية
 
 اسم المنحة:
 تكفل الدولة بمساهمة الأعراف في النظام القانوني للضمان الاجتماعي بالنسبة للمنتدبين لأول مرة وبصفة قارة.
-
 --------------------------------------------------
-
 نوع المنحة: منحة تطوير القدرة التشغيلية
 
 اسم المنحة:
 تكفل الدولة بنسبة من الأجور المدفوعة للأعوان التونسيين حسب نسبة التأطير بعنوان حاملي الشهائد الجامعية أو مؤهل تقني سام.
-
 --------------------------------------------------
-
 نوع المنحة: مساهمة في رأس المال محملة على موارد الصندوق التونسي للاستثمار
 
 اسم المنحة:
@@ -1385,21 +1000,17 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 
 </topic>
 
-
 <topic name="توزيع تعهد ملفات الاستثمار بين الهياكل">
 
 # توزيع تعهد الملفات
 
 ## تفاصيل تعهد الملفات:
-
 ### توزيع تعهد الملفات بين الوكالة والمندوبيات الجهوية
 * يتم توزيع ملفات الاستثمار بين المصالح الجهوية للوكالة ومصالح المندوبية الجهوية للتنمية الفلاحية طبقا لما كان معمولا به قبل دخول قانون الاستثمار حيّز التطبيق مع مواصلة اللجان الجهوية المحدثة بمقتضى مجلة تشجيع الاستثمارات النظر في ملفات الاستثمار سواء كان ذلك في إطار المجلة القديمة أو في إطار قانون الاستثمار إلى حين مباشرة لجان إسناد الامتيازات لمهامها حسب مقتضيات القرار المشترك المؤرّخ في 28 أفريل 2017 المتعلق بضبط تركيبة اللجان الوطنية والجهوية المكلفة بالنظر في مطالب الانتفاع بالمنح والمساهمات في رأس المال والقروض العقارية الفلاحية وطرق سيرها.
 * بالنسبة للاستثمارات التي سبق أن انتفعت بشهائد إيداع تصاريح بالاستثمار أو مقررات إسناد امتيازات من وكالة النهوض بالاستثمارات الفلاحية، يتم تعهد عمليات التوسعة والتجديد والتحيين المرتبطة بها من قبل وكالة النهوض بالاستثمارات الفلاحية مهما كانت قيمة استثماراتها وذلك تفاديا لتشتت الباعث والملفات بين مصالح وكالة النهوض بالاستثمارات الفلاحية والمندوبيات.
 * بالنسبة للاستثمارات التي تقوم بها شركات الاحياء، يتم التعهد بها حصريا من قبل الإدارة المركزية لوكالة النهوض بالاستثمارات الفلاحية مهما كانت قيمتها.
 * بالنسبة للاستثمارات المتعلقة بمشاريع التحويل الأولي البيولوجي يتم التعهد بها حصريا من قبل وكالة النهوض بالاستثمارات الفلاحية ما دامت قيمتها استثماراتها لا تتجاوز 15 م د.
 * بالنسبة لمطالب القروض العقارية، يتم التعهد بها حصريا من قبل المصالح المركزية لوكالة النهوض بالاستثمارات الفلاحية وذلك بعد أن يتم إيداع الملف على المستوى الجهوي ومطالبة الباعث بإتمامه بالمعطيات والوثائق الضرورية والقيام بمعاينة الأرض موضوع مطلب القرض العقاري وإعداد تقرير في الغرض وإحالة الملف إلى الإدارة المركزية.
-
----
 
 ### توزيع تعهد الملفات بين المركزي والجهوي
 * يمكن للمستثمرين إيداع الملفات التي تفوق قيمة استثماراتها 225 أ د بالنسبة للفلاحة والخدمات والتحويل الأولي و 450 أد بالنسبة للصيد البحري وتربية الأحياء المائية مباشرة بمصالح الإدارة المركزية للوكالة.
@@ -1413,7 +1024,6 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 # الملحق عدد 1 للأمر عدد 389 لسنة 2017
 
 ## أولاً: منحة القطاعات ذات الأولوية
-
 * الفلاحة والصيد البحري وتربية الأحياء المائية والخدمات المرتبطة بها.
 * أنشطة التحويل الأولي لمنتوجات الفلاحة والصيد البحري.
 * صناعات النانوتكنولوجيا.
@@ -1424,18 +1034,12 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * تكنولوجيات الاتصال والمعلومات.
 * الخدمات اللوجستية المسداة بالمناطق اللوجستية.
 
----
-
 ## ثانياً: منحة المنظومات الاقتصادية
-
 * منظومة الزراعات الجيوحرارية.
 * منظومة النباتات الطبية والعطرية.
 * منظومة المواد الإنشائية.
 
----
-
 ## ثالثاً: قائمة أنشطة الخدمات والتحويل الأولي لمنتوجات الفلاحة والصيد البحري
-
 ### 1. الخدمات المرتبطة بالأنشطة الفلاحية:
 * إضفاء قيمة إضافية للمنتوجات الفرعية النباتية أو الحيوانية.
 * التلقيح الاصطناعي.
@@ -1480,18 +1084,12 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * وحدات تحويل اللحوم.
 * نشر وتحويل وتكييف المنتجات الغابية.
 
----
-
 ## رابعاً: منحة الاستثمارات المادية للتحكم في التكنولوجيات الحديثة
-
 * تجهيزات التصميم: محطات التصميم باعتماد الحاسوب ومحطات الرسم باعتماد الحاسوب.
 * محطات التصرف في الإنتاج باعتماد الحاسوب ومحطات الصيانة باعتماد الحاسوب.
 * تجهيزات المخابر باستثناء الأدوات والتجهيزات الصغرى مثل التجهيزات البلورية للمخابر والمواد الاستهلاكية وتجهيزات الإنتاج.
 
----
-
 ## خامساً: قائمة منحة الاستثمارات المادية لتحسين الإنتاجية
-
 * اقتناء الجرارات الفلاحية وتوابعها وآلات الحصاد وآلات جني الزيتون.
 * اقتناء الآلات والمعدات الضرورية للاقتصاد في مياه الري وتحسين نوعيتها والتحكم في تقنيات الري والتسميد.
 * إنجاز أشغال حفظ المياه وأديم الأرض.
@@ -1518,10 +1116,7 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * موزع آلي للأكسيجين بمنشآت تربية الأحياء المائية بالأحواض.
 * غراسات الزيتون الجديدة.
 
----
-
 ## سادساً: قائمة منحة الاستثمارات اللامادية
-
 * التحاليل المخبرية للمنتوج قصد إثبات مطابقته للمواصفات المطلوبة وإبراز علاماته الخصوصية.
 * تصميم وتسجيل العلامات التجارية للمنتجات الفلاحية.
 * وضع نظام علامات مثبتة للأصل وعلامات بيان المصدر وغيرها من علامات الجودة للمنتجات الفلاحية.
@@ -1550,8 +1145,6 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * منظومات المراقبة والتحكم عن بعد.
 * الإنذار الصحي.
 
----
-
 ## سابعاً: قائمة منحة مصاريف البحث والتطوير
 
 * الدراسات الأولية اللازمة لتطوير منتوجات أو نماذج إنتاج جديدة.
@@ -1566,11 +1159,8 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 # قواعد احتساب وسقوف المنح وآجال البت
 
 ## أولاً: احتساب المنح والقيمة المضافة (TVA)
-
 * **الأنشطة غير الخاضعة للأداء (فلاحة، صيد بحري، أحياء مائية):** يتم احتساب المنح باعتبار الأداء على القيمة المضافة (TVA) ما عدا المكونات المعفاة أصلاً.
 * **الأنشطة الخاضعة للأداء (خدمات، تحويل أولي):** يتم احتساب المنح دون اعتبار الأداء على القيمة المضافة، باستثناء أنشطة جمع وخزن المنتوج (مثل صوامع الحبوب وتجميع الحليب).
-
----
 
 ## ثانياً: أسقف المنح وقواعد الجمع بينها
 
@@ -1582,16 +1172,12 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * **الجمع المسموح به للمشروع:** يمكن الجمع بين منحة القطاعات ذات الأولوية، ومنحة المنظومات الاقتصادية، ومنحة التنمية الجهوية في نفس المشروع.
 * **حظر المنح المزدوجة للأداء الاقتصادي:** لا يمكن للمكونات التي تحصلت على منحة الأداء الاقتصادي أو التنمية المستدامة الانتفاع بمنح أخرى.
 
----
-
 ## ثالثاً: إسناد المنح وطبيعة عملية الاستثمار
 
 * **منحة تحسين الإنتاجية:** تُسند منحة تحسين الإنتاجية عند الإحداث والتوسعة والتجديد، لكنها لا تُسند نهائياً لمشاريع الخدمات.
 * **التحكم في التكنولوجيا والمنح اللامادية:** تُسند منح التحكم في التكنولوجيا والمنح اللامادية (أداء اقتصادي) عند الإحداث فقط، أما في التوسعة فتنتفع بمنح الصنف وفق سقفها.
 * **وضعية شراء الأرض:** لا تنتفع قيمة شراء الأرض بمنحة الاستثمار المباشر، لكن يمكن لقطاعي الخدمات والتحويل الأولي الانتفاع بمنحة التنمية الجهوية في المناطق الصناعية.
 * **الشركات التعاونية:** تُسند منح الأداء الاقتصادي حسب القوائم، وتصل منح بقية المكونات إلى 33.33% باعتبارها مصنفة دائماً في الصنف "أ".
-
----
 
 ## رابعاً: آجال البت في مطالب إسناد الامتيازات المالية
 
@@ -1631,20 +1217,14 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 * **التركيبة:** تضم ممثلين جهويين عن نفس الهياكل الوزارية والمنظمات المهنية المذكورة في اللجنة الوطنية.
 * **التعيين والكتابة:** تتبع نفس إجراءات اللجنة الوطنية من حيث التعيين الوزاري وتولي الإدارة الجهوية للوكالة مهام الكتابة.
 
----
-
 ## ثانياً: سير عمل اللجان وقواعد المداولة
-
 * **دورية الانعقاد:** تجتمع اللجان مرة كل 3 أسابيع على الأقل، وكلما دعت الحاجة إلى ذلك.
 * **الدعوة للجلسات:** يوجه رؤساء اللجان الدعوات مرفقة بجدول الأعمال، وتحال إلى الأعضاء قبل 7 أيام على الأقل من تاريخ الانعقاد.
 * **النصاب القانوني المشروط:** لا تصح المداولات إلا بحضور أغلبية الأعضاء، مع **وجوب حضور ممثل الهيئة التونسية للاستثمار وممثل وزارة المالية**.
 * **حالة غياب النصاب:** في حال عدم توفر النصاب القانوني، يتم توجيه دعوة ثانية جديدة وتجتمع اللجنة في تاريخ يقرره رئيسها وتصح مداولاتها مهما كان عدد الأعضاء الحاضرين.
 * **اتخاذ القرار:** تتخذ اللجنة قراراتها بأغلبية أصوات الأعضاء الحاضرين، وعند تساوي الأصوات يكون صوت رئيس اللجنة مرجحاً.
 
----
-
 ## ثالثاً: نتائج مداولات اللجان وإجراءات الإمضاء والمتابعة
-
 تتمخض مداولات اللجان بعد دراسة الملفات وتقييمها عن إحدى النتائج التالية:
 1. **الموافقة:** عند توفر الشروط القانونية والمالية واكتمال الملف.
 2. **الرفض:** لعدم توفر الشروط المستوجبة أو لنقص في الوثائق الداعمة مع وجوب التعليل.
@@ -1662,12 +1242,9 @@ o	التدخل للمساندة خلال الإجراءات المتعلقة ب�
 <topic name="صرف المنح: احتساب نسب الإنجاز وإجراءات الصرف">
 
 # صرف المنح: احتساب نسب الإنجاز وإجراءات الصرف
-
 * **أقساط الصرف:** تُصرف المنح المالية للمستثمرين على قسطين أساسيين بناءً على مطلب كتابي يقدمه الباعث وفق الأنموذج بالملحق عدد 13.
   * **القسط الأول:** يتم صرفه بنسبة 40% من قيمة المنح عند إنجاز 40% من كلفة الاستثمار المصادق عليه.
   * **القسط الثاني:** يتم صرفه بنسبة 60% المتبقية عند الدخول الفعلي في طور النشاط.
-
----
 
 ## أولاً: طريقة احتساب نسبة إنجاز الاستثمارات
 
@@ -1678,10 +1255,7 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * **ملاحظة احتسابية:** يقصد بالاستثمار المصادق عليه في هذه العملية "الاستثمار المحتسب".
 * **الاستثناء:** لا يتم احتساب مصاريف الدراسة ضمن نسبة إنجاز الاستثمارات.
 
----
-
 ## ثانياً: شروط صرف المنح والالتزامات الزمنية
-
 * **التقرير السنوي:** يتعين على المستثمر تقديم تقرير سنوي (الملحق 14) حول تقدم إنجاز المشروع إلى الهيكل المعني بالاستثمار طيلة فترة الإنجاز.
 * **انتظام التقارير:** لا يمكن صرف أي منح ما لم يتم تقديم تقارير السنوات السابقة بانتظام.
 * **أجل الإنجاز القانوني:** يجب إنجاز برنامج الاستثمار خلال 4 سنوات من تاريخ التصريح، قابلة للتمديد استثنائياً لمرة واحدة لمدة أقصاها سنتان بمقرر معلل.
@@ -1691,34 +1265,23 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * بالنسبة للمشاريع وفق المنظومة القديمة، يجب الحصول على مقرر إسناد ودخول طور النشاط قبل 01 أفريل 2019 لصرف المنح.
 * أما المشاريع المتحصلة على تصاريح قبل 01 أفريل 2017، فتتواصل إجراءات صرفها وفق التمشي المعمول به سابقاً.
 
----
-
 ## ثالثاً: الوثائق المطلوبة وقواعد الخلاص النقدي
 
 * **صيغة الفواتير:** يتم قبول الفواتير الأصلية، أو نظير أصلي منها (Duplicata)، أو نسخ مطابقة للأصل.
 * **سقف الخلاص النقدي:** لا تُعتمد عمليات الخلاص نقداً التي يتجاوز مبلغها 5000 دينار.
 * **الإحالة للمالية:** تحال عقود وفواتير الخلاص النقدي التي تفوق 5000 دينار إلى المصالح المختصة بوزارة المالية.
 
----
-
 ## رابعاً: إجراءات المعاينة الميدانية والصرف مباشرة للمزودين
-
 * **حضور عون المالية:** يتم صرف أقساط المنح بناءً على الوثائق وبعد معاينة ميدانية يحضرها وجوباً ممثل عن المصالح الجهوية لوزارة المالية.
 * **قاعدة البطلان:** تعتبر أي معاينة ميدانية لصرف المنح تتم دون حضور عون المالية لاغية.
 * **استثناء المعدات الثقيلة:** بالنسبة لاقتناء الجرارات والحاصدات، يقوم أصل البطاقة الرمادية والفاتورة النهائية وما يفيد الخلاص مقام المعاينة الميدانية.
 * **الصرف المباشر:** يمكن صرف المنح المتعلقة بالمعدات المتنقلة مباشرة للمزود طبقاً للإجراءات الخاصة بالقطاع الفلاحي.
 
----
-
 ## خامساً: قواعد صرف منحة الدراسة
-
 * **موعد الصرف:** تُصرف منحة الدراسة كاملة عند صرف القسط الأول من منح المشروع (أي عند إنجاز 40% من الكلفة).
 * **الوثائق والجهة المستلمة:** يتم الصرف للمستثمر بعد الاستظهار بالفاتورة وبما يفيد الخلاص الفعلي للمبلغ. وتُصرف منحة الدراسة حصرياً للباعث، إلا إذا قدم مطلباً لصرفها بصفة كاملة لمكتب الدراسات.
 
----
-
 ## سادساً: التعامل مع حالات عدم إتمام المشروع والسحب الجزئي
-
 * **التوقف الإرادي للباعث:** للباعثين غير الراغبين في مواصلة البرنامج، تُجرى معاينة للمكونات التي دخلت طور النشاط فقط ويُحين المقرر بناءً على ذلك.
 * **فائض الصرف المسترد:** إذا تجاوزت المنح المصروفة في القسط الأول قيمة الاستحقاق الفعلي، يُطالب الباعث بإرجاع الفارق عبر قرار سحب جزئي للامتيازات.
 * **حظر المطالبات اللاحقة:** لا يمكن للباعث المطالبة بصرف منح لمكونات ينجزها لاحقاً بعد تسوية وضعيته الناتجة عن التوقف عن المشروع.
@@ -1730,7 +1293,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 # الوثائق المطلوبة في ملفات صرف الامتيازات المالية - مشروع فلاحي
 
 ## أولاً: الوثائق العامة والأساسية للملف
-
 * مطلب كتابي طبق الأنموذج المصاحب.
 * نسخة من السجل التجاري للشركات المتحصلة على مقررات قبل التكوين.
 * نسخة من عقد الكراء بالنسبة لشركات الاحياء والتنمية الفلاحية.
@@ -1741,10 +1303,7 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 > **ملاحظة إجرائية للبناءات والتهيئة:**
 > يمكن اعتماد قائمات إنجاز أشغال بالنسبة للبناءات والتهيئة مسلمة من قبل مقاول. وفي صورة تعذر تقديم فواتير أو قائمات أشغال بالنسبة للبناءات وأشغال التهيئة، يتم تقديم كشف مصاريف ممضى من قبل الباعث بالنسبة لليد العاملة مع فواتير اقتناء المواد المستعملة.
 
----
-
 ## ثانياً: الوثائق الإضافية الحصرية حسب مكونات الاستثمار
-
 | مكونات الاستثمار | الوثائق المطلوبة |
 | :--- | :--- |
 | **بناءات** | تراخيص البناء. |
@@ -1753,23 +1312,18 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 | **المواشي** | * محضر مصادقة بالنسبة للأراخي ومحضر فرز بالنسبة للأغنام والماعز.<br>* شهادة في السلامة الصحية للقطيع.<br>* سجل الأنساب ورأي فنّي مسلم من قبل المؤسسة الوطنية لتحسين وتجويد الخيل حول سجل الأنساب يتضمن وجوباً معطيات بخصوص بكرية الولادة للأفراس المعنية وانجرار ملكيتها للباعث بالنسبة للخيول المعدة للتربية.<br>* محضر معاينة من قبل لجنة الفرز المحدثة بمقتضى المقرر عدد 727 لسنة 2007 بالنسبة للإبل غير المرقمة. |
 | **معدات الاقتصاد في مياه الري** | شهادة ضمان. |
 
----
-
 ## ثالثاً: ملاحظات وضوابط قانونية صارمة
-
 * لا تقبل الفواتير والعقود التي لا تستجيب للتراتيب الجاري بها العمل وخاصة منها التنصيص على المعرف الجبائي.
 * يجب أن تكون الفواتير أصلية ومفصلة ومؤرخة وممضاة وتحمل ختم المزود.
 * في صورة اقتناء معدات من الخارج، يجب تقديم نسخة من تصريح الديوانة (D.U.M) وفاتورة المورد الأجنبي وما يفيد الخلاص.
 
 </topic>
 
-
 <topic name="التصريح بالاستثمار">
 
 # التصريح بالاستثمار
 
 ## تفاصيل التصريح بالاستثمار:
-
 ### إجراءات وآجال ملفات التصاريح بالاستثمار
 
 * **قاعدة القبول:** يجب قبول كافة ملفات إيداع التصاريح الواردة لمصالح الوكالة أو المندوبيات.
@@ -1787,8 +1341,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * **مكونات الاستثمار:** تدرج كافة المكونات في الشهادة، بما فيها المنجزة قبل التصريح أو بمعدات قديمة (إجراء مفتوح دون أجل).
 * **هيكل التمويل:** يشترط تقديم هيكل تمويل يتضمن الحد الأدنى من التمويلات الذاتية قانوناً.
 * **ملحقات الشهادة:** تلحق شهادة الإيداع آلياً ببيانات التجهيزات (المحلية والمستوردة).
-
----
 
 ### تعهّد مطالب تغيير شهائد التصريح بالاستثمار
 
@@ -1809,14 +1361,10 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * تعمير وإمضاء مراسلة الملحق 3 وتسليمها للباعث في الإبان.
 * **ملاحظة هامة:** إذا مر أكثر من سنة على إصدار الوصل، يجب وجوباً التثبت من الشروع في الإنجاز قبل أي إجراء.
 
----
-
 ### التصريح بالاستثمار بالنسبة للتونسيين المقيمين بالخارج
 
 * **نظام التصريح:** يتم عبر "الإضبارة الوحيدة" مع الحفاظ على نفس الإجراءات والوثائق السابقة.
 * **المستند القانوني:** يجب التنصيص في الشهادة على الفصل 28 من القانون عدد 27 لسنة 2012 (قانون المالية لسنة 2013).
-
----
 
 ### صلوحية شهائد التصاريح بالاستثمار
 
@@ -1830,8 +1378,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * الرفع من القيمة المضافة والقدرة التنافسية والتصديرية والمحتوى التكنولوجي للاقتصاد.
 * تحقيق تنمية جهوية مندمجة ومتوازنة وتحقيق تنمية مستدامة.
 * يخول القانون لكل شخص طبيعي أو معنوي (تونسي أو أجنبي) الاستثمار بحرية في الفلاحة والصيد البحري.
-
----
 
 ## ثانياً: تصنيف عمليات الاستثمار (الصنف أ و ب)
 
@@ -1848,16 +1394,12 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 4. **الخدمات والتحويل الأولي:** صنف "ب" مهما كانت قيمة الاستثمار.
 5. **الشركات التعاونية:** صنف "أ" مهما كانت قيمة الاستثمار.
 
----
-
 ## ثالثاً: إجراءات التصريح بالاستثمار
 
 * يجب إيداع التصريح بالاستثمار قبل الشروع في إنجاز عملية الاستثمار.
 * يتم اعتماد نظام "الإضبارة الوحيدة" لتبسيط الإجراءات منذ 01 أفريل 2017.
 * **أجل الحصول على الشهادة:** 24 ساعة من تاريخ إيداع ملف مستوفٍ للشروط.
 * **الصلوحية:** يعتبر التصريح ملغى آلياً إذا لم يتم الشروع في الإنجاز خلال سنة واحدة.
-
----
 
 ## رابعاً: توزيع المهام وجهات الاختصاص
 
@@ -1867,16 +1409,12 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
    * المشاريع التي تفوق مساحتها الجداول القصوى للزراعات.
 4. **المندوبية الجهوية (CRDA):** * الاستثمارات الفلاحية التي تساوي أو تقل عن 60 أد وضمن المساحات القصوى.
 
----
-
 ## خامساً: هيكل التمويل والامتيازات المالية
 
 * **نسبة التمويل الذاتي:** يجب ألا تقل عن 10% لمشاريع الصنف "أ" و 30% لمشاريع الصنف "ب".
 * **مكونات الهيكل:** يتكون من التمويل الذاتي والقروض فقط، وتُحتسب المنح خارج الهيكل.
 * **استثناء (بنك التضامن):** تُدرج المنح وجوباً داخل الهيكل ولا تُصرف إلا بعد المعاينة الميدانية.
 * **منحة القدرة التشغيلية:** تشمل تكفل الدولة بمساهمة الأعراف (عبر الضمان الاجتماعي) أو نسبة من الأجور (عبر مكتب التشغيل).
-
----
 
 ## سادساً: أمثلة من جدول المساحات القصوى (بعلي)
 
@@ -1893,10 +1431,7 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 ## الخدمة:
 الحصول على مقرر إسناد امتيازات من صنف "أ" أو "ب"
 
----
-
 ## 1- شروط الانتفاع بالخدمة:
-
 * **طبيعة المشروع:** مشروع فلاحي.
 * **التصريح المسبق:** إيداع تصريح بالاستثمار قبل الشروع في إنجاز عملية الاستثمار وملف للانتفاع بالامتيازات المالية.
 * **هيكل التمويل:** إنجاز هيكل تمويل المشروع يتضمن نسبة دنيا من تمويل ذاتي لا تقل عن 10% من كلفة الاستثمار بالنسبة للصنف "أ" و 30% بالنسبة للصنف "ب".
@@ -1904,7 +1439,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 ---
 
 ## 2- الوثائق المطلوبة حسب طبيعة المشروع:
-
 * مطلب كتابي لدى الوكالة في أجل أقصاه سنة من تاريخ إيداع التصريح.
 * نسخة من بطاقة التعريف أو السجل التجاري أو مشروع قانون أساسي بالنسبة للشركات في طور التكوين بما في ذلك الشركات التعاونية ومجامع التنمية.
 * وثيقة تثبت أن الوضعية الجبائية للباعث مسواة.
@@ -1945,8 +1479,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
   * موافقة شركة استثمار ذات رأس مال تنمية أو الصناديق المشتركة للتوظيف في رأس مال تنمية على المساهمة في رأس المال.
   * الموافقات المبدئية البنكية لتمويل المشروع طبقاً لهيكل التمويل المصادق عليه من شركة استثمار ذات رأس مال تنمية أو الصناديق المشتركة للتوظيف في رأس مال تنمية.
 
----
-
 ## 3- الإجراءات والآجال الزمنية:
 
 * **الخطوة 1:** إيداع ملف مستوفى الشروط من قبل الباعث.
@@ -1957,8 +1489,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * **الخطوة 6:** إمضاء المقرر من قبل الوزير المكلف بالفلاحة أو من ينوبه (3 أيام).
 * **الخطوة 7:** دعوة الباعث كتابياً لتسلم المقرر (يوم).
 * **الخطوة 8:** تسليم الباعث قائمة في الوثائق لتجسيم الامتيازات (قائمة عدد 5) مع المقرر.
-
----
 
 ## 4- مكان إيداع الملف والحصول على الخدمة:
 
@@ -1974,8 +1504,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 ### جدول المساحات القصوى للزراعات حسب المناطق:
 *(يتضمن الجدول تفاصيل زراعات سقوية وبعلية لمناطق مختلفة تشمل الزراعات الكبرى، أراضي المرعى، الأشجار المثمرة، اللوز والزيتون، كروم المائدة، عنب التخمير، القوارص، زراعة الخضر، زراعات الواحات، والزراعات تحت البيوت المكيفة).*
 
----
-
 ## 5- أجل الحصول على الخدمة والملاحظات الهامة:
 
 * **أجل الحصول على الخدمة:** 23 يوماً من تاريخ إيداع ملف مستوفٍ للشروط، و30 يوماً بالنسبة للمشاريع التي تتضمن مكونات اقتصاد في مياه الري.
@@ -1985,14 +1513,10 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * **التقرير السنوي:** يتعين على الباعث تقديم تقرير سنوي حول تقدّم إنجاز الاستثمارات إلى الهيكل المعني بالاستثمار طيلة فترة الإنجاز (4 سنوات).
 * **مدة الإنجاز:** يتعين إنجاز برنامج الاستثمار خلال أربع سنوات من تاريخ التصريح بالاستثمار قابلة للتمديد بصفة استثنائية ولمرة واحدة لمدة أقصاها سنتان بمقرّر معلل من الهيئة.
 
----
-
 ## 6- المراجع القانونية:
 
 * القانون عدد 71 لسنة 2016 المؤرخ في 30 سبتمبر 2016.
 * الأمر الحكومي عدد 389 لسنة 2017 المؤرخ في 09 مارس 2017.
-
----
 
 ## القائمة عدد 2: كراسات الشروط أو التراخيص أو الموافقات المبدئية المطلوبة
 
@@ -2000,8 +1524,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * موافقة مبدئية/مصادقة على صلوحية مدجنة أو مذبح دواجن أو منشأة تفريخ.
 * ترخيص وزاري لأعوان وإطارات وزارة الفلاحة.
 * كراسات شروط: الفلاحة البيولوجية، إنتاج البذور والشتلات، تربية الأراخي المؤصلة، مراكز تربية فحول الأبقار/الأغنام/الماعز/الأرانب المؤصلة، تربية الطرائد، مراكز تربية الحلزون.
-
----
 
 ## القائمة عدد 3: الوثائق المعتمدة في إثبات صيغة استغلال الأرض
 
@@ -2012,10 +1534,7 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * عقود شراء، هبة، تنازل، أو مقاسمة مسجلة.
 * موافقات كراء الأراضي الدولية.
 
----
-
 ## القائمة عدد 4: مضمون دراسة جدوى المشروع
-
 * ملخص الدراسة والخاتمة.
 * معطيات حول الباعث.
 * معطيات عامة حول المستغلة ومواردها ومحيطها.
@@ -2023,17 +1542,13 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * دراسة السوق، الدراسة الفنية، روزنامة الإنجاز، التشغيل، الدراسة المالية.
 * التأثير البيئي للمشروع، فريق العمل، والمصاريف.
 
-
 # إجراءات وآجال تعهد ملفات مطالب الانتفاع بالامتيازات المالية
 
 ## تفاصيل إجراءات وآجال تعهد ملفات مطالب الانتفاع بالامتيازات المالية:
 
 ### إيداع مطالب إسناد الامتيازات المالية ومحتواها
-
 * **قبول الملفات:** يتعين قبول جميع ملفات مطالب إسناد الامتيازات الواردة على مصالح الوكالة أو المندوبيات.
-
 * **المطلب الكتابي:** يجب تقديم مطلب كتابي (الملحق 4) لدى الهيئة التونسية للاستثمار أو الهيكل المختص ترابياً في أجل أقصاه سنة واحدة من تاريخ إيداع التصريح بالاستثمار.
-
 * **منحة القدرة التشغيلية:** يقدم المطلب (الملحق 4) حسب جهة الاختصاص:
   * **الصندوق الوطني للضمان الاجتماعي:** لتكفل الدولة بمساهمة الأعراف، ويتم الرد في أجل أقصاه 3 أشهر.
   * **مكتب التشغيل والعمل المستقل:** لتكفل الدولة بنسبة من الأجور للمنتدبين التونسيين.
@@ -2041,15 +1556,10 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 ---
 
 ### قواعد التعامل مع المنظومات (القديمة والجديدة)
-
 * **المنظومة القديمة:** الملفات التي تُنظر وفق مجلة تشجيع الاستثمارات تحافظ على نفس الإجراءات والوثائق والتمشي المعمول به سابقاً.
-
 * **المنظومة الجديدة:** تعتمد الإجراءات والوثائق حسب الملحق الخاص بالخدمات المتعلقة بالاستثمار في القطاع الفلاحي.
 
----
-
 ### متطلبات الدراسة الفنية والاقتصادية
-
 * **القاعدة العامة:** تُطالب كافة المشاريع بتقديم دراسة فنية واقتصادية.
 
 * **الاستثناءات (يكتفى بمطلب ودراسة مختصرة):**
@@ -2058,29 +1568,17 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
   * إصلاح مراكب الصيد أو تجديد تجهيزاتها وعمليات التوسعة الخاصة بها.
 
 * **المشاريع الأخرى:** يتعين تقديم دراسة جدوى اقتصادية وفنية طبقاً للمقاييس الواردة بالملحق عدد 5.
-
 * **دور المندوبيات:** تعتمد المندوبيات الجهوية الأنموذج (الملحق 4) كبديل للبحث الفني إلا في حالات الضرورة القصوى.
 
----
-
 ### هيكل التمويل
-
 * **نسبة التمويل الذاتي:** يجب ألا تقل عن 10% لمشاريع الصنف "أ" و30% لمشاريع الصنف "ب" من قيمة الاستثمار.
-
 * **مكونات الهيكل:** يتكون من التمويل الذاتي والقروض فقط، حيث تُحتسب المنح خارج هيكل التمويل.
-
 * **إثبات الهيكل:** لا تُطلب مؤيدات لهيكل التمويل، ويُكتفى بالهيكل المقدم من الباعث.
-
 * **استثناء (بنك التضامن):** للمشاريع الممولة من البنك التونسي للتضامن، تُدرج المنح وجوباً داخل الهيكل ولا تُصرف إلا بعد معاينة ميدانية مشتركة.
 
----
-
 ### إسناد الامتيازات وارتباطها بتاريخ التصريح
-
 * **تصاريح ما قبل 01 أفريل 2017:** تُطبق عليها الأحكام الانتقالية والأمر رقم 427 لسنة 1994، ويصدر مقرر إسناد امتيازات وفق الملحق 6.
-
 * **تصاريح بداية 01 أفريل 2017:** تُسند الامتيازات وفق قانون الاستثمار الجديد (قانون 71 لسنة 2016).
-
 * **حالات الإحالة (التحيين):** للمشاريع المتعهد بها سابقاً، يمكن إصدار تصاريح وفق الإضبارة الوحيدة مع الحفاظ على نفس الامتيازات القديمة.
 
 * **الاستثمارات المنجزة قبل التصريح:**
@@ -2108,14 +1606,10 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * **إعلام أعضاء اللجان:** يجب إعلام أعضاء لجان إسناد الامتيازات بكل حالات التغيير والتحيين التي تطرأ على المشاريع، وذلك عبر عرض مذكرات تفصيلية تتضمن بوضوح موضوع التغيير وأسبابه.
 * **تأريخ المقررات المحدثة:** في حالات التحيين التي تستوجب إصدار مقرر جديد، يجب أن يحمل المقرر المحدث تاريخاً ورقماً ترتيبياً جديداً وخاصاً به، حتى وإن تم إصداره في نفس السنة الإدارية للمقرر الأصلي.
 
----
-
 ## ثانياً: على مستوى قاعدة المعطيات والإحصائيات
 
 * **التسجيل الشامل:** يجب التنصيص الرقمي على كافة التغييرات والتعديلات المتفق عليها داخل قاعدة المعطيات الإعلامية للوكالة، حتى وإن لم يصدر في شأنها مقرر "تحيين" رسمي واكتُفي بالمراسلة.
 * **طريقة الاحتساب الإحصائي:** يتم الاقتصار على احتساب الفارق المالي الإيجابي للاستثمارات فقط (الزيادة في كلفة الاستثمار إن وجدت) بعنوان "تحيين" ضمن التقارير الإحصائية السنوية والدورية.
-
----
 
 ## ثالثاً: ضوابط وقواعد إحالة المشاريع الفلاحية
 
@@ -2141,37 +1635,21 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 | تحويل أولي | - | مهما كانت قيمة الاستثمار |
 | الشركات التعاونية والشركات الأهلية | مهما كانت قيمة الاستثمار | - |
 
----
-
 * يتم تصنيف المشروع بالاعتماد على قيمة الاستثمارات المقترحة من قبل الباعث في ملف مطلب الامتيازات المالية. 
-
----
 
 * لا تعتبر قيمة شراء الأرض في التصنيف ولا في توزيع الملفات بين المركزي والجهوي ولا بين الوكالة والهيئة. 
 
----
-
 * لا تعتبر في التصنيف قيمة اقتناء مراكب الصيد البحري القديمة. 
-
----
 
 * تُصنف عملية الاستثمار في التوسعات والتجديد حسب القيمة التراكمية للاستثمارات المصادق عليها في إطار مجلة تشجيع الاستثمار القانون عدد 120 لسنة (1993) وفي إطار قانون الاستثمار القانون عدد 71 لسنة 2016. ولا تعتبر في القيمة التراكمية إلا قيمة العملية الجديدة وقيمة عمليات الاستثمار التي لم يمر على تاريخ إمضاء المقررات المتعلقة بها أكثر من 10 سنوات وذلك في تاريخ إيداع مطلب الحصول على الامتيازات المالية لعملية الاستثمار الجديدة. 
 
----
-
 * في صورة تعهد مشروع يتضمن مكوّنات فلاحية مع مكوّنات تحويل أولي أو مكونات صيد بحري مع مكونات تحويل أولي، فإنّه يتم تقييم كل مكونات الاستثمار كمشروع واحد مشروع فلاحي أو مشروع صيد بحري ويتم تصنيف المشروع في الصنف "أ" أو "ب" حسب قيمة الاستثمار.
 
----
-
 * إذا تم إنجاز عملية توسعة في نشاط تحويل أولي مندمجة مع استثمارات في نشاط فلاحي أو نشاط صيد بحري مصادق عليهما في عملية استثمار سابقة، يتم تصنيف عملية التحويل الأولي حسب القيمة التراكمية للعمليتين.
-
----
 
 * يصنف الاستثمار في التحويل الأولي في الصنف "ب" إذا كان مندمجا مع مشروع فلاحي أو صيد بحري غير مصادق عليه.
 
 </topic>
-
-
 
 <topic name="تعريف بعض المصطلحات">
 
@@ -2180,18 +1658,12 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 ## القطاعات ذات الأولوية 
 هي القطاعات التي تتميز بطابعها الاستراتيجي وقدرتها على الرفع من نسق النمو أو ذات تشغيلية عالية، وتحظى بأولوية طبقا للمخططات التنموية. وقد تم اعتبار القطاع الفلاحي والصيد البحري وتربية الأحياء المائية والخدمات والتحويل الأولى ذات أولوية.
 
----
-
 ## المنظومات الاقتصادية 
 هي الأنشطة التي تعتمد بشكل أساسي على تثمين الموارد الإنشائية والفلاحية والمخزون الطبيعي والثقافي من خلال التصنيع والتوظيف بمناطق الإنتاج وتساهم في تطوير سلاسل القيم من خلال التحويل الجذري لطبيعة المنتوج، وهي تضم منظومتين: منظومة الزراعات الجيوحرارية ومنظومة النباتات الطبية والعطرية.
 وتسند الامتيازات المتعلقة بالمنظومات الاقتصادية لعمليات الاستثمار الخاصة بالتحويل فقط.
 
----
-
 ## الإحداث 
 هو كل مشروع جديد مستقل بذاته بغرض إنتاج سلع أو إسداء خدمات وموضوع أول طلب لإسناد الامتيازات. كما تصنف إحداث عملية الاستثمار التي تلي مباشرة عملية استثمار مصادق عليها منذ فترة تزيد عن 10 سنوات وذلك في تاريخ إيداع الملف المتعلق بها.
-
----
 
 ## التوسعة
 هي كل عمليات الاستثمار الموالية لعمليات الاحداث أو لعمليات التوسعة ومرتبطة بها:
@@ -2200,8 +1672,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * بالنسبة لتربية الأحياء المائية إذا تمت في نفس الموقع أو استعملت نفس الموارد أو وسائل الانتاج،
 * بالنسبة للخدمات والتحويل الأولي إذا تمت في نفس المكان أو استعملت نفس الموارد أو وسائل الانتاج،
 * عمليات الاستثمار في التحويل الأولي المندمج مع استثمارات فلاحية انتفعت بامتيازات سابقا.
-
----
 
 ## التجديد 
 هي كل عملية استثمار تتعلق بتجديد استثمارات انتفعت بامتيازات سابقا في إطار مجلة تشجيع الاستثمار أو قانون الاستثمار. ويعتمد في ذلك المدة الإندثارية لكل مكونة استثمار على النحو التالي:
@@ -2212,22 +1682,14 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * الغراسات السقوية باستثناء الزياتين التي تخضع للترخيص ومدتها الاندثارية 15 سنة.
 * تهيئة البناءات ومدتها الاندثارية 10 سنوات.
 
----
-
 ## التحويل الأولي المندمج
 تعتبر عمليات الاستثمار لتحويل المنتوج مندمجة مع عملية استثمار في النشاط الفلاحي أو الصيد البحري عندما يتعلق التحويل بمنتوج المستثمر نفسه وإن كانت عمليتي الاستثمار على موقعين متباعدين جغرافيا على أن يمثل الإنتاج ما لا يقل عن 10% من طاقة التحويل. وينطبق مفهوم الاندماج حتى بالنسبة لتحويل منتوج متأت من مشروع فلاحي أو صيد بحري غير مصادق عليهما.
 
----
-
 ## الشروع في انجاز الاستثمار 
-يعتبر شروعا في إنجاز الاستثمار، بداية إنجاز مكونة من مكونات الاستثمار المصرح به ويتم الإثبات بالاستظهار بما يفيد خلاص مبلغ مالي مقابل ذلك أو بناء على معاينة ميدانية.
-
----
+يعتبر شروعا في إنجاز الاستثمار، بداية إنجاز مكونة من مكونات الاستثمار المصرح به ويتم الإثبات بالاستظهار بما يفيد خلاص مبلغ مالي مقابل ذلك أو بناء على معاينة ميدانية
 
 ## دخول طور النشاط الفعلي 
 يعتبر دخولا في طور النشاط الفعلي الانتهاء من إنجاز كل مكونات الاستثمار المصادق عليها.
-
----
 
 ## الفواتير التي تستجيب للشروط القانونية 
 حسب الفصل 25 من القانون عدد 64 لسنة 1991 المؤرخ في 29 جويلية 1991 المتعلق بالمنافسة والأسعار، يجب أن تكون كل عملية بيع منتوج أو إسداء خدمة لنشاط مهني موضوع فاتورة. وعلى البائع أن يسلم الفاتورة عند القيام بالبيع أو إسداء الخدمة وعلى المشتري المطالبة بها كما يجب تحرير الفاتورة في نظيرين ويتحتم على كل من البائع والمشتري الاحتفاظ بها لمد ة لا تقل عن ثلاث سنوات ويجب أن تتضمن الفاتورة التنصيصات الوجوبية التالية: 
@@ -2240,8 +1702,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 
 يتم قبول الفواتير الأصلية أو نظير أصلي منها أو نسخ مطابقة للأصل وبالنسبة للفواتير الواردة من الخارج يتعين مطالبة الباعث بالاستظهار بالتصريح الديواني مسلما من قبل مصالح الديوانة التونسية.
 
----
-
 ## المرافق المختصّ
 يعتبر مرافقا مختصا في بعث المشاريع والتصرف في المشاريع الفلاحية كل شخص تتوفر فيه الشروط الثلاث التالية مجتمعة:
 * مهندس فلاحي،
@@ -2249,8 +1709,6 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 * متكون في مجالات المرافقة والتأطير والتصرف في المستغلات الفلاحية.
 
 مع ضرورة الحصول على معرف الهوية الجبائية لممارسة النشاط.
-
----
 
 ## المؤسسات المصدّرة كليا
 تعتبر مؤسسات مصدرة كليا المؤسسات التي تبيع كامل سلعها أو منتجاتها أو تسدي كامل خدماتها خارج البلاد التونسية أو التي تنجز كامل خدماتها بالبلاد التونسية والتي يتم استعمالها بالخارج.
@@ -2268,50 +1726,23 @@ $$\text{نسبة إنجاز المشروع} = \frac{\sum (\text{نسبة الإ�
 
 يخضع الاستثمار في القطاع الفلاحي والصيد البحري، وعلى غرار القطاعات الاقتصادية الأخرى، إلى أحكام القانون عدد 71 لسنة 2016 المؤرخ في 30 سبتمبر 2016 وأوامره الحكومية.
 
----
-
 ويهدف هذا القانون إلى النهوض بالاستثمار وتشجيع إحداث المؤسسات وتطويرها حسب أولويات الاقتصاد الوطني خاصة عبر:
 * الترفيع من القيمة المضافة والقدرة التنافسية والتصديرية والمحتوى التكنولوجي للاقتصاد الوطني على المستويين الإقليمي والدولي وتنمية القطاعات ذات الأولوية،
 * إحداث مواطن الشغل والرفع من كفاءة الموارد البشرية،
 * تحقيق تنمية جهوية مندمجة ومتوازنة،
 * تحقيق تنمية مستدامة.
-
----
-
 ويخول هذا القانون لكل شخص طبيعي أو معنوي سواء كان تونسياً أو أجنبياً، مقيماً أو غير مقيم أو في نطاق الشراكة، من الاستثمار بحرية في قطاع الفلاحة والصيد البحري.
-
----
-
 وتّم تعريف الاستثمار على أنّه كل توظيف مستدام لأموال يقوم به المستثمر لإنجاز مشروع من شأنه المساهمة في تنمية الاقتصاد التونسي مع تحمل مخاطره ويكون في شكل عمليات استثمار مباشر (إحداث، توسعة، تجديد) أو استثمار بالمساهمة النقدية أو العينية في رأس مال شركات بالبلاد التونسية سواء عند تكوينها أو عند الترفيع في رأس مالها أو اقتناء مساهمة في رأس مالها.
-
----
-
 وأقرّ قانون الاستثمار مجموعة من الحوافز للقطاع الفلاحي تحت أربع عناوين رئيسية وهي:
 * منحة الترفيع من القيمة المضافة والقدرة التنافسية،
 * منحة التنمية الجهوية،
 * منحة تطوير القدرة التشغيلية،
 * منحة التنمية المستدامة بعنوان مقاومة التلوث وحماية البيئة.
-
 ---
-
 كما تمّ إقرار حوافز في شكل مساهمة في رأس المال محمّلة على موارد الصندوق التونسي للاستثمار وقروض عقارية.
-
----
-
 وتمّ كذلك وضع حوافز جبائية ومالية للمشاريع ذات الأهمية الوطنية والتي تمّ تعريفها على أساس حجمها الاستثماري (يفوق 50 م د) أو طاقتها التشغيلية (500 موطن شغل) واستجابتها على الأقل لأحد الأهداف الواردة أعلاه.
-
----
-
 وتضمّن قانون الاستثمار أحكاماً انتقالية تتمثّل في مواصلة الانتفاع بامتيازات مجلة تشجيع الاستثمار شريطة الحصول على شهادة تصريح بالاستثمار قبل دخول قانون الاستثمار حيّز التطبيق وعلى مقرّر إسناد امتيازات مالية ودخول الاستثمارات طور النشاط الفعلي في أجل أقصاه سنتان ابتداءً من تاريخ دخول قانون الاستثمار حيز التطبيق.
-
----
-
 إلى جانب الحوافز، أخضع القانون المؤسسات المنتفعة إلى متابعة ومراقبة المصالح الإدارية المختصة ووضع إجراءات لسحب الحوافز في صورة مخالفة أحكامه أو أحكام نصوصه الحكومية.
-
----
-
 وتجدر الإشارة إلى أنّ الاستثمار في القطاعات الاقتصادية يخول لها الانتفاع بامتيازات جبائية تمّ تضمينها في قانون عدد 8 لسنة 2017 مؤرخ في 14 فيفري 2017 يتعلّق بمراجعة منظومة الامتيازات الجبائية ونصوصه التطبيقية.
-
 </topic>
-
 `;
