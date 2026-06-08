@@ -83,13 +83,20 @@ function retrieveRelevantTopics(query, topK = 3) {
       if (matchCount > 0) {
         relevantSections.push(section.trim());
 
-        // ✅ توسعة ذكية: إذا القسم يحتوي "جرار"
-        if (normalizedSection.includes("جرار")) {
+        // ✅ توسعة ذكية عامة
+        if (
+          normalizedSection.includes("جرار") ||
+          normalizedSection.includes("طاقه") ||
+          normalizedSection.includes("غراس") ||
+          normalizedSection.includes("بحث")
+        ) {
           sections.forEach(s2 => {
+            const ns2 = normalizeArabic(s2);
             if (
-              normalizeArabic(s2).includes("نسب") ||
-              normalizeArabic(s2).includes("صنف") ||
-              normalizeArabic(s2).includes("سقف")
+              ns2.includes("نسب") ||
+              ns2.includes("صنف") ||
+              ns2.includes("سقف") ||
+              ns2.includes("%")
             ) {
               relevantSections.push(s2.trim());
             }
@@ -99,7 +106,6 @@ function retrieveRelevantTopics(query, topK = 3) {
     });
   });
 
-  // إزالة التكرار
   const unique = [...new Set(relevantSections)];
 
   return unique.join('\n\n').slice(0, 8000);
