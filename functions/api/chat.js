@@ -31,25 +31,65 @@ function extractKeywords(query) {
 }
 
 function retrieveRelevantTopics(query, topK = 3) {
-  const keywords = extractKeywords(query);
+  const normalizedQuery = normalizeArabic(query);
+  const keywords = extractKeywords(normalizedQuery);
+
   if (keywords.length === 0) return '';
 
   const scored = TOPICS.map(topic => {
+    const normalizedName = normalizeArabic(topic.name);
+    const normalizedContent = normalizeArabic(topic.content);
+
     let score = 0;
+
     keywords.forEach(word => {
-      if (topic.name.toLowerCase().includes(word)) score += 5;
-      if (topic.headings.some(h => h.toLowerCase().includes(word))) score += 3;
-      if (topic.content.toLowerCase().includes(word)) score += 1;
+      if (normalizedName.includes(word)) score += 6;
+      if (topic.headings.some(h => normalizeArabic(h).includes(word))) score += 4;
+      if (normalizedContent.includes(word)) score += 2;
     });
+
     return { ...topic, score };
   });
 
-  return scored
+  const selectedTopics = scored
     .filter(t => t.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, topK)
-    .map(t => t.content)
-    .join('\n\n');
+    .slice(0, topK);
+
+  if (selectedTopics.length === 0) return '';
+
+  const relevantSections = [];
+
+  selectedTopics.forEach(topic => {
+    const sections = topic.content.split(/\n## |\n# /);
+
+    sections.forEach(section => {
+      const normalizedSection = normalizeArabic(section);
+      const matchCount = keywords.filter(k => normalizedSection.includes(k)).length;
+
+      if (matchCount > 0) {
+        relevantSections.push(section.trim());
+
+        // ✅ توسعة ذكية: إذا القسم يحتوي "جرار"
+        if (normalizedSection.includes("جرار")) {
+          sections.forEach(s2 => {
+            if (
+              normalizeArabic(s2).includes("نسب") ||
+              normalizeArabic(s2).includes("صنف") ||
+              normalizeArabic(s2).includes("سقف")
+            ) {
+              relevantSections.push(s2.trim());
+            }
+          });
+        }
+      }
+    });
+  });
+
+  // إزالة التكرار
+  const unique = [...new Set(relevantSections)];
+
+  return unique.join('\n\n').slice(0, 8000);
 }
 
 // ── تقليص الـ history ──
