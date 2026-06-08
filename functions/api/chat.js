@@ -143,7 +143,7 @@ ${knowledgeBlock}
       response = await callGeminiWithRetry(geminiUrl, {
         contents,
         systemInstruction: { parts: [{ text: systemInstruction }] },
-        generationConfig: { temperature: 0.0, topP: 0.95 }
+        generationConfig: { temperature: 0.1, topP: 0.95 }
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: err.message }), {
