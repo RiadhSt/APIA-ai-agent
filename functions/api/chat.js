@@ -1,237 +1,200 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// ── تحليل الـ topics مرة واحدة عند التحميل ──
-const TOPICS = (() => {
-  const regex = /<topic\s+name="([^"]+)">([\s\S]*?)<\/topic>/g;
-  const map = [];
-  let match;
-  while ((match = regex.exec(myKnowledgeBase)) !== null) {
-    const name = match[1];
-    const content = match[2];
-    const headings = [];
-    content.replace(/^#{1,3}\s+(.+)$/gm, (_, h) => headings.push(h.trim()));
-    map.push({ name, content: match[0], headings });
-  }
-  return map;
-})();
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
 
-const STOP_WORDS = new Set([
-  'في','من','إلى','على','هل','ما','هو','هي','عن','مع','أو','و','كيف',
-  'الذي','التي','هذا','هذه','تلك','ذلك','كل','لا','نعم','أي','كم',
-  'les','des','du','de','la','le','un','une','est','sont','pour','avec',
-  'the','of','in','is','are','for','what','how','which','does','do'
-]);
+// حدّ أقصى لأدوار المحادثة لتقليل التوكنز
+const MAX_HISTORY_TURNS = 4;
 
-function extractKeywords(query) {
-  const normalized = normalizeArabic(query);
+// تحكم في حجم الرد
+const MAX_OUTPUT_TOKENS = 1100;
 
-  return normalized
-    .split(/\s+/)
-    .map(w => w.trim())
-    .filter(w => w.length > 2 && !STOP_WORDS.has(w));
+const GEMINI_URL = (apiKey) =>
+  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+// تعليمات System (مُخزّنة مرة واحدة عند تحميل الـ Worker)
+const SYSTEM_INSTRUCTION_TEXT = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
+
+CRITICAL RULES:
+1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French or English). Never mix languages.
+2. STRICT CONTEXT FOCUS: Answer ONLY the specific topic raised in the user's question. Provide all technical figures, percentages, and steps related exclusively to that topic. NEVER drift into other types of grants, secondary regulations, or unrelated laws unless the user explicitly asks for them.
+3. CONCISE YET POWERFUL: Be highly direct, official, and professional. Avoid introductory filler, extra prose, or general overviews. Deliver the required exact data immediately.
+4. MARKDOWN TABLES: Format numbers, percentages, and financial grants exclusively in clear Markdown tables.
+
+OFFICIAL DATABASE TO USE:
+<knowledge_base>
+${myKnowledgeBase}
+</knowledge_base>`.trim();
+
+export async function onRequestOptions() {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
 }
 
-function normalizeArabic(text) {
-  return text
-    .toLowerCase()
-    .replace(/[أإآ]/g, "ا")
-    .replace(/ة/g, "ه")
-    .replace(/ى/g, "ي")
-    .replace(/\bال/g, "")
-    .replace(/ات\b/g, "")
-    .replace(/ون\b/g, "")
-    .replace(/[?؟!،,\.]/g, " ");
-}
-
-function retrieveRelevantTopics(query, topK = 3) {
-  const normalizedQuery = normalizeArabic(query);
-  const keywords = extractKeywords(normalizedQuery);
-
-  if (keywords.length === 0) return '';
-
-  const scored = TOPICS.map(topic => {
-    const normalizedName = normalizeArabic(topic.name);
-    const normalizedContent = normalizeArabic(topic.content);
-
-    let score = 0;
-
-    keywords.forEach(word => {
-      if (normalizedName.includes(word)) score += 6;
-      if (topic.headings.some(h => normalizeArabic(h).includes(word))) score += 4;
-      if (normalizedContent.includes(word)) score += 2;
-    });
-
-    return { ...topic, score };
-  });
-
-  const selectedTopics = scored
-    .filter(t => t.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, topK);
-
-  if (selectedTopics.length === 0) return '';
-
-  const relevantSections = [];
-
-  selectedTopics.forEach(topic => {
-    const sections = topic.content.split(/\n## |\n# /);
-
-    sections.forEach(section => {
-      const normalizedSection = normalizeArabic(section);
-      const matchCount = keywords.filter(k => normalizedSection.includes(k)).length;
-
-      if (matchCount > 0) {
-        relevantSections.push(section.trim());
-
-        // ✅ توسعة ذكية عامة
-        if (
-          normalizedSection.includes("جرار") ||
-          normalizedSection.includes("طاقه") ||
-          normalizedSection.includes("غراس") ||
-          normalizedSection.includes("بحث")
-        ) {
-          sections.forEach(s2 => {
-            const ns2 = normalizeArabic(s2);
-            if (
-              ns2.includes("نسب") ||
-              ns2.includes("صنف") ||
-              ns2.includes("سقف") ||
-              ns2.includes("%")
-            ) {
-              relevantSections.push(s2.trim());
-            }
-          });
-        }
-      }
-    });
-  });
-
-  const unique = [...new Set(relevantSections)];
-
-  return unique.join('\n\n').slice(0, 8000);
-}
-
-// ── تقليص الـ history ──
-function trimHistory(history, maxTurns = 6) {
-  if (!history || history.length <= maxTurns) return history || [];
-  return history.slice(-maxTurns);
-}
-
-// ── Retry تلقائي ──
-async function callGeminiWithRetry(url, body, maxRetries = 3) {
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-
-    if (response.ok) return response;
-
-    const status = response.status;
-    if ((status === 429 || status === 503) && attempt < maxRetries) {
-      await new Promise(r => setTimeout(r, attempt * 1500));
-      continue;
-    }
-
-    const data = await response.json().catch(() => ({}));
-    const msg = status === 429 ? "الخدمة مشغولة، حاول بعد لحظة"
-               : status === 401 ? "خطأ في مفتاح الـ API"
-               : status === 503 ? "سيرفر Google غير متاح مؤقتاً"
-               : data.error?.message || "خطأ غير متوقع";
-    throw new Error(msg);
-  }
-}
-
-// ══════════════════════════════════════════════
-//  Handler الرئيسي
-// ══════════════════════════════════════════════
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
 
   try {
-    const { message, history } = await request.json();
-    const apiKey = env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
+    const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
+    const body = await request.json().catch(() => null);
+    if (!body) {
+      return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
+        status: 400,
+        headers: corsWithJson,
       });
     }
 
-    // ── RAG: knowledge ذات الصلة فقط ──
-    const relevantKnowledge = retrieveRelevantTopics(message);
-    const knowledgeBlock = relevantKnowledge.trim()
-      ? relevantKnowledge
-      : "لا توجد معلومات مباشرة متعلقة بهذا السؤال في قاعدة البيانات.";
+    const { message, history } = body;
 
-    // ── History مُقلَّصة ──
-    const safeHistory = trimHistory(history, 6).map(turn => ({
-      role: turn.role === "assistant" ? "model" : turn.role,
-      parts: (typeof turn.parts === "string") ? [{ text: turn.parts }] : turn.parts
-    }));
+    if (!env.GEMINI_API_KEY) {
+      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
+        status: 500,
+        headers: corsWithJson,
+      });
+    }
 
-    const systemInstruction = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
+    if (typeof message !== "string" || !message.trim()) {
+      return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
+        status: 400,
+        headers: corsWithJson,
+      });
+    }
 
-CRITICAL RULES:
-1. LANGUAGE MATCH: Reply in the same language as the user query.
-2. STRICT CONTEXT FOCUS: Answer ONLY using the knowledge provided below. If the answer is not in the knowledge, say so clearly.
-3. CONCISE YET POWERFUL: Be highly direct, official, and professional.
-4. MARKDOWN TABLES: Format numbers, percentages, and financial grants in clear Markdown tables.
-
-RELEVANT KNOWLEDGE (retrieved for this query only):
-<knowledge_base>
-${knowledgeBlock}
-</knowledge_base>`;
+    const safeHistory = normalizeHistory(history);
 
     const contents = [
       ...safeHistory,
-      { role: "user", parts: [{ text: message }] }
+      { role: "user", parts: [{ text: message.trim() }] }
     ];
 
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-    let response;
-    try {
-      response = await callGeminiWithRetry(geminiUrl, {
-        contents,
-        systemInstruction: { parts: [{ text: systemInstruction }] },
-        generationConfig: { temperature: 0.1, topP: 0.95 }
-      });
-    } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), {
-        status: 503,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      });
-    }
-
-    const data = await response.json();
-    const candidate = data.candidates?.[0];
-    let botReply = "";
-
-    if (candidate?.content?.parts) {
-      botReply = candidate.content.parts
-        .filter(p => !p.thought && p.text)
-        .map(p => p.text)
-        .join("\n");
-    }
-
-    if (!botReply) botReply = "لم أتمكن من صياغة إجابة.";
-
-    return new Response(JSON.stringify({ reply: botReply }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" }
+    const result = await callGeminiWithRetry({
+      apiKey: env.GEMINI_API_KEY,
+      contents,
+      systemInstructionText: SYSTEM_INSTRUCTION_TEXT,
     });
 
+    return new Response(JSON.stringify({ reply: result }), {
+      status: 200,
+      headers: corsWithJson,
+    });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي" }), {
       status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" }
+      headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
   }
+}
+
+/* ============================
+   Helpers
+============================ */
+
+function normalizeHistory(history) {
+  if (!Array.isArray(history)) return [];
+
+  return history
+    .slice(-MAX_HISTORY_TURNS)
+    .map(turn => {
+      const role = turn?.role === "assistant" ? "model" : "user";
+      const parts = [];
+
+      if (typeof turn?.parts === "string") {
+        const t = turn.parts.trim();
+        if (t) parts.push({ text: t });
+      } else if (Array.isArray(turn?.parts)) {
+        for (const p of turn.parts) {
+          // نحاول استخراج text فقط لتفادي هياكل غير متوقعة
+          const t = typeof p === "string" ? p.trim() : p?.text?.trim?.() || "";
+          if (t) parts.push({ text: t });
+        }
+      } else {
+        const t = turn?.parts?.text?.trim?.() || "";
+        if (t) parts.push({ text: t });
+      }
+
+      // إذا لا يوجد text، نزيل الدور
+      if (!parts.length) return null;
+
+      return { role, parts };
+    })
+    .filter(Boolean);
+}
+
+async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) {
+  const url = GEMINI_URL(apiKey);
+
+  const payload = {
+    contents,
+    systemInstruction: { parts: [{ text: systemInstructionText }] },
+    generationConfig: {
+      temperature: 0.0,
+      topP: 0.95,
+      maxOutputTokens: MAX_OUTPUT_TOKENS,
+    }
+  };
+
+  const maxRetries = 2; // جرّبتك قبل: قلل لإبقاء زمن التنفيذ معقول
+  let lastErr = null;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeoutMs = 24000; // ~24 ثانية
+      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!resp.ok) {
+        // Retry على 429 و503 فقط
+        if ((resp.status === 429 || resp.status === 503) && attempt < maxRetries) {
+          await backoff(attempt);
+          continue;
+        }
+
+        const data = await resp.json().catch(() => ({}));
+        const msg =
+          data?.error?.message ||
+          (resp.status === 503 ? "سيرفر Google غير متاح مؤقتاً" : `خطأ HTTP: ${resp.status}`);
+
+        throw new Error(msg);
+      }
+
+      const data = await resp.json();
+
+      const parts = data?.candidates?.[0]?.content?.parts;
+      const botReply = Array.isArray(parts)
+        ? parts.filter(p => !p?.thought && p?.text).map(p => p.text).join("\n").trim()
+        : "";
+
+      if (!botReply) throw new Error("لم يتم إرجاع نص من Gemini");
+
+      return botReply;
+    } catch (err) {
+      lastErr = err;
+
+      // إذا تم الإجهاض بسبب timeout أو error عام
+      if (attempt < maxRetries) {
+        await backoff(attempt);
+        continue;
+      }
+    }
+  }
+
+  // في النهاية: رسالة واضحة
+  throw lastErr || new Error("خطأ غير معروف");
+}
+
+function backoff(attempt) {
+  // attempt=0 => 1.2s، attempt=1 => 2.4s
+  const ms = 1200 * (attempt + 1);
+  return new Promise(r => setTimeout(r, ms));
 }
