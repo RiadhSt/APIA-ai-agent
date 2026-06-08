@@ -6,28 +6,23 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
-// ✅ حد أقصى لعدد أدوار المحادثة لتقليل التوكنز
-const MAX_HISTORY_TURNS = 4;
-
-// ✅ حد أقصى لعدد الأسئلة في المحادثة الواحدة
+const MAX_HISTORY_TURNS = 3; // أقل تاريخ ممكن لتقليل الضغط
 const MAX_QUESTIONS_PER_SESSION = 5;
-
-// ✅ تحكم في حجم الرد
-const MAX_OUTPUT_TOKENS = 1100;
+const MAX_OUTPUT_TOKENS = 1500; // رفع لمنع قطع الجداول
+const TIMEOUT_MS = 28000; // أقل من 30 ثانية لتفادي قطع Cloudflare
 
 const GEMINI_URL = (apiKey) =>
   `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-// ✅ تعليمات النظام
 const SYSTEM_INSTRUCTION_TEXT = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
 CRITICAL RULES:
-1. LANGUAGE MATCH: Reply in the same language as the user query (Arabic or French or English). Never mix languages.
-2. STRICT CONTEXT FOCUS: Answer ONLY the specific topic raised in the user's question. Provide all technical figures, percentages, and steps related exclusively to that topic. NEVER drift into other types of grants, secondary regulations, or unrelated laws unless the user explicitly asks for them.
-3. CONCISE YET POWERFUL: Be highly direct, official, and professional. Avoid introductory filler, extra prose, or general overviews. Deliver the required exact data immediately.
-4. MARKDOWN TABLES: Format numbers, percentages, and financial grants exclusively in clear Markdown tables.
+1. LANGUAGE MATCH: Reply in the same language as the user query.
+2. STRICT CONTEXT FOCUS: Answer ONLY using the provided knowledge below.
+3. Provide complete structured answer.
+4. When using Markdown tables, always complete the full table including all rows.
+5. Do NOT invent information.
 
-OFFICIAL DATABASE TO USE:
 <knowledge_base>
 ${myKnowledgeBase}
 </knowledge_base>`.trim();
@@ -59,28 +54,28 @@ export async function onRequestPost(context) {
       });
     }
 
-    if (typeof message !== "string" || !message.trim()) {
+    if (!message || typeof message !== "string" || !message.trim()) {
       return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
         status: 400,
         headers: corsWithJson,
       });
     }
 
-// ✅ حساب عدد أسئلة المستخدم
-const previousUserQuestions = Array.isArray(history)
-  ? history.filter(turn => turn?.role === "user").length
-  : 0;
+    // ✅ حساب عدد الأسئلة
+    const previousUserQuestions = Array.isArray(history)
+      ? history.filter(turn => turn?.role === "user").length
+      : 0;
 
-const totalUserQuestions = previousUserQuestions + 1;
+    const totalUserQuestions = previousUserQuestions + 1;
 
-if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
-  return new Response(JSON.stringify({
-    error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
-  }), {
-    status: 429,
-    headers: corsWithJson,
-  });
-}
+    if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
+      return new Response(JSON.stringify({
+        error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
+      }), {
+        status: 429,
+        headers: corsWithJson,
+      });
+    }
 
     const safeHistory = normalizeHistory(history);
 
@@ -89,13 +84,12 @@ if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
       { role: "user", parts: [{ text: message.trim() }] }
     ];
 
-    const result = await callGeminiWithRetry({
+    const reply = await callGeminiSafe({
       apiKey: env.GEMINI_API_KEY,
       contents,
-      systemInstructionText: SYSTEM_INSTRUCTION_TEXT,
     });
 
-    return new Response(JSON.stringify({ reply: result }), {
+    return new Response(JSON.stringify({ reply }), {
       status: 200,
       headers: corsWithJson,
     });
@@ -129,24 +123,20 @@ function normalizeHistory(history) {
           const t = typeof p === "string" ? p.trim() : p?.text?.trim?.() || "";
           if (t) parts.push({ text: t });
         }
-      } else {
-        const t = turn?.parts?.text?.trim?.() || "";
-        if (t) parts.push({ text: t });
       }
 
       if (!parts.length) return null;
-
       return { role, parts };
     })
     .filter(Boolean);
 }
 
-async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) {
+async function callGeminiSafe({ apiKey, contents }) {
   const url = GEMINI_URL(apiKey);
 
   const payload = {
     contents,
-    systemInstruction: { parts: [{ text: systemInstructionText }] },
+    systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION_TEXT }] },
     generationConfig: {
       temperature: 0.0,
       topP: 0.95,
@@ -154,63 +144,50 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
     }
   };
 
-  const maxRetries = 2;
-  let lastErr = null;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-      const controller = new AbortController();
-      const timeoutMs = 24000;
-      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
 
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      });
+    clearTimeout(timeoutId);
 
-      clearTimeout(timeoutId);
+    if (!resp.ok) {
+      const data = await resp.json().catch(() => ({}));
+      const msg =
+        resp.status === 503 ? "سيرفر Google غير متاح مؤقتاً"
+        : resp.status === 429 ? "الخدمة مشغولة، حاول بعد لحظة"
+        : data?.error?.message || `خطأ HTTP: ${resp.status}`;
 
-      if (!resp.ok) {
-        if ((resp.status === 429 || resp.status === 503) && attempt < maxRetries) {
-          await backoff(attempt);
-          continue;
-        }
-
-        const data = await resp.json().catch(() => ({}));
-        const msg =
-          data?.error?.message ||
-          (resp.status === 503 ? "سيرفر Google غير متاح مؤقتاً" : `خطأ HTTP: ${resp.status}`);
-
-        throw new Error(msg);
-      }
-
-      const data = await resp.json();
-
-      const parts = data?.candidates?.[0]?.content?.parts;
-      const botReply = Array.isArray(parts)
-        ? parts.filter(p => !p?.thought && p?.text).map(p => p.text).join("\n").trim()
-        : "";
-
-      if (!botReply) throw new Error("لم يتم إرجاع نص من Gemini");
-
-      return botReply;
-
-    } catch (err) {
-      lastErr = err;
-
-      if (attempt < maxRetries) {
-        await backoff(attempt);
-        continue;
-      }
+      throw new Error(msg);
     }
+
+    const data = await resp.json();
+    const parts = data?.candidates?.[0]?.content?.parts;
+
+    if (!Array.isArray(parts)) {
+      throw new Error("لم يتم إرجاع نص من Gemini");
+    }
+
+    const text = parts
+      .filter(p => p?.text)
+      .map(p => p.text)
+      .join("\n")
+      .trim();
+
+    if (!text) {
+      throw new Error("لم يتم إرجاع نص من Gemini");
+    }
+
+    return text;
+
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
   }
-
-  throw lastErr || new Error("خطأ غير معروف");
-}
-
-function backoff(attempt) {
-  const ms = 1200 * (attempt + 1);
-  return new Promise(r => setTimeout(r, ms));
 }
