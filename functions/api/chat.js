@@ -49,7 +49,14 @@ export async function onRequestPost(context) {
         headers: corsWithJson,
       });
     }
+const totalText =
+  SYSTEM_INSTRUCTION_TEXT +
+  JSON.stringify(safeHistory) +
+  message;
 
+const estimatedTokens = estimateTokens(totalText);
+
+console.log("Estimated tokens sent:", estimatedTokens);
     const { message, history } = body;
 
     if (!env.GEMINI_API_KEY) {
@@ -221,4 +228,8 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
 function backoff(attempt) {
   const ms = 1200 * (attempt + 1);
   return new Promise(r => setTimeout(r, ms));
+}
+function estimateTokens(text) {
+  if (!text) return 0;
+  return Math.ceil(text.length / 4);
 }
