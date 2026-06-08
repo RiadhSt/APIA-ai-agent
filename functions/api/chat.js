@@ -67,11 +67,21 @@ export async function onRequestPost(context) {
     }
 
     // ✅ حساب عدد أسئلة المستخدم
-    const userQuestionCount = Array.isArray(history)
-      ? history.filter(turn => turn?.role === "user").length
-      : 0;
+const previousUserQuestions = Array.isArray(history)
+  ? history.filter(turn => turn?.role === "user").length
+  : 0;
 
-    if (userQuestionCount >= MAX_QUESTIONS_PER_SESSION) {
+// ✅ نضيف السؤال الحالي
+const totalUserQuestions = previousUserQuestions + 1;
+
+if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
+  return new Response(JSON.stringify({
+    error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
+  }), {
+    status: 429,
+    headers: corsWithJson,
+  });
+}
       return new Response(JSON.stringify({
         error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
       }), {
