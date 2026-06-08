@@ -6,16 +6,19 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
-// حدّ أقصى لأدوار المحادثة لتقليل التوكنز
+// ✅ حد أقصى لعدد أدوار المحادثة لتقليل التوكنز
 const MAX_HISTORY_TURNS = 4;
 
-// تحكم في حجم الرد
+// ✅ حد أقصى لعدد الأسئلة في المحادثة الواحدة
+const MAX_QUESTIONS_PER_SESSION = 5;
+
+// ✅ تحكم في حجم الرد
 const MAX_OUTPUT_TOKENS = 1100;
 
 const GEMINI_URL = (apiKey) =>
   `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-// تعليمات System (مُخزّنة مرة واحدة عند تحميل الـ Worker)
+// ✅ تعليمات النظام
 const SYSTEM_INSTRUCTION_TEXT = `You are the official Smart Assistant for the Agricultural Investment Promotion Agency (APIA) in Tunisia.
 
 CRITICAL RULES:
@@ -39,6 +42,7 @@ export async function onRequestPost(context) {
   try {
     const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
     const body = await request.json().catch(() => null);
+
     if (!body) {
       return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
         status: 400,
@@ -62,6 +66,20 @@ export async function onRequestPost(context) {
       });
     }
 
+    // ✅ حساب عدد أسئلة المستخدم
+    const userQuestionCount = Array.isArray(history)
+      ? history.filter(turn => turn?.role === "user").length
+      : 0;
+
+    if (userQuestionCount >= MAX_QUESTIONS_PER_SESSION) {
+      return new Response(JSON.stringify({
+        error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
+      }), {
+        status: 429,
+        headers: corsWithJson,
+      });
+    }
+
     const safeHistory = normalizeHistory(history);
 
     const contents = [
@@ -79,6 +97,7 @@ export async function onRequestPost(context) {
       status: 200,
       headers: corsWithJson,
     });
+
   } catch (error) {
     return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي" }), {
       status: 500,
@@ -97,7 +116,7 @@ function normalizeHistory(history) {
   return history
     .slice(-MAX_HISTORY_TURNS)
     .map(turn => {
-      const role = turn?.role === "assistant" ? "model" : "user";
+      const role = turn?.role === "assistant" ? "model" : turn.role;
       const parts = [];
 
       if (typeof turn?.parts === "string") {
@@ -105,7 +124,6 @@ function normalizeHistory(history) {
         if (t) parts.push({ text: t });
       } else if (Array.isArray(turn?.parts)) {
         for (const p of turn.parts) {
-          // نحاول استخراج text فقط لتفادي هياكل غير متوقعة
           const t = typeof p === "string" ? p.trim() : p?.text?.trim?.() || "";
           if (t) parts.push({ text: t });
         }
@@ -114,7 +132,6 @@ function normalizeHistory(history) {
         if (t) parts.push({ text: t });
       }
 
-      // إذا لا يوجد text، نزيل الدور
       if (!parts.length) return null;
 
       return { role, parts };
@@ -135,13 +152,13 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
     }
   };
 
-  const maxRetries = 2; // جرّبتك قبل: قلل لإبقاء زمن التنفيذ معقول
+  const maxRetries = 2;
   let lastErr = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       const controller = new AbortController();
-      const timeoutMs = 24000; // ~24 ثانية
+      const timeoutMs = 24000;
       const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
       const resp = await fetch(url, {
@@ -154,7 +171,6 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
       clearTimeout(timeoutId);
 
       if (!resp.ok) {
-        // Retry على 429 و503 فقط
         if ((resp.status === 429 || resp.status === 503) && attempt < maxRetries) {
           await backoff(attempt);
           continue;
@@ -178,10 +194,10 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
       if (!botReply) throw new Error("لم يتم إرجاع نص من Gemini");
 
       return botReply;
+
     } catch (err) {
       lastErr = err;
 
-      // إذا تم الإجهاض بسبب timeout أو error عام
       if (attempt < maxRetries) {
         await backoff(attempt);
         continue;
@@ -189,12 +205,10 @@ async function callGeminiWithRetry({ apiKey, contents, systemInstructionText }) 
     }
   }
 
-  // في النهاية: رسالة واضحة
   throw lastErr || new Error("خطأ غير معروف");
 }
 
 function backoff(attempt) {
-  // attempt=0 => 1.2s، attempt=1 => 2.4s
   const ms = 1200 * (attempt + 1);
   return new Promise(r => setTimeout(r, ms));
 }
