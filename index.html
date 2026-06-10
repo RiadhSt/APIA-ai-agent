@@ -178,25 +178,25 @@ async function sendMessage() {
             appendMessage("user", query);
 
             // 1. إنشاء فقاعة الانتظار مع رسالة ترحيبية أولية
-            const assistantMessageId = appendMessage("assistant", "يتم حالياً معالجة طلبكم…");
-            
-            // 🌟 2. رسائل الانتظار
-            const apiaHints = [
-                " بصدد استخراج المعطيات ذات الصلة…",
-                "جارٍ تدقيق المعلومات…",
-                "يرجى الانتظار لحين استكمال الإجابة…"
-            ];
+            const loadingMessages = [
+  "يتم حالياً معالجة طلبكم…",
+  "بصدد استخراج المعطيات ذات الصلة…",
+  "جارٍ تدقيق المعلومات…",
+  "يرجى الانتظار لحين استكمال الإجابة…"
+];
 
-            let hintIndex = 0;
-            // تدوير المعلومات الخاطفة كل 3.5 ثوانٍ لينشغل بها المستخدم تماماً
-            let loadingInterval = setInterval(() => {
-                const bubble = document.getElementById(assistantMessageId);
-                if (!bubble) return;
-                
-                // تحديث النص داخل الفقاعة بشكل سلس
-                bubble.innerText = apiaHints[hintIndex];
-                hintIndex = (hintIndex + 1) % apiaHints.length;
-            }, 3500);
+let hintIndex = 0;
+
+const assistantMessageId = appendMessage("assistant", loadingMessages[0]);
+
+let loadingInterval = setInterval(() => {
+  const bubble = document.getElementById(assistantMessageId);
+  if (!bubble) return;
+
+  hintIndex = (hintIndex + 1) % loadingMessages.length;
+  bubble.innerText = loadingMessages[hintIndex];
+
+}, 3000);
 
             try {
                 const response = await fetch(WORKER_URL, {
