@@ -1,15 +1,17 @@
 import { myKnowledgeBase } from './knowledge.js';
 
+// تحديث رؤوس CORS لتكون متوافقة تماماً مع معايير المتصفحات الأمنية
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "*", // يمكنك استبدالها بـ "https://www.apia.com.tn" لاحقاً لزيادة الأمان
   "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+  "Access-Control-Max-Age": "86400", // حفظ تصريح المتصفح لمدة يوم لتقليل الطلبات الزائدة
 };
 
-const MAX_HISTORY_TURNS = 3; // أقل تاريخ ممكن لتقليل الضغط
+const MAX_HISTORY_TURNS = 3; 
 const MAX_QUESTIONS_PER_SESSION = 5;
-const MAX_OUTPUT_TOKENS = 1500; // رفع لمنع قطع الجداول
-const TIMEOUT_MS = 28000; // أقل من 30 ثانية لتفادي قطع Cloudflare
+const MAX_OUTPUT_TOKENS = 1500; 
+const TIMEOUT_MS = 28000; 
 
 const GEMINI_URL = (apiKey) =>
   `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
@@ -27,15 +29,19 @@ CRITICAL RULES:
 ${myKnowledgeBase}
 </knowledge_base>`.trim();
 
+// إصلاح رد طلبات OPTIONS المبدئية من المتصفح
 export async function onRequestOptions() {
-  return new Response(null, { status: 204, headers: CORS_HEADERS });
+  return new Response(null, { 
+    status: 204, 
+    headers: CORS_HEADERS 
+  });
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
 
   try {
-    const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
     const body = await request.json().catch(() => null);
 
     if (!body) {
@@ -97,7 +103,7 @@ export async function onRequestPost(context) {
   } catch (error) {
     return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي" }), {
       status: 500,
-      headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      headers: corsWithJson,
     });
   }
 }
