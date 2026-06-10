@@ -1,11 +1,10 @@
 import { myKnowledgeBase } from './knowledge.js';
 
-// تحديث رؤوس CORS لتكون متوافقة تماماً مع معايير المتصفحات الأمنية
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*", // يمكنك استبدالها بـ "https://www.apia.com.tn" لاحقاً لزيادة الأمان
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Origin": "*", 
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
-  "Access-Control-Max-Age": "86400", // حفظ تصريح المتصفح لمدة يوم لتقليل الطلبات الزائدة
+  "Access-Control-Max-Age": "86400",
 };
 
 const MAX_HISTORY_TURNS = 3; 
@@ -29,89 +28,101 @@ CRITICAL RULES:
 ${myKnowledgeBase}
 </knowledge_base>`.trim();
 
-// إصلاح رد طلبات OPTIONS المبدئية من المتصفح
-export async function onRequestOptions() {
-  return new Response(null, { 
-    status: 204, 
-    headers: CORS_HEADERS 
-  });
-}
+// الدالة الأساسية لمعالجة كافة الطلبات في Cloudflare Workers
+export default {
+  async fetch(request, env, ctx) {
+    const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
-  const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
+    // 1. التعامل مع طلبات OPTIONS المبدئية
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: CORS_HEADERS });
+    }
 
-  try {
-    const body = await request.json().catch(() => null);
-
-    if (!body) {
-      return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
-        status: 400,
-        headers: corsWithJson,
+    // 2. السماح بطلب GET خفيف للتأكد من أن السيرفر يعمل (عند فتحه في المتصفح)
+    if (request.method === "GET") {
+      return new Response(JSON.stringify({ status: "APIA Bot Server is Running" }), {
+        status: 200,
+        headers: corsWithJson
       });
     }
 
-    const { message, history } = body;
+    // 3. معالجة طلب الـ POST الأساسي القادم من البوت
+    if (request.method === "POST") {
+      try {
+        const body = await request.json().catch(() => null);
 
-    if (!env.GEMINI_API_KEY) {
-      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
-        status: 500,
-        headers: corsWithJson,
-      });
+        if (!body) {
+          return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
+            status: 400,
+            headers: corsWithJson,
+          });
+        }
+
+        const { message, history } = body;
+
+        if (!env.GEMINI_API_KEY) {
+          return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود في إعدادات الـ Worker!" }), {
+            status: 500,
+            headers: corsWithJson,
+          });
+        }
+
+        if (!message || typeof message !== "string" || !message.trim()) {
+          return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
+            status: 400,
+            headers: corsWithJson,
+          });
+        }
+
+        // حساب عدد الأسئلة
+        const previousUserQuestions = Array.isArray(history)
+          ? history.filter(turn => turn?.role === "user").length
+          : 0;
+
+        const totalUserQuestions = previousUserQuestions + 1;
+
+        if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
+          return new Response(JSON.stringify({
+            error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
+          }), {
+            status: 429,
+            headers: corsWithJson,
+          });
+        }
+
+        const safeHistory = normalizeHistory(history);
+
+        const contents = [
+          ...safeHistory,
+          { role: "user", parts: [{ text: message.trim() }] }
+        ];
+
+        const reply = await callGeminiSafe({
+          apiKey: env.GEMINI_API_KEY,
+          contents,
+        });
+
+        return new Response(JSON.stringify({ reply }), {
+          status: 200,
+          headers: corsWithJson,
+        });
+
+      } catch (error) {
+        return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي في الخادم" }), {
+          status: 500,
+          headers: corsWithJson,
+        });
+      }
     }
 
-    if (!message || typeof message !== "string" || !message.trim()) {
-      return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
-        status: 400,
-        headers: corsWithJson,
-      });
-    }
-
-    // ✅ حساب عدد الأسئلة
-    const previousUserQuestions = Array.isArray(history)
-      ? history.filter(turn => turn?.role === "user").length
-      : 0;
-
-    const totalUserQuestions = previousUserQuestions + 1;
-
-    if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
-      return new Response(JSON.stringify({
-        error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
-      }), {
-        status: 429,
-        headers: corsWithJson,
-      });
-    }
-
-    const safeHistory = normalizeHistory(history);
-
-    const contents = [
-      ...safeHistory,
-      { role: "user", parts: [{ text: message.trim() }] }
-    ];
-
-    const reply = await callGeminiSafe({
-      apiKey: env.GEMINI_API_KEY,
-      contents,
-    });
-
-    return new Response(JSON.stringify({ reply }), {
-      status: 200,
-      headers: corsWithJson,
-    });
-
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي" }), {
-      status: 500,
-      headers: corsWithJson,
-    });
+    // إذا تم إرسال طلب بنوع آخر غير مدعوم
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), { status: 405, headers: CORS_HEADERS });
   }
-}
+};
 
 /* ============================
    Helpers
 ============================ */
-
 function normalizeHistory(history) {
   if (!Array.isArray(history)) return [];
 
