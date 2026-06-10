@@ -298,20 +298,14 @@ function appendMessage(role, text) {
 
 
 
-
-// 🌐 كود المحرك الخلفي - يوضع في ملف index.html على Cloudflare Pages
+// 🌐 كود المحرك الخلفي المضمون - يوضع في ملف index.html على Cloudflare Pages
 window.addEventListener('message', async function(event) {
   const data = event.data;
   
   if (data && data.type === 'SEND_TO_WORKER') {
     try {
-      
-      /* 🚨 التعديل الهام هنا 🚨
-         تأكد من كتابة المسار الكامل للـ API الذي يتلقى طلبات POST.
-         إذا كانت الدالة مدمجة مع Pages (Functions)، فغالباً يكون المسار "/api/chat" أو "/chat".
-         أما إذا كان الـ Worker مستقلاً تماماً، فضع رابط الـ Worker المباشر (مثال: https://xxxx.workers.dev).
-      */
-      const response = await fetch("https://apia-ai-agent.pages.dev/chat", { // أو ضع رابط الـ Worker المباشر هنا
+      // الاتصال بالـ Worker (تأكد أن الرابط هو نفس مسار الـ API الشغال لديك)
+      const response = await fetch("https://apia-ai-agent.pages.dev/chat", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -320,26 +314,24 @@ window.addEventListener('message', async function(event) {
         })
       });
       
-      if (!response.ok) {
-        throw new Error(`خطأ من السيرفر بـ كود: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`السيرفر أرجع خطأ بكود: ${response.status}`);
       
       const resData = await response.json();
       
-      // إرسال النتيجة فوراً إلى الموقع التجريبي الرئيسي
-      event.source.postMessage({
+      // 🔥 الحل الجذري: الإرسال المباشر للنافذة الأم دون الاعتماد على event.source
+      window.parent.postMessage({
         type: 'WORKER_RESPONSE',
         success: true,
         reply: resData.reply
-      }, event.origin);
+      }, '*');
       
     } catch (error) {
       console.error("خطأ الجسر البرمي:", error);
-      event.source.postMessage({
+      window.parent.postMessage({
         type: 'WORKER_RESPONSE',
         success: false,
         error: error.message
-      }, event.origin);
+      }, '*');
     }
   }
 });
