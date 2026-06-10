@@ -1,16 +1,15 @@
 import { myKnowledgeBase } from './knowledge.js';
 
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*", 
-  "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
-  "Access-Control-Max-Age": "86400",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
 };
 
-const MAX_HISTORY_TURNS = 3; 
+const MAX_HISTORY_TURNS = 3; // أقل تاريخ ممكن لتقليل الضغط
 const MAX_QUESTIONS_PER_SESSION = 5;
-const MAX_OUTPUT_TOKENS = 1500; 
-const TIMEOUT_MS = 28000; 
+const MAX_OUTPUT_TOKENS = 1500; // رفع لمنع قطع الجداول
+const TIMEOUT_MS = 28000; // أقل من 30 ثانية لتفادي قطع Cloudflare
 
 const GEMINI_URL = (apiKey) =>
   `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
@@ -28,101 +27,85 @@ CRITICAL RULES:
 ${myKnowledgeBase}
 </knowledge_base>`.trim();
 
-// الدالة الأساسية لمعالجة كافة الطلبات في Cloudflare Workers
-export default {
-  async fetch(request, env, ctx) {
+export async function onRequestOptions() {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
+
+  try {
     const corsWithJson = { ...CORS_HEADERS, "Content-Type": "application/json" };
+    const body = await request.json().catch(() => null);
 
-    // 1. التعامل مع طلبات OPTIONS المبدئية
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: CORS_HEADERS });
-    }
-
-    // 2. السماح بطلب GET خفيف للتأكد من أن السيرفر يعمل (عند فتحه في المتصفح)
-    if (request.method === "GET") {
-      return new Response(JSON.stringify({ status: "APIA Bot Server is Running" }), {
-        status: 200,
-        headers: corsWithJson
+    if (!body) {
+      return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
+        status: 400,
+        headers: corsWithJson,
       });
     }
 
-    // 3. معالجة طلب الـ POST الأساسي القادم من البوت
-    if (request.method === "POST") {
-      try {
-        const body = await request.json().catch(() => null);
+    const { message, history } = body;
 
-        if (!body) {
-          return new Response(JSON.stringify({ error: "Body JSON غير صالح" }), {
-            status: 400,
-            headers: corsWithJson,
-          });
-        }
-
-        const { message, history } = body;
-
-        if (!env.GEMINI_API_KEY) {
-          return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود في إعدادات الـ Worker!" }), {
-            status: 500,
-            headers: corsWithJson,
-          });
-        }
-
-        if (!message || typeof message !== "string" || !message.trim()) {
-          return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
-            status: 400,
-            headers: corsWithJson,
-          });
-        }
-
-        // حساب عدد الأسئلة
-        const previousUserQuestions = Array.isArray(history)
-          ? history.filter(turn => turn?.role === "user").length
-          : 0;
-
-        const totalUserQuestions = previousUserQuestions + 1;
-
-        if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
-          return new Response(JSON.stringify({
-            error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
-          }), {
-            status: 429,
-            headers: corsWithJson,
-          });
-        }
-
-        const safeHistory = normalizeHistory(history);
-
-        const contents = [
-          ...safeHistory,
-          { role: "user", parts: [{ text: message.trim() }] }
-        ];
-
-        const reply = await callGeminiSafe({
-          apiKey: env.GEMINI_API_KEY,
-          contents,
-        });
-
-        return new Response(JSON.stringify({ reply }), {
-          status: 200,
-          headers: corsWithJson,
-        });
-
-      } catch (error) {
-        return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي في الخادم" }), {
-          status: 500,
-          headers: corsWithJson,
-        });
-      }
+    if (!env.GEMINI_API_KEY) {
+      return new Response(JSON.stringify({ error: "مفتاح الـ GEMINI_API_KEY مفقود!" }), {
+        status: 500,
+        headers: corsWithJson,
+      });
     }
 
-    // إذا تم إرسال طلب بنوع آخر غير مدعوم
-    return new Response(JSON.stringify({ error: "Method Not Allowed" }), { status: 405, headers: CORS_HEADERS });
+    if (!message || typeof message !== "string" || !message.trim()) {
+      return new Response(JSON.stringify({ error: "الرسالة فارغة" }), {
+        status: 400,
+        headers: corsWithJson,
+      });
+    }
+
+    // ✅ حساب عدد الأسئلة
+    const previousUserQuestions = Array.isArray(history)
+      ? history.filter(turn => turn?.role === "user").length
+      : 0;
+
+    const totalUserQuestions = previousUserQuestions + 1;
+
+    if (totalUserQuestions > MAX_QUESTIONS_PER_SESSION) {
+      return new Response(JSON.stringify({
+        error: "لقد وصلت إلى الحد الأقصى للأسئلة في محادثة واحدة، لبدء محادثة جديدة الرجاء تحديث الصفحة."
+      }), {
+        status: 429,
+        headers: corsWithJson,
+      });
+    }
+
+    const safeHistory = normalizeHistory(history);
+
+    const contents = [
+      ...safeHistory,
+      { role: "user", parts: [{ text: message.trim() }] }
+    ];
+
+    const reply = await callGeminiSafe({
+      apiKey: env.GEMINI_API_KEY,
+      contents,
+    });
+
+    return new Response(JSON.stringify({ reply }), {
+      status: 200,
+      headers: corsWithJson,
+    });
+
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error?.message || "خطأ داخلي" }), {
+      status: 500,
+      headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    });
   }
-};
+}
 
 /* ============================
    Helpers
 ============================ */
+
 function normalizeHistory(history) {
   if (!Array.isArray(history)) return [];
 
