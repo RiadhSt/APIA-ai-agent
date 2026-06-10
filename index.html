@@ -305,7 +305,7 @@ window.addEventListener('message', async function(event) {
   if (data && data.type === 'SEND_TO_WORKER') {
     try {
       // الاتصال بالـ Worker (تأكد أن الرابط هو نفس مسار الـ API الشغال لديك)
-      const response = await fetch("https://apia-ai-agent.pages.dev/chat", {
+      const response = await fetch("https://apia-ai-agent.pages.dev/api/chat", { // إضافة /api/chat أو /chat
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
