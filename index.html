@@ -295,6 +295,46 @@ function appendMessage(role, text) {
                 sendMessage();
             }
         });
+
+
+        <script>
+// 🚀 ضع الكود الأول هنا ليقوم بدور الجسر البرمي
+window.addEventListener('message', async function(event) {
+  const data = event.data;
+  
+  if (data && data.type === 'SEND_TO_WORKER') {
+    const query = data.query;
+    const history = data.history;
+    
+    try {
+      // الاتصال بالـ Worker (رابط الـ Worker الخاص بك)
+      const res = await fetch("https://apia-ai-agent.pages.dev/chat", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query, history: history })
+      });
+      
+      if (!res.ok) throw new Error(`خطأ من السيرفر: ${res.status}`);
+      
+      const resData = await res.json();
+      
+      // إرسال الإجابة رجوعاً للموقع الرئيسي التجريبي
+      window.parent.postMessage({
+        type: 'WORKER_RESPONSE',
+        success: true,
+        reply: resData.reply
+      }, '*');
+      
+    } catch (error) {
+      window.parent.postMessage({
+        type: 'WORKER_RESPONSE',
+        success: false,
+        error: error.message
+      }, '*');
+    }
+  }
+});
+
     </script>
 </body>
 </html>
