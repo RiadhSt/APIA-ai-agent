@@ -8,7 +8,7 @@ const CORS_HEADERS = {
 
 const MAX_HISTORY_TURNS = 3; // أقل تاريخ ممكن لتقليل الضغط
 const MAX_QUESTIONS_PER_SESSION = 5;
-const MAX_OUTPUT_TOKENS = 1500; // رفع لمنع قطع الجداول
+const MAX_OUTPUT_TOKENS = 1600; // رفع لمنع قطع الجداول
 const TIMEOUT_MS = 28000; // أقل من 30 ثانية لتفادي قطع Cloudflare
 
 const GEMINI_URL = (apiKey) =>
@@ -181,10 +181,15 @@ async function callGeminiSafe({ apiKey, contents }) {
       .trim();
 
     if (!text) {
-      throw new Error("لم يتم إرجاع نص من Gemini");
-    }
+  throw new Error("لم يتم إرجاع نص من Gemini");
+}
 
-    return text;
+// ✅ إذا انتهى الرد بشكل غير مكتمل، اطلب استكماله
+if (!text.trim().endsWith(".") && !text.includes("</table>")) {
+  return text + "\n\n(تم اختصار الرد بسبب الطول. يرجى طلب المتابعة إن لزم الأمر.)";
+}
+
+return text;
 
   } catch (err) {
     clearTimeout(timeoutId);
