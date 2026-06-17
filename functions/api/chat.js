@@ -20,8 +20,9 @@ CRITICAL RULES:
 1. LANGUAGE MATCH: Reply in the same language as the user query.
 2. STRICT CONTEXT FOCUS: Answer ONLY using the provided knowledge below.
 3. Provide complete structured answer.
-4. When using Markdown tables, always complete the full table including all rows.
-5. Do NOT invent information.
+4. MARKDOWN TABLES: Format ALL numbers, percentages, and financial grants exclusively in clear Markdown tables. Do not write numbers in raw text.
+5. When using Markdown tables, always complete the full table including all rows.
+6. Do NOT invent information.
 
 <knowledge_base>
 ${myKnowledgeBase}
