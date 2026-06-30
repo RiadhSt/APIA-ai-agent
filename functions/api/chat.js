@@ -6,10 +6,10 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
-const MAX_HISTORY_TURNS = 3; // أقل تاريخ ممكن لتقليل الضغط
+const MAX_HISTORY_TURNS = 3;
 const MAX_QUESTIONS_PER_SESSION = 5;
-const MAX_OUTPUT_TOKENS = 2000; // رفع لمنع قطع الجداول
-const TIMEOUT_MS = 28000; // أقل من 30 ثانية لتفادي قطع Cloudflare
+const MAX_OUTPUT_TOKENS = 2000;
+const TIMEOUT_MS = 28000;
 
 const GEMINI_URL = (apiKey) =>
   `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
@@ -62,7 +62,6 @@ export async function onRequestPost(context) {
       });
     }
 
-    // ✅ حساب عدد الأسئلة
     const previousUserQuestions = Array.isArray(history)
       ? history.filter(turn => turn?.role === "user").length
       : 0;
@@ -135,8 +134,7 @@ function normalizeHistory(history) {
 async function callGeminiSafe({ apiKey, contents }) {
   const url = GEMINI_URL(apiKey);
 
-  const payload = {
-    contents,
+  const basePayload = {
     systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION_TEXT }] },
     generationConfig: {
       temperature: 0.0,
@@ -149,48 +147,83 @@ async function callGeminiSafe({ apiKey, contents }) {
   const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   try {
-    const resp = await fetch(url, {
+    // ✅ الطلب الأول
+    const firstResp = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        ...basePayload,
+        contents
+      }),
       signal: controller.signal
     });
 
-    clearTimeout(timeoutId);
-
-    if (!resp.ok) {
-      const data = await resp.json().catch(() => ({}));
-      const msg =
-        resp.status === 503 ? "سيرفر Google غير متاح مؤقتاً"
-        : resp.status === 429 ? "الخدمة مشغولة، حاول بعد لحظة"
-        : data?.error?.message || `خطأ HTTP: ${resp.status}`;
-
-      throw new Error(msg);
+    if (!firstResp.ok) {
+      const data = await firstResp.json().catch(() => ({}));
+      throw new Error(data?.error?.message || `خطأ HTTP: ${firstResp.status}`);
     }
 
-    const data = await resp.json();
-    const parts = data?.candidates?.[0]?.content?.parts;
+    const firstData = await firstResp.json();
+    const firstCandidate = firstData?.candidates?.[0];
+    const firstParts = firstCandidate?.content?.parts;
 
-    if (!Array.isArray(parts)) {
+    if (!Array.isArray(firstParts)) {
       throw new Error("لم يتم إرجاع نص من Gemini");
     }
 
-    const text = parts
+    let fullText = firstParts
       .filter(p => p?.text)
       .map(p => p.text)
       .join("\n")
       .trim();
 
-    if (!text) {
-  throw new Error("لم يتم إرجاع نص من Gemini");
-}
+    if (!fullText) {
+      throw new Error("لم يتم إرجاع نص من Gemini");
+    }
 
-// ✅ إذا انتهى الرد بشكل غير مكتمل، اطلب استكماله
-if (!text.trim().endsWith(".") && !text.includes("</table>")) {
-  return text + "\n\n(تم اختصار الرد بسبب الطول. يرجى طلب المتابعة إن لزم الأمر.)";
-}
+    // ✅ إذا لم يتم القطع → نعيد الرد مباشرة
+    if (firstCandidate?.finishReason !== "MAX_TOKENS") {
+      clearTimeout(timeoutId);
+      return fullText;
+    }
 
-return text;
+    // ✅ إذا تم القطع → نطلب استكمال تلقائي
+    const continueResp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...basePayload,
+        contents: [
+          ...contents,
+          { role: "model", parts: [{ text: fullText }] },
+          { role: "user", parts: [{ text: "Continue the previous answer exactly from where it stopped. Do not repeat anything." }] }
+        ]
+      }),
+      signal: controller.signal
+    });
+
+    if (!continueResp.ok) {
+      clearTimeout(timeoutId);
+      return fullText; // إذا فشل الاستكمال نعيد الجزء الأول فقط
+    }
+
+    const continueData = await continueResp.json();
+    const continueParts = continueData?.candidates?.[0]?.content?.parts;
+
+    if (Array.isArray(continueParts)) {
+      const continuation = continueParts
+        .filter(p => p?.text)
+        .map(p => p.text)
+        .join("\n")
+        .trim();
+
+      if (continuation) {
+        fullText += "\n" + continuation;
+      }
+    }
+
+    clearTimeout(timeoutId);
+    return fullText;
 
   } catch (err) {
     clearTimeout(timeoutId);
