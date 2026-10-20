@@ -167,10 +167,53 @@
         // إعدادات رندرة الجداول والنصوص
         marked.setOptions({ breaks: true, gfm: true });
 
+        // 🛡️ منطق حصر عدد الأسئلة (Rate Limiter) - 5 أسئلة كل ساعة
+        const MAX_QUESTIONS = 5;
+        const TIME_WINDOW_MS = 60 * 60 * 1000; // 1 ساعة بالمللي ثانية
+
+        function getUsageData() {
+            try {
+                const data = JSON.parse(localStorage.getItem("apia_rate_limit") || "{}");
+                const now = Date.now();
+                if (!data.startTime || (now - data.startTime) > TIME_WINDOW_MS) {
+                    return { count: 0, startTime: now };
+                }
+                return data;
+            } catch (e) {
+                return { count: 0, startTime: Date.now() };
+            }
+        }
+
+        function incrementUsage() {
+            const usage = getUsageData();
+            usage.count += 1;
+            localStorage.setItem("apia_rate_limit", JSON.stringify(usage));
+            return usage;
+        }
+
+        function checkRateLimit() {
+            const usage = getUsageData();
+            if (usage.count >= MAX_QUESTIONS) {
+                const remainingMinutes = Math.ceil((TIME_WINDOW_MS - (Date.now() - usage.startTime)) / (60 * 1000));
+                return { allowed: false, remainingMinutes };
+            }
+            return { allowed: true };
+        }
+
 async function sendMessage() {
             const inputEl = document.getElementById("userInput");
             const query = inputEl.value.trim();
             if (!query) return;
+
+            // التحقق من الحد المسموح قبل الإرسال
+            const limitStatus = checkRateLimit();
+            if (!limitStatus.allowed) {
+                document.getElementById("welcome").style.display = "none";
+                appendMessage("user", query);
+                appendMessage("assistant", `<span style='color: #ff4d4d;'>لقد تجاوزت الحد الأقصى المسموح به (5 أسئلة في الساعة). يرجى الانتظار لمدة ${limitStatus.remainingMinutes} دقيقة قبل طرح سؤال جديد.</span>`);
+                inputEl.value = "";
+                return;
+            }
 
             document.getElementById("welcome").style.display = "none";
             inputEl.value = "";
@@ -212,6 +255,9 @@ let loadingInterval = setInterval(() => {
                     const errorData = await response.json().catch(() => ({}));
                     throw new Error(errorData.error || "تعذر على خادم الوكالة معالجة طلبك حالياً.");
                 }
+
+                // تسجيل السؤال المقبول نجاحه ضمن الاستهلاك
+                incrementUsage();
 
                 const data = await response.json();
                 const fullAnswer = data.reply || "لم أتمكن من الحصول على إجابة واضحة.";
@@ -295,9 +341,6 @@ function appendMessage(role, text) {
                 sendMessage();
             }
         });
-
-
-
 
     </script>
 </body>
